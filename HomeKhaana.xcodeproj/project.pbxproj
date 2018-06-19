@@ -11,6 +11,9 @@
 		5AC040A5B34E858B379C52B2 /* Pods_HomeKhaanaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BDDC88BE19ACB80C0892354 /* Pods_HomeKhaanaTests.framework */; };
 		B61558C920D6D7B400471718 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558C820D6D7B400471718 /* NotificationsViewController.swift */; };
 		B61558CF20D6D93D00471718 /* HowItWorksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558CE20D6D93D00471718 /* HowItWorksViewController.swift */; };
+		B61558D120D7476700471718 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558D020D7476700471718 /* User.swift */; };
+		B61558D320D8611F00471718 /* UserPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558D220D8611F00471718 /* UserPreferencesViewController.swift */; };
+		B61558D520D8641F00471718 /* CustomUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558D420D8641F00471718 /* CustomUIButton.swift */; };
 		B64AB0BC20BCC707003B966C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64AB0BB20BCC707003B966C /* AppDelegate.swift */; };
 		B64AB0C120BCC707003B966C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B64AB0BF20BCC707003B966C /* Main.storyboard */; };
 		B64AB0C320BCC70A003B966C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B64AB0C220BCC70A003B966C /* Assets.xcassets */; };
@@ -52,6 +55,9 @@
 		7D1B59AC1C89897F71B06C5F /* Pods-HomeKhaana.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeKhaana.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeKhaana/Pods-HomeKhaana.release.xcconfig"; sourceTree = "<group>"; };
 		B61558C820D6D7B400471718 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		B61558CE20D6D93D00471718 /* HowItWorksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowItWorksViewController.swift; sourceTree = "<group>"; };
+		B61558D020D7476700471718 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		B61558D220D8611F00471718 /* UserPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferencesViewController.swift; sourceTree = "<group>"; };
+		B61558D420D8641F00471718 /* CustomUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIButton.swift; sourceTree = "<group>"; };
 		B64AB0B820BCC706003B966C /* HomeKhaana.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeKhaana.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B64AB0BB20BCC707003B966C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B64AB0C020BCC707003B966C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -160,6 +166,9 @@
 				B69F54AF20CDE9B000E1B0EB /* Extensions.swift */,
 				B61558C820D6D7B400471718 /* NotificationsViewController.swift */,
 				B61558CE20D6D93D00471718 /* HowItWorksViewController.swift */,
+				B61558D020D7476700471718 /* User.swift */,
+				B61558D220D8611F00471718 /* UserPreferencesViewController.swift */,
+				B61558D420D8641F00471718 /* CustomUIButton.swift */,
 			);
 			path = HomeKhaana;
 			sourceTree = "<group>";
@@ -379,23 +388,37 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-HomeKhaana/Pods-HomeKhaana-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -430,10 +453,13 @@
 			files = (
 				B61558C920D6D7B400471718 /* NotificationsViewController.swift in Sources */,
 				B69F54AC20CDD67900E1B0EB /* SignUpViewController.swift in Sources */,
+				B61558D520D8641F00471718 /* CustomUIButton.swift in Sources */,
 				B64AB0BC20BCC707003B966C /* AppDelegate.swift in Sources */,
 				B61558CF20D6D93D00471718 /* HowItWorksViewController.swift in Sources */,
 				B69F54AE20CDDBCF00E1B0EB /* HomeViewController.swift in Sources */,
 				B69F54B020CDE9B000E1B0EB /* Extensions.swift in Sources */,
+				B61558D320D8611F00471718 /* UserPreferencesViewController.swift in Sources */,
+				B61558D120D7476700471718 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

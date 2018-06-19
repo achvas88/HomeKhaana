@@ -240,6 +240,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oe2-aP-u5n">
                                 <rect key="frame" x="171.5" y="617" width="32" height="30"/>
                                 <state key="normal" title="Cool"/>
+                                <connections>
+                                    <segue destination="VGf-9h-Wt0" kind="show" id="Zfs-8d-jOq"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="lunch options change every day so you never get bored" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ebr-gi-Pi0">
                                 <rect key="frame" x="101" y="456" width="212" height="45"/>
@@ -282,6 +285,94 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BRv-vk-JKY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1052" y="916.1919040479761"/>
+        </scene>
+        <!--User Preferences View Controller-->
+        <scene sceneID="oPs-8A-lfQ">
+            <objects>
+                <viewController id="VGf-9h-Wt0" customClass="UserPreferencesViewController" customModule="HomeKhaana" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fCO-qk-vxo">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USER PREFERENCES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ShP-6N-G3u">
+                                <rect key="frame" x="104" y="125" width="167" height="21"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <color key="textColor" red="1" green="0.40643951839999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vegetarian?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KDo-jx-9oL">
+                                <rect key="frame" x="67" y="211" width="91" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Primary Delivery Address: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y1C-hS-wJd">
+                                <rect key="frame" x="67" y="279" width="201" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment Method: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fdr-BB-DBv">
+                                <rect key="frame" x="67" y="367" width="140" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dUC-T0-Mr4" customClass="CustomUIButton" customModule="HomeKhaana" customModuleProvider="target">
+                                <rect key="frame" x="67" y="396" width="252" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Add Card">
+                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yT7-Zz-wna">
+                                <rect key="frame" x="146" y="617" width="82" height="30"/>
+                                <state key="normal" title="Looks Good"/>
+                                <connections>
+                                    <action selector="btnLooksGoodClicked:" destination="VGf-9h-Wt0" eventType="touchUpInside" id="Ue2-Mu-qLH"/>
+                                </connections>
+                            </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kG0-pl-h2D">
+                                <rect key="frame" x="270" y="206" width="51" height="31"/>
+                            </switch>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yaC-UD-4Ui" customClass="CustomUIButton" customModule="HomeKhaana" customModuleProvider="target">
+                                <rect key="frame" x="67" y="308" width="252" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Add Address">
+                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="yaC-UD-4Ui" firstAttribute="top" secondItem="Y1C-hS-wJd" secondAttribute="bottom" constant="8" id="0BT-By-paS"/>
+                            <constraint firstItem="fdr-BB-DBv" firstAttribute="top" secondItem="yaC-UD-4Ui" secondAttribute="bottom" constant="29" id="6VS-5I-yS5"/>
+                            <constraint firstItem="yT7-Zz-wna" firstAttribute="centerX" secondItem="SlL-bp-eUG" secondAttribute="centerX" id="8ok-Lc-mWL"/>
+                            <constraint firstItem="SlL-bp-eUG" firstAttribute="bottom" secondItem="yT7-Zz-wna" secondAttribute="bottom" constant="20" id="Aee-bM-MAz"/>
+                            <constraint firstItem="ShP-6N-G3u" firstAttribute="top" secondItem="SlL-bp-eUG" secondAttribute="top" constant="105" id="D7K-8t-2e8"/>
+                            <constraint firstItem="Y1C-hS-wJd" firstAttribute="top" secondItem="KDo-jx-9oL" secondAttribute="bottom" constant="47" id="IIM-Dz-e6J"/>
+                            <constraint firstItem="fdr-BB-DBv" firstAttribute="leading" secondItem="yaC-UD-4Ui" secondAttribute="leading" id="Ljg-t7-CJc"/>
+                            <constraint firstItem="yaC-UD-4Ui" firstAttribute="leading" secondItem="Y1C-hS-wJd" secondAttribute="leading" id="N1p-gV-Mc4"/>
+                            <constraint firstItem="Y1C-hS-wJd" firstAttribute="leading" secondItem="KDo-jx-9oL" secondAttribute="leading" id="NnY-KG-Ue6"/>
+                            <constraint firstItem="yaC-UD-4Ui" firstAttribute="trailing" secondItem="kG0-pl-h2D" secondAttribute="trailing" id="Q0r-bS-MHf"/>
+                            <constraint firstItem="KDo-jx-9oL" firstAttribute="top" secondItem="ShP-6N-G3u" secondAttribute="bottom" constant="65" id="R8T-wN-c9q"/>
+                            <constraint firstItem="KDo-jx-9oL" firstAttribute="leading" secondItem="SlL-bp-eUG" secondAttribute="leading" constant="67" id="WpK-RO-ME1"/>
+                            <constraint firstItem="dUC-T0-Mr4" firstAttribute="top" secondItem="fdr-BB-DBv" secondAttribute="bottom" constant="8" id="cWl-vM-f6S"/>
+                            <constraint firstItem="dUC-T0-Mr4" firstAttribute="trailing" secondItem="yaC-UD-4Ui" secondAttribute="trailing" id="gch-5l-F1P"/>
+                            <constraint firstItem="dUC-T0-Mr4" firstAttribute="leading" secondItem="fdr-BB-DBv" secondAttribute="leading" id="jvO-fe-VGn"/>
+                            <constraint firstItem="ShP-6N-G3u" firstAttribute="centerX" secondItem="SlL-bp-eUG" secondAttribute="centerX" id="pRF-MP-jTa"/>
+                            <constraint firstItem="kG0-pl-h2D" firstAttribute="leading" secondItem="KDo-jx-9oL" secondAttribute="trailing" constant="112" id="ugi-Gh-PBG"/>
+                            <constraint firstItem="kG0-pl-h2D" firstAttribute="centerY" secondItem="KDo-jx-9oL" secondAttribute="centerY" id="zuh-FK-R5B"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="SlL-bp-eUG"/>
+                    </view>
+                    <connections>
+                        <outlet property="tglVegetarian" destination="kG0-pl-h2D" id="5ZY-S9-Xdk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mg6-tm-4le" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1727.2" y="913.49325337331345"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="7uQ-2A-trf">
