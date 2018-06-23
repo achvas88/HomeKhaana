@@ -33,7 +33,7 @@
 	<key>FacebookAppID</key>
 	<string>200394600606103</string>
 	<key>FacebookDisplayName</key>
-	<string>HomeKhaana</string>
+	<string>Home Khaana</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -62,5 +62,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Show your location on the map</string>
 </dict>
 </plist>

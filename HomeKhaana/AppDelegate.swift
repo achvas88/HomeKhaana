@@ -10,12 +10,14 @@ import UIKit
 import Firebase
 import GoogleSignIn
 import FBSDKCoreKit
+import GooglePlaces
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate  {
 
     var window: UIWindow?
-
+    var googlePlacesAPIKey: String = "AIzaSyBpMHyyTsbPEGv_vvvd5xhTWjh0rWHSFUA"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -39,6 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
                 window.rootViewController = rootController
             }
         }
+        
+       GMSPlacesClient.provideAPIKey(googlePlacesAPIKey)
+       GMSServices.provideAPIKey(googlePlacesAPIKey)
         
         return true
     }

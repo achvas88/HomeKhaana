@@ -9,11 +9,13 @@
 import UIKit
 import Firebase
 import FirebaseFirestore
+import GooglePlacePicker
 
-
-class UserPreferencesViewController: UIViewController {
-
+class UserPreferencesViewController: UIViewController,GMSPlacePickerViewControllerDelegate {
+    
     @IBOutlet weak var tglVegetarian: UISwitch!
+    @IBOutlet weak var btnAddAddress: CustomUIButton!
+    
     let db = Firestore.firestore()
     
     override func viewDidLoad() {
@@ -82,6 +84,35 @@ class UserPreferencesViewController: UIViewController {
                 }
             }
         }
+        
+        //GO HOME.
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Home")
+        self.present(vc!, animated: true, completion: nil)
+    }
+    
+    @IBAction func btnAddAddressClicked(_ sender: Any) {
+        let config = GMSPlacePickerConfig(viewport: nil)
+        let placePicker = GMSPlacePickerViewController(config: config)
+        placePicker.delegate = self
+        present(placePicker, animated: true, completion: nil)
+    }
+    
+    func placePicker(_ viewController: GMSPlacePickerViewController, didPick place: GMSPlace) {
+        
+        // Dismiss the place picker, as it cannot dismiss itself.
+        viewController.dismiss(animated: true, completion: nil)
+        
+        self.btnAddAddress.setTitle(place.name, for: .normal)
+        print("Place name \(place.name)")
+        print("Place address \(String(describing: place.formattedAddress))")
+        print("Place attributions \(String(describing:place.attributions))")
+    }
+    
+    func placePickerDidCancel(_ viewController: GMSPlacePickerViewController) {
+        // Dismiss the place picker, as it cannot dismiss itself.
+        viewController.dismiss(animated: true, completion: nil)
+        
+        print("No place selected")
     }
     
     /*

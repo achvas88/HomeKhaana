@@ -11,7 +11,7 @@ import FirebaseAuth
 import GoogleSignIn
 import FBSDKLoginKit
 
-class HomeViewController: UIViewController {
+class UserProfileViewController: UIViewController {
 
     
     @IBOutlet weak var lblTitle: UILabel!

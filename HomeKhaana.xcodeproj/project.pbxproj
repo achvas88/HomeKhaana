@@ -14,6 +14,10 @@
 		B61558D120D7476700471718 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558D020D7476700471718 /* User.swift */; };
 		B61558D320D8611F00471718 /* UserPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558D220D8611F00471718 /* UserPreferencesViewController.swift */; };
 		B61558D520D8641F00471718 /* CustomUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558D420D8641F00471718 /* CustomUIButton.swift */; };
+		B61558D720DCA74B00471718 /* Todo.rtf in Resources */ = {isa = PBXBuildFile; fileRef = B61558D620DCA74B00471718 /* Todo.rtf */; };
+		B61558D920DF0AC800471718 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558D820DF0AC800471718 /* HomeTableViewController.swift */; };
+		B61558DB20DF0B6700471718 /* Choice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558DA20DF0B6700471718 /* Choice.swift */; };
+		B61558DD20DF0D4200471718 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558DC20DF0D4100471718 /* DataManager.swift */; };
 		B64AB0BC20BCC707003B966C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64AB0BB20BCC707003B966C /* AppDelegate.swift */; };
 		B64AB0C120BCC707003B966C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B64AB0BF20BCC707003B966C /* Main.storyboard */; };
 		B64AB0C320BCC70A003B966C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B64AB0C220BCC70A003B966C /* Assets.xcassets */; };
@@ -24,7 +28,7 @@
 		B69F54A720CDD0EB00E1B0EB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B69F54A520CDD0EB00E1B0EB /* GoogleService-Info.plist */; };
 		B69F54A820CDD0EB00E1B0EB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B69F54A520CDD0EB00E1B0EB /* GoogleService-Info.plist */; };
 		B69F54AC20CDD67900E1B0EB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69F54AB20CDD67900E1B0EB /* SignUpViewController.swift */; };
-		B69F54AE20CDDBCF00E1B0EB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69F54AD20CDDBCF00E1B0EB /* HomeViewController.swift */; };
+		B69F54AE20CDDBCF00E1B0EB /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69F54AD20CDDBCF00E1B0EB /* UserProfileViewController.swift */; };
 		B69F54B020CDE9B000E1B0EB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69F54AF20CDE9B000E1B0EB /* Extensions.swift */; };
 		C9A6C1ACD528FB79021F8FDC /* Pods_HomeKhaana.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06406288B39D9646E7ECC0D4 /* Pods_HomeKhaana.framework */; };
 /* End PBXBuildFile section */
@@ -58,6 +62,10 @@
 		B61558D020D7476700471718 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B61558D220D8611F00471718 /* UserPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferencesViewController.swift; sourceTree = "<group>"; };
 		B61558D420D8641F00471718 /* CustomUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIButton.swift; sourceTree = "<group>"; };
+		B61558D620DCA74B00471718 /* Todo.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Todo.rtf; sourceTree = "<group>"; };
+		B61558D820DF0AC800471718 /* HomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
+		B61558DA20DF0B6700471718 /* Choice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choice.swift; sourceTree = "<group>"; };
+		B61558DC20DF0D4100471718 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		B64AB0B820BCC706003B966C /* HomeKhaana.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeKhaana.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B64AB0BB20BCC707003B966C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B64AB0C020BCC707003B966C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -72,7 +80,7 @@
 		B64AB0DD20BCC70A003B966C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B69F54A520CDD0EB00E1B0EB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B69F54AB20CDD67900E1B0EB /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		B69F54AD20CDDBCF00E1B0EB /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		B69F54AD20CDDBCF00E1B0EB /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		B69F54AF20CDE9B000E1B0EB /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		BBBD316E896632323B2713CD /* Pods_HomeKhaanaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HomeKhaanaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD4603C2E9D37B0C0F1C4E42 /* Pods-HomeKhaanaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeKhaanaUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HomeKhaanaUITests/Pods-HomeKhaanaUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -162,13 +170,17 @@
 				B64AB0C420BCC70A003B966C /* LaunchScreen.storyboard */,
 				B64AB0C720BCC70A003B966C /* Info.plist */,
 				B69F54AB20CDD67900E1B0EB /* SignUpViewController.swift */,
-				B69F54AD20CDDBCF00E1B0EB /* HomeViewController.swift */,
+				B69F54AD20CDDBCF00E1B0EB /* UserProfileViewController.swift */,
 				B69F54AF20CDE9B000E1B0EB /* Extensions.swift */,
 				B61558C820D6D7B400471718 /* NotificationsViewController.swift */,
 				B61558CE20D6D93D00471718 /* HowItWorksViewController.swift */,
 				B61558D020D7476700471718 /* User.swift */,
 				B61558D220D8611F00471718 /* UserPreferencesViewController.swift */,
 				B61558D420D8641F00471718 /* CustomUIButton.swift */,
+				B61558D620DCA74B00471718 /* Todo.rtf */,
+				B61558D820DF0AC800471718 /* HomeTableViewController.swift */,
+				B61558DA20DF0B6700471718 /* Choice.swift */,
+				B61558DC20DF0D4100471718 /* DataManager.swift */,
 			);
 			path = HomeKhaana;
 			sourceTree = "<group>";
@@ -300,6 +312,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B61558D720DCA74B00471718 /* Todo.rtf in Resources */,
 				B64AB0C620BCC70A003B966C /* LaunchScreen.storyboard in Resources */,
 				B69F54A620CDD0EB00E1B0EB /* GoogleService-Info.plist in Resources */,
 				B64AB0C320BCC70A003B966C /* Assets.xcassets in Resources */,
@@ -369,10 +382,16 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-HomeKhaana/Pods-HomeKhaana-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlacePicker/Frameworks/GooglePlacePicker.framework/Resources/GooglePlacePicker.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlacePicker.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -452,11 +471,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				B61558C920D6D7B400471718 /* NotificationsViewController.swift in Sources */,
+				B61558DD20DF0D4200471718 /* DataManager.swift in Sources */,
 				B69F54AC20CDD67900E1B0EB /* SignUpViewController.swift in Sources */,
+				B61558DB20DF0B6700471718 /* Choice.swift in Sources */,
 				B61558D520D8641F00471718 /* CustomUIButton.swift in Sources */,
 				B64AB0BC20BCC707003B966C /* AppDelegate.swift in Sources */,
+				B61558D920DF0AC800471718 /* HomeTableViewController.swift in Sources */,
 				B61558CF20D6D93D00471718 /* HowItWorksViewController.swift in Sources */,
-				B69F54AE20CDDBCF00E1B0EB /* HomeViewController.swift in Sources */,
+				B69F54AE20CDDBCF00E1B0EB /* UserProfileViewController.swift in Sources */,
 				B69F54B020CDE9B000E1B0EB /* Extensions.swift in Sources */,
 				B61558D320D8611F00471718 /* UserPreferencesViewController.swift in Sources */,
 				B61558D120D7476700471718 /* User.swift in Sources */,
