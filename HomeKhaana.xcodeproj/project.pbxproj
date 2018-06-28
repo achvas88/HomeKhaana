@@ -18,6 +18,7 @@
 		B61558D920DF0AC800471718 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558D820DF0AC800471718 /* HomeTableViewController.swift */; };
 		B61558DB20DF0B6700471718 /* Choice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558DA20DF0B6700471718 /* Choice.swift */; };
 		B61558DD20DF0D4200471718 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558DC20DF0D4100471718 /* DataManager.swift */; };
+		B64393A220DFC7D800058C82 /* ChoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64393A120DFC7D800058C82 /* ChoiceTableViewCell.swift */; };
 		B64AB0BC20BCC707003B966C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64AB0BB20BCC707003B966C /* AppDelegate.swift */; };
 		B64AB0C120BCC707003B966C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B64AB0BF20BCC707003B966C /* Main.storyboard */; };
 		B64AB0C320BCC70A003B966C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B64AB0C220BCC70A003B966C /* Assets.xcassets */; };
@@ -66,6 +67,7 @@
 		B61558D820DF0AC800471718 /* HomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
 		B61558DA20DF0B6700471718 /* Choice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choice.swift; sourceTree = "<group>"; };
 		B61558DC20DF0D4100471718 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		B64393A120DFC7D800058C82 /* ChoiceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceTableViewCell.swift; sourceTree = "<group>"; };
 		B64AB0B820BCC706003B966C /* HomeKhaana.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeKhaana.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B64AB0BB20BCC707003B966C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B64AB0C020BCC707003B966C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				B61558D820DF0AC800471718 /* HomeTableViewController.swift */,
 				B61558DA20DF0B6700471718 /* Choice.swift */,
 				B61558DC20DF0D4100471718 /* DataManager.swift */,
+				B64393A120DFC7D800058C82 /* ChoiceTableViewCell.swift */,
 			);
 			path = HomeKhaana;
 			sourceTree = "<group>";
@@ -478,6 +481,7 @@
 				B64AB0BC20BCC707003B966C /* AppDelegate.swift in Sources */,
 				B61558D920DF0AC800471718 /* HomeTableViewController.swift in Sources */,
 				B61558CF20D6D93D00471718 /* HowItWorksViewController.swift in Sources */,
+				B64393A220DFC7D800058C82 /* ChoiceTableViewCell.swift in Sources */,
 				B69F54AE20CDDBCF00E1B0EB /* UserProfileViewController.swift in Sources */,
 				B69F54B020CDE9B000E1B0EB /* Extensions.swift in Sources */,
 				B61558D320D8611F00471718 /* UserPreferencesViewController.swift in Sources */,

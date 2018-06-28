@@ -13,6 +13,11 @@ import FBSDKLoginKit
 
 class UserProfileViewController: UIViewController {
 
+    @IBOutlet weak var btnPreferences: CustomUIButton!
+    @IBOutlet weak var btnPayment: CustomUIButton!
+    @IBOutlet weak var btnHelp: CustomUIButton!
+    @IBOutlet weak var btnFAQ: CustomUIButton!
+    @IBOutlet weak var btnLogout: CustomUIButton!
     
     @IBOutlet weak var lblTitle: UILabel!
     
@@ -26,12 +31,26 @@ class UserProfileViewController: UIViewController {
             self.lblTitle.text = email
         }
         
+        self.setupButtons()
+        
         // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func setupButtons()
+    {
+        self.btnPreferences.setImage(UIImage(named: "settings (1)")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        self.btnPayment.setImage(UIImage(named: "credit-card (2)")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        self.btnHelp.setImage(UIImage(named: "question (3)")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        self.btnFAQ.setImage(UIImage(named: "question (2)")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        self.btnLogout.backgroundColor = UIColor.red
+        self.btnLogout.layer.borderColor = UIColor.red.cgColor
+        self.btnLogout.setTitleColor(UIColor.white, for: .normal)
+        self.btnLogout.setTitleColor(UIColor.lightText, for: .focused)
     }
     
     @IBAction func btnLogOutClicked(_ sender: Any) {

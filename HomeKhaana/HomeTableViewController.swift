@@ -41,12 +41,13 @@ class HomeTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "choiceCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "choiceCell", for: indexPath) as! ChoiceTableViewCell
 
         // Configure the cell...
         let choice = choices[indexPath.row]
-        cell.textLabel?.text = choice.displayTitle
-        cell.detailTextLabel?.text = choice.description
+        cell.choice = choice
+        //cell.textLabel?.text = choice.displayTitle
+        //cell.detailTextLabel?.text = choice.description
         return cell
     }
     

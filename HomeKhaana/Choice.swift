@@ -14,11 +14,13 @@ class Choice
     var description:String
     var cost:String
     var isVegetarian:Bool
+    var imgName: String
     
-    init(title:String,description:String,cost:String,isVegetarian:Bool) {
+    init(title:String,description:String,cost:String,isVegetarian:Bool,imgName:String) {
         self.displayTitle = title
         self.description = description
         self.cost = cost
         self.isVegetarian = isVegetarian
+        self.imgName = imgName
     }
 }
