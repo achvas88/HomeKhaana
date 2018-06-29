@@ -27,8 +27,8 @@ class UserProfileViewController: UIViewController {
         
         if let user = Auth.auth().currentUser
         {
-            let email = user.email
-            self.lblTitle.text = email
+            let name = user.displayName
+            self.lblTitle.text = name
         }
         
         self.setupButtons()
@@ -43,14 +43,12 @@ class UserProfileViewController: UIViewController {
     
     func setupButtons()
     {
-        self.btnPreferences.setImage(UIImage(named: "settings (1)")?.withRenderingMode(.alwaysOriginal), for: .normal)
-        self.btnPayment.setImage(UIImage(named: "credit-card (2)")?.withRenderingMode(.alwaysOriginal), for: .normal)
-        self.btnHelp.setImage(UIImage(named: "question (3)")?.withRenderingMode(.alwaysOriginal), for: .normal)
-        self.btnFAQ.setImage(UIImage(named: "question (2)")?.withRenderingMode(.alwaysOriginal), for: .normal)
-        self.btnLogout.backgroundColor = UIColor.red
-        self.btnLogout.layer.borderColor = UIColor.red.cgColor
-        self.btnLogout.setTitleColor(UIColor.white, for: .normal)
-        self.btnLogout.setTitleColor(UIColor.lightText, for: .focused)
+        self.btnPreferences.setImage(UIImage(named: "settings")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        self.btnPayment.setImage(UIImage(named: "credit-card")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        self.btnHelp.setImage(UIImage(named: "Help")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        self.btnFAQ.setImage(UIImage(named: "FAQ")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        let logoutBgColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1.0)
+        self.btnLogout.backgroundColor = logoutBgColor
     }
     
     @IBAction func btnLogOutClicked(_ sender: Any) {
