@@ -86,8 +86,9 @@ class UserPreferencesViewController: UIViewController,GMSPlacePickerViewControll
         }
         
         //GO HOME.
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Home")
-        self.present(vc!, animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
+        /*let vc = self.storyboard?.instantiateViewController(withIdentifier: "Home")
+        self.present(vc!, animated: true, completion: nil)*/
     }
     
     @IBAction func btnAddAddressClicked(_ sender: Any) {

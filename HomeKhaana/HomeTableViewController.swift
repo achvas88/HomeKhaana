@@ -87,14 +87,24 @@ class HomeTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "choiceDetail")
+        {
+            let detailsVC: ChoiceDetailViewController? = segue.destination as? ChoiceDetailViewController
+            let currentRow: ChoiceTableViewCell? = sender as! ChoiceTableViewCell?
+            
+            if(detailsVC != nil && currentRow != nil)
+            {
+                detailsVC!.theChoice = currentRow!.choice
+            }
+        }
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
+    
 
 }
