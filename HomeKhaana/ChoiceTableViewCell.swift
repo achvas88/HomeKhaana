@@ -24,7 +24,7 @@ class ChoiceTableViewCell: UITableViewCell {
             
             lblDisplayTitle.text = choice.displayTitle
             lblDescription.text = choice.description
-            lblCost.text = choice.cost
+            lblCost.text = "\(choice.cost)\(choice.currency)"
             if(choice.isVegetarian) { imgIsVegetarian.image = UIImage(named: "leaf") }
             imgRepresentation.image = UIImage(named: choice.imgName)
         }

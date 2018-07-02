@@ -10,7 +10,7 @@ import UIKit
 
 class HomeTableViewController: UITableViewController {
 
-    var choices = DataManager.generateTestData()
+    let choices:[Choice] = DataManager.generateTestData()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +22,10 @@ class HomeTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        if(DataManager.inCart.count == 0) {self.navigationController?.tabBarController?.tabBar.items?[1].badgeValue = nil}
+        else {self.navigationController?.tabBarController?.tabBar.items?[1].badgeValue = String(DataManager.inCart.count)}
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

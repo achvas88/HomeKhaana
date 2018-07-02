@@ -26,6 +26,9 @@
 		B64AB0C620BCC70A003B966C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B64AB0C420BCC70A003B966C /* LaunchScreen.storyboard */; };
 		B64AB0D120BCC70A003B966C /* HomeKhaanaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64AB0D020BCC70A003B966C /* HomeKhaanaTests.swift */; };
 		B64AB0DC20BCC70A003B966C /* HomeKhaanaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64AB0DB20BCC70A003B966C /* HomeKhaanaUITests.swift */; };
+		B691C78820E9AA440060CF98 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B691C78720E9AA440060CF98 /* CartViewController.swift */; };
+		B691C78A20E9B09C0060CF98 /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B691C78920E9B09C0060CF98 /* HomeTabBarController.swift */; };
+		B691C78C20E9B8D30060CF98 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B691C78B20E9B8D30060CF98 /* CartTableViewCell.swift */; };
 		B69F54A620CDD0EB00E1B0EB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B69F54A520CDD0EB00E1B0EB /* GoogleService-Info.plist */; };
 		B69F54A720CDD0EB00E1B0EB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B69F54A520CDD0EB00E1B0EB /* GoogleService-Info.plist */; };
 		B69F54A820CDD0EB00E1B0EB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B69F54A520CDD0EB00E1B0EB /* GoogleService-Info.plist */; };
@@ -82,6 +85,9 @@
 		B64AB0D720BCC70A003B966C /* HomeKhaanaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HomeKhaanaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B64AB0DB20BCC70A003B966C /* HomeKhaanaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeKhaanaUITests.swift; sourceTree = "<group>"; };
 		B64AB0DD20BCC70A003B966C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B691C78720E9AA440060CF98 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
+		B691C78920E9B09C0060CF98 /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
+		B691C78B20E9B8D30060CF98 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
 		B69F54A520CDD0EB00E1B0EB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B69F54AB20CDD67900E1B0EB /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		B69F54AD20CDDBCF00E1B0EB /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
@@ -187,6 +193,9 @@
 				B61558DC20DF0D4100471718 /* DataManager.swift */,
 				B64393A120DFC7D800058C82 /* ChoiceTableViewCell.swift */,
 				B6287B4320E873C1009FF79D /* ChoiceDetailViewController.swift */,
+				B691C78720E9AA440060CF98 /* CartViewController.swift */,
+				B691C78920E9B09C0060CF98 /* HomeTabBarController.swift */,
+				B691C78B20E9B8D30060CF98 /* CartTableViewCell.swift */,
 			);
 			path = HomeKhaana;
 			sourceTree = "<group>";
@@ -483,12 +492,15 @@
 				B6287B4420E873C1009FF79D /* ChoiceDetailViewController.swift in Sources */,
 				B61558D520D8641F00471718 /* CustomUIButton.swift in Sources */,
 				B64AB0BC20BCC707003B966C /* AppDelegate.swift in Sources */,
+				B691C78820E9AA440060CF98 /* CartViewController.swift in Sources */,
+				B691C78C20E9B8D30060CF98 /* CartTableViewCell.swift in Sources */,
 				B61558D920DF0AC800471718 /* HomeTableViewController.swift in Sources */,
 				B61558CF20D6D93D00471718 /* HowItWorksViewController.swift in Sources */,
 				B64393A220DFC7D800058C82 /* ChoiceTableViewCell.swift in Sources */,
 				B69F54AE20CDDBCF00E1B0EB /* UserProfileViewController.swift in Sources */,
 				B69F54B020CDE9B000E1B0EB /* Extensions.swift in Sources */,
 				B61558D320D8611F00471718 /* UserPreferencesViewController.swift in Sources */,
+				B691C78A20E9B09C0060CF98 /* HomeTabBarController.swift in Sources */,
 				B61558D120D7476700471718 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

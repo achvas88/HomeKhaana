@@ -12,15 +12,19 @@ class Choice
 {
     var displayTitle: String
     var description:String
-    var cost:String
+    var cost:Float
     var isVegetarian:Bool
     var imgName: String
+    var currency: String
+    var id:Int
     
-    init(title:String,description:String,cost:String,isVegetarian:Bool,imgName:String) {
+    init(id:Int, title:String,description:String,cost:Float,isVegetarian:Bool,imgName:String,currency:String) {
+        self.id = id
         self.displayTitle = title
         self.description = description
         self.cost = cost
         self.isVegetarian = isVegetarian
         self.imgName = imgName
+        self.currency = currency
     }
 }

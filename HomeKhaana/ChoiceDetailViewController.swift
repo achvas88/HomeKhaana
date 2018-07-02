@@ -26,24 +26,45 @@ class ChoiceDetailViewController: UIViewController {
         
         self.lblDisplayTitle.text = theChoice!.displayTitle
         self.lblDescription.text = theChoice!.description
-        btnAddToCart.setTitle("Add to Cart (\(theChoice!.cost))", for: .normal)
         if(!theChoice!.isVegetarian) { stkVegetarian.isHidden = true }
         imgRepresentation.image = UIImage(named: theChoice!.imgName)
-        
+        setAddToCartTitle()
         // Do any additional setup after loading the view.
     }
 
+    @IBAction func btnMinusClicked(_ sender: Any) {
+        var quantity:Int = Int(self.lblQuantity.text!)!
+        if(quantity==1) { return}
+        quantity = quantity - 1
+        self.lblQuantity.text=String(quantity)
+        setAddToCartTitle()
+    }
+    
+    @IBAction func btnPlusClicked(_ sender: Any) {
+        var quantity:Int = Int(self.lblQuantity.text!)!
+        if(quantity==5) {return}
+        quantity = quantity+1
+        self.lblQuantity.text=String(quantity)
+        
+        setAddToCartTitle()
+    }
+    
+    @IBAction func btnAddToCartClicked(_ sender: Any) {
+        DataManager.addToCart(choiceID: theChoice!.id, quantity: Int(lblQuantity.text!)!)
+        
+        self.dismiss(animated: true
+            , completion: nil)
+    }
+    
+    func setAddToCartTitle()
+    {
+        btnAddToCart.setTitle("Add to Cart  -  \(theChoice!.cost * Float(lblQuantity.text!)!)\(theChoice!.currency)", for: .normal)
+    }
+    
     func setupButtons()
     {
         self.btnAddToCart.backgroundColor = UIColor(red: 69/255, green: 191/255, blue: 34/255, alpha: 1.0)
         self.btnAddToCart.setTitleColor(UIColor.white, for: .normal)
-    }
-    
-    @IBAction func btnMinusClicked(_ sender: Any) {
-        
-    }
-    
-    @IBAction func btnPlusClicked(_ sender: Any) {
     }
     
     override func didReceiveMemoryWarning() {
@@ -51,7 +72,6 @@ class ChoiceDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
     /*
     // MARK: - Navigation
 
