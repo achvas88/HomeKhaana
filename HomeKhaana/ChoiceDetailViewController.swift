@@ -11,6 +11,8 @@ import UIKit
 class ChoiceDetailViewController: UIViewController {
 
     var theChoice:Choice?
+    var isAddingToCart:Bool = true
+    var buttonCaption:String = "Add to Cart"
     
     @IBOutlet weak var imgRepresentation: UIImageView!
     @IBOutlet weak var lblDisplayTitle: UILabel!
@@ -24,6 +26,14 @@ class ChoiceDetailViewController: UIViewController {
         
         self.setupButtons()
         
+        self.isAddingToCart = true
+        let quantity:Int? = DataManager.inCart[theChoice!.id]
+        if(quantity != nil)
+        {
+            self.lblQuantity.text=String(quantity!)
+            self.buttonCaption = "Update Cart"
+            self.isAddingToCart = false
+        }
         self.lblDisplayTitle.text = theChoice!.displayTitle
         self.lblDescription.text = theChoice!.description
         if(!theChoice!.isVegetarian) { stkVegetarian.isHidden = true }
@@ -34,7 +44,8 @@ class ChoiceDetailViewController: UIViewController {
 
     @IBAction func btnMinusClicked(_ sender: Any) {
         var quantity:Int = Int(self.lblQuantity.text!)!
-        if(quantity==1) { return}
+        if(self.isAddingToCart && quantity==1) { return }
+        if(!self.isAddingToCart && quantity==0) { return }  // if updating cart, then allow removing item from the cart.
         quantity = quantity - 1
         self.lblQuantity.text=String(quantity)
         setAddToCartTitle()
@@ -50,7 +61,7 @@ class ChoiceDetailViewController: UIViewController {
     }
     
     @IBAction func btnAddToCartClicked(_ sender: Any) {
-        DataManager.addToCart(choiceID: theChoice!.id, quantity: Int(lblQuantity.text!)!)
+        DataManager.updateCart(choiceID: theChoice!.id, quantity: Int(lblQuantity.text!)!)
         
         self.dismiss(animated: true
             , completion: nil)
@@ -58,7 +69,7 @@ class ChoiceDetailViewController: UIViewController {
     
     func setAddToCartTitle()
     {
-        btnAddToCart.setTitle("Add to Cart  -  \(theChoice!.cost * Float(lblQuantity.text!)!)\(theChoice!.currency)", for: .normal)
+        btnAddToCart.setTitle("\(self.buttonCaption)  -  \(theChoice!.currency)\(convertToCurrency(input:(theChoice!.cost * Float(lblQuantity.text!)!)))", for: .normal)
     }
     
     func setupButtons()

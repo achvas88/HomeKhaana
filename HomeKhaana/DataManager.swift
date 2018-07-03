@@ -41,8 +41,15 @@ class DataManager {
         return choices
     }
     
-    static func addToCart(choiceID: Int,quantity: Int)
+    static func updateCart(choiceID: Int,quantity: Int)
     {
-        inCart[choiceID] = quantity
+        if(quantity == 0)
+        {
+            inCart[choiceID] = nil
+        }
+        else
+        {
+            inCart[choiceID] = quantity
+        }
     }
 }

@@ -14,6 +14,7 @@ class HomeTabBarController: UITabBarController,UITabBarControllerDelegate {
         super.viewDidLoad()
         
         self.delegate = self
+        self.definesPresentationContext = true
         // Do any additional setup after loading the view.
     }
 
@@ -28,9 +29,12 @@ class HomeTabBarController: UITabBarController,UITabBarControllerDelegate {
             return false
         }
         
+        if(fromView != toView)
+        {
         UIView.transition(from: fromView, to: toView, duration: 0.2, options: [.transitionCrossDissolve], completion: nil)
-        
         return true
+        }
+        return false
     }
 //    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
 //

@@ -29,6 +29,7 @@
 		B691C78820E9AA440060CF98 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B691C78720E9AA440060CF98 /* CartViewController.swift */; };
 		B691C78A20E9B09C0060CF98 /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B691C78920E9B09C0060CF98 /* HomeTabBarController.swift */; };
 		B691C78C20E9B8D30060CF98 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B691C78B20E9B8D30060CF98 /* CartTableViewCell.swift */; };
+		B691C78E20EB3B480060CF98 /* SharedFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B691C78D20EB3B480060CF98 /* SharedFunctions.swift */; };
 		B69F54A620CDD0EB00E1B0EB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B69F54A520CDD0EB00E1B0EB /* GoogleService-Info.plist */; };
 		B69F54A720CDD0EB00E1B0EB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B69F54A520CDD0EB00E1B0EB /* GoogleService-Info.plist */; };
 		B69F54A820CDD0EB00E1B0EB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B69F54A520CDD0EB00E1B0EB /* GoogleService-Info.plist */; };
@@ -88,6 +89,7 @@
 		B691C78720E9AA440060CF98 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		B691C78920E9B09C0060CF98 /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
 		B691C78B20E9B8D30060CF98 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
+		B691C78D20EB3B480060CF98 /* SharedFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedFunctions.swift; sourceTree = "<group>"; };
 		B69F54A520CDD0EB00E1B0EB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B69F54AB20CDD67900E1B0EB /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		B69F54AD20CDDBCF00E1B0EB /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				B691C78720E9AA440060CF98 /* CartViewController.swift */,
 				B691C78920E9B09C0060CF98 /* HomeTabBarController.swift */,
 				B691C78B20E9B8D30060CF98 /* CartTableViewCell.swift */,
+				B691C78D20EB3B480060CF98 /* SharedFunctions.swift */,
 			);
 			path = HomeKhaana;
 			sourceTree = "<group>";
@@ -493,6 +496,7 @@
 				B61558D520D8641F00471718 /* CustomUIButton.swift in Sources */,
 				B64AB0BC20BCC707003B966C /* AppDelegate.swift in Sources */,
 				B691C78820E9AA440060CF98 /* CartViewController.swift in Sources */,
+				B691C78E20EB3B480060CF98 /* SharedFunctions.swift in Sources */,
 				B691C78C20E9B8D30060CF98 /* CartTableViewCell.swift in Sources */,
 				B61558D920DF0AC800471718 /* HomeTableViewController.swift in Sources */,
 				B61558CF20D6D93D00471718 /* HowItWorksViewController.swift in Sources */,
