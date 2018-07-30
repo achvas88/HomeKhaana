@@ -8,7 +8,6 @@
 
 import UIKit
 import Firebase
-import FirebaseFirestore
 import GooglePlacePicker
 
 class UserPreferencesViewController: UIViewController,GMSPlacePickerViewControllerDelegate {
@@ -16,45 +15,12 @@ class UserPreferencesViewController: UIViewController,GMSPlacePickerViewControll
     @IBOutlet weak var tglVegetarian: UISwitch!
     @IBOutlet weak var btnAddAddress: CustomUIButton!
     
-    let db = Firestore.firestore()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        if let user = Auth.auth().currentUser
-        {
-            // we are using email address as the document id
-            let email = user.email!
-            
-            if(email == "") {
-                fatalError("User email is empty")
-            }
-            
-            
-            let docRef = db.collection("Users").document(email)
-            
-            docRef.getDocument { (document, error) in
-                if let document = document, document.exists {
-                    
-                    if let user = User(dictionary: document.data()!) {
-                        print("userID:" + user.id)
-                        print("userEmail:" + user.emailAddress)
-                        print("isVegetarian:" + String(user.isVegetarian))
-                        self.tglVegetarian.isOn = user.isVegetarian
-                    } else {
-                        fatalError("Unable to initialize type \(User.self) with dictionary \(String(describing: document.data()))")
-                    }
-                    
-                    //let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                    //print("Document data: \(dataDescription)")
-                } else {
-                    print("Document does not exist")
-                }
-            }
-        }
-
-        // Do any additional setup after loading the view.
+        let user:User = User.sharedInstance!
+        self.tglVegetarian.isOn = user.isVegetarian
     }
 
     override func didReceiveMemoryWarning() {
@@ -63,32 +29,8 @@ class UserPreferencesViewController: UIViewController,GMSPlacePickerViewControll
     }
     
     @IBAction func btnLooksGoodClicked(_ sender: Any) {
-        
-        if let user = Auth.auth().currentUser
-        {
-            // we are using email address as the document id
-            let email = user.email!
-            if(email == "") {
-                fatalError("User email is empty")
-            }
-            let docRef = db.collection("Users").document(email)
-            docRef.setData([
-                "isVegetarian": tglVegetarian.isOn,
-                "emailAddress": email,
-                "name": user.displayName ?? "Username"
-            ],merge: true) { err in
-                if let err = err {
-                    print("Error writing document: \(err)")
-                } else {
-                    print("Document successfully written!")
-                }
-            }
-        }
-        
-        //GO HOME.
+        User.sharedInstance!.isVegetarian = tglVegetarian.isOn
         self.dismiss(animated: true, completion: nil)
-        /*let vc = self.storyboard?.instantiateViewController(withIdentifier: "Home")
-        self.present(vc!, animated: true, completion: nil)*/
     }
     
     @IBAction func btnAddAddressClicked(_ sender: Any) {

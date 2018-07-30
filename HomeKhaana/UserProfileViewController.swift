@@ -57,6 +57,8 @@ class UserProfileViewController: UIViewController {
         {
             do
             {
+                User.WriteToDatabase()
+                
                 try Auth.auth().signOut()
                 
                 GIDSignIn.sharedInstance().signOut()

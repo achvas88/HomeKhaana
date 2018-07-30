@@ -29,7 +29,12 @@
 		B691C78820E9AA440060CF98 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B691C78720E9AA440060CF98 /* CartViewController.swift */; };
 		B691C78A20E9B09C0060CF98 /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B691C78920E9B09C0060CF98 /* HomeTabBarController.swift */; };
 		B691C78C20E9B8D30060CF98 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B691C78B20E9B8D30060CF98 /* CartTableViewCell.swift */; };
-		B691C78E20EB3B480060CF98 /* SharedFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B691C78D20EB3B480060CF98 /* SharedFunctions.swift */; };
+		B691C78E20EB3B480060CF98 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = B691C78D20EB3B480060CF98 /* Shared.swift */; };
+		B691C79020FBF52F0060CF98 /* PaymentsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B691C78F20FBF52E0060CF98 /* PaymentsManager.swift */; };
+		B691C79220FBF97E0060CF98 /* PaymentSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B691C79120FBF97E0060CF98 /* PaymentSource.swift */; };
+		B691C79420FD82050060CF98 /* PaymentSourceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B691C79320FD82050060CF98 /* PaymentSourceTableViewCell.swift */; };
+		B691C79620FD823D0060CF98 /* AddPaymentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B691C79520FD823D0060CF98 /* AddPaymentTableViewCell.swift */; };
+		B691C79820FD834C0060CF98 /* PaymentSourceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B691C79720FD834C0060CF98 /* PaymentSourceTableViewController.swift */; };
 		B69F54A620CDD0EB00E1B0EB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B69F54A520CDD0EB00E1B0EB /* GoogleService-Info.plist */; };
 		B69F54A720CDD0EB00E1B0EB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B69F54A520CDD0EB00E1B0EB /* GoogleService-Info.plist */; };
 		B69F54A820CDD0EB00E1B0EB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B69F54A520CDD0EB00E1B0EB /* GoogleService-Info.plist */; };
@@ -89,7 +94,12 @@
 		B691C78720E9AA440060CF98 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		B691C78920E9B09C0060CF98 /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
 		B691C78B20E9B8D30060CF98 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
-		B691C78D20EB3B480060CF98 /* SharedFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedFunctions.swift; sourceTree = "<group>"; };
+		B691C78D20EB3B480060CF98 /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
+		B691C78F20FBF52E0060CF98 /* PaymentsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentsManager.swift; sourceTree = "<group>"; };
+		B691C79120FBF97E0060CF98 /* PaymentSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSource.swift; sourceTree = "<group>"; };
+		B691C79320FD82050060CF98 /* PaymentSourceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSourceTableViewCell.swift; sourceTree = "<group>"; };
+		B691C79520FD823D0060CF98 /* AddPaymentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPaymentTableViewCell.swift; sourceTree = "<group>"; };
+		B691C79720FD834C0060CF98 /* PaymentSourceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSourceTableViewController.swift; sourceTree = "<group>"; };
 		B69F54A520CDD0EB00E1B0EB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B69F54AB20CDD67900E1B0EB /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		B69F54AD20CDDBCF00E1B0EB /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
@@ -198,7 +208,12 @@
 				B691C78720E9AA440060CF98 /* CartViewController.swift */,
 				B691C78920E9B09C0060CF98 /* HomeTabBarController.swift */,
 				B691C78B20E9B8D30060CF98 /* CartTableViewCell.swift */,
-				B691C78D20EB3B480060CF98 /* SharedFunctions.swift */,
+				B691C78D20EB3B480060CF98 /* Shared.swift */,
+				B691C78F20FBF52E0060CF98 /* PaymentsManager.swift */,
+				B691C79120FBF97E0060CF98 /* PaymentSource.swift */,
+				B691C79320FD82050060CF98 /* PaymentSourceTableViewCell.swift */,
+				B691C79520FD823D0060CF98 /* AddPaymentTableViewCell.swift */,
+				B691C79720FD834C0060CF98 /* PaymentSourceTableViewController.swift */,
 			);
 			path = HomeKhaana;
 			sourceTree = "<group>";
@@ -425,36 +440,26 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-HomeKhaana/Pods-HomeKhaana-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
-				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKShareKit/FBSDKShareKit.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
+				"${BUILT_PRODUCTS_DIR}/Stripe/Stripe.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKShareKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Stripe.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -488,21 +493,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B691C79420FD82050060CF98 /* PaymentSourceTableViewCell.swift in Sources */,
 				B61558C920D6D7B400471718 /* NotificationsViewController.swift in Sources */,
+				B691C79620FD823D0060CF98 /* AddPaymentTableViewCell.swift in Sources */,
 				B61558DD20DF0D4200471718 /* DataManager.swift in Sources */,
 				B69F54AC20CDD67900E1B0EB /* SignUpViewController.swift in Sources */,
 				B61558DB20DF0B6700471718 /* Choice.swift in Sources */,
+				B691C79020FBF52F0060CF98 /* PaymentsManager.swift in Sources */,
 				B6287B4420E873C1009FF79D /* ChoiceDetailViewController.swift in Sources */,
 				B61558D520D8641F00471718 /* CustomUIButton.swift in Sources */,
 				B64AB0BC20BCC707003B966C /* AppDelegate.swift in Sources */,
 				B691C78820E9AA440060CF98 /* CartViewController.swift in Sources */,
-				B691C78E20EB3B480060CF98 /* SharedFunctions.swift in Sources */,
+				B691C78E20EB3B480060CF98 /* Shared.swift in Sources */,
 				B691C78C20E9B8D30060CF98 /* CartTableViewCell.swift in Sources */,
 				B61558D920DF0AC800471718 /* HomeTableViewController.swift in Sources */,
 				B61558CF20D6D93D00471718 /* HowItWorksViewController.swift in Sources */,
 				B64393A220DFC7D800058C82 /* ChoiceTableViewCell.swift in Sources */,
 				B69F54AE20CDDBCF00E1B0EB /* UserProfileViewController.swift in Sources */,
 				B69F54B020CDE9B000E1B0EB /* Extensions.swift in Sources */,
+				B691C79820FD834C0060CF98 /* PaymentSourceTableViewController.swift in Sources */,
+				B691C79220FBF97E0060CF98 /* PaymentSource.swift in Sources */,
 				B61558D320D8611F00471718 /* UserPreferencesViewController.swift in Sources */,
 				B691C78A20E9B09C0060CF98 /* HomeTabBarController.swift in Sources */,
 				B61558D120D7476700471718 /* User.swift in Sources */,

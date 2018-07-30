@@ -195,6 +195,9 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     
     func takeMeHome()
     {
+        // initialize user here. At this point, pakka there is a firebase user.
+        User.initialize()
+        
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "Notifications")
         self.present(vc!, animated: true, completion: nil)
     }

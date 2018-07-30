@@ -13,3 +13,4 @@ func convertToCurrency(input:Float)->String
     //return round(input*1000)/1000 - can be used in the future to actually store float value
     return String(format: "%.2f", input)
 }
+

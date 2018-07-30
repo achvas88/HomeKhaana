@@ -12,6 +12,7 @@ import GoogleSignIn
 import FBSDKCoreKit
 import GooglePlaces
 import GoogleMaps
+import Stripe
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate  {
@@ -30,6 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         if (FBSDKAccessToken.current() != nil || (GIDSignIn.sharedInstance().hasAuthInKeychain() == true)) {
             // User is logged in, use 'accessToken' here.
             
+            // initialize user here for now. At this point, pakka there is a firebase user.
+            User.initialize()
+            
             // get your storyboard
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
@@ -40,10 +44,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
             if let window = self.window {
                 window.rootViewController = rootController
             }
+            
+            
         }
         
-       GMSPlacesClient.provideAPIKey(googlePlacesAPIKey)
-       GMSServices.provideAPIKey(googlePlacesAPIKey)
+        GMSPlacesClient.provideAPIKey(googlePlacesAPIKey)
+        GMSServices.provideAPIKey(googlePlacesAPIKey)
+        
+        STPPaymentConfiguration.shared().publishableKey = Constants.publishableKey
         
         return true
     }
@@ -81,6 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        User.WriteToDatabase()
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {

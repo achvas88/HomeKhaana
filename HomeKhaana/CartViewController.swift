@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Stripe
+import Firebase
+import FirebaseDatabase
 
 class CartViewController: UIViewController, UITableViewDataSource {
     
@@ -24,6 +27,7 @@ class CartViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var stkEmptyCart: UIStackView!
     
     var inCart:Array<(key:Int, value:Int)> = []
+    var currentTotal:Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,6 +95,7 @@ class CartViewController: UIViewController, UITableViewDataSource {
         self.lblTax.text = "\(convertToCurrency(input:(subTotal*0.05)))$"
         self.lblConvenienceFee.text = "\(convertToCurrency(input:2))$"
         self.lblTotal.text = "\(convertToCurrency(input:(subTotal+(subTotal*0.05)+2)))$"
+        self.currentTotal = Int(floor((subTotal+(subTotal*0.05)+2)*100))
     }
     
     func setupButtons()
@@ -123,7 +128,53 @@ class CartViewController: UIViewController, UITableViewDataSource {
         return cell
     }
     
+    @IBAction func btnCheckoutClicked(_ sender: Any) {
+        if (User.isUserInitialized)
+        {
+            let id = User.sharedInstance!.id
+            User.sharedInstance!.chargeID = User.sharedInstance!.chargeID + 1
+            let chargeID=User.sharedInstance!.chargeID
+            
+            let newChargeRef = Database.database().reference().child("Charges/\(id)").child(String(chargeID))
+            var theCharge:Dictionary<String,Any>=[:]
+            theCharge["amount"]=self.currentTotal
+            
+             newChargeRef.setValue(theCharge) {
+                (error:Error?, ref:DatabaseReference) in
+                if let error = error {
+                    print("Error charging user: \(error).")
+                } else {
+                    print("Successfuly charged user!")
+                    let alertController = UIAlertController(title: "Success",
+                                                            message: "Charging complete!",
+                                                            preferredStyle: .alert)
+                    let alertAction = UIAlertAction(title: "Cool", style: .default)
+                    alertController.addAction(alertAction)
+                    self.present(alertController, animated: true)
+                    return
+                }
+            }
+        }
+    }
     
+    @IBAction func btnPayments(_ sender: Any) {
+        guard inCart.count > 0 else {
+            
+            //sanity check. This will never happen.
+            let alertController = UIAlertController(title: "Warning",
+                                                    message: "Your cart is empty",
+                                                    preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "OK", style: .default)
+            alertController.addAction(alertAction)
+            present(alertController, animated: true)
+            return
+        }
+        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "PaymentSources")
+        navigationController?.pushViewController(vc!, animated: true)
+        //self.present(vc!, animated: true, completion: nil)
+        
+    }
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -141,7 +192,4 @@ class CartViewController: UIViewController, UITableViewDataSource {
             }
         }
     }
-    
-    
-
 }

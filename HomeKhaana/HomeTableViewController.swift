@@ -50,8 +50,6 @@ class HomeTableViewController: UITableViewController {
         // Configure the cell...
         let choice = choices[indexPath.row]
         cell.choice = choice
-        //cell.textLabel?.text = choice.displayTitle
-        //cell.detailTextLabel?.text = choice.description
         return cell
     }
     
