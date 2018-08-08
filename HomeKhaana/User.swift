@@ -9,6 +9,7 @@
 import Foundation
 import Firebase
 import FirebaseDatabase
+import FirebaseFunctions
 
 final class User{
     
@@ -21,8 +22,12 @@ final class User{
     var id: String
     var email: String
     var customerID:String
-    var paymentSources: [PaymentSource]
+    var paymentSources: [PaymentSource]?
     var chargeID: UInt
+    var defaultPaymentSourceID:String?
+    var defaultPaymentSource:PaymentSource?
+    var defaultAddress:String
+    var isUserImageLoaded: Bool
     
     static var dictionary: [String: Any] {
         return [
@@ -30,20 +35,23 @@ final class User{
             "isVegetarian": User.sharedInstance!.isVegetarian,
             "id": User.sharedInstance!.id,
             "email": User.sharedInstance!.email,
+            "chargeID": User.sharedInstance!.chargeID,
             "customerID": User.sharedInstance!.customerID,
+            "defaultAddress": User.sharedInstance!.defaultAddress
         ]
     }
     
     //designated constructors
-    public init(name:String, isVegetarian:Bool, id:String, email:String, customerID:String)
+    public init(name:String, isVegetarian:Bool, id:String, email:String, customerID:String, chargeID:UInt, defaultAddress: String)
     {
         self.name = name
         self.isVegetarian = isVegetarian
         self.id = id
         self.email = email
         self.customerID = customerID
-        self.paymentSources = []   // these will be set later on.
-        self.chargeID = 0          // these will also be set later on.
+        self.chargeID = chargeID          // these will also be set later on.
+        self.defaultAddress = defaultAddress
+        self.isUserImageLoaded = false
         User.isUserInitialized = true
     }
     
@@ -53,30 +61,37 @@ final class User{
         guard let name = dictionary["name"] as? String,
               let isVegetarian = dictionary["isVegetarian"] as? Bool,
               let email = dictionary["email"] as? String,
+              let chargeID = dictionary["chargeID"] as? UInt,
               let customerID = dictionary["customerID"] as? String
         else { return nil}
         
-        self.init(name: name, isVegetarian: isVegetarian, id: id, email: email, customerID:customerID)
+        let defaultAddress = dictionary["defaultAddress"] as? String
+        
+        self.init(name: name, isVegetarian: isVegetarian, id: id, email: email, customerID:customerID, chargeID: chargeID, defaultAddress: (defaultAddress ?? ""))
     }
     
     //intializes User data from the database
     public static func initialize()
     {
+        let db: DatabaseReference! = Database.database().reference()
         if let user = Auth.auth().currentUser
         {
             // we are using email address as the document id
             let uid = user.uid
             
             if(uid == "") {
-                fatalError("User id is empty")
+                return
             }
             
+            //First load the User.
+            let dispatchGroupUser = DispatchGroup()
+            dispatchGroupUser.enter()
             db.child("Users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
                 // Get user value
                 let value = snapshot.value as? NSDictionary
                 if(value == nil){
                     //new user! yayy!!
-                    User.sharedInstance = User(name: user.displayName!, isVegetarian: false, id: uid, email: user.email!, customerID: "")
+                    User.sharedInstance = User(name: user.displayName!, isVegetarian: false, id: uid, email: user.email!, customerID: "", chargeID: 1, defaultAddress: "")
                     
                     //write back to the database
                     db.child("Users").child(uid).setValue(User.dictionary, withCompletionBlock: { (err:Error?, ref:DatabaseReference) in
@@ -91,10 +106,72 @@ final class User{
                     let user = User(dictionary: value!, id: uid)
                     User.sharedInstance = user
                 }
-            }) { (error) in
-                print(error.localizedDescription)
-            }
+                //semaphore.signal()
+                dispatchGroupUser.leave()
+            });
+            
+            //next load payments
+            dispatchGroupUser.notify(queue: DispatchQueue.main, execute: loadPayments)
         }
+    }
+    
+    public static func loadPayments()
+    {
+        print("Finished Loading User Details")
+        
+        //obtain payment sources
+        let dispatchGroupPaymentSources = DispatchGroup()
+        dispatchGroupPaymentSources.enter()
+        let paymentSourcesRef = db.child("PaymentSources/\(Auth.auth().currentUser!.uid)")
+        paymentSourcesRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            User.sharedInstance!.paymentSources = []
+            
+            for card in snapshot.children {
+                if let snapshot = card as? DataSnapshot,
+                    let paymentSource = PaymentSource(snapshot: snapshot)
+                {
+                    User.sharedInstance!.paymentSources!.append(paymentSource)
+                }
+            }
+            dispatchGroupPaymentSources.leave()
+            
+        })
+        //next obtain default payment source
+        dispatchGroupPaymentSources.notify(queue: DispatchQueue.main, execute: loadDefaultPayment)
+    }
+    
+    public static func loadDefaultPayment()
+    {
+        print("Finished Loading User Payments")
+        
+        //obtain default payment source
+        let dispatchGroupDefaultPayment = DispatchGroup()
+        dispatchGroupDefaultPayment.enter()
+        functions.httpsCallable("getDefaultPaymentSource").call() { (result, error) in
+            if let error = error as NSError? {
+                //function errored out
+                fatalError(error.localizedDescription)
+            }
+            if let defaultPaymentSourceID = (result?.data as? [String: Any])?["defaultSourceID"] as? String {
+                User.sharedInstance!.defaultPaymentSourceID = defaultPaymentSourceID
+                for source in User.sharedInstance!.paymentSources!
+                {
+                    if(source.id == defaultPaymentSourceID)
+                    {
+                        User.sharedInstance!.defaultPaymentSource = source
+                        break
+                    }
+                }
+            }
+           dispatchGroupDefaultPayment.leave()
+        }
+        dispatchGroupDefaultPayment.notify(queue: DispatchQueue.main, execute: allDone)
+    }
+    
+    public static func allDone()
+    {
+        print("Finished Loading User Default Payments")
     }
     
     //writes back User data to the database
@@ -103,10 +180,10 @@ final class User{
         if User.isUserInitialized
         {
             let id=User.sharedInstance!.id
-            db.child("Users/\(id)/isVegetarian").setValue(User.sharedInstance!.isVegetarian){
+            db.child("Users/\(id)").setValue(User.dictionary){
                 (error:Error?, ref:DatabaseReference) in
                 if let error = error {
-                    print("Error uploading user data: \(error).")
+                    fatalError("Error uploading user data: \(error).")
                 } else {
                     print("User updated successfully!")
                 }

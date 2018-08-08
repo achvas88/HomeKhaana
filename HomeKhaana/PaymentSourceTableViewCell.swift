@@ -13,6 +13,15 @@ class PaymentSourceTableViewCell: UITableViewCell {
     @IBOutlet weak var imgCardBrand: UIImageView!
     @IBOutlet weak var lblCardNumber: UILabel!
     
+    var paymentSource:PaymentSource? {
+        didSet {
+            guard let paymentSource = paymentSource else { return }
+            
+            imgCardBrand.image = paymentSource.cardImage
+            lblCardNumber.text = "**** " + String(paymentSource.cardNumber)
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

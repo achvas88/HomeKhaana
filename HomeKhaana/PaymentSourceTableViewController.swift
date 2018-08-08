@@ -11,33 +11,22 @@ import Stripe
 import Firebase
 import FirebaseDatabase
 
-
+protocol PaymentSourceDelegate: class {
+    func updatePaymentSource(_ paymentSource:PaymentSource?)
+}
 class PaymentSourceTableViewController: UITableViewController {
 
+    public var selectedPayment:PaymentSource?
+    weak var paymentSourceDelegate: PaymentSourceDelegate?
+    var indicator: UIActivityIndicatorView?
+    var alreadyListening: Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // initialize payment sources
-        let uid = User.sharedInstance!.id
-        
-        let paymentSourcesRef = db.child("PaymentSources/\(uid)")
-        paymentSourcesRef.observe(.value, with: { (snapshot) in
-            
-            User.sharedInstance?.paymentSources = []
-            
-            for card in snapshot.children {
-                if let snapshot = card as? DataSnapshot,
-                   let paymentSource = PaymentSource(snapshot: snapshot)
-                {
-                    User.sharedInstance?.paymentSources.append(paymentSource)
-                }
-            }
-            self.tableView.reloadData()
-        })
-        
+        //self.tableView.reloadData()
         self.tableView.separatorStyle = .none
-
+        self.alreadyListening = false
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -58,23 +47,46 @@ class PaymentSourceTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return User.sharedInstance!.paymentSources.count + 1
+        if(User.sharedInstance!.paymentSources == nil) {
+            return 1
+        }
+        else {
+            return User.sharedInstance!.paymentSources!.count + 1
+        }
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if(indexPath.row != User.sharedInstance!.paymentSources.count)
+        if(indexPath.row != User.sharedInstance!.paymentSources!.count)
         {
             let cell = tableView.dequeueReusableCell(withIdentifier: "paymentSource", for: indexPath) as! PaymentSourceTableViewCell
-            let card:PaymentSource = User.sharedInstance!.paymentSources[indexPath.row]
-            cell.lblCardNumber.text = "**** " + String(card.cardNumber)
-            cell.imgCardBrand.image = card.cardImage
+            let card:PaymentSource = User.sharedInstance!.paymentSources![indexPath.row]
+            cell.paymentSource = card
+            if(card.id == selectedPayment!.id)  //there has got to be at least one default at this time as at least one row is already present. So force unwrapping.
+            {
+                cell.accessoryType = .checkmark
+            }
             return cell
         }
         else
         {
             let cell = tableView.dequeueReusableCell(withIdentifier: "addPayment", for: indexPath) as! AddPaymentTableViewCell
             return cell
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if(indexPath.row != User.sharedInstance!.paymentSources!.count)
+        {
+//            for cell in self.tableView.visibleCells
+//            {
+//                cell.accessoryType = .none
+//            }
+//
+//            cell!.accessoryType = .checkmark
+            let cell = tableView.cellForRow(at: indexPath) as? PaymentSourceTableViewCell
+            paymentSourceDelegate?.updatePaymentSource(cell!.paymentSource)
+            self.navigationController?.popViewController(animated: true)
         }
     }
     
@@ -119,16 +131,14 @@ class PaymentSourceTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-    }
-    */
-
+    }*/
 }
 
 //Credit Card Processing
@@ -144,6 +154,7 @@ extension PaymentSourceTableViewController: STPAddCardViewControllerDelegate {
         
         if (User.isUserInitialized)
         {
+            
             let id = User.sharedInstance!.id
             
             Database.database().reference().child("PaymentSources/\(id)").child(token.tokenId).setValue(token.card!.last4){
@@ -154,9 +165,54 @@ extension PaymentSourceTableViewController: STPAddCardViewControllerDelegate {
                 } else {
                     print("Added Payment!")
                     completion(nil)
+                    self.setupLoadingIndicator()
+                    if(!self.alreadyListening!) { self.listenToPaymentSourceChanges() }
                     self.navigationController?.popViewController(animated: true)
                 }
             }
         }
+    }
+    
+    func setupLoadingIndicator()
+    {
+        if(self.indicator == nil)
+        {
+            self.indicator  = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+            self.indicator!.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+            self.indicator!.center = self.view.center
+            self.indicator!.hidesWhenStopped = true
+            self.view.addSubview(self.indicator!)
+            self.view.bringSubview(toFront: self.indicator!)
+            //UIApplication.shared.isNetworkActivityIndicatorVisible = true
+            self.indicator!.startAnimating()
+        }
+        else
+        {
+            self.indicator!.startAnimating()
+        }
+        print("start Animating")
+    }
+    
+    func listenToPaymentSourceChanges()
+    {
+        let paymentSourcesRef = db.child("PaymentSources/\(Auth.auth().currentUser!.uid)")
+        paymentSourcesRef.observe(.value, with: { (snapshot) in
+            
+            User.sharedInstance!.paymentSources = []
+            
+            for card in snapshot.children {
+                if let snapshot = card as? DataSnapshot,
+                    let paymentSource = PaymentSource(snapshot: snapshot)
+                {
+                    User.sharedInstance!.paymentSources!.append(paymentSource)
+                }
+            }
+            // so the very first time the indicator doesnt stop animating because we know that a payment source has been added but it
+            // is not yet reflected in the table view controller because teh paymentSources has not yet updated.
+            if(self.alreadyListening! == true) { self.indicator!.stopAnimating() }
+            print("stop Animating")
+            self.tableView.reloadData()
+            self.alreadyListening = true
+        })
     }
 }

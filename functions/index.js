@@ -86,3 +86,20 @@ exports.charge = functions.database.ref('/Charges/{userId}/{id}').onCreate((snap
 function userFacingMessage(error) {
   return error.type ? error.message : 'Oops! Something went wrong. The developers are on it!';
 }
+
+//get default payment source
+exports.getDefaultPaymentSource = functions.https.onCall((data, context) => {
+   if (!context.auth) {
+     throw new functions.https.HttpsError('failed-precondition', 'No authenticated user found.');
+   }
+   const uid = context.auth.uid;
+
+   return admin.database().ref(`/Users/${uid}/customerID`).once('value').then((snapshot) => {
+            return snapshot.val();
+          }).then((customer) => {
+            return stripe.customers.retrieve(customer);
+	  }).then((response) => {
+            var defaultSourceID= response["default_source"];
+	    return {"defaultSourceID": defaultSourceID};
+	  });
+});

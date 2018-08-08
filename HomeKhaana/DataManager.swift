@@ -7,11 +7,13 @@
 //
 
 import Foundation
+import FirebaseDatabase
 
 class DataManager {
     
     static var choices:[Choice] = []
     static var inCart:Dictionary<Int,Int> = Dictionary<Int,Int>()
+    static var locations:[Address] = []
     
     static func initData() -> Void {
         
@@ -29,6 +31,33 @@ class DataManager {
         
         //initialize the cart
         inCart=[:]
+        
+        //initializa the locations
+        let locationRef = db.child("Locations")
+        locationRef.observeSingleEvent(of: .value, with: { (snapshot) in
+            self.locations = []
+            
+            if let addresses = snapshot.value as? [String: AnyObject]
+            {
+                for items in addresses {
+                    let key=items.key
+                    let val = items.value as! String
+                    self.locations.append(Address(title: val, address: key))
+                }
+            }
+        })
+    }
+    
+    static func getAddressForTitle(title:String) ->Address?
+    {
+        for address in locations
+        {
+            if(address.title == title)
+            {
+                return address
+            }
+        }
+        return nil
     }
     
     static func getChoiceForId(id:Int) -> Choice

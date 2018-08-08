@@ -18,6 +18,10 @@
 		B61558D920DF0AC800471718 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558D820DF0AC800471718 /* HomeTableViewController.swift */; };
 		B61558DB20DF0B6700471718 /* Choice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558DA20DF0B6700471718 /* Choice.swift */; };
 		B61558DD20DF0D4200471718 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558DC20DF0D4100471718 /* DataManager.swift */; };
+		B61B78F221177BED000EDE80 /* UserInitializationErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B78F121177BED000EDE80 /* UserInitializationErrorViewController.swift */; };
+		B61B78F42117E3CE000EDE80 /* AddressesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B78F32117E3CE000EDE80 /* AddressesTableViewController.swift */; };
+		B61B78F62117E3FA000EDE80 /* AddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B78F52117E3FA000EDE80 /* AddressTableViewCell.swift */; };
+		B61B78F82117E7C2000EDE80 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B78F72117E7C2000EDE80 /* Address.swift */; };
 		B6287B4420E873C1009FF79D /* ChoiceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6287B4320E873C1009FF79D /* ChoiceDetailViewController.swift */; };
 		B64393A220DFC7D800058C82 /* ChoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64393A120DFC7D800058C82 /* ChoiceTableViewCell.swift */; };
 		B64AB0BC20BCC707003B966C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64AB0BB20BCC707003B966C /* AppDelegate.swift */; };
@@ -77,6 +81,10 @@
 		B61558D820DF0AC800471718 /* HomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
 		B61558DA20DF0B6700471718 /* Choice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choice.swift; sourceTree = "<group>"; };
 		B61558DC20DF0D4100471718 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		B61B78F121177BED000EDE80 /* UserInitializationErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInitializationErrorViewController.swift; sourceTree = "<group>"; };
+		B61B78F32117E3CE000EDE80 /* AddressesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressesTableViewController.swift; sourceTree = "<group>"; };
+		B61B78F52117E3FA000EDE80 /* AddressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressTableViewCell.swift; sourceTree = "<group>"; };
+		B61B78F72117E7C2000EDE80 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		B6287B4320E873C1009FF79D /* ChoiceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceDetailViewController.swift; sourceTree = "<group>"; };
 		B64393A120DFC7D800058C82 /* ChoiceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceTableViewCell.swift; sourceTree = "<group>"; };
 		B64AB0B820BCC706003B966C /* HomeKhaana.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeKhaana.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -214,6 +222,10 @@
 				B691C79320FD82050060CF98 /* PaymentSourceTableViewCell.swift */,
 				B691C79520FD823D0060CF98 /* AddPaymentTableViewCell.swift */,
 				B691C79720FD834C0060CF98 /* PaymentSourceTableViewController.swift */,
+				B61B78F121177BED000EDE80 /* UserInitializationErrorViewController.swift */,
+				B61B78F32117E3CE000EDE80 /* AddressesTableViewController.swift */,
+				B61B78F52117E3FA000EDE80 /* AddressTableViewCell.swift */,
+				B61B78F72117E7C2000EDE80 /* Address.swift */,
 			);
 			path = HomeKhaana;
 			sourceTree = "<group>";
@@ -501,13 +513,17 @@
 				B61558DB20DF0B6700471718 /* Choice.swift in Sources */,
 				B691C79020FBF52F0060CF98 /* PaymentsManager.swift in Sources */,
 				B6287B4420E873C1009FF79D /* ChoiceDetailViewController.swift in Sources */,
+				B61B78F42117E3CE000EDE80 /* AddressesTableViewController.swift in Sources */,
 				B61558D520D8641F00471718 /* CustomUIButton.swift in Sources */,
 				B64AB0BC20BCC707003B966C /* AppDelegate.swift in Sources */,
 				B691C78820E9AA440060CF98 /* CartViewController.swift in Sources */,
+				B61B78F62117E3FA000EDE80 /* AddressTableViewCell.swift in Sources */,
 				B691C78E20EB3B480060CF98 /* Shared.swift in Sources */,
 				B691C78C20E9B8D30060CF98 /* CartTableViewCell.swift in Sources */,
 				B61558D920DF0AC800471718 /* HomeTableViewController.swift in Sources */,
+				B61B78F221177BED000EDE80 /* UserInitializationErrorViewController.swift in Sources */,
 				B61558CF20D6D93D00471718 /* HowItWorksViewController.swift in Sources */,
+				B61B78F82117E7C2000EDE80 /* Address.swift in Sources */,
 				B64393A220DFC7D800058C82 /* ChoiceTableViewCell.swift in Sources */,
 				B69F54AE20CDDBCF00E1B0EB /* UserProfileViewController.swift in Sources */,
 				B69F54B020CDE9B000E1B0EB /* Extensions.swift in Sources */,

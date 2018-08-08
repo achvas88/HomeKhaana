@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
             // User is logged in, use 'accessToken' here.
             
             // initialize user here for now. At this point, pakka there is a firebase user.
-            User.initialize()
+            //User.initialize()
             
             // get your storyboard
             let storyboard = UIStoryboard(name: "Main", bundle: nil)

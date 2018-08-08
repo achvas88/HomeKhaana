@@ -1,5 +1,5 @@
 //
-//  SharedFunctions.swift
+//  Shared.swift
 //  HomeKhaana
 //
 //  Created by Achyuthan Vasanth on 7/3/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 import FirebaseDatabase
-
+import FirebaseFunctions
 
 func convertToCurrency(input:Float)->String
 {
@@ -22,3 +22,5 @@ enum Constants
 }
 
 let db: DatabaseReference! = Database.database().reference()
+
+var functions = Functions.functions()

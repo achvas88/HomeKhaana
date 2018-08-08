@@ -11,9 +11,9 @@ import Stripe
 import Firebase
 import FirebaseDatabase
 
-class CartViewController: UIViewController, UITableViewDataSource {
+class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceDelegate,AddressDelegate {
     
-    @IBOutlet weak var lblLocation: UILabel!
+    @IBOutlet weak var btnAddAddress: UIButton!
     @IBOutlet weak var lblTime: UILabel!
     @IBOutlet weak var lblSubtotal: UILabel!
     @IBOutlet weak var lblConvenienceFee: UILabel!
@@ -28,11 +28,16 @@ class CartViewController: UIViewController, UITableViewDataSource {
     
     var inCart:Array<(key:Int, value:Int)> = []
     var currentTotal:Int = 0
+    var selectedPayment:PaymentSource?
+    var selectedAddress:Address?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        self.selectedPayment = self.selectedPayment ?? User.sharedInstance!.defaultPaymentSource
+        self.selectedAddress = DataManager.getAddressForTitle(title: User.sharedInstance!.defaultAddress)
+        
         self.tblItems.dataSource = self
         self.setupButtons()
         self.updateDisplay(initialize: true)
@@ -69,18 +74,31 @@ class CartViewController: UIViewController, UITableViewDataSource {
         {
             self.btnCheckout.isHidden = true
             self.scrScrollArea.isHidden = true
+            self.btnAddPayment.isHidden = true
             self.stkEmptyCart.isHidden = false
         }
         else
         {
             self.btnCheckout.isHidden = false
             self.scrScrollArea.isHidden = false
+            self.btnAddPayment.isHidden = false
             self.stkEmptyCart.isHidden = true
             if(!initialize)
             {
                 self.tblItems.reloadData()
             }
             self.calculatePrice()
+        }
+        
+        if (self.selectedPayment != nil)
+        {
+            self.btnAddPayment.setTitle("**** " + self.selectedPayment!.cardNumber, for: .normal)
+            self.btnAddPayment.setImage(self.selectedPayment!.cardImage, for: .normal)
+        }
+        
+        if(self.selectedAddress != nil )
+        {
+            self.btnAddAddress.setTitle(self.selectedAddress!.title, for: .normal)
         }
     }
     
@@ -91,11 +109,12 @@ class CartViewController: UIViewController, UITableViewDataSource {
             let choice = DataManager.getChoiceForId(id: id)
             subTotal = subTotal + (choice.cost * Float(quantity))
         }
-        self.lblSubtotal.text = "\(convertToCurrency(input:subTotal))$"
-        self.lblTax.text = "\(convertToCurrency(input:(subTotal*0.05)))$"
-        self.lblConvenienceFee.text = "\(convertToCurrency(input:2))$"
-        self.lblTotal.text = "\(convertToCurrency(input:(subTotal+(subTotal*0.05)+2)))$"
+        self.lblSubtotal.text = "$\(convertToCurrency(input:subTotal))"
+        self.lblTax.text = "$\(convertToCurrency(input:(subTotal*0.05)))"
+        self.lblConvenienceFee.text = "$\(convertToCurrency(input:2))"
+        self.lblTotal.text = "$\(convertToCurrency(input:(subTotal+(subTotal*0.05)+2)))"
         self.currentTotal = Int(floor((subTotal+(subTotal*0.05)+2)*100))
+        self.btnCheckout.setTitle("CHECKOUT - \(self.lblTotal.text!)", for: .normal)
     }
     
     func setupButtons()
@@ -129,6 +148,17 @@ class CartViewController: UIViewController, UITableViewDataSource {
     }
     
     @IBAction func btnCheckoutClicked(_ sender: Any) {
+        guard inCart.count > 0 else {
+            //sanity check. This will never happen as the empty cart will start showing.
+            let alertController = UIAlertController(title: "Warning",
+                                                    message: "Your cart is empty",
+                                                    preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "OK", style: .default)
+            alertController.addAction(alertAction)
+            present(alertController, animated: true)
+            return
+        }
+        
         if (User.isUserInitialized)
         {
             let id = User.sharedInstance!.id
@@ -138,6 +168,7 @@ class CartViewController: UIViewController, UITableViewDataSource {
             let newChargeRef = Database.database().reference().child("Charges/\(id)").child(String(chargeID))
             var theCharge:Dictionary<String,Any>=[:]
             theCharge["amount"]=self.currentTotal
+            theCharge["source"]=self.selectedPayment!.id
             
              newChargeRef.setValue(theCharge) {
                 (error:Error?, ref:DatabaseReference) in
@@ -158,20 +189,8 @@ class CartViewController: UIViewController, UITableViewDataSource {
     }
     
     @IBAction func btnPayments(_ sender: Any) {
-        guard inCart.count > 0 else {
-            
-            //sanity check. This will never happen.
-            let alertController = UIAlertController(title: "Warning",
-                                                    message: "Your cart is empty",
-                                                    preferredStyle: .alert)
-            let alertAction = UIAlertAction(title: "OK", style: .default)
-            alertController.addAction(alertAction)
-            present(alertController, animated: true)
-            return
-        }
-        
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "PaymentSources")
-        navigationController?.pushViewController(vc!, animated: true)
+        //let vc = self.storyboard?.instantiateViewController(withIdentifier: "PaymentSources")
+        //navigationController?.pushViewController(vc!, animated: true)
         //self.present(vc!, animated: true, completion: nil)
         
     }
@@ -191,5 +210,24 @@ class CartViewController: UIViewController, UITableViewDataSource {
                 detailsVC!.theChoice = currentRow!.choice
             }
         }
+        else if(segue.identifier == "choosePayment")
+        {
+            let paymentsVC: PaymentSourceTableViewController? = segue.destination as? PaymentSourceTableViewController
+            paymentsVC?.selectedPayment = self.selectedPayment
+            paymentsVC?.paymentSourceDelegate = self
+        }
+        else if(segue.identifier == "chooseAddress")
+        {
+            let addressesVC: AddressesTableViewController? = segue.destination as? AddressesTableViewController
+            addressesVC?.addressDelegate = self
+        }
+    }
+    
+    func updateAddress(_ address: Address?) {
+         self.selectedAddress = address
+    }
+    
+    func updatePaymentSource(_ paymentSource: PaymentSource?) {
+        self.selectedPayment = paymentSource
     }
 }

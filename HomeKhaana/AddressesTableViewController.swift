@@ -1,29 +1,24 @@
 //
-//  HomeTableViewController.swift
+//  AddressesTableViewController.swift
 //  HomeKhaana
 //
-//  Created by Achyuthan Vasanth on 6/23/18.
+//  Created by Achyuthan Vasanth on 8/5/18.
 //  Copyright © 2018 Achyuthan Vasanth. All rights reserved.
 //
 
 import UIKit
+import FirebaseDatabase
 
-class HomeTableViewController: UITableViewController {
+protocol AddressDelegate: class {
+    func updateAddress(_ address:Address?)
+}
 
-    let choices:[Choice] = DataManager.generateTestData()
+class AddressesTableViewController: UITableViewController {
+
+    weak var addressDelegate: AddressDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // initialize user here. At this point, pakka there is a firebase user.
-        User.initialize()
-//        let userInitializationSuccess:Bool = User.initialize()
-//        
-//        if(userInitializationSuccess == false)
-//        {
-//            let vc = self.storyboard?.instantiateViewController(withIdentifier: "TimedOut")
-//            self.present(vc!, animated: true, completion: nil)
-//        }
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -32,10 +27,6 @@ class HomeTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        if(DataManager.inCart.count == 0) {self.navigationController?.tabBarController?.tabBar.items?[1].badgeValue = nil}
-        else {self.navigationController?.tabBarController?.tabBar.items?[1].badgeValue = String(DataManager.inCart.count)}
-    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -50,19 +41,22 @@ class HomeTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return choices.count
+        return DataManager.locations.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "choiceCell", for: indexPath) as! ChoiceTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "address", for: indexPath) as! AddressTableViewCell
 
-        // Configure the cell...
-        let choice = choices[indexPath.row]
-        cell.choice = choice
+        cell.address = DataManager.locations[indexPath.row]
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as? AddressTableViewCell
+        addressDelegate?.updateAddress(cell!.address)
+        self.navigationController?.popViewController(animated: true)
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -99,24 +93,14 @@ class HomeTableViewController: UITableViewController {
     }
     */
 
-    
+    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "choiceDetail")
-        {
-            let detailsVC: ChoiceDetailViewController? = segue.destination as? ChoiceDetailViewController
-            let currentRow: ChoiceTableViewCell? = sender as! ChoiceTableViewCell?
-            
-            if(detailsVC != nil && currentRow != nil)
-            {
-                detailsVC!.theChoice = currentRow!.choice
-            }
-        }
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    
+    */
 
 }

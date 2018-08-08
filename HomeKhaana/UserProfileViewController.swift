@@ -20,6 +20,7 @@ class UserProfileViewController: UIViewController {
     @IBOutlet weak var btnLogout: CustomUIButton!
     
     @IBOutlet weak var lblTitle: UILabel!
+    @IBOutlet weak var imgUser: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,9 +32,31 @@ class UserProfileViewController: UIViewController {
             self.lblTitle.text = name
         }
         
+        self.imgUser.layer.borderWidth = 3
+        self.imgUser.layer.masksToBounds = false
+        self.imgUser.layer.borderColor = UIColor.white.cgColor
+        self.imgUser.layer.cornerRadius = self.imgUser.frame.height/2
+        self.imgUser.clipsToBounds = true
+        
         self.setupButtons()
         
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        //load user image
+        if (!User.sharedInstance!.isUserImageLoaded)
+        {
+            let user = Auth.auth().currentUser
+            if let user = user {
+                let pic = user.photoURL
+                if(pic != nil)
+                {
+                    self.imgUser.downloadedFrom(url: pic!)
+                    User.sharedInstance!.isUserImageLoaded = true
+                }
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
