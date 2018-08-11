@@ -103,3 +103,25 @@ exports.getDefaultPaymentSource = functions.https.onCall((data, context) => {
 	    return {"defaultSourceID": defaultSourceID};
 	  });
 });
+
+//get default payment source
+exports.updateDefaultPaymentSource = functions.https.onCall((data, context) => {
+   if (!context.auth) {
+     throw new functions.https.HttpsError('failed-precondition', 'No authenticated user found.');
+   } 
+
+   //passed on using ["updatedDefaultSourceID": inputField.text]
+   const updatedDefaultSourceID = data.updatedDefaultSourceID;
+
+   if (updatedDefaultSourceID=="") {
+     throw new functions.https.HttpsError('failed-precondition', 'Default source ID is empty.');
+   }
+
+   const uid = context.auth.uid;
+
+   return admin.database().ref(`/Users/${uid}/customerID`).once('value').then((snapshot) => {
+            return snapshot.val();
+          }).then((customer) => {
+	    return stripe.customers.update(customer, {"default_source": updatedDefaultSourceID});
+	  });	
+});

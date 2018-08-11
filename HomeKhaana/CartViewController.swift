@@ -213,7 +213,8 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
         else if(segue.identifier == "choosePayment")
         {
             let paymentsVC: PaymentSourceTableViewController? = segue.destination as? PaymentSourceTableViewController
-            paymentsVC?.selectedPayment = self.selectedPayment
+            paymentsVC?.mgmtMode = false
+            paymentsVC?.selectedPayment = self.selectedPayment ?? User.sharedInstance!.defaultPaymentSource
             paymentsVC?.paymentSourceDelegate = self
         }
         else if(segue.identifier == "chooseAddress")

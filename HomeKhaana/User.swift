@@ -25,9 +25,11 @@ final class User{
     var paymentSources: [PaymentSource]?
     var chargeID: UInt
     var defaultPaymentSourceID:String?
+    var originalDefaultPaymentSourceID:String?
     var defaultPaymentSource:PaymentSource?
     var defaultAddress:String
     var isUserImageLoaded: Bool
+    var paymentSourcesToDeleteOnQuit:[PaymentSource]?
     
     static var dictionary: [String: Any] {
         return [
@@ -52,6 +54,7 @@ final class User{
         self.chargeID = chargeID          // these will also be set later on.
         self.defaultAddress = defaultAddress
         self.isUserImageLoaded = false
+        self.paymentSourcesToDeleteOnQuit = []
         User.isUserInitialized = true
     }
     
@@ -155,6 +158,7 @@ final class User{
             }
             if let defaultPaymentSourceID = (result?.data as? [String: Any])?["defaultSourceID"] as? String {
                 User.sharedInstance!.defaultPaymentSourceID = defaultPaymentSourceID
+                User.sharedInstance!.originalDefaultPaymentSourceID = defaultPaymentSourceID
                 for source in User.sharedInstance!.paymentSources!
                 {
                     if(source.id == defaultPaymentSourceID)
@@ -169,9 +173,62 @@ final class User{
         dispatchGroupDefaultPayment.notify(queue: DispatchQueue.main, execute: allDone)
     }
     
+    public static func updateDefaultPayment()
+    {
+        if(User.sharedInstance!.defaultPaymentSource == nil) { return; }
+        
+        if (User.sharedInstance!.defaultPaymentSource!.id != User.sharedInstance!.originalDefaultPaymentSourceID)
+        {
+            //update default payment source
+            functions.httpsCallable("updateDefaultPaymentSource").call(["updatedDefaultSourceID": User.sharedInstance!.defaultPaymentSource!.id]) { (result, error) in
+            }
+        }
+    }
+    
     public static func allDone()
     {
         print("Finished Loading User Default Payments")
+    }
+    
+    public static func markPaymentSourceForDeletion(paymentSource:PaymentSource)
+    {
+        User.sharedInstance!.paymentSourcesToDeleteOnQuit!.append(paymentSource)
+    }
+    
+    public static func paymentIsMarkedForDeletion(paymentSource:PaymentSource)->Bool
+    {
+        if(User.sharedInstance!.paymentSourcesToDeleteOnQuit == nil) { return false }
+        if(User.sharedInstance!.paymentSourcesToDeleteOnQuit!.count == 0) { return false }
+        for source in User.sharedInstance!.paymentSourcesToDeleteOnQuit!
+        {
+            if(source.id == paymentSource.id) { return true }
+        }
+        return false
+    }
+    
+    private static func deleteSourcesMarkedForDeletion()
+    {
+        for paymentSource in User.sharedInstance!.paymentSourcesToDeleteOnQuit!
+        {
+            deletePaymentSource(paymentSource: paymentSource)
+        }
+    }
+    
+    public static func deletePaymentSource(paymentSource:PaymentSource)
+    {
+        if (User.isUserInitialized)
+        {
+            let id = User.sharedInstance!.id
+            
+            Database.database().reference().child("PaymentSources/\(id)").child(paymentSource.tokenID).setValue(nil){
+                (error:Error?, ref:DatabaseReference) in
+                if let error = error {
+                    print("Error deleting payment source: \(error).")
+                } else {
+                    print("Removed Payment!")
+                }
+            }
+        }
     }
     
     //writes back User data to the database
@@ -179,6 +236,7 @@ final class User{
     {
         if User.isUserInitialized
         {
+            // update the user object
             let id=User.sharedInstance!.id
             db.child("Users/\(id)").setValue(User.dictionary){
                 (error:Error?, ref:DatabaseReference) in
@@ -188,6 +246,12 @@ final class User{
                     print("User updated successfully!")
                 }
             }
+            
+            //delete sources marked for deletion
+            deleteSourcesMarkedForDeletion()
+            
+            //update the default payment source.
+            updateDefaultPayment()
         }
     }
 }

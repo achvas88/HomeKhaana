@@ -20,6 +20,7 @@ class PaymentSourceTableViewController: UITableViewController {
     weak var paymentSourceDelegate: PaymentSourceDelegate?
     var indicator: UIActivityIndicatorView?
     var alreadyListening: Bool?
+    public var mgmtMode:Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,11 +28,12 @@ class PaymentSourceTableViewController: UITableViewController {
         //self.tableView.reloadData()
         self.tableView.separatorStyle = .none
         self.alreadyListening = false
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+         self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     override func didReceiveMemoryWarning() {
@@ -78,15 +80,23 @@ class PaymentSourceTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if(indexPath.row != User.sharedInstance!.paymentSources!.count)
         {
-//            for cell in self.tableView.visibleCells
-//            {
-//                cell.accessoryType = .none
-//            }
-//
-//            cell!.accessoryType = .checkmark
-            let cell = tableView.cellForRow(at: indexPath) as? PaymentSourceTableViewCell
-            paymentSourceDelegate?.updatePaymentSource(cell!.paymentSource)
-            self.navigationController?.popViewController(animated: true)
+            let selectedCell = tableView.cellForRow(at: indexPath) as? PaymentSourceTableViewCell
+            
+            if(self.mgmtMode!)
+            {
+                for cell in self.tableView.visibleCells
+                {
+                    cell.accessoryType = .none
+                }
+                selectedCell!.accessoryType = .checkmark
+                User.sharedInstance!.defaultPaymentSource = selectedCell!.paymentSource
+                self.selectedPayment = selectedCell!.paymentSource //don't need to do this really. But in case in the future a table redraw happen, we need to make sure that there is no crash because we didn't update the selectedPayment. 
+            }
+            else
+            {
+                paymentSourceDelegate?.updatePaymentSource(selectedCell!.paymentSource)
+                self.navigationController?.popViewController(animated: true)
+            }
         }
     }
     
@@ -96,25 +106,63 @@ class PaymentSourceTableViewController: UITableViewController {
         navigationController?.pushViewController(addCardViewController, animated: true)
     }
     
-    /*
+    
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
-        return true
+        if(indexPath.row != User.sharedInstance!.paymentSources!.count)
+        {
+            return true
+        }
+        return false
     }
-    */
-
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            var updateDefaultPayment: Bool = false
+            let card:PaymentSource = User.sharedInstance!.paymentSources![indexPath.row]
+            if(card.id == User.sharedInstance!.defaultPaymentSource!.id)
+            {
+                updateDefaultPayment=true
+            }
+            
             // Delete the row from the data source
+            User.markPaymentSourceForDeletion(paymentSource: card)
+            User.sharedInstance!.paymentSources?.remove(at: indexPath.row)
+            
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            
+            //update the default payment and draw the checkmark at the right spot.
+            if(updateDefaultPayment)
+            {
+                var indexPathForDefaultPayment:IndexPath?
+                let paymentSourcesCount:Int = User.sharedInstance!.paymentSources!.count
+                if(paymentSourcesCount == 0)    //all payment sources deleted, mark default payment source as nil.
+                {
+                    User.sharedInstance!.defaultPaymentSource = nil
+                }
+                else if(indexPath.row == paymentSourcesCount)    //the very last payment source was deleted
+                {
+                    User.sharedInstance!.defaultPaymentSource = User.sharedInstance!.paymentSources![paymentSourcesCount-1]
+                    indexPathForDefaultPayment = IndexPath(row: paymentSourcesCount-1, section: indexPath.section)
+                }
+                else
+                {
+                    User.sharedInstance!.defaultPaymentSource = User.sharedInstance!.paymentSources![indexPath.row]
+                    indexPathForDefaultPayment = indexPath
+                }
+                self.selectedPayment = User.sharedInstance!.defaultPaymentSource
+                
+                if(indexPathForDefaultPayment != nil)
+                {
+                    let selectedCell = tableView.cellForRow(at: indexPathForDefaultPayment!) as? PaymentSourceTableViewCell
+                    selectedCell!.accessoryType = .checkmark
+                }
+            }
+        }
     }
-    */
+    
 
     /*
     // Override to support rearranging the table view.
@@ -183,7 +231,7 @@ extension PaymentSourceTableViewController: STPAddCardViewControllerDelegate {
             self.indicator!.hidesWhenStopped = true
             self.view.addSubview(self.indicator!)
             self.view.bringSubview(toFront: self.indicator!)
-            //UIApplication.shared.isNetworkActivityIndicatorVisible = true
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
             self.indicator!.startAnimating()
         }
         else
@@ -204,12 +252,33 @@ extension PaymentSourceTableViewController: STPAddCardViewControllerDelegate {
                 if let snapshot = card as? DataSnapshot,
                     let paymentSource = PaymentSource(snapshot: snapshot)
                 {
-                    User.sharedInstance!.paymentSources!.append(paymentSource)
+                    if(!User.paymentIsMarkedForDeletion(paymentSource: paymentSource))
+                    {
+                        User.sharedInstance!.paymentSources!.append(paymentSource)
+                    }
                 }
             }
+            
+            if(User.sharedInstance!.defaultPaymentSource == nil)
+            {
+                if(User.sharedInstance!.paymentSources!.count>0)
+                {
+                    User.sharedInstance!.defaultPaymentSource = User.sharedInstance!.paymentSources![0]
+                    self.selectedPayment = User.sharedInstance!.defaultPaymentSource
+                }
+            }
+            
+            if(self.selectedPayment == nil)
+            {
+                self.selectedPayment = User.sharedInstance!.defaultPaymentSource
+            }
+            
             // so the very first time the indicator doesnt stop animating because we know that a payment source has been added but it
             // is not yet reflected in the table view controller because teh paymentSources has not yet updated.
-            if(self.alreadyListening! == true) { self.indicator!.stopAnimating() }
+            if(self.alreadyListening! == true) {
+                self.indicator!.stopAnimating()
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            }
             print("stop Animating")
             self.tableView.reloadData()
             self.alreadyListening = true

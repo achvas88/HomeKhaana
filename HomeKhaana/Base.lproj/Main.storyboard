@@ -351,6 +351,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M7l-V4-yDi" customClass="CustomUIButton" customModule="HomeKhaana" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="30" width="375" height="30"/>
                                         <state key="normal" title="Payment"/>
+                                        <connections>
+                                            <segue destination="9fq-Ab-qtc" kind="show" identifier="showPayment" id="auW-X4-2bE"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NgZ-Yc-FnO" customClass="CustomUIButton" customModule="HomeKhaana" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="60" width="375" height="30"/>
@@ -1326,6 +1329,7 @@
         <image name="vegetables" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="auW-X4-2bE"/>
         <segue reference="l6h-Uk-a9H"/>
         <segue reference="Gmd-Ol-96N"/>
     </inferredMetricsTieBreakers>

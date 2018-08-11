@@ -19,6 +19,7 @@ class PaymentSource
     var brand:String
     var isDefault:Bool
     var cardImage:UIImage
+    var tokenID:String
     
     var dictionary: [String: Any] {
         return [
@@ -27,11 +28,12 @@ class PaymentSource
             "expMonth": expMonth,
             "expYear": expYear,
             "brand": brand,
-            "isDefault": isDefault
+            "isDefault": isDefault,
+            "tokenID": tokenID
         ]
     }
     
-    public init(id:String, cardNumber:String, expMonth: Int32, expYear: Int32, brand: String, isDefault: Bool, cardImage: UIImage)
+    public init(id:String, cardNumber:String, expMonth: Int32, expYear: Int32, brand: String, isDefault: Bool, cardImage: UIImage, tokenID: String)
     {
         self.id = id
         self.cardNumber = cardNumber
@@ -40,10 +42,12 @@ class PaymentSource
         self.brand = brand
         self.isDefault = isDefault
         self.cardImage = cardImage
+        self.tokenID = tokenID
     }
     
     public convenience init?(snapshot: DataSnapshot)
     {
+        let tokenID = snapshot.key
         guard
             let value = snapshot.value as? [String: AnyObject]
             else { return nil }
@@ -67,6 +71,6 @@ class PaymentSource
         let cardBrand = STPCard.brand(from: brand!)
         let cardImage = STPImageLibrary.brandImage(for: cardBrand)
         
-        self.init(id: id!, cardNumber: cardNumber!, expMonth: expMonth!, expYear: expYear!, brand: brand!, isDefault: false, cardImage: cardImage)
+        self.init(id: id!, cardNumber: cardNumber!, expMonth: expMonth!, expYear: expYear!, brand: brand!, isDefault: false, cardImage: cardImage, tokenID: tokenID)
     }
 }
