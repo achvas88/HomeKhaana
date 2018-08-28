@@ -16,6 +16,12 @@ func convertToCurrency(input:Float)->String
     return String(format: "%.2f", input)
 }
 
+func limitToTwoDecimal(input:Float)->Float
+{
+    //return ((input*100).rounded()/100)
+    return Float(String(format: "%.2f", input))!
+}
+
 enum Constants
 {
     static let publishableKey = "pk_test_E7O4iRuxgXcMDjnMPNJvVtXX"

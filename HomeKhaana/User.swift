@@ -148,6 +148,11 @@ final class User{
     {
         print("Finished Loading User Payments")
         
+        if (User.sharedInstance!.paymentSources == nil)
+        {
+            return //nothing to do. return.
+        }
+        
         //obtain default payment source
         let dispatchGroupDefaultPayment = DispatchGroup()
         dispatchGroupDefaultPayment.enter()
@@ -229,6 +234,22 @@ final class User{
                 }
             }
         }
+    }
+    
+    public static func getPaymentSourceForID(id:String) -> PaymentSource?
+    {
+        if(User.sharedInstance!.paymentSources == nil)
+        {
+            return nil
+        }
+        for paymentSource in User.sharedInstance!.paymentSources!
+        {
+            if(paymentSource.id == id)
+            {
+                return paymentSource
+            }
+        }
+        return nil
     }
     
     //writes back User data to the database

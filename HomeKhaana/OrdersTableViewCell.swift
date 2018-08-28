@@ -1,0 +1,117 @@
+//
+//  OrdersTableViewCell.swift
+//  HomeKhaana
+//
+//  Created by Achyuthan Vasanth on 8/19/18.
+//  Copyright © 2018 Achyuthan Vasanth. All rights reserved.
+//
+
+import UIKit
+
+class OrdersTableViewCell: UITableViewCell {
+
+    /*
+     image
+     order id,
+     order status,
+     order date,
+     delivery address,
+     order rating if status = Delivered
+     cart
+     order total
+     */
+    @IBOutlet weak var imgOrder: UIImageView!
+    @IBOutlet weak var imgRating: UIImageView!
+    @IBOutlet weak var lblOrderID: UILabel!
+    @IBOutlet weak var lblOrderDate: UILabel!
+    @IBOutlet weak var lblStatus: UILabel!
+    @IBOutlet weak var lblWhere: UILabel!
+    @IBOutlet weak var lblWhen: UILabel!
+    @IBOutlet weak var lblTotal: UILabel!
+    //@IBOutlet weak var btnRateIt: UIButton!
+    @IBOutlet weak var btnCartLink: UIButton!
+    @IBOutlet weak var orderOuterView: UIView!
+    
+    var order:Order? {
+        didSet {
+            guard let order = order else { return }
+            
+            //ratings related
+            imgRating.isHidden = true
+            //btnRateIt.isHidden = true
+            if(order.status == "Delivered")
+            {
+                // if not already rated
+                if(order.orderRating == nil || order.orderRating == -1)
+                {
+                    //btnRateIt.isHidden = false
+                }
+                else
+                {
+                    imgRating.isHidden = false
+                }
+            }
+            
+            //order image
+            let choice:Choice = DataManager.getChoiceForId(id: Int(order.cart.keys.first!)!)
+            self.imgOrder.image = UIImage(named: choice.imgName)
+            
+            //cart link title
+            var cartLinkTitle:String = choice.displayTitle + " (\(order.cart.values.first!))"
+            let totalInCart = order.cart.keys.count - 1
+            if(totalInCart>0)
+            {
+                cartLinkTitle = cartLinkTitle + ", \(totalInCart) other"
+            }
+            self.btnCartLink.setTitle(cartLinkTitle, for: .normal)
+            
+            //others
+            lblOrderID.text = String(self.order!.id)
+            lblOrderDate.text = self.order!.orderDate
+            lblStatus.text = self.order!.status
+            lblWhere.text = self.order!.selectedAddress?.address
+            if(self.order!.status != "Delivered")
+            {
+                lblWhen.text = "11-12PM, " + self.order!.deliveryDate
+            }
+            else
+            {
+                lblWhen.text = self.order!.deliveryDate
+            }
+            lblTotal.text = "$\(convertToCurrency(input: self.order!.orderTotal))"
+        }
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+
+    override func layoutSubviews() {
+        
+        // just use the layer's shadow... adding the Bezier
+        //let shadowPath = UIBezierPath(roundedRect: orderOuterView.bounds, cornerRadius: cornerRadius)
+        //orderOuterView.layer.shadowPath = shadowPath.cgPath
+        let path = UIBezierPath(roundedRect:self.imgOrder.bounds,
+                                byRoundingCorners:[.topRight, .topLeft],
+                                cornerRadii: CGSize(width: 10, height:  10))
+        
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = path.cgPath
+        self.imgOrder.layer.mask = maskLayer
+        
+        orderOuterView.layer.cornerRadius = 10
+        orderOuterView.layer.masksToBounds = false
+        orderOuterView.layer.shadowColor = UIColor.lightGray.cgColor
+        orderOuterView.layer.shadowOffset = CGSize(width: 5, height: 5);
+        orderOuterView.layer.shadowOpacity = 0.3
+        orderOuterView.layer.borderWidth = 1.0
+        orderOuterView.layer.borderColor = UIColor(red:0.87, green:0.87, blue:0.87, alpha:1).cgColor
+    }
+}

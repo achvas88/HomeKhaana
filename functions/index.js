@@ -62,7 +62,7 @@ exports.removePaymentSource = functions.database.ref('/PaymentSources/{userId}/{
 });
 
 //charge the customer
-exports.charge = functions.database.ref('/Charges/{userId}/{id}').onCreate((snap, context) => {
+exports.charge = functions.database.ref('/Orders/{userId}/{id}').onCreate((snap, context) => {
       const val = snap.val();
       return admin.database().ref(`/Users/${context.params.userId}/customerID`).once('value').then((snapshot) => {
             return snapshot.val();
@@ -76,9 +76,14 @@ exports.charge = functions.database.ref('/Charges/{userId}/{id}').onCreate((snap
             return stripe.charges.create(charge, {idempotency_key: chargeID});
           }).then((response) => {
             // write response to database
-            return snap.ref.set(response);
+	    if(response.status=="succeeded")
+	    {
+		snap.ref.child('status').set("Ordered");
+	    }
+            return snap.ref.child('stripeResponse').set(response);
           }).catch((error) => {
-            return snap.ref.child('error').set(userFacingMessage(error));
+	    snap.ref.child('status').set("Error Processing Payment");
+            return snap.ref.child('stripeResponse/error').set(userFacingMessage(error));
           });
 });
 

@@ -17,9 +17,9 @@ class CartTableViewCell: UITableViewCell {
     var choice:Choice?
     var quantity: Int = 0
     
-    func setupCell(id: Int, quantity: Int) -> Void
+    func setupCell(id: String, quantity: Int) -> Void
     {
-        self.choice = DataManager.getChoiceForId(id: id)
+        self.choice = DataManager.getChoiceForId(id: Int(id)!)
         self.quantity = quantity
         self.lblDisplayTitle?.text = choice!.displayTitle
         self.lblCost?.text = "\(choice!.currency)\(convertToCurrency(input: (choice!.cost * Float(quantity))))"

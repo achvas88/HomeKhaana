@@ -265,16 +265,18 @@ extension PaymentSourceTableViewController: STPAddCardViewControllerDelegate {
                 {
                     User.sharedInstance!.defaultPaymentSource = User.sharedInstance!.paymentSources![0]
                     self.selectedPayment = User.sharedInstance!.defaultPaymentSource
+                    self.paymentSourceDelegate?.updatePaymentSource(self.selectedPayment)
                 }
             }
             
             if(self.selectedPayment == nil)
             {
                 self.selectedPayment = User.sharedInstance!.defaultPaymentSource
+                self.paymentSourceDelegate?.updatePaymentSource(self.selectedPayment)
             }
             
             // so the very first time the indicator doesnt stop animating because we know that a payment source has been added but it
-            // is not yet reflected in the table view controller because teh paymentSources has not yet updated.
+            // is not yet reflected in the table view controller because the paymentSources has not yet updated.
             if(self.alreadyListening! == true) {
                 self.indicator!.stopAnimating()
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false

@@ -16,9 +16,9 @@ class Choice
     var isVegetarian:Bool
     var imgName: String
     var currency: String
-    var id:Int
+    var id:String
     
-    init(id:Int, title:String,description:String,cost:Float,isVegetarian:Bool,imgName:String,currency:String) {
+    init(id:String, title:String,description:String,cost:Float,isVegetarian:Bool,imgName:String,currency:String) {
         self.id = id
         self.displayTitle = title
         self.description = description
