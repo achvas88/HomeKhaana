@@ -198,16 +198,6 @@ class Order
             }
         }
         
-//        for cartItem in cartSnapshot!.children {
-//            if let cartItem1 = cartItem as? DataSnapshot,
-//               let cartItem2 = cartItem as? Int,
-//               let cartItemKey = cartItem1.key as? String,
-//               let cartItemValue = cartItem1.value as? Int
-//            {
-//                cart[cartItemKey] = cartItemValue
-//            }
-//        }
-        
         //cost
         let subTotal = snapshot["subTotal"] as? Float
         let tax = snapshot["tax"] as? Float

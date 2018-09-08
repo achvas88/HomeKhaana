@@ -10,7 +10,7 @@ import UIKit
 
 class HomeTableViewController: UITableViewController {
 
-    let choices:[Choice] = DataManager.generateTestData()
+    let choices:[Choice] = DataManager.choices
     
     override func viewDidLoad() {
         super.viewDidLoad()

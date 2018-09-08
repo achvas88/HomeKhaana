@@ -94,6 +94,16 @@ class OrdersTableViewCell: UITableViewCell {
     }
 
     override func layoutSubviews() {
+        
+        if(self.order!.status == "Delivered")
+        {
+            lblStatus.textColor = UIColor.darkGray
+        }
+        else
+        {
+            lblStatus.textColor = UIColor(red: 65, green: 117/255, blue: 79/255, alpha: 1)
+        }
+
         self.selectionStyle = .none
         
         // just use the layer's shadow... adding the Bezier

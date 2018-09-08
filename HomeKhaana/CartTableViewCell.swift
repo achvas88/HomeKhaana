@@ -22,7 +22,7 @@ class CartTableViewCell: UITableViewCell {
         self.choice = DataManager.getChoiceForId(id: Int(id)!)
         self.quantity = quantity
         self.lblDisplayTitle?.text = choice!.displayTitle
-        self.lblCost?.text = "\(choice!.currency)\(convertToCurrency(input: (choice!.cost * Float(quantity))))"
+        self.lblCost?.text = "$\(convertToCurrency(input: (choice!.cost * Float(quantity))))"
         self.lblQuantity?.text = String(quantity)
     }
     

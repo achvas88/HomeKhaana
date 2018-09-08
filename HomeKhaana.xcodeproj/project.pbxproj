@@ -220,6 +220,8 @@
 				B64393A120DFC7D800058C82 /* ChoiceTableViewCell.swift */,
 				B61558D420D8641F00471718 /* CustomUIButton.swift */,
 				B61558DC20DF0D4100471718 /* DataManager.swift */,
+				B62F26F1213B537C00FA88D3 /* DeliveryTableViewCell.swift */,
+				B62F26EF213B536100FA88D3 /* DeliveryTableViewController.swift */,
 				B69F54AF20CDE9B000E1B0EB /* Extensions.swift */,
 				B69F54A520CDD0EB00E1B0EB /* GoogleService-Info.plist */,
 				B691C78920E9B09C0060CF98 /* HomeTabBarController.swift */,
@@ -227,6 +229,8 @@
 				B61558CE20D6D93D00471718 /* HowItWorksViewController.swift */,
 				B64AB0C720BCC70A003B966C /* Info.plist */,
 				B64AB0C420BCC70A003B966C /* LaunchScreen.storyboard */,
+				B62F26F5213CA83000FA88D3 /* LoaderController.swift */,
+				B62F26F3213CA20200FA88D3 /* LoadingScreenViewController.swift */,
 				B64AB0BF20BCC707003B966C /* Main.storyboard */,
 				B61558C820D6D7B400471718 /* NotificationsViewController.swift */,
 				B609AC3E2120C8C000C45C49 /* Order.swift */,
@@ -243,10 +247,6 @@
 				B61B78F121177BED000EDE80 /* UserInitializationErrorViewController.swift */,
 				B61558D220D8611F00471718 /* UserPreferencesViewController.swift */,
 				B69F54AD20CDDBCF00E1B0EB /* UserProfileViewController.swift */,
-				B62F26EF213B536100FA88D3 /* DeliveryTableViewController.swift */,
-				B62F26F1213B537C00FA88D3 /* DeliveryTableViewCell.swift */,
-				B62F26F3213CA20200FA88D3 /* LoadingScreenViewController.swift */,
-				B62F26F5213CA83000FA88D3 /* LoaderController.swift */,
 			);
 			path = HomeKhaana;
 			sourceTree = "<group>";

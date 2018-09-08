@@ -14,26 +14,26 @@ class LoadingScreenViewController: UIViewController {
         super.viewDidLoad()
         
         LoaderController.sharedInstance.showLoader(indicatorText: "", holdingView: self.view)
+        
+        //first load the user data
         User.initialize( completion: {
-            LoaderController.sharedInstance.removeLoader();
-            
-            //this also needs to be moved into its own asynchronous load
-            DataManager.generateTestData()
-            
-            if(User.sharedInstance!.isAdmin)
-            {
-                self.takeMeToAdminPage()
-            }
-            else if(User.userJustCreated)
-            {
-                self.takeUserToInitialWalkThrough()
-            }
-            else
-            {
-                self.takeMeHome()
-            }
+            //then load miscellaneous non-user data
+            DataManager.initData(completion: {
+                LoaderController.sharedInstance.removeLoader();
+                if(User.sharedInstance!.isAdmin)
+                {
+                    self.takeMeToAdminPage()
+                }
+                else if(User.userJustCreated)
+                {
+                    self.takeUserToInitialWalkThrough()
+                }
+                else
+                {
+                    self.takeMeHome()
+                }
+            })
         })
-        // Do any additional setup after loading the view.
     }
 
     func takeMeToAdminPage()

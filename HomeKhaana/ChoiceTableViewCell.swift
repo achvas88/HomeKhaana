@@ -16,6 +16,8 @@ class ChoiceTableViewCell: UITableViewCell {
     @IBOutlet weak var imgRepresentation: UIImageView!
     @IBOutlet weak var lblCost: UILabel!
     @IBOutlet weak var imgIsVegetarian: UIImageView!
+    @IBOutlet weak var lblItems: UILabel!
+    @IBOutlet weak var lblKitchen: UILabel!
     
     @IBOutlet weak var choiceOuterView: UIView!
     
@@ -25,9 +27,11 @@ class ChoiceTableViewCell: UITableViewCell {
             
             lblDisplayTitle.text = choice.displayTitle
             lblDescription.text = choice.description
-            lblCost.text = "\(choice.currency)\(convertToCurrency(input:choice.cost))"
+            lblCost.text = "$\(convertToCurrency(input:choice.cost))"
             if(choice.isVegetarian) { imgIsVegetarian.image = UIImage(named: "leaf") }
             imgRepresentation.image = UIImage(named: choice.imgName)
+            lblItems.text = choice.items
+            lblKitchen.text = choice.kitchen
         }
     }
     override func awakeFromNib() {

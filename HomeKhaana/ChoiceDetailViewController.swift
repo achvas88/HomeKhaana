@@ -20,6 +20,8 @@ class ChoiceDetailViewController: UIViewController {
     @IBOutlet weak var lblQuantity: UILabel!
     @IBOutlet weak var btnAddToCart: UIButton!
     @IBOutlet weak var stkVegetarian: UIStackView!
+    @IBOutlet weak var lblItems: UILabel!
+    @IBOutlet weak var lblKitchen: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +37,10 @@ class ChoiceDetailViewController: UIViewController {
             self.isAddingToCart = false
         }
         self.lblDisplayTitle.text = theChoice!.displayTitle
+        self.lblItems.text = theChoice!.items
         self.lblDescription.text = theChoice!.description
+        self.lblKitchen.text = theChoice!.kitchen
+        
         if(!theChoice!.isVegetarian) { stkVegetarian.isHidden = true }
         imgRepresentation.image = UIImage(named: theChoice!.imgName)
         setAddToCartTitle()
@@ -69,7 +74,7 @@ class ChoiceDetailViewController: UIViewController {
     
     func setAddToCartTitle()
     {
-        btnAddToCart.setTitle("\(self.buttonCaption)  -  \(theChoice!.currency)\(convertToCurrency(input:(theChoice!.cost * Float(lblQuantity.text!)!)))", for: .normal)
+        btnAddToCart.setTitle("\(self.buttonCaption)  -  $\(convertToCurrency(input:(theChoice!.cost * Float(lblQuantity.text!)!)))", for: .normal)
     }
     
     func setupButtons()
