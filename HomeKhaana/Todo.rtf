@@ -19,19 +19,18 @@ TEST: Check duplicate credit cards\
 TEST: Test indicator hiding when credit card addition fail. \
 TEST: Test without any card. \
 TEST: test card addition failing - make sure that a line doesnt show up for a failed paymentsource. \
-DEV: make sure that after all cards are deleted, the cart updates appropriately. \
+TEST: make sure that after all cards are deleted, the cart updates appropriately. \
 \
 
 \b Main App:
 \b0 \
-DEV: if an order has been placed, show the current order on top of the screen\
-DEV: After checkout, clear cart + move to order screen\
-DEV: show kitchen\
+DEV: Add ability to mark an order as "complete" for admins. \
+DEV: Create indexed database for ordered orders\
 DEV: Store menu items into the database\
 TEST: Test without network connection\
 DEV: Notifications\
-DEV: Add ability to mark an order as "complete"\
-\
+DEV:  add custom instructions while placing order \
+FIX: Find out why some of the orders dont show up in the past orders screen.\
 \
 
 \b Registration workflows:
@@ -40,5 +39,11 @@ DEV: Fix Facebook email issue\
 TEST: test with facebook \
 DEV: if things dont work, delete facebook login. \
 FIX: Bug when creating a new user - default payment source fails\
+DEV: If user gmail/fb user newly created take through walkthrough\
 \
-}
+\
+
+\b Risk Avertion:
+\b0 \
+Update the charge id right away -> send to server. \
+have a time-out everytime the server is contacted. }

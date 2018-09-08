@@ -25,6 +25,10 @@
 		B61B78F62117E3FA000EDE80 /* AddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B78F52117E3FA000EDE80 /* AddressTableViewCell.swift */; };
 		B61B78F82117E7C2000EDE80 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B78F72117E7C2000EDE80 /* Address.swift */; };
 		B6287B4420E873C1009FF79D /* ChoiceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6287B4320E873C1009FF79D /* ChoiceDetailViewController.swift */; };
+		B62F26F0213B536100FA88D3 /* DeliveryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F26EF213B536100FA88D3 /* DeliveryTableViewController.swift */; };
+		B62F26F2213B537C00FA88D3 /* DeliveryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F26F1213B537C00FA88D3 /* DeliveryTableViewCell.swift */; };
+		B62F26F4213CA20200FA88D3 /* LoadingScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F26F3213CA20200FA88D3 /* LoadingScreenViewController.swift */; };
+		B62F26F6213CA83000FA88D3 /* LoaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F26F5213CA83000FA88D3 /* LoaderController.swift */; };
 		B64393A220DFC7D800058C82 /* ChoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64393A120DFC7D800058C82 /* ChoiceTableViewCell.swift */; };
 		B64AB0BC20BCC707003B966C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64AB0BB20BCC707003B966C /* AppDelegate.swift */; };
 		B64AB0C120BCC707003B966C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B64AB0BF20BCC707003B966C /* Main.storyboard */; };
@@ -91,6 +95,10 @@
 		B61B78F52117E3FA000EDE80 /* AddressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressTableViewCell.swift; sourceTree = "<group>"; };
 		B61B78F72117E7C2000EDE80 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		B6287B4320E873C1009FF79D /* ChoiceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceDetailViewController.swift; sourceTree = "<group>"; };
+		B62F26EF213B536100FA88D3 /* DeliveryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryTableViewController.swift; sourceTree = "<group>"; };
+		B62F26F1213B537C00FA88D3 /* DeliveryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryTableViewCell.swift; sourceTree = "<group>"; };
+		B62F26F3213CA20200FA88D3 /* LoadingScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreenViewController.swift; sourceTree = "<group>"; };
+		B62F26F5213CA83000FA88D3 /* LoaderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderController.swift; sourceTree = "<group>"; };
 		B64393A120DFC7D800058C82 /* ChoiceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceTableViewCell.swift; sourceTree = "<group>"; };
 		B64AB0B820BCC706003B966C /* HomeKhaana.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeKhaana.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B64AB0BB20BCC707003B966C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -235,6 +243,10 @@
 				B61B78F121177BED000EDE80 /* UserInitializationErrorViewController.swift */,
 				B61558D220D8611F00471718 /* UserPreferencesViewController.swift */,
 				B69F54AD20CDDBCF00E1B0EB /* UserProfileViewController.swift */,
+				B62F26EF213B536100FA88D3 /* DeliveryTableViewController.swift */,
+				B62F26F1213B537C00FA88D3 /* DeliveryTableViewCell.swift */,
+				B62F26F3213CA20200FA88D3 /* LoadingScreenViewController.swift */,
+				B62F26F5213CA83000FA88D3 /* LoaderController.swift */,
 			);
 			path = HomeKhaana;
 			sourceTree = "<group>";
@@ -519,10 +531,12 @@
 				B609AC412128A4F500C45C49 /* OrderConfirmationViewController.swift in Sources */,
 				B691C79620FD823D0060CF98 /* AddPaymentTableViewCell.swift in Sources */,
 				B61558DD20DF0D4200471718 /* DataManager.swift in Sources */,
+				B62F26F4213CA20200FA88D3 /* LoadingScreenViewController.swift in Sources */,
 				B69F54AC20CDD67900E1B0EB /* SignUpViewController.swift in Sources */,
 				B61558DB20DF0B6700471718 /* Choice.swift in Sources */,
 				B609AC3F2120C8C000C45C49 /* Order.swift in Sources */,
 				B6287B4420E873C1009FF79D /* ChoiceDetailViewController.swift in Sources */,
+				B62F26F6213CA83000FA88D3 /* LoaderController.swift in Sources */,
 				B69CE0822129F93200B7CFDB /* OrdersTableViewCell.swift in Sources */,
 				B61B78F42117E3CE000EDE80 /* AddressesTableViewController.swift in Sources */,
 				B61558D520D8641F00471718 /* CustomUIButton.swift in Sources */,
@@ -530,6 +544,7 @@
 				B691C78820E9AA440060CF98 /* CartViewController.swift in Sources */,
 				B61B78F62117E3FA000EDE80 /* AddressTableViewCell.swift in Sources */,
 				B691C78E20EB3B480060CF98 /* Shared.swift in Sources */,
+				B62F26F0213B536100FA88D3 /* DeliveryTableViewController.swift in Sources */,
 				B691C78C20E9B8D30060CF98 /* CartTableViewCell.swift in Sources */,
 				B61558D920DF0AC800471718 /* HomeTableViewController.swift in Sources */,
 				B61B78F221177BED000EDE80 /* UserInitializationErrorViewController.swift in Sources */,
@@ -542,6 +557,7 @@
 				B691C79820FD834C0060CF98 /* PaymentSourceTableViewController.swift in Sources */,
 				B691C79220FBF97E0060CF98 /* PaymentSource.swift in Sources */,
 				B61558D320D8611F00471718 /* UserPreferencesViewController.swift in Sources */,
+				B62F26F2213B537C00FA88D3 /* DeliveryTableViewCell.swift in Sources */,
 				B691C78A20E9B09C0060CF98 /* HomeTabBarController.swift in Sources */,
 				B61558D120D7476700471718 /* User.swift in Sources */,
 			);

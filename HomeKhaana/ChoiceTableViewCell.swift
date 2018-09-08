@@ -17,6 +17,7 @@ class ChoiceTableViewCell: UITableViewCell {
     @IBOutlet weak var lblCost: UILabel!
     @IBOutlet weak var imgIsVegetarian: UIImageView!
     
+    @IBOutlet weak var choiceOuterView: UIView!
     
     var choice: Choice? {
         didSet {
@@ -40,4 +41,23 @@ class ChoiceTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    override func layoutSubviews() {
+        self.selectionStyle = .none
+
+        let path = UIBezierPath(roundedRect:self.imgRepresentation.bounds,
+                                byRoundingCorners:[.bottomLeft,.topRight],
+                                cornerRadii: CGSize(width: 6, height:  6))
+        
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = path.cgPath
+        self.imgRepresentation.layer.mask = maskLayer
+        
+        choiceOuterView.layer.cornerRadius = 6
+        choiceOuterView.layer.masksToBounds = false
+        choiceOuterView.layer.shadowColor = UIColor.lightGray.cgColor
+        choiceOuterView.layer.shadowOffset = CGSize(width: 3, height: 3);
+        choiceOuterView.layer.shadowOpacity = 0.2
+        choiceOuterView.layer.borderWidth = 1.0
+        choiceOuterView.layer.borderColor = UIColor(red:0.87, green:0.87, blue:0.87, alpha:1).cgColor
+    }
 }

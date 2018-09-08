@@ -70,7 +70,7 @@ exports.charge = functions.database.ref('/Orders/{userId}/{id}').onCreate((snap,
             const amount = val.amount;
             const chargeID = context.params.id;
             const charge = {amount, currency, customer};
-            if (val.source !== null) {
+            if (val.source !== null) {
               charge.source = val.source;
             }
             return stripe.charges.create(charge, {idempotency_key: chargeID});
@@ -79,6 +79,8 @@ exports.charge = functions.database.ref('/Orders/{userId}/{id}').onCreate((snap,
 	    if(response.status=="succeeded")
 	    {
 		snap.ref.child('status').set("Ordered");
+		val.status = "Ordered";
+		admin.database().ref(`/CurrentOrders/${context.params.userId}/${context.params.id}`).set(val);
 	    }
             return snap.ref.child('stripeResponse').set(response);
           }).catch((error) => {

@@ -11,19 +11,16 @@ import FirebaseDatabase
 
 class OrderConfirmationViewController: UIViewController {
 
-    @IBOutlet weak var stkPaymentProcessing: UIStackView!
-    @IBOutlet weak var lblStatus: UILabel!
-    @IBOutlet weak var indActivityIndicator: UIActivityIndicatorView!
-    
     var order:Order?    //order that is currently being processed
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-        processPayment()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        processPayment()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -31,7 +28,7 @@ class OrderConfirmationViewController: UIViewController {
     
     func processPayment()
     {
-        self.indActivityIndicator.startAnimating()
+        LoaderController.sharedInstance.showLoader(indicatorText: "Payment Processing", holdingView: self.view)
         
         //post payment
         if (User.isUserInitialized)
@@ -40,22 +37,28 @@ class OrderConfirmationViewController: UIViewController {
             let chargeID=User.sharedInstance!.chargeID
             
             let newChargeRef = Database.database().reference().child("Orders/\(id)").child(String(chargeID))
+            
+            //make sure the order id is the same as the charge id. It could be different when charge transactions fail.
+            self.order!.id = chargeID
+            
+            //create the charge dcitionary that will be filed.
             let theCharge:Dictionary<String,Any>=self.order!.dictionary
             
+            //update the chargeID immediately (idempotency key for Stripe)
+            User.sharedInstance!.chargeID = User.sharedInstance!.chargeID + 1
+            
+            //file a charge
             newChargeRef.setValue(theCharge) {
                 (error:Error?, ref:DatabaseReference) in
-                if let error = error {
-                    print("Error charging user: \(error).")
+                if error != nil {
+                    LoaderController.sharedInstance.updateTitle(title: "Error Processing Payment")
                 } else {
-                    print("Charging initiated successfully!")
+                    LoaderController.sharedInstance.updateTitle(title: "Charging Initiated")
                 }
             }
             
             //listen to payment posting updates
             listenToPaymentPostingUpdates(uid: id, chargeID: String(chargeID))
-            
-            //update the chargeID (idempotency key for Stripe)
-            User.sharedInstance!.chargeID = User.sharedInstance!.chargeID + 1
         }
     }
 
@@ -63,31 +66,36 @@ class OrderConfirmationViewController: UIViewController {
     {
         let paymentSourcesRef = db.child("Orders/\(uid)/\(chargeID)/stripeResponse")
         paymentSourcesRef.observe(.value, with: { (snapshot) in
-            self.indActivityIndicator.stopAnimating()
+            LoaderController.sharedInstance.updateTitle(title: "Charging Response Received")
             let response = self.order!.processResponse(snapshot: snapshot)
             if(response == "succeeded")
             {
-                self.lblStatus.text = "Success!"
+                LoaderController.sharedInstance.updateTitle(title: "Success!")
+                LoaderController.sharedInstance.removeLoader()
+                DataManager.inCart=[:]
+                self.navigationController?.tabBarController?.tabBar.items?[1].badgeValue = nil
                 // we should actually go to the upcoming orders screen now. for now, we are simply dismissing the controller.
-                self.dismiss(animated: true, completion: nil)
+                self.performSegue(withIdentifier: "returnAfterConfirmation", sender: self)
             }
-            else
+            else if(response != "")
             {
-                self.lblStatus.text = response
+                LoaderController.sharedInstance.updateTitle(title: response)
+                LoaderController.sharedInstance.removeLoader()
+                
+                //payment processing failed. Tell the user.
+                let alertController = UIAlertController(title: "Payment Processing Failed",
+                                                        message: "We are sorry. Please try again",
+                                                        preferredStyle: .alert)
+                let alertAction = UIAlertAction(title: "OK", style: .default)
+                alertController.addAction(alertAction)
+                self.present(alertController, animated: true)
+                
+                //dismiss this screen
+                self.dismiss(animated: true, completion: nil)
             }
         })
     }
     /*
-     
-     let alertController = UIAlertController(title: "Success",
-     message: "Charging complete!",
-     preferredStyle: .alert)
-     let alertAction = UIAlertAction(title: "Cool", style: .default)
-     alertController.addAction(alertAction)
-     self.present(alertController, animated: true)
-     return
-     
-     
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

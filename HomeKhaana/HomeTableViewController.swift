@@ -16,15 +16,9 @@ class HomeTableViewController: UITableViewController {
         super.viewDidLoad()
 
         // initialize user here. At this point, pakka there is a firebase user.
-        User.initialize()
-//        let userInitializationSuccess:Bool = User.initialize()
-//        
-//        if(userInitializationSuccess == false)
-//        {
-//            let vc = self.storyboard?.instantiateViewController(withIdentifier: "TimedOut")
-//            self.present(vc!, animated: true, completion: nil)
-//        }
+        //User.initialize()
         
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 

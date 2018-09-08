@@ -17,6 +17,8 @@ class Order
     var deliveryDate:String
     var orderRating:Int?
     var status:String
+    var orderingUserID:String
+    var orderingUserName:String
     
     //order items
     var cart:Dictionary<String,Int>
@@ -38,7 +40,7 @@ class Order
             "orderDate": self.orderDate,
             "deliveryDate": self.deliveryDate,
             "orderRating": orderRating ?? -1,
-            "cart": cart as [String:AnyObject],
+            "cart": cart as Dictionary<String,Int>,
             "subTotal": subTotal,
             "tax": tax,
             "convenienceFee": convenienceFee,
@@ -47,7 +49,9 @@ class Order
             "source": self.selectedPayment!.id,
             "amount": Int(floor(self.orderTotal*100)),
             "address": selectedAddress!.address,
-            "status": self.status
+            "status": self.status,
+            "orderingUserID": self.orderingUserID,  //these values are used in delivery workflows
+            "orderingUserName": self.orderingUserName // these values are used in delivery workflows
         ]
     }
     
@@ -70,6 +74,8 @@ class Order
         self.convenienceFee = 0
         self.discount = 0
         self.orderTotal = 0
+        self.orderingUserName = User.sharedInstance!.name
+        self.orderingUserID = User.sharedInstance!.id
     }
     
     public init(id: UInt, orderDate: String, deliveryDate: String, orderRating: Int?, status: String, cart: Dictionary<String,Int>, subTotal: Float, tax: Float, convenienceFee: Float, discount: Float, orderTotal: Float, source: PaymentSource?, deliveryAddress: Address?)
@@ -87,9 +93,11 @@ class Order
         self.orderTotal = orderTotal
         self.selectedPayment = source
         self.selectedAddress = deliveryAddress
+        self.orderingUserName = User.sharedInstance!.name
+        self.orderingUserID = User.sharedInstance!.id
     }
     
-    public convenience init?(snapshot: DataSnapshot)
+    /*public convenience init?(snapshot: DataSnapshot)
     {
         guard
             let value = snapshot.value as? [String: AnyObject]
@@ -120,13 +128,12 @@ class Order
         var address:String?
         var selectedPaymentID: String?
         
-        
         for items in value {
             let key=items.key
             let val = items.value
             if(key == "address") { address = val as? String }
             else if(key == "cart") {
-                cart = val as? [String:Int]
+                cart = val as? Dictionary<String,Int>
             }
             else if(key == "convenienceFee") { convenienceFee = val as? Float  }
             else if(key == "discount") { discount = val as? Float }
@@ -144,13 +151,83 @@ class Order
         selectedPayment = User.getPaymentSourceForID(id: selectedPaymentID!)
         selectedAddress = DataManager.getAddressForKey(key: address!)
         
+        if(cart == nil) //this happens. figure out why the hell.
+        {
+            return nil
+        }
+        
         self.init(id: id!, orderDate: orderDate ?? "", deliveryDate: deliveryDate ?? "", orderRating: orderRating, status: status ?? "New", cart: cart!, subTotal: subTotal!, tax: tax!, convenienceFee: convenienceFee!, discount: discount!, orderTotal: orderTotal!, source: selectedPayment, deliveryAddress: selectedAddress)
+    }*/
+    
+    public convenience init?(snapshot: DataSnapshot)
+    {
+        let snapshot = snapshot.value as AnyObject
+        
+        //other meta-data
+        let id = snapshot["id"] as? UInt
+        let orderDate = snapshot["orderDate"] as? String
+        let deliveryDate = snapshot["deliveryDate"] as? String
+        let orderRating = snapshot["orderRating"] as? Int
+        let status = snapshot["status"] as? String
+        
+        //order items
+        var cart:Dictionary<String,Int> = [:]
+        let cartDic = snapshot["cart"] as? Dictionary<String,Int>
+        if (cartDic != nil)
+        {
+            for items in cartDic! {
+                let key=items.key
+                let val = items.value
+                cart[key] = val
+            }
+        }
+        else
+        {
+            let cartArr = snapshot["cart"] as? NSArray as? [Int?]
+            var counter:Int = 0
+            if (cartArr != nil)
+            {
+                for val in cartArr!
+                {
+                    if(val != nil)
+                    {
+                        cart[String(counter)] = val!
+                    }
+                    counter = counter+1
+                }
+            }
+        }
+        
+//        for cartItem in cartSnapshot!.children {
+//            if let cartItem1 = cartItem as? DataSnapshot,
+//               let cartItem2 = cartItem as? Int,
+//               let cartItemKey = cartItem1.key as? String,
+//               let cartItemValue = cartItem1.value as? Int
+//            {
+//                cart[cartItemKey] = cartItemValue
+//            }
+//        }
+        
+        //cost
+        let subTotal = snapshot["subTotal"] as? Float
+        let tax = snapshot["tax"] as? Float
+        let convenienceFee = snapshot["convenienceFee"] as? Float
+        let discount = snapshot["discount"] as? Float
+        let orderTotal = snapshot["orderTotal"] as? Float
+        
+        let address = snapshot["address"] as? String
+        let selectedPaymentID = snapshot["source"] as? String
+        //payment source and address
+        let selectedPayment:PaymentSource? = User.getPaymentSourceForID(id: selectedPaymentID!)
+        let selectedAddress:Address? = DataManager.getAddressForKey(key: address!)
+        
+        self.init(id: id!, orderDate: orderDate ?? "", deliveryDate: deliveryDate ?? "", orderRating: orderRating ?? -1, status: status ?? "New", cart: cart, subTotal: subTotal!, tax: tax!, convenienceFee: convenienceFee!, discount: discount!, orderTotal: orderTotal!, source: selectedPayment, deliveryAddress: selectedAddress)
     }
  
     func processResponse(snapshot: DataSnapshot) -> String
     {
         guard
-            let value = snapshot.value as? [String: AnyObject]
+            let value = snapshot.value as? AnyObject
             else { return "" }
         
         let errorString = value["error"] as? String

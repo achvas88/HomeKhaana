@@ -30,6 +30,7 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
     
     var inCart:Array<(key:String, value:Int)> = []
     var currentOrder:Order?
+    var navigateToOrdersScreen:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,6 +103,11 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        //if the payment processing has failed, then we need to update the order's ID with the updated charge ID.
+        self.currentOrder?.id = User.sharedInstance!.chargeID
+        
+        //update display
         self.updateDisplay(initialize: false)
     }
     
@@ -112,6 +118,12 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
     
     func updateDisplay(initialize:Bool)
     {
+        if(self.navigateToOrdersScreen == true)
+        {
+            self.navigateToOrdersScreen = false
+            self.navigationController?.tabBarController?.selectedIndex = 2
+        }
+        
         if(self.currentOrder!.status == "New")
         {
             self.inCart = Array(DataManager.inCart)
@@ -255,6 +267,17 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
                 return false
             }
             
+            guard self.currentOrder!.selectedAddress != nil else {
+                //make sure that there is a payment source selected
+                let alertController = UIAlertController(title: "No Address Specified",
+                                                        message: "Please choose a valid delivery address to continue",
+                                                        preferredStyle: .alert)
+                let alertAction = UIAlertAction(title: "OK", style: .default)
+                alertController.addAction(alertAction)
+                present(alertController, animated: true)
+                return false
+            }
+            
             guard self.currentOrder!.cart.count > 0 else {
                 //sanity check. This will never happen as the empty cart will start showing.
                 let alertController = UIAlertController(title: "Empty Cart",
@@ -337,5 +360,10 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
     
     func updatePaymentSource(_ paymentSource: PaymentSource?) {
         self.currentOrder!.selectedPayment = paymentSource
+    }
+    
+    @IBAction func backFromModal(_ segue: UIStoryboardSegue) {
+        //self.navigationController?.tabBarController?.selectedViewController =  self.storyboard?.instantiateViewController(withIdentifier: "Orders")
+        self.navigateToOrdersScreen = true
     }
 }

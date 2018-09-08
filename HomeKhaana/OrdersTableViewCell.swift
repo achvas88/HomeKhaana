@@ -94,23 +94,24 @@ class OrdersTableViewCell: UITableViewCell {
     }
 
     override func layoutSubviews() {
+        self.selectionStyle = .none
         
         // just use the layer's shadow... adding the Bezier
         //let shadowPath = UIBezierPath(roundedRect: orderOuterView.bounds, cornerRadius: cornerRadius)
         //orderOuterView.layer.shadowPath = shadowPath.cgPath
         let path = UIBezierPath(roundedRect:self.imgOrder.bounds,
                                 byRoundingCorners:[.topRight, .topLeft],
-                                cornerRadii: CGSize(width: 10, height:  10))
+                                cornerRadii: CGSize(width: 6, height:  6))
         
         let maskLayer = CAShapeLayer()
         maskLayer.path = path.cgPath
         self.imgOrder.layer.mask = maskLayer
         
-        orderOuterView.layer.cornerRadius = 10
+        orderOuterView.layer.cornerRadius = 6
         orderOuterView.layer.masksToBounds = false
         orderOuterView.layer.shadowColor = UIColor.lightGray.cgColor
-        orderOuterView.layer.shadowOffset = CGSize(width: 5, height: 5);
-        orderOuterView.layer.shadowOpacity = 0.3
+        orderOuterView.layer.shadowOffset = CGSize(width: 3, height: 3);
+        orderOuterView.layer.shadowOpacity = 0.2
         orderOuterView.layer.borderWidth = 1.0
         orderOuterView.layer.borderColor = UIColor(red:0.87, green:0.87, blue:0.87, alpha:1).cgColor
     }

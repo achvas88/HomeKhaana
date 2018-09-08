@@ -104,7 +104,7 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
             (user, error) in
             if (error == nil)
             {
-                self.takeMeHome()
+                self.navigateToLoadUserScreen()
             }
             else
             {
@@ -138,7 +138,7 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                             }
                             else
                             {
-                                self.takeMeHome()
+                                self.navigateToLoadUserScreen()
                             }
                     })
                 }
@@ -167,7 +167,7 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                     (result, error) in
                     if (error == nil)
                     {
-                        self.takeMeHome()
+                        self.navigateToLoadUserScreen()
                     }
                     else
                     {
@@ -182,7 +182,7 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                     (result, error) in
                     if (error == nil)
                     {
-                        self.takeMeHome()
+                        self.navigateToLoadUserScreen()
                     }
                     else
                     {
@@ -193,9 +193,9 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
         }
     }
     
-    func takeMeHome()
+    func navigateToLoadUserScreen()
     {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Notifications")
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoadUser")
         self.present(vc!, animated: true, completion: nil)
     }
     

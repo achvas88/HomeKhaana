@@ -43,15 +43,18 @@ class OrdersTableViewController: UITableViewController {
 
     func listenToOrders()
     {
-        let mostRecentOrdersQuery = db.child("Orders/\(User.sharedInstance!.id)").queryOrderedByKey().queryLimited(toLast: 10)
+        let mostRecentOrdersQuery = db.child("Orders/\(User.sharedInstance!.id)").queryLimited(toLast: 10)
         
         mostRecentOrdersQuery.observe(.value, with: { (snapshot) in
             self.mostRecentOrders = []
             for orderChild in snapshot.children {
                 if let snapshot = orderChild as? DataSnapshot,
-                    let order = Order(snapshot: snapshot)
+                    let order:Order? = Order(snapshot: snapshot)
                 {
-                    self.mostRecentOrders!.append(order)
+                    if(order != nil)
+                    {
+                        self.mostRecentOrders!.insert(order!, at: 0)
+                    }
                 }
             }
             self.tableView.reloadData()

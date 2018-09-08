@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
             // instantiate your desired ViewController
-            let rootController = storyboard.instantiateViewController(withIdentifier: "Home")
+            let rootController = storyboard.instantiateViewController(withIdentifier: "LoadUser")
             
             // Because self.window is an optional you should check it's value first and assign your rootViewController
             if let window = self.window {

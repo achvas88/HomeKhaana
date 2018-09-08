@@ -15,6 +15,7 @@ final class User{
     
     static var sharedInstance:User? = nil   //singleton
     static var isUserInitialized: Bool = false
+    static var userJustCreated: Bool = false
     
     //member variables
     var name:String
@@ -30,6 +31,8 @@ final class User{
     var defaultAddress:String
     var isUserImageLoaded: Bool
     var paymentSourcesToDeleteOnQuit:[PaymentSource]?
+    var isAdmin: Bool
+    
     
     static var dictionary: [String: Any] {
         return [
@@ -39,12 +42,13 @@ final class User{
             "email": User.sharedInstance!.email,
             "chargeID": User.sharedInstance!.chargeID,
             "customerID": User.sharedInstance!.customerID,
-            "defaultAddress": User.sharedInstance!.defaultAddress
+            "defaultAddress": User.sharedInstance!.defaultAddress,
+            "isAdmin": User.sharedInstance!.isAdmin
         ]
     }
     
     //designated constructors
-    public init(name:String, isVegetarian:Bool, id:String, email:String, customerID:String, chargeID:UInt, defaultAddress: String)
+    public init(name:String, isVegetarian:Bool, id:String, email:String, customerID:String, chargeID:UInt, defaultAddress: String, isAdmin: Bool)
     {
         self.name = name
         self.isVegetarian = isVegetarian
@@ -55,6 +59,7 @@ final class User{
         self.defaultAddress = defaultAddress
         self.isUserImageLoaded = false
         self.paymentSourcesToDeleteOnQuit = []
+        self.isAdmin = isAdmin
         User.isUserInitialized = true
     }
     
@@ -69,13 +74,15 @@ final class User{
         else { return nil}
         
         let defaultAddress = dictionary["defaultAddress"] as? String
+        let isAdmin = dictionary["isAdmin"] as? Bool
         
-        self.init(name: name, isVegetarian: isVegetarian, id: id, email: email, customerID:customerID, chargeID: chargeID, defaultAddress: (defaultAddress ?? ""))
+        self.init(name: name, isVegetarian: isVegetarian, id: id, email: email, customerID:customerID, chargeID: chargeID, defaultAddress: (defaultAddress ?? ""), isAdmin: isAdmin ?? false)
     }
     
     //intializes User data from the database
-    public static func initialize()
+    public static func initialize(completion: @escaping () -> ())
     {
+        LoaderController.sharedInstance.updateTitle(title: "Loading User Details")
         let db: DatabaseReference! = Database.database().reference()
         if let user = Auth.auth().currentUser
         {
@@ -94,14 +101,15 @@ final class User{
                 let value = snapshot.value as? NSDictionary
                 if(value == nil){
                     //new user! yayy!!
-                    User.sharedInstance = User(name: user.displayName!, isVegetarian: false, id: uid, email: user.email!, customerID: "", chargeID: 1, defaultAddress: "")
+                    User.sharedInstance = User(name: user.displayName!, isVegetarian: false, id: uid, email: user.email!, customerID: "", chargeID: 1, defaultAddress: "", isAdmin: false)
                     
                     //write back to the database
                     db.child("Users").child(uid).setValue(User.dictionary, withCompletionBlock: { (err:Error?, ref:DatabaseReference) in
                         if let err = err {
                             fatalError("Error creating new user: \(err)")
                         } else {
-                            print("New user created!")
+                            User.userJustCreated = true
+                            LoaderController.sharedInstance.updateTitle(title: "User Successfully Initialized")
                         }
                     })
                 }
@@ -114,13 +122,24 @@ final class User{
             });
             
             //next load payments
-            dispatchGroupUser.notify(queue: DispatchQueue.main, execute: loadPayments)
+            dispatchGroupUser.notify(queue: DispatchQueue.main) {
+                if(User.userJustCreated != true && User.sharedInstance!.isAdmin != true)
+                {
+                    loadPayments(completion: completion)
+                }
+                else
+                {
+                    User.sharedInstance!.paymentSources = []
+                    allDone(completion: completion)
+                }
+            }
         }
     }
     
-    public static func loadPayments()
+    public static func loadPayments(completion: @escaping () -> ())
     {
         print("Finished Loading User Details")
+        LoaderController.sharedInstance.updateTitle(title: "Loading User Payments")
         
         //obtain payment sources
         let dispatchGroupPaymentSources = DispatchGroup()
@@ -141,15 +160,20 @@ final class User{
             
         })
         //next obtain default payment source
-        dispatchGroupPaymentSources.notify(queue: DispatchQueue.main, execute: loadDefaultPayment)
+        //dispatchGroupPaymentSources.notify(queue: DispatchQueue.main, execute: loadDefaultPayment(completion: completion))
+        dispatchGroupPaymentSources.notify(queue: DispatchQueue.main) {
+            loadDefaultPayment(completion: completion)
+        }
     }
     
-    public static func loadDefaultPayment()
+    public static func loadDefaultPayment(completion: @escaping () -> ())
     {
         print("Finished Loading User Payments")
+        LoaderController.sharedInstance.updateTitle(title: "Loading User Defaults")
         
-        if (User.sharedInstance!.paymentSources == nil)
+        if (User.sharedInstance!.paymentSources?.count == 0)
         {
+            allDone(completion: completion)
             return //nothing to do. return.
         }
         
@@ -175,7 +199,16 @@ final class User{
             }
            dispatchGroupDefaultPayment.leave()
         }
-        dispatchGroupDefaultPayment.notify(queue: DispatchQueue.main, execute: allDone)
+        dispatchGroupDefaultPayment.notify(queue: DispatchQueue.main) {
+            allDone(completion: completion)
+        }
+    }
+    
+    public static func allDone(completion: @escaping () -> ())
+    {
+        print("Finished Loading User Default Payments")
+        LoaderController.sharedInstance.updateTitle(title: "Finished Loading")
+        completion();
     }
     
     public static func updateDefaultPayment()
@@ -188,11 +221,6 @@ final class User{
             functions.httpsCallable("updateDefaultPaymentSource").call(["updatedDefaultSourceID": User.sharedInstance!.defaultPaymentSource!.id]) { (result, error) in
             }
         }
-    }
-    
-    public static func allDone()
-    {
-        print("Finished Loading User Default Payments")
     }
     
     public static func markPaymentSourceForDeletion(paymentSource:PaymentSource)
@@ -255,7 +283,7 @@ final class User{
     //writes back User data to the database
     public static func WriteToDatabase()
     {
-        if User.isUserInitialized
+        if (User.isUserInitialized && User.sharedInstance!.isAdmin != true)
         {
             // update the user object
             let id=User.sharedInstance!.id
