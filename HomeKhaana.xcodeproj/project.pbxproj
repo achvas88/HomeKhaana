@@ -21,9 +21,6 @@
 		B61558DB20DF0B6700471718 /* Choice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558DA20DF0B6700471718 /* Choice.swift */; };
 		B61558DD20DF0D4200471718 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558DC20DF0D4100471718 /* DataManager.swift */; };
 		B61B78F221177BED000EDE80 /* UserInitializationErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B78F121177BED000EDE80 /* UserInitializationErrorViewController.swift */; };
-		B61B78F42117E3CE000EDE80 /* AddressesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B78F32117E3CE000EDE80 /* AddressesTableViewController.swift */; };
-		B61B78F62117E3FA000EDE80 /* AddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B78F52117E3FA000EDE80 /* AddressTableViewCell.swift */; };
-		B61B78F82117E7C2000EDE80 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B78F72117E7C2000EDE80 /* Address.swift */; };
 		B6287B4420E873C1009FF79D /* ChoiceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6287B4320E873C1009FF79D /* ChoiceDetailViewController.swift */; };
 		B62F26F0213B536100FA88D3 /* DeliveryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F26EF213B536100FA88D3 /* DeliveryTableViewController.swift */; };
 		B62F26F2213B537C00FA88D3 /* DeliveryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F26F1213B537C00FA88D3 /* DeliveryTableViewCell.swift */; };
@@ -36,6 +33,11 @@
 		B64AB0C620BCC70A003B966C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B64AB0C420BCC70A003B966C /* LaunchScreen.storyboard */; };
 		B64AB0D120BCC70A003B966C /* HomeKhaanaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64AB0D020BCC70A003B966C /* HomeKhaanaTests.swift */; };
 		B64AB0DC20BCC70A003B966C /* HomeKhaanaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64AB0DB20BCC70A003B966C /* HomeKhaanaUITests.swift */; };
+		B655FFBF219BA975008691D2 /* KitchensTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B655FFBE219BA975008691D2 /* KitchensTableViewController.swift */; };
+		B655FFC1219BA98F008691D2 /* Kitchen.swift in Sources */ = {isa = PBXBuildFile; fileRef = B655FFC0219BA98F008691D2 /* Kitchen.swift */; };
+		B655FFC3219BA9A4008691D2 /* KitchenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B655FFC2219BA9A4008691D2 /* KitchenTableViewCell.swift */; };
+		B655FFC5219D1046008691D2 /* ChoiceGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B655FFC4219D1046008691D2 /* ChoiceGroup.swift */; };
+		B655FFC721A0D302008691D2 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B655FFC621A0D302008691D2 /* Cart.swift */; };
 		B691C78820E9AA440060CF98 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B691C78720E9AA440060CF98 /* CartViewController.swift */; };
 		B691C78A20E9B09C0060CF98 /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B691C78920E9B09C0060CF98 /* HomeTabBarController.swift */; };
 		B691C78C20E9B8D30060CF98 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B691C78B20E9B8D30060CF98 /* CartTableViewCell.swift */; };
@@ -91,9 +93,6 @@
 		B61558DA20DF0B6700471718 /* Choice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choice.swift; sourceTree = "<group>"; };
 		B61558DC20DF0D4100471718 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		B61B78F121177BED000EDE80 /* UserInitializationErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInitializationErrorViewController.swift; sourceTree = "<group>"; };
-		B61B78F32117E3CE000EDE80 /* AddressesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressesTableViewController.swift; sourceTree = "<group>"; };
-		B61B78F52117E3FA000EDE80 /* AddressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressTableViewCell.swift; sourceTree = "<group>"; };
-		B61B78F72117E7C2000EDE80 /* Address.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		B6287B4320E873C1009FF79D /* ChoiceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceDetailViewController.swift; sourceTree = "<group>"; };
 		B62F26EF213B536100FA88D3 /* DeliveryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryTableViewController.swift; sourceTree = "<group>"; };
 		B62F26F1213B537C00FA88D3 /* DeliveryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryTableViewCell.swift; sourceTree = "<group>"; };
@@ -112,6 +111,11 @@
 		B64AB0D720BCC70A003B966C /* HomeKhaanaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HomeKhaanaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B64AB0DB20BCC70A003B966C /* HomeKhaanaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeKhaanaUITests.swift; sourceTree = "<group>"; };
 		B64AB0DD20BCC70A003B966C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B655FFBE219BA975008691D2 /* KitchensTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitchensTableViewController.swift; sourceTree = "<group>"; };
+		B655FFC0219BA98F008691D2 /* Kitchen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kitchen.swift; sourceTree = "<group>"; };
+		B655FFC2219BA9A4008691D2 /* KitchenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitchenTableViewCell.swift; sourceTree = "<group>"; };
+		B655FFC4219D1046008691D2 /* ChoiceGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceGroup.swift; sourceTree = "<group>"; };
+		B655FFC621A0D302008691D2 /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
 		B691C78720E9AA440060CF98 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		B691C78920E9B09C0060CF98 /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
 		B691C78B20E9B8D30060CF98 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
@@ -207,46 +211,13 @@
 		B64AB0BA20BCC706003B966C /* HomeKhaana */ = {
 			isa = PBXGroup;
 			children = (
-				B691C79520FD823D0060CF98 /* AddPaymentTableViewCell.swift */,
-				B61B78F72117E7C2000EDE80 /* Address.swift */,
-				B61B78F32117E3CE000EDE80 /* AddressesTableViewController.swift */,
-				B61B78F52117E3FA000EDE80 /* AddressTableViewCell.swift */,
-				B64AB0BB20BCC707003B966C /* AppDelegate.swift */,
-				B64AB0C220BCC70A003B966C /* Assets.xcassets */,
-				B691C78B20E9B8D30060CF98 /* CartTableViewCell.swift */,
-				B691C78720E9AA440060CF98 /* CartViewController.swift */,
-				B61558DA20DF0B6700471718 /* Choice.swift */,
-				B6287B4320E873C1009FF79D /* ChoiceDetailViewController.swift */,
-				B64393A120DFC7D800058C82 /* ChoiceTableViewCell.swift */,
-				B61558D420D8641F00471718 /* CustomUIButton.swift */,
-				B61558DC20DF0D4100471718 /* DataManager.swift */,
-				B62F26F1213B537C00FA88D3 /* DeliveryTableViewCell.swift */,
-				B62F26EF213B536100FA88D3 /* DeliveryTableViewController.swift */,
-				B69F54AF20CDE9B000E1B0EB /* Extensions.swift */,
-				B69F54A520CDD0EB00E1B0EB /* GoogleService-Info.plist */,
-				B691C78920E9B09C0060CF98 /* HomeTabBarController.swift */,
-				B61558D820DF0AC800471718 /* HomeTableViewController.swift */,
-				B61558CE20D6D93D00471718 /* HowItWorksViewController.swift */,
 				B64AB0C720BCC70A003B966C /* Info.plist */,
-				B64AB0C420BCC70A003B966C /* LaunchScreen.storyboard */,
-				B62F26F5213CA83000FA88D3 /* LoaderController.swift */,
-				B62F26F3213CA20200FA88D3 /* LoadingScreenViewController.swift */,
-				B64AB0BF20BCC707003B966C /* Main.storyboard */,
-				B61558C820D6D7B400471718 /* NotificationsViewController.swift */,
-				B609AC3E2120C8C000C45C49 /* Order.swift */,
-				B609AC402128A4F500C45C49 /* OrderConfirmationViewController.swift */,
-				B69CE0812129F93200B7CFDB /* OrdersTableViewCell.swift */,
-				B69CE07F2129F91B00B7CFDB /* OrdersTableViewController.swift */,
-				B691C79120FBF97E0060CF98 /* PaymentSource.swift */,
-				B691C79320FD82050060CF98 /* PaymentSourceTableViewCell.swift */,
-				B691C79720FD834C0060CF98 /* PaymentSourceTableViewController.swift */,
-				B691C78D20EB3B480060CF98 /* Shared.swift */,
-				B69F54AB20CDD67900E1B0EB /* SignUpViewController.swift */,
 				B61558D620DCA74B00471718 /* Todo.rtf */,
-				B61558D020D7476700471718 /* User.swift */,
-				B61B78F121177BED000EDE80 /* UserInitializationErrorViewController.swift */,
-				B61558D220D8611F00471718 /* UserPreferencesViewController.swift */,
-				B69F54AD20CDDBCF00E1B0EB /* UserProfileViewController.swift */,
+				B6B28AB72187DCAE00818967 /* General */,
+				B6B28AB82187DD3700818967 /* Shared */,
+				B6B28ABD2187DE8400818967 /* Initialization */,
+				B6B28AC22187E18C00818967 /* Primary Tabs */,
+				B6B28AC32187E1CF00818967 /* Secondary Screens */,
 			);
 			path = HomeKhaana;
 			sourceTree = "<group>";
@@ -267,6 +238,153 @@
 				B64AB0DD20BCC70A003B966C /* Info.plist */,
 			);
 			path = HomeKhaanaUITests;
+			sourceTree = "<group>";
+		};
+		B6B28AB62187DC8A00818967 /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+				B691C78B20E9B8D30060CF98 /* CartTableViewCell.swift */,
+				B691C78720E9AA440060CF98 /* CartViewController.swift */,
+			);
+			path = Cart;
+			sourceTree = "<group>";
+		};
+		B6B28AB72187DCAE00818967 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				B64AB0C220BCC70A003B966C /* Assets.xcassets */,
+				B64AB0BB20BCC707003B966C /* AppDelegate.swift */,
+				B69F54A520CDD0EB00E1B0EB /* GoogleService-Info.plist */,
+				B64AB0C420BCC70A003B966C /* LaunchScreen.storyboard */,
+				B64AB0BF20BCC707003B966C /* Main.storyboard */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
+		B6B28AB82187DD3700818967 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				B62F26F5213CA83000FA88D3 /* LoaderController.swift */,
+				B61558D420D8641F00471718 /* CustomUIButton.swift */,
+				B61558DC20DF0D4100471718 /* DataManager.swift */,
+				B691C78D20EB3B480060CF98 /* Shared.swift */,
+				B61558D020D7476700471718 /* User.swift */,
+				B69F54AF20CDE9B000E1B0EB /* Extensions.swift */,
+				B655FFC621A0D302008691D2 /* Cart.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		B6B28AB92187DD5E00818967 /* Payment Sources */ = {
+			isa = PBXGroup;
+			children = (
+				B691C79520FD823D0060CF98 /* AddPaymentTableViewCell.swift */,
+				B691C79120FBF97E0060CF98 /* PaymentSource.swift */,
+				B691C79320FD82050060CF98 /* PaymentSourceTableViewCell.swift */,
+				B691C79720FD834C0060CF98 /* PaymentSourceTableViewController.swift */,
+			);
+			path = "Payment Sources";
+			sourceTree = "<group>";
+		};
+		B6B28ABA2187DDAF00818967 /* Orders */ = {
+			isa = PBXGroup;
+			children = (
+				B609AC3E2120C8C000C45C49 /* Order.swift */,
+				B69CE0812129F93200B7CFDB /* OrdersTableViewCell.swift */,
+				B69CE07F2129F91B00B7CFDB /* OrdersTableViewController.swift */,
+			);
+			path = Orders;
+			sourceTree = "<group>";
+		};
+		B6B28ABB2187DE6300818967 /* User Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				B61558D220D8611F00471718 /* UserPreferencesViewController.swift */,
+			);
+			path = "User Preferences";
+			sourceTree = "<group>";
+		};
+		B6B28ABC2187DE7800818967 /* User Profile */ = {
+			isa = PBXGroup;
+			children = (
+				B69F54AD20CDDBCF00E1B0EB /* UserProfileViewController.swift */,
+			);
+			path = "User Profile";
+			sourceTree = "<group>";
+		};
+		B6B28ABD2187DE8400818967 /* Initialization */ = {
+			isa = PBXGroup;
+			children = (
+				B62F26F3213CA20200FA88D3 /* LoadingScreenViewController.swift */,
+				B61558CE20D6D93D00471718 /* HowItWorksViewController.swift */,
+				B61558C820D6D7B400471718 /* NotificationsViewController.swift */,
+				B69F54AB20CDD67900E1B0EB /* SignUpViewController.swift */,
+				B61B78F121177BED000EDE80 /* UserInitializationErrorViewController.swift */,
+			);
+			path = Initialization;
+			sourceTree = "<group>";
+		};
+		B6B28ABE2187DEB400818967 /* Order Confirmation */ = {
+			isa = PBXGroup;
+			children = (
+				B609AC402128A4F500C45C49 /* OrderConfirmationViewController.swift */,
+			);
+			path = "Order Confirmation";
+			sourceTree = "<group>";
+		};
+		B6B28ABF2187DF1B00818967 /* Delivery */ = {
+			isa = PBXGroup;
+			children = (
+				B62F26F1213B537C00FA88D3 /* DeliveryTableViewCell.swift */,
+				B62F26EF213B536100FA88D3 /* DeliveryTableViewController.swift */,
+			);
+			path = Delivery;
+			sourceTree = "<group>";
+		};
+		B6B28AC02187DF5800818967 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				B61558DA20DF0B6700471718 /* Choice.swift */,
+				B655FFC4219D1046008691D2 /* ChoiceGroup.swift */,
+				B64393A120DFC7D800058C82 /* ChoiceTableViewCell.swift */,
+				B691C78920E9B09C0060CF98 /* HomeTabBarController.swift */,
+				B61558D820DF0AC800471718 /* HomeTableViewController.swift */,
+				B655FFBE219BA975008691D2 /* KitchensTableViewController.swift */,
+				B655FFC0219BA98F008691D2 /* Kitchen.swift */,
+				B655FFC2219BA9A4008691D2 /* KitchenTableViewCell.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		B6B28AC12187DFE400818967 /* Choice Detail */ = {
+			isa = PBXGroup;
+			children = (
+				B6287B4320E873C1009FF79D /* ChoiceDetailViewController.swift */,
+			);
+			path = "Choice Detail";
+			sourceTree = "<group>";
+		};
+		B6B28AC22187E18C00818967 /* Primary Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				B6B28AC02187DF5800818967 /* Home */,
+				B6B28AB62187DC8A00818967 /* Cart */,
+				B6B28ABA2187DDAF00818967 /* Orders */,
+				B6B28ABC2187DE7800818967 /* User Profile */,
+			);
+			path = "Primary Tabs";
+			sourceTree = "<group>";
+		};
+		B6B28AC32187E1CF00818967 /* Secondary Screens */ = {
+			isa = PBXGroup;
+			children = (
+				B6B28AC12187DFE400818967 /* Choice Detail */,
+				B6B28ABF2187DF1B00818967 /* Delivery */,
+				B6B28ABE2187DEB400818967 /* Order Confirmation */,
+				B6B28AB92187DD5E00818967 /* Payment Sources */,
+				B6B28ABB2187DE6300818967 /* User Preferences */,
+			);
+			path = "Secondary Screens";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -526,6 +644,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B655FFC5219D1046008691D2 /* ChoiceGroup.swift in Sources */,
 				B691C79420FD82050060CF98 /* PaymentSourceTableViewCell.swift in Sources */,
 				B61558C920D6D7B400471718 /* NotificationsViewController.swift in Sources */,
 				B609AC412128A4F500C45C49 /* OrderConfirmationViewController.swift in Sources */,
@@ -538,11 +657,11 @@
 				B6287B4420E873C1009FF79D /* ChoiceDetailViewController.swift in Sources */,
 				B62F26F6213CA83000FA88D3 /* LoaderController.swift in Sources */,
 				B69CE0822129F93200B7CFDB /* OrdersTableViewCell.swift in Sources */,
-				B61B78F42117E3CE000EDE80 /* AddressesTableViewController.swift in Sources */,
+				B655FFC3219BA9A4008691D2 /* KitchenTableViewCell.swift in Sources */,
 				B61558D520D8641F00471718 /* CustomUIButton.swift in Sources */,
+				B655FFC721A0D302008691D2 /* Cart.swift in Sources */,
 				B64AB0BC20BCC707003B966C /* AppDelegate.swift in Sources */,
 				B691C78820E9AA440060CF98 /* CartViewController.swift in Sources */,
-				B61B78F62117E3FA000EDE80 /* AddressTableViewCell.swift in Sources */,
 				B691C78E20EB3B480060CF98 /* Shared.swift in Sources */,
 				B62F26F0213B536100FA88D3 /* DeliveryTableViewController.swift in Sources */,
 				B691C78C20E9B8D30060CF98 /* CartTableViewCell.swift in Sources */,
@@ -550,15 +669,16 @@
 				B61B78F221177BED000EDE80 /* UserInitializationErrorViewController.swift in Sources */,
 				B61558CF20D6D93D00471718 /* HowItWorksViewController.swift in Sources */,
 				B69CE0802129F91B00B7CFDB /* OrdersTableViewController.swift in Sources */,
-				B61B78F82117E7C2000EDE80 /* Address.swift in Sources */,
 				B64393A220DFC7D800058C82 /* ChoiceTableViewCell.swift in Sources */,
 				B69F54AE20CDDBCF00E1B0EB /* UserProfileViewController.swift in Sources */,
 				B69F54B020CDE9B000E1B0EB /* Extensions.swift in Sources */,
 				B691C79820FD834C0060CF98 /* PaymentSourceTableViewController.swift in Sources */,
 				B691C79220FBF97E0060CF98 /* PaymentSource.swift in Sources */,
+				B655FFBF219BA975008691D2 /* KitchensTableViewController.swift in Sources */,
 				B61558D320D8611F00471718 /* UserPreferencesViewController.swift in Sources */,
 				B62F26F2213B537C00FA88D3 /* DeliveryTableViewCell.swift in Sources */,
 				B691C78A20E9B09C0060CF98 /* HomeTabBarController.swift in Sources */,
+				B655FFC1219BA98F008691D2 /* Kitchen.swift in Sources */,
 				B61558D120D7476700471718 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

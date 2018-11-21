@@ -10,24 +10,17 @@ import UIKit
 import Firebase
 import GooglePlacePicker
 
-class UserPreferencesViewController: UIViewController,AddressDelegate {
+class UserPreferencesViewController: UIViewController {
     
     @IBOutlet weak var tglVegetarian: UISwitch!
-    @IBOutlet weak var btnAddAddress: CustomUIButton!
-    
-    var selectedAddress:Address?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.selectedAddress = DataManager.getAddressForTitle(title: User.sharedInstance!.defaultAddress)
         self.tglVegetarian.isOn = User.sharedInstance!.isVegetarian
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        setDefaultAddress()
-    }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -38,18 +31,6 @@ class UserPreferencesViewController: UIViewController,AddressDelegate {
         User.sharedInstance!.isVegetarian = tglVegetarian.isOn
     }
     
-    func updateAddress(_ address: Address?) {
-        self.selectedAddress = address
-    }
-    
-    func setDefaultAddress()
-    {
-        if(self.selectedAddress != nil )
-        {
-            User.sharedInstance!.defaultAddress = self.selectedAddress!.title
-            self.btnAddAddress.setTitle(self.selectedAddress!.title, for: .normal)
-        }
-    }
     
 //    @IBAction func btnAddAddressClicked(_ sender: Any) {
 //        let config = GMSPlacePickerConfig(viewport: nil)
@@ -83,11 +64,7 @@ class UserPreferencesViewController: UIViewController,AddressDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        if(segue.identifier == "selectAddress")
-        {
-            let addressesVC: AddressesTableViewController? = segue.destination as? AddressesTableViewController
-            addressesVC?.addressDelegate = self
-        }
+        
     }
     
 

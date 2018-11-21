@@ -72,7 +72,7 @@ class OrderConfirmationViewController: UIViewController {
             {
                 LoaderController.sharedInstance.updateTitle(title: "Success!")
                 LoaderController.sharedInstance.removeLoader()
-                DataManager.inCart=[:]
+                Cart.sharedInstance.cart.removeAll()
                 self.navigationController?.tabBarController?.tabBar.items?[1].badgeValue = nil
                 // we should actually go to the upcoming orders screen now. for now, we are simply dismissing the controller.
                 self.performSegue(withIdentifier: "returnAfterConfirmation", sender: self)
@@ -104,5 +104,4 @@ class OrderConfirmationViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }

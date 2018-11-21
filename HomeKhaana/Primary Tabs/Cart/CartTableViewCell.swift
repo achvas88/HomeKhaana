@@ -14,16 +14,14 @@ class CartTableViewCell: UITableViewCell {
     @IBOutlet weak var lblDisplayTitle: UILabel!
     @IBOutlet weak var lblCost: UILabel!
     
-    var choice:Choice?
-    var quantity: Int = 0
-    
-    func setupCell(id: String, quantity: Int) -> Void
-    {
-        self.choice = DataManager.getChoiceForId(id: Int(id)!)
-        self.quantity = quantity
-        self.lblDisplayTitle?.text = choice!.displayTitle
-        self.lblCost?.text = "$\(convertToCurrency(input: (choice!.cost * Float(quantity))))"
-        self.lblQuantity?.text = String(quantity)
+    var choice: Choice? {
+        didSet {
+            guard let choice = choice else { return }
+            
+            self.lblDisplayTitle?.text = choice.displayTitle
+            self.lblCost?.text = "$\(convertToCurrency(input: (choice.cost * Float(choice.quantity!))))"
+            self.lblQuantity?.text = String(choice.quantity!)
+        }
     }
     
     override func awakeFromNib() {

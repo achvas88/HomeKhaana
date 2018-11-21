@@ -18,9 +18,10 @@ class Choice
     var imgName: String
     var id:String
     var items: String // In the future this can be different. For now, this is good enough.
-    var kitchen: String // In the future we can add an id to the kitchen
+    var kitchenId: String
+    var quantity: Int?
     
-    init(id:String, title:String,description:String,cost:Float,isVegetarian:Bool,imgName:String, items: String, kitchen: String) {
+    init(id:String, title:String,description:String,cost:Float,isVegetarian:Bool,imgName:String, items: String, kitchenId: String) {
         self.id = id
         self.displayTitle = title
         self.description = description
@@ -28,10 +29,16 @@ class Choice
         self.isVegetarian = isVegetarian
         self.imgName = imgName
         self.items = items
-        self.kitchen = kitchen
+        self.kitchenId = kitchenId
     }
     
-    public convenience init?(snapshot: DataSnapshot)
+    public convenience init?(displayTitle: String, quantity: Int, cost: Float)
+    {
+        self.init(id: "", title: displayTitle, description: "", cost: cost, isVegetarian: true, imgName: "", items: "", kitchenId: "")
+        self.quantity = quantity
+    }
+    
+    public convenience init?(kitchenId:String, snapshot: DataSnapshot)
     {
         let snapshot = snapshot.value as AnyObject
         
@@ -42,9 +49,8 @@ class Choice
         let imgName = snapshot["imgName"] as! String
         let id = snapshot["id"] as! String
         let items = snapshot["items"] as! String
-        let kitchen = snapshot["kitchen"] as! String
-    
-        self.init(id: id, title: displayTitle , description: description, cost: cost, isVegetarian: isVegetarian, imgName: imgName, items: items, kitchen: kitchen)
+        
+        self.init(id: id, title: displayTitle , description: description, cost: cost, isVegetarian: isVegetarian, imgName: imgName, items: items, kitchenId: kitchenId)
     }
     
 }

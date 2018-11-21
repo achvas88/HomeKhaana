@@ -2,9 +2,9 @@
   "name": "functions",
   "description": "Firebase Functions for Stripe",
   "dependencies": {
-    "stripe": "^4.15.0",
     "firebase-admin": "~5.12.1",
-    "firebase-functions": "^1.0.3"
+    "firebase-functions": "^2.1.0",
+    "stripe": "^4.15.0"
   },
   "devDependencies": {
     "eslint": "^4.13.1",

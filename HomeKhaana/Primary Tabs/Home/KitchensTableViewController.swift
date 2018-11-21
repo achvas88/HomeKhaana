@@ -1,22 +1,20 @@
 //
-//  OrdersTableViewController.swift
+//  KitchensTableViewController.swift
 //  HomeKhaana
 //
-//  Created by Achyuthan Vasanth on 8/19/18.
+//  Created by Achyuthan Vasanth on 11/13/18.
 //  Copyright © 2018 Achyuthan Vasanth. All rights reserved.
 //
 
 import UIKit
-import FirebaseDatabase
 
-class OrdersTableViewController: UITableViewController {
+class KitchensTableViewController: UITableViewController {
 
-    var mostRecentOrders:[Order]?
+    var kitchens:[Kitchen] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.listenToOrders()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -24,13 +22,20 @@ class OrdersTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     // MARK: - Table view data source
 
+    override func viewWillAppear(_ animated: Bool) {
+        self.kitchens = DataManager.getKitchens()
+        self.tableView.reloadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableViewScrollPosition.top, animated: true)
+        
+        if(Cart.sharedInstance.cart.count == 0) {self.navigationController?.tabBarController?.tabBar.items?[1].badgeValue = nil}
+        else {self.navigationController?.tabBarController?.tabBar.items?[1].badgeValue = String(Cart.sharedInstance.cart.count)}
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -38,36 +43,20 @@ class OrdersTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return mostRecentOrders?.count ?? 0
+        return self.kitchens.count
     }
 
-    func listenToOrders()
-    {
-        let mostRecentOrdersQuery = db.child("Orders/\(User.sharedInstance!.id)").queryLimited(toLast: 10)
-        
-        mostRecentOrdersQuery.observe(.value, with: { (snapshot) in
-            self.mostRecentOrders = []
-            for orderChild in snapshot.children {
-                if let snapshot = orderChild as? DataSnapshot,
-                    let order:Order? = Order(snapshot: snapshot)
-                {
-                    if(order != nil)
-                    {
-                        self.mostRecentOrders!.insert(order!, at: 0)
-                    }
-                }
-            }
-            self.tableView.reloadData()
-        })
-    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "order", for: indexPath) as! OrdersTableViewCell
-        cell.order = self.mostRecentOrders![indexPath.row]
+        // Configure the cell...
+        let cell = tableView.dequeueReusableCell(withIdentifier: "kitchenTableViewCell", for: indexPath) as! KitchenTableViewCell
+        
+        // Configure the cell...
+        let kitchen = kitchens[indexPath.row]
+        cell.kitchen = kitchen
         return cell
     }
     
-
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -108,19 +97,18 @@ class OrdersTableViewController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        if(segue.identifier == "showCart")
+        if (segue.identifier == "showMenuItems")
         {
-            let cartViewVC: CartViewController? = segue.destination as? CartViewController
-            let currentRow: OrdersTableViewCell? = sender as! OrdersTableViewCell?
+            let menuItemsVC: HomeTableViewController? = segue.destination as? HomeTableViewController
+            let currentRow: KitchenTableViewCell? = sender as! KitchenTableViewCell?
             
-            if(cartViewVC != nil && currentRow != nil)
+            if(menuItemsVC != nil && currentRow != nil)
             {
-                cartViewVC!.currentOrder = currentRow!.order
+                menuItemsVC!.kitchen = currentRow!.kitchen!
             }
         }
+        
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
     }
- 
-
 }

@@ -10,15 +10,38 @@ import UIKit
 
 class HomeTableViewController: UITableViewController {
 
-    let choices:[Choice] = DataManager.choices
+    //var choices:[Choice] = []
+    var menuItems: [ChoiceGroup] = []
+    
+    var kitchen: Kitchen?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // initialize user here. At this point, pakka there is a firebase user.
-        //User.initialize()
         
+        //self.choices = DataManager.getChoices()
+        var menuItems:[ChoiceGroup]? = DataManager.getChoiceGroups(kitchenId: self.kitchen!.id)
+        if(menuItems != nil)
+        {
+            self.menuItems = menuItems!
+        }
+        else
+        {
+            LoaderController.sharedInstance.showLoader(indicatorText: "Loading Menu Items", holdingView: self.view)
+            DataManager.loadMenuItems(kitchenId: self.kitchen!.id, completion:
+                {
+                    LoaderController.sharedInstance.removeLoader();
+                    menuItems = DataManager.getChoiceGroups(kitchenId: self.kitchen!.id)
+                    if(menuItems != nil)
+                    {
+                        self.menuItems = menuItems!
+                    }
+                    self.tableView.reloadData()
+                }
+            )
+        }
 
+        self.title = self.kitchen!.name
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -27,8 +50,13 @@ class HomeTableViewController: UITableViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        if(DataManager.inCart.count == 0) {self.navigationController?.tabBarController?.tabBar.items?[1].badgeValue = nil}
-        else {self.navigationController?.tabBarController?.tabBar.items?[1].badgeValue = String(DataManager.inCart.count)}
+        if(self.menuItems.count>0)
+        {
+            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableViewScrollPosition.top, animated: true)
+        }
+        
+        if(Cart.sharedInstance.cart.count == 0) {self.navigationController?.tabBarController?.tabBar.items?[1].badgeValue = nil}
+        else {self.navigationController?.tabBarController?.tabBar.items?[1].badgeValue = String(Cart.sharedInstance.cart.count)}
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -39,12 +67,13 @@ class HomeTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return menuItems.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return choices.count
+        //return choices.count
+        return menuItems[section].getChoices().count
     }
 
     
@@ -52,11 +81,22 @@ class HomeTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "choiceCell", for: indexPath) as! ChoiceTableViewCell
 
         // Configure the cell...
-        let choice = choices[indexPath.row]
+        //let choice = choices[indexPath.row]
+        //cell.choice = choice
+        let choice = menuItems[indexPath.section].getChoices()[indexPath.row]
         cell.choice = choice
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if(menuItems.count == 1) {
+            return ""   // do not show section title if there is only one section
+        }
+        else {
+            return menuItems[section].displayTitle
+        }
+        
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -111,6 +151,4 @@ class HomeTableViewController: UITableViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    
-
 }

@@ -9,6 +9,8 @@
 import UIKit
 import FirebaseDatabase
 
+// TODO: Update this... .
+
 protocol MarkAsDeliveredDelegate{
     func markAsDeliveredClicked(at index:IndexPath)
     func btnCartLinkClicked(at index:IndexPath)
@@ -33,9 +35,9 @@ class DeliveryTableViewCell: UITableViewCell {
             guard let order = order else { return }
             
             //cart link title
-            let choice:Choice = DataManager.getChoiceForId(id: Int(order.cart.keys.first!)!)
-            var cartLinkTitle:String = choice.displayTitle + " (\(order.cart.values.first!))"
-            let totalInCart = order.cart.keys.count - 1
+            let choice:Choice = Cart.sharedInstance.cart[0]
+            var cartLinkTitle:String = choice.displayTitle //+ " (\(order.cart.values.first!))"
+            let totalInCart = order.cart.count - 1
             if(totalInCart>0)
             {
                 cartLinkTitle = cartLinkTitle + ", \(totalInCart) other"
@@ -45,7 +47,7 @@ class DeliveryTableViewCell: UITableViewCell {
             //others
             lblOrderID.text = String(self.order!.id)
             lblOrderTime.text = self.order!.orderDate
-            lblWhere.text = self.order!.selectedAddress?.address
+            lblWhere.text = "" //self.order!.selectedAddress?.address
             if(self.order!.status != "Delivered")
             {
                 lblWhen.text = "11-12PM, " + self.order!.deliveryDate

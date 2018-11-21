@@ -70,7 +70,8 @@ exports.charge = functions.database.ref('/Orders/{userId}/{id}').onCreate((snap,
             const amount = val.amount;
             const chargeID = context.params.id;
             const charge = {amount, currency, customer};
-            if (val.source !== null) {
+            if (val.source !== null)
+            {
               charge.source = val.source;
             }
             return stripe.charges.create(charge, {idempotency_key: chargeID});

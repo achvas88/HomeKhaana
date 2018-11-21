@@ -29,8 +29,8 @@ class ChoiceDetailViewController: UIViewController {
         self.setupButtons()
         
         self.isAddingToCart = true
-        let quantity:Int? = DataManager.inCart[theChoice!.id]
-        if(quantity != nil)
+        let quantity:Int? = theChoice?.quantity
+        if(quantity != nil && quantity! != 0)
         {
             self.lblQuantity.text=String(quantity!)
             self.buttonCaption = "UPDATE CART"
@@ -39,7 +39,9 @@ class ChoiceDetailViewController: UIViewController {
         self.lblDisplayTitle.text = theChoice!.displayTitle
         self.lblItems.text = theChoice!.items
         self.lblDescription.text = theChoice!.description
-        self.lblKitchen.text = theChoice!.kitchen
+        
+        let kitchen:Kitchen = DataManager.kitchens[theChoice!.kitchenId]!
+        self.lblKitchen.text = kitchen.name
         
         if(!theChoice!.isVegetarian) { stkVegetarian.isHidden = true }
         imgRepresentation.image = UIImage(named: theChoice!.imgName)
@@ -66,10 +68,14 @@ class ChoiceDetailViewController: UIViewController {
     }
     
     @IBAction func btnAddToCartClicked(_ sender: Any) {
-        DataManager.updateCart(choiceID: theChoice!.id, quantity: Int(lblQuantity.text!)!)
-        
-        self.dismiss(animated: true
-            , completion: nil)
+        //DataManager.updateCart(choiceID: theChoice!.id, quantity: Int(lblQuantity.text!)!)
+        let quantity:Int = Int(self.lblQuantity.text!)!
+        theChoice!.quantity = quantity
+        Cart.sharedInstance.updateCart(choice: theChoice!, vc: self, completion:
+            {
+                self.dismiss(animated: true, completion: nil)
+            }
+        )
     }
     
     func setAddToCartTitle()

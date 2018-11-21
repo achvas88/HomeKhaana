@@ -9,6 +9,8 @@
 import UIKit
 import FirebaseDatabase
 
+//TODO: update this file.
+
 class DeliveryTableViewController: UITableViewController, MarkAsDeliveredDelegate {
     
     var currentOrders:[Order]?
@@ -80,16 +82,15 @@ class DeliveryTableViewController: UITableViewController, MarkAsDeliveredDelegat
         
         var cartContents:String = ""
         //generate cart text
-        let inCart:Array<(key:String, value:Int)> = Array(order.cart)
+        let inCart:[Choice] = order.cart
         
         var choice:Choice
-        for (orderItem, orderQuantity) in inCart
+        for choice in inCart
         {
-            choice = DataManager.getChoiceForId(id: Int(orderItem)!)
             if(cartContents != "") {
                 cartContents = cartContents + ", "
             }
-            cartContents = cartContents + " \(choice.displayTitle)(\(orderQuantity))"
+            cartContents = cartContents + " \(choice.displayTitle)(\(choice.quantity!))"
         }
         
         

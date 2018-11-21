@@ -6,6 +6,8 @@
 //  Copyright © 2018 Achyuthan Vasanth. All rights reserved.
 //
 
+// TODO: Need to update this file.
+
 import Foundation
 import FirebaseDatabase
 
@@ -19,9 +21,10 @@ class Order
     var status:String
     var orderingUserID:String
     var orderingUserName:String
+    var kitchenId: String
     
     //order items
-    var cart:Dictionary<String,Int>
+    var cart:[Choice]
     
     //cost
     var subTotal:Float
@@ -32,7 +35,6 @@ class Order
     
     //payment source and address
     var selectedPayment:PaymentSource?
-    var selectedAddress:Address?
     
     var dictionary: Dictionary<String, Any> {
         return [
@@ -40,7 +42,6 @@ class Order
             "orderDate": self.orderDate,
             "deliveryDate": self.deliveryDate,
             "orderRating": orderRating ?? -1,
-            "cart": cart as Dictionary<String,Int>,
             "subTotal": subTotal,
             "tax": tax,
             "convenienceFee": convenienceFee,
@@ -48,11 +49,22 @@ class Order
             "orderTotal": orderTotal,
             "source": self.selectedPayment!.id,
             "amount": Int(floor(self.orderTotal*100)),
-            "address": selectedAddress!.address,
             "status": self.status,
             "orderingUserID": self.orderingUserID,  //these values are used in delivery workflows
-            "orderingUserName": self.orderingUserName // these values are used in delivery workflows
+            "orderingUserName": self.orderingUserName, // these values are used in delivery workflows
+            "kitchenId": self.kitchenId,
+            "cart": getMapFromCart()
         ]
+    }
+    
+    private func getMapFromCart() -> Dictionary<String, String>
+    {
+        var retMap:Dictionary<String,String> = [:]
+        for choice in self.cart
+        {
+            retMap[choice.displayTitle] = String(choice.cost) + ":" + String(choice.quantity!)
+        }
+        return retMap
     }
     
     public init(id:UInt)
@@ -67,7 +79,7 @@ class Order
         self.orderDate = dateFormatter.string(from: Date.init())
         dateFormatter.timeStyle = .none
         self.deliveryDate = dateFormatter.string(from: Date.init(timeInterval: TimeInterval.init(exactly: (24*60*60))!, since: Date.init()))
-        self.cart = Dictionary<String,Int>()
+        self.cart = [] //Dictionary<String,Int>()
         self.orderRating = -1
         self.subTotal = 0
         self.tax = 0
@@ -76,9 +88,10 @@ class Order
         self.orderTotal = 0
         self.orderingUserName = User.sharedInstance!.name
         self.orderingUserID = User.sharedInstance!.id
+        self.kitchenId = ""
     }
     
-    public init(id: UInt, orderDate: String, deliveryDate: String, orderRating: Int?, status: String, cart: Dictionary<String,Int>, subTotal: Float, tax: Float, convenienceFee: Float, discount: Float, orderTotal: Float, source: PaymentSource?, deliveryAddress: Address?)
+    public init(id: UInt, orderDate: String, deliveryDate: String, orderRating: Int?, status: String, cart: [Choice], subTotal: Float, tax: Float, convenienceFee: Float, discount: Float, orderTotal: Float, source: PaymentSource?, kitchenId: String)
     {
         self.id = id
         self.orderDate = orderDate
@@ -92,9 +105,9 @@ class Order
         self.discount = discount
         self.orderTotal = orderTotal
         self.selectedPayment = source
-        self.selectedAddress = deliveryAddress
         self.orderingUserName = User.sharedInstance!.name
         self.orderingUserID = User.sharedInstance!.id
+        self.kitchenId = kitchenId
     }
     
     /*public convenience init?(snapshot: DataSnapshot)
@@ -161,6 +174,7 @@ class Order
     
     public convenience init?(snapshot: DataSnapshot)
     {
+        let snapshotCpy:DataSnapshot = snapshot
         let snapshot = snapshot.value as AnyObject
         
         //other meta-data
@@ -169,9 +183,27 @@ class Order
         let deliveryDate = snapshot["deliveryDate"] as? String
         let orderRating = snapshot["orderRating"] as? Int
         let status = snapshot["status"] as? String
+        let kitchenId = snapshot["kitchenId"] as? String
         
         //order items
-        var cart:Dictionary<String,Int> = [:]
+        var cart:[Choice] = []
+        if(snapshotCpy.hasChild("cart"))
+        {
+            let cartRef = snapshotCpy.childSnapshot(forPath: "cart")
+            
+            let cartDic = cartRef.value as? Dictionary<String,String>
+            if(cartDic != nil)
+            {
+                for items in cartDic! {
+                    let choiceTitle:String = items.key
+                    let val:String  = String(items.value)
+                    let choiceParts : [String] = val.components(separatedBy: ":")
+                    cart.append(Choice(displayTitle: choiceTitle, quantity: Int(choiceParts[1])!, cost: Float(choiceParts[0])!)!)
+                }
+            }
+        }
+        
+        /*var cart:Dictionary<String,Int> = [:]
         let cartDic = snapshot["cart"] as? Dictionary<String,Int>
         if (cartDic != nil)
         {
@@ -196,7 +228,7 @@ class Order
                     counter = counter+1
                 }
             }
-        }
+        }*/
         
         //cost
         let subTotal = snapshot["subTotal"] as? Float
@@ -205,13 +237,11 @@ class Order
         let discount = snapshot["discount"] as? Float
         let orderTotal = snapshot["orderTotal"] as? Float
         
-        let address = snapshot["address"] as? String
         let selectedPaymentID = snapshot["source"] as? String
         //payment source and address
         let selectedPayment:PaymentSource? = User.getPaymentSourceForID(id: selectedPaymentID!)
-        let selectedAddress:Address? = DataManager.getAddressForKey(key: address!)
         
-        self.init(id: id!, orderDate: orderDate ?? "", deliveryDate: deliveryDate ?? "", orderRating: orderRating ?? -1, status: status ?? "New", cart: cart, subTotal: subTotal!, tax: tax!, convenienceFee: convenienceFee!, discount: discount!, orderTotal: orderTotal!, source: selectedPayment, deliveryAddress: selectedAddress)
+        self.init(id: id!, orderDate: orderDate ?? "", deliveryDate: deliveryDate ?? "", orderRating: orderRating ?? -1, status: status ?? "New", cart: cart, subTotal: subTotal!, tax: tax!, convenienceFee: convenienceFee!, discount: discount!, orderTotal: orderTotal!, source: selectedPayment, kitchenId: kitchenId!)
     }
  
     func processResponse(snapshot: DataSnapshot) -> String
@@ -235,4 +265,3 @@ class Order
         return ""
     }
 }
-

@@ -1,25 +1,22 @@
 //
-//  AddressesTableViewController.swift
+//  OrdersTableViewController.swift
 //  HomeKhaana
 //
-//  Created by Achyuthan Vasanth on 8/5/18.
+//  Created by Achyuthan Vasanth on 8/19/18.
 //  Copyright © 2018 Achyuthan Vasanth. All rights reserved.
 //
 
 import UIKit
 import FirebaseDatabase
 
-protocol AddressDelegate: class {
-    func updateAddress(_ address:Address?)
-}
+class OrdersTableViewController: UITableViewController {
 
-class AddressesTableViewController: UITableViewController {
-
-    weak var addressDelegate: AddressDelegate?
+    var mostRecentOrders:[Order]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        self.listenToOrders()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -41,22 +38,35 @@ class AddressesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return DataManager.locations.count
+        return mostRecentOrders?.count ?? 0
     }
 
+    func listenToOrders()
+    {
+        let mostRecentOrdersQuery = db.child("Orders/\(User.sharedInstance!.id)").queryLimited(toLast: 10)
+        
+        mostRecentOrdersQuery.observe(.value, with: { (snapshot) in
+            self.mostRecentOrders = []
+            for orderChild in snapshot.children {
+                if let snapshot = orderChild as? DataSnapshot,
+                    let order:Order? = Order(snapshot: snapshot)
+                {
+                    if(order != nil)
+                    {
+                        self.mostRecentOrders!.insert(order!, at: 0)
+                    }
+                }
+            }
+            self.tableView.reloadData()
+        })
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "address", for: indexPath) as! AddressTableViewCell
-
-        cell.address = DataManager.locations[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "order", for: indexPath) as! OrdersTableViewCell
+        cell.order = self.mostRecentOrders![indexPath.row]
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath) as? AddressTableViewCell
-        addressDelegate?.updateAddress(cell!.address)
-        self.navigationController?.popViewController(animated: true)
-    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -93,14 +103,22 @@ class AddressesTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if(segue.identifier == "showCart")
+        {
+            let cartViewVC: CartViewController? = segue.destination as? CartViewController
+            let currentRow: OrdersTableViewCell? = sender as! OrdersTableViewCell?
+            
+            if(cartViewVC != nil && currentRow != nil)
+            {
+                cartViewVC!.currentOrder = currentRow!.order
+            }
+        }
     }
-    */
-
 }

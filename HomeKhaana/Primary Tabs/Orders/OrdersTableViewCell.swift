@@ -8,6 +8,7 @@
 
 import UIKit
 
+// TODO: need to update this.
 class OrdersTableViewCell: UITableViewCell {
 
     /*
@@ -53,12 +54,14 @@ class OrdersTableViewCell: UITableViewCell {
             }
             
             //order image
-            let choice:Choice = DataManager.getChoiceForId(id: Int(order.cart.keys.first!)!)
-            self.imgOrder.image = UIImage(named: choice.imgName)
+            let choice:Choice = order.cart[0]
+            
+            let kitchen:Kitchen? = DataManager.kitchens[order.kitchenId]
+            self.imgOrder.image = UIImage(named: kitchen?.imgName ?? "shopping-cart (1)")
             
             //cart link title
-            var cartLinkTitle:String = choice.displayTitle + " (\(order.cart.values.first!))"
-            let totalInCart = order.cart.keys.count - 1
+            var cartLinkTitle:String = choice.displayTitle
+            let totalInCart = order.cart.count - 1
             if(totalInCart>0)
             {
                 cartLinkTitle = cartLinkTitle + ", \(totalInCart) other"
@@ -69,7 +72,8 @@ class OrdersTableViewCell: UITableViewCell {
             lblOrderID.text = String(self.order!.id)
             lblOrderDate.text = self.order!.orderDate
             lblStatus.text = self.order!.status
-            lblWhere.text = self.order!.selectedAddress?.address
+            lblWhere.text = DataManager.kitchens[self.order!.kitchenId]?.name
+            
             if(self.order!.status != "Delivered")
             {
                 lblWhen.text = "11-12PM, " + self.order!.deliveryDate
