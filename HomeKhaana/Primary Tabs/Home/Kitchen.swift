@@ -22,6 +22,19 @@ class Kitchen
     var imgName: String
     var offersVegetarian: Bool
     
+    var dictionary: [String: Any] {
+        return [
+            "address": self.address,
+            "imgName": self.imgName,
+            "name": self.name,
+            "offersVegetarian": self.offersVegetarian,
+            "rating": self.rating,
+            "ratingCount": self.ratingCount,
+            "timeForFood": self.timeForFood,
+            "type": self.type
+        ]
+    }
+    
     init(id:String, name:String, rating:NSNumber, timeForFood:String, address: String, type: String, ratingCount: NSNumber, imgName: String, offersVegetarian: Bool) {
         self.id = id
         self.name = name
@@ -32,6 +45,22 @@ class Kitchen
         self.ratingCount = ratingCount
         self.imgName = imgName
         self.offersVegetarian = offersVegetarian
+    }
+    
+    //convenience constructors
+    public convenience init?(dictionary: NSDictionary, id: String)
+    {
+        guard let name = dictionary["name"] as? String,
+            let rating = dictionary["rating"] as? NSNumber,
+            let timeForFood = dictionary["timeForFood"] as? String,
+            let address = dictionary["address"] as? String,
+            let type = dictionary["type"] as? String,
+            let ratingCount = dictionary["ratingCount"] as? NSNumber,
+            let imgName = dictionary["imgName"] as? String,
+            let offersVegetarian = dictionary["offersVegetarian"] as? Bool
+            else { return nil }
+        
+         self.init(id: id, name:name, rating: rating, timeForFood: timeForFood,address: address, type: type, ratingCount: ratingCount, imgName: imgName, offersVegetarian: offersVegetarian)
     }
     
     public convenience init?(snapshot: DataSnapshot)

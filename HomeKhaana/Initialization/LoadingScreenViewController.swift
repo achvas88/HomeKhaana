@@ -20,9 +20,17 @@ class LoadingScreenViewController: UIViewController {
             //then load miscellaneous non-user data
             DataManager.initData(completion: {
                 LoaderController.sharedInstance.removeLoader();
-                if(User.sharedInstance!.isAdmin)
+                if(User.sharedInstance!.isKitchen)
                 {
-                    self.takeMeToAdminPage()
+                    let kitchen:Kitchen? = DataManager.kitchens[User.sharedInstance!.id]
+                    if(kitchen != nil)
+                    {
+                        self.takeMeToKitchenHome()
+                    }
+                    else
+                    {
+                        self.takeMeToKitchenInitialization()
+                    }
                 }
                 else if(User.userJustCreated)
                 {
@@ -30,21 +38,27 @@ class LoadingScreenViewController: UIViewController {
                 }
                 else
                 {
-                    self.takeMeHome()
+                    self.takeMeToUserHome()
                 }
             })
         })
     }
 
-    func takeMeToAdminPage()
+    func takeMeToKitchenInitialization()
     {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Delivery")
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "KitchenInitialization")
         self.present(vc!, animated: false, completion: nil)
     }
     
-    func takeMeHome()
+    func takeMeToKitchenHome()
     {
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "Home")
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "KitchenHome")
+        self.present(vc!, animated: false, completion: nil)
+    }
+    
+    func takeMeToUserHome()
+    {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "UserHome")
         self.present(vc!, animated: false, completion: nil)
     }
     

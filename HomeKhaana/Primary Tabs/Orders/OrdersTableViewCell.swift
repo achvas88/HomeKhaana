@@ -17,7 +17,7 @@ class OrdersTableViewCell: UITableViewCell {
      order status,
      order date,
      delivery address,
-     order rating if status = Delivered
+     order rating if status = Completed
      cart
      order total
      */
@@ -40,7 +40,7 @@ class OrdersTableViewCell: UITableViewCell {
             //ratings related
             imgRating.isHidden = true
             //btnRateIt.isHidden = true
-            if(order.status == "Delivered")
+            if(order.status == "Completed")
             {
                 // if not already rated
                 if(order.orderRating == nil || order.orderRating == -1)
@@ -74,7 +74,7 @@ class OrdersTableViewCell: UITableViewCell {
             lblStatus.text = self.order!.status
             lblWhere.text = DataManager.kitchens[self.order!.kitchenId]?.name
             
-            if(self.order!.status != "Delivered")
+            if(self.order!.status != "Completed")
             {
                 lblWhen.text = "11-12PM, " + self.order!.deliveryDate
             }
@@ -99,7 +99,7 @@ class OrdersTableViewCell: UITableViewCell {
 
     override func layoutSubviews() {
         
-        if(self.order!.status == "Delivered")
+        if(self.order!.status == "Completed")
         {
             lblStatus.textColor = UIColor.darkGray
         }

@@ -31,7 +31,7 @@ final class User{
     var defaultAddress:String
     var isUserImageLoaded: Bool
     var paymentSourcesToDeleteOnQuit:[PaymentSource]?
-    var isAdmin: Bool
+    var isKitchen: Bool
     
     
     static var dictionary: [String: Any] {
@@ -43,12 +43,12 @@ final class User{
             "chargeID": User.sharedInstance!.chargeID,
             "customerID": User.sharedInstance!.customerID,
             "defaultAddress": User.sharedInstance!.defaultAddress,
-            "isAdmin": User.sharedInstance!.isAdmin
+            "isKitchen": User.sharedInstance!.isKitchen
         ]
     }
     
     //designated constructors
-    public init(name:String, isVegetarian:Bool, id:String, email:String, customerID:String, chargeID:UInt, defaultAddress: String, isAdmin: Bool)
+    public init(name:String, isVegetarian:Bool, id:String, email:String, customerID:String, chargeID:UInt, defaultAddress: String, isKitchen: Bool)
     {
         self.name = name
         self.isVegetarian = isVegetarian
@@ -59,7 +59,7 @@ final class User{
         self.defaultAddress = defaultAddress
         self.isUserImageLoaded = false
         self.paymentSourcesToDeleteOnQuit = []
-        self.isAdmin = isAdmin
+        self.isKitchen = isKitchen
         User.isUserInitialized = true
     }
     
@@ -74,9 +74,9 @@ final class User{
         else { return nil}
         
         let defaultAddress = dictionary["defaultAddress"] as? String
-        let isAdmin = dictionary["isAdmin"] as? Bool
+        let isKitchen = dictionary["isKitchen"] as? Bool
         
-        self.init(name: name, isVegetarian: isVegetarian, id: id, email: email, customerID:customerID, chargeID: chargeID, defaultAddress: (defaultAddress ?? ""), isAdmin: isAdmin ?? false)
+        self.init(name: name, isVegetarian: isVegetarian, id: id, email: email, customerID:customerID, chargeID: chargeID, defaultAddress: (defaultAddress ?? ""), isKitchen: isKitchen ?? false)
     }
     
     //intializes User data from the database
@@ -101,7 +101,7 @@ final class User{
                 let value = snapshot.value as? NSDictionary
                 if(value == nil){
                     //new user! yayy!!
-                    User.sharedInstance = User(name: user.displayName!, isVegetarian: false, id: uid, email: user.email!, customerID: "", chargeID: 1, defaultAddress: "", isAdmin: false)
+                    User.sharedInstance = User(name: user.displayName ?? user.email!, isVegetarian: false, id: uid, email: user.email!, customerID: "", chargeID: 1, defaultAddress: "", isKitchen: false)
                     
                     //write back to the database
                     db.child("Users").child(uid).setValue(User.dictionary, withCompletionBlock: { (err:Error?, ref:DatabaseReference) in
@@ -123,7 +123,7 @@ final class User{
             
             //next load payments
             dispatchGroupUser.notify(queue: DispatchQueue.main) {
-                if(User.userJustCreated != true && User.sharedInstance!.isAdmin != true)
+                if(User.userJustCreated != true && User.sharedInstance!.isKitchen != true)
                 {
                     loadPayments(completion: completion)
                 }
@@ -283,24 +283,45 @@ final class User{
     //writes back User data to the database
     public static func WriteToDatabase()
     {
-        if (User.isUserInitialized && User.sharedInstance!.isAdmin != true)
+        if (User.isUserInitialized)
         {
-            // update the user object
-            let id=User.sharedInstance!.id
-            db.child("Users/\(id)").setValue(User.dictionary){
-                (error:Error?, ref:DatabaseReference) in
-                if let error = error {
-                    fatalError("Error uploading user data: \(error).")
-                } else {
-                    print("User updated successfully!")
+            if(User.sharedInstance!.isKitchen != true)
+            {
+                // update the user object
+                let id=User.sharedInstance!.id
+                db.child("Users/\(id)").setValue(User.dictionary){
+                    (error:Error?, ref:DatabaseReference) in
+                    if let error = error {
+                        fatalError("Error uploading user data: \(error).")
+                    } else {
+                        print("User updated successfully!")
+                    }
+                }
+                
+                //delete sources marked for deletion
+                deleteSourcesMarkedForDeletion()
+                
+                //update the default payment source.
+                updateDefaultPayment()
+            }
+            else
+            {
+                // update the user object
+                let id=User.sharedInstance!.id
+                let currentKitchen:Kitchen? = DataManager.kitchens[id]
+                
+                if(currentKitchen != nil)
+                {
+                    db.child("Kitchens/\(id)").setValue(currentKitchen!.dictionary){
+                        (error:Error?, ref:DatabaseReference) in
+                        if let error = error {
+                            fatalError("Error uploading kitchen data: \(error).")
+                        } else {
+                            print("Kitchen updated successfully!")
+                        }
+                    }
                 }
             }
-            
-            //delete sources marked for deletion
-            deleteSourcesMarkedForDeletion()
-            
-            //update the default payment source.
-            updateDefaultPayment()
         }
     }
 }

@@ -9,26 +9,25 @@
 import UIKit
 import FirebaseDatabase
 
-// TODO: Update this... .
-
-protocol MarkAsDeliveredDelegate{
-    func markAsDeliveredClicked(at index:IndexPath)
+protocol CurrentOrderActionsDelegate{
+    func markAsReadyforPickupClicked(at index:IndexPath)
+    func markAsCompletedClicked(at index:IndexPath)
     func btnCartLinkClicked(at index:IndexPath)
 }
 
-class DeliveryTableViewCell: UITableViewCell {
+class CurrentOrdersTableViewCell: UITableViewCell {
 
     @IBOutlet weak var lblCustomer: UILabel!
     @IBOutlet weak var lblOrderID: UILabel!
     @IBOutlet weak var lblOrderTime: UILabel!
-    @IBOutlet weak var lblWhere: UILabel!
-    @IBOutlet weak var lblWhen: UILabel!
     @IBOutlet weak var lblWhat: UIButton!
     @IBOutlet weak var orderOuterView: UIView!
     @IBOutlet weak var lblStatus: UILabel!
+    @IBOutlet weak var btnMarkAsReady: UIButton!
+    @IBOutlet weak var btnMarkAsCompleted: UIButton!
     
     var indexPath: IndexPath?
-    var delegate:MarkAsDeliveredDelegate?
+    var delegate:CurrentOrderActionsDelegate?
     
     var order:Order? {
         didSet {
@@ -47,16 +46,17 @@ class DeliveryTableViewCell: UITableViewCell {
             //others
             lblOrderID.text = String(self.order!.id)
             lblOrderTime.text = self.order!.orderDate
-            lblWhere.text = "" //self.order!.selectedAddress?.address
-            if(self.order!.status != "Delivered")
+            lblStatus.text = self.order!.status
+            if(self.order!.status == "Ready for Pick-Up")
             {
-                lblWhen.text = "11-12PM, " + self.order!.deliveryDate
+                self.btnMarkAsCompleted.isHidden = false
+                self.btnMarkAsReady.isHidden = true
             }
             else
             {
-                lblWhen.text = self.order!.deliveryDate
+                self.btnMarkAsCompleted.isHidden = true
+                self.btnMarkAsReady.isHidden = false
             }
-            lblStatus.text = self.order!.status
             self.lblCustomer.text = self.order!.orderingUserName
         }
     }
@@ -72,8 +72,12 @@ class DeliveryTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    @IBAction func btnMarkAsDeliveredClicked(_ sender: Any) {
-        self.delegate?.markAsDeliveredClicked(at: self.indexPath!)
+    @IBAction func btnMarkAsReadyForPickupClicked(_ sender: Any) {
+        self.delegate?.markAsReadyforPickupClicked(at: self.indexPath!)
+    }
+    
+    @IBAction func btnMarkAsCompletedClicked(_ sender: Any) {
+        self.delegate?.markAsCompletedClicked(at: self.indexPath!)
     }
     
     @IBAction func btnCartLinkClicked(_ sender: Any) {
@@ -90,5 +94,4 @@ class DeliveryTableViewCell: UITableViewCell {
         orderOuterView.layer.borderWidth = 1.0
         orderOuterView.layer.borderColor = UIColor(red:0.87, green:0.87, blue:0.87, alpha:1).cgColor
     }
-    
 }

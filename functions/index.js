@@ -63,31 +63,33 @@ exports.removePaymentSource = functions.database.ref('/PaymentSources/{userId}/{
 
 //charge the customer
 exports.charge = functions.database.ref('/Orders/{userId}/{id}').onCreate((snap, context) => {
-      const val = snap.val();
-      return admin.database().ref(`/Users/${context.params.userId}/customerID`).once('value').then((snapshot) => {
-            return snapshot.val();
-          }).then((customer) => {
-            const amount = val.amount;
-            const chargeID = context.params.id;
-            const charge = {amount, currency, customer};
-            if (val.source !== null)
-            {
-              charge.source = val.source;
-            }
-            return stripe.charges.create(charge, {idempotency_key: chargeID});
-          }).then((response) => {
-            // write response to database
-	    if(response.status=="succeeded")
-	    {
-		snap.ref.child('status').set("Ordered");
-		val.status = "Ordered";
-		admin.database().ref(`/CurrentOrders/${context.params.userId}/${context.params.id}`).set(val);
-	    }
-            return snap.ref.child('stripeResponse').set(response);
-          }).catch((error) => {
-	    snap.ref.child('status').set("Error Processing Payment");
-            return snap.ref.child('stripeResponse/error').set(userFacingMessage(error));
-          });
+  const val = snap.val();
+  return admin.database().ref(`/Users/${context.params.userId}/customerID`).once('value').then((snapshot) => {
+        return snapshot.val();
+      }).then((customer) => {
+        const amount = val.amount;
+        const chargeID = context.params.id;
+        const charge = {amount, currency, customer};
+        if (val.source !== null)
+        {
+          charge.source = val.source;
+        }
+        return stripe.charges.create(charge, {idempotency_key: chargeID});
+      }).then((response) => {
+        // write response to database
+        if(response.status=="succeeded")
+        {
+              snap.ref.child('status').set("Ordered");
+              val.status = "Ordered";
+              const kitchenId = val.kitchenId;
+              admin.database().ref(`/CurrentOrders/${kitchenId}/${context.params.userId}/${context.params.id}`).set(val);
+        }
+        return snap.ref.child('stripeResponse').set(response);
+      }).catch((error) => {
+               snap.ref.child('status').set("Error Processing Payment");
+               //return snap.ref.child('stripeResponse/error').set(error.message);
+               return snap.ref.child('stripeResponse/error').set(userFacingMessage(error));
+      });
 });
 
 //sanitize error message

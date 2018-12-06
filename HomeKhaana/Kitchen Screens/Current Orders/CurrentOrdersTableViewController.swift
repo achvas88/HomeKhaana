@@ -1,5 +1,5 @@
 //
-//  DeliveryTableViewController.swift
+//  CurrentOrdersTableViewController.swift
 //  HomeKhaana
 //
 //  Created by Achyuthan Vasanth on 9/1/18.
@@ -9,9 +9,8 @@
 import UIKit
 import FirebaseDatabase
 
-//TODO: update this file.
 
-class DeliveryTableViewController: UITableViewController, MarkAsDeliveredDelegate {
+class CurrentOrdersTableViewController: UITableViewController, CurrentOrderActionsDelegate {
     
     var currentOrders:[Order]?
     
@@ -34,18 +33,23 @@ class DeliveryTableViewController: UITableViewController, MarkAsDeliveredDelegat
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return currentOrders?.count ?? 0
+        if(currentOrders == nil || currentOrders!.count == 0)
+        {
+            return 1
+        }
+        else
+        {
+            return currentOrders!.count
+        }
     }
     
     func listenToOrders()
     {
-        let currentOrdersQuery = db.child("CurrentOrders")
+        let currentOrdersQuery = db.child("CurrentOrders/\(User.sharedInstance!.id)") // let menuItemsRef = db.child("MenuItems/\(kitchenId)")
         currentOrdersQuery.removeAllObservers()
         currentOrdersQuery.observe(.value, with: { (snapshot) in
             self.currentOrders = []
@@ -69,11 +73,19 @@ class DeliveryTableViewController: UITableViewController, MarkAsDeliveredDelegat
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "delivery", for: indexPath) as! DeliveryTableViewCell
-        cell.delegate = self
-        cell.order = self.currentOrders![indexPath.row]
-        cell.indexPath = indexPath
-        return cell
+        if(self.currentOrders != nil && self.currentOrders!.count > 0)
+        {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "order", for: indexPath) as! CurrentOrdersTableViewCell
+            cell.delegate = self
+            cell.order = self.currentOrders![indexPath.row]
+            cell.indexPath = indexPath
+            return cell
+        }
+        else
+        {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "noOrder", for: indexPath)
+            return cell
+        }
     }
 
     // Delegates
@@ -102,33 +114,35 @@ class DeliveryTableViewController: UITableViewController, MarkAsDeliveredDelegat
         present(alertController, animated: true)
     }
     
-    func markAsDeliveredClicked(at index: IndexPath) {
+    func markAsReadyforPickupClicked(at index: IndexPath) {
         let order:Order = self.currentOrders![index.row]
         
         let alertController = UIAlertController(title: "Confirmation",
-                                                message: "This will mark the order as delivered. Are you sure?",
+                                                message: "This will mark the order as ready for pick-up. Are you sure?",
                                                 preferredStyle: .alert)
         var alertAction = UIAlertAction(title: "Yes", style: .default, handler: { (action) -> Void in
             
-            order.status = "Delivered"
-            LoaderController.sharedInstance.showLoader(indicatorText: "Marking as Delivered", holdingView: self.view)
-            let userId=User.sharedInstance!.id
-            db.child("CurrentOrders/\(userId)/\(order.id)").setValue(nil)
+            order.status = "Ready for Pick-Up"
+            LoaderController.sharedInstance.showLoader(indicatorText: "Marking as Ready for Pick-Up", holdingView: self.view)
+            let kitchenId=User.sharedInstance!.id
+            db.child("CurrentOrders/\(kitchenId)/\(order.orderingUserID)/\(order.id)/status").setValue("Ready for Pick-Up")
             {
                 (error:Error?, ref:DatabaseReference) in
                 if error != nil {
+                    db.child("Orders/\(order.orderingUserID)/\(order.id)/status").setValue("Ready for Pick-Up"){
+                        (error:Error?, ref:DatabaseReference) in
+                        if error != nil {
+                            LoaderController.sharedInstance.updateTitle(title: "Failed. Try again")
+                        } else {
+                            LoaderController.sharedInstance.updateTitle(title: "Complete!")
+                        }
+                        LoaderController.sharedInstance.removeLoader()
+                        self.tableView.reloadData()
+                    }
                 } else {
-                }
-            }
-            db.child("Orders/\(userId)/\(order.id)/status").setValue("Delivered"){
-                (error:Error?, ref:DatabaseReference) in
-                if error != nil {
                     LoaderController.sharedInstance.updateTitle(title: "Failed. Try again")
-                } else {
-                    LoaderController.sharedInstance.updateTitle(title: "Complete!")
+                    LoaderController.sharedInstance.removeLoader()
                 }
-                LoaderController.sharedInstance.removeLoader()
-                self.tableView.reloadData()
             }
         })
         
@@ -136,7 +150,46 @@ class DeliveryTableViewController: UITableViewController, MarkAsDeliveredDelegat
         alertAction = UIAlertAction(title: "Cancel", style: .cancel)
         alertController.addAction(alertAction)
         present(alertController, animated: true)
+    }
+    
+    
+    func markAsCompletedClicked(at index: IndexPath) {
+        let order:Order = self.currentOrders![index.row]
         
+        let alertController = UIAlertController(title: "Confirmation",
+                                                message: "This will mark the order as completed. Are you sure?",
+                                                preferredStyle: .alert)
+        var alertAction = UIAlertAction(title: "Yes", style: .default, handler: { (action) -> Void in
+            
+            order.status = "Completed"
+            LoaderController.sharedInstance.showLoader(indicatorText: "Marking as Completed", holdingView: self.view)
+            let kitchenId=User.sharedInstance!.id
+            db.child("CurrentOrders/\(kitchenId)/\(order.orderingUserID)/\(order.id)").setValue(nil)
+            {
+                (error:Error?, ref:DatabaseReference) in
+                if error != nil {
+                    db.child("Orders/\(order.orderingUserID)/\(order.id)/status").setValue("Completed"){
+                        (error:Error?, ref:DatabaseReference) in
+                        if error != nil {
+                            LoaderController.sharedInstance.updateTitle(title: "Failed. Try again")
+                        } else {
+                            LoaderController.sharedInstance.updateTitle(title: "Complete!")
+                        }
+                        LoaderController.sharedInstance.removeLoader()
+                        self.tableView.reloadData()
+                    }
+                } else {
+                    LoaderController.sharedInstance.updateTitle(title: "Failed. Try again")
+                    LoaderController.sharedInstance.removeLoader()
+                }
+            }
+            
+        })
+        
+        alertController.addAction(alertAction)
+        alertAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alertController.addAction(alertAction)
+        present(alertController, animated: true)
     }
     
 

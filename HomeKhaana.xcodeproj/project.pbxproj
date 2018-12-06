@@ -21,9 +21,11 @@
 		B61558DB20DF0B6700471718 /* Choice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558DA20DF0B6700471718 /* Choice.swift */; };
 		B61558DD20DF0D4200471718 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558DC20DF0D4100471718 /* DataManager.swift */; };
 		B61B78F221177BED000EDE80 /* UserInitializationErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B78F121177BED000EDE80 /* UserInitializationErrorViewController.swift */; };
+		B61F20C721B3467000A85EDF /* InventoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61F20C621B3467000A85EDF /* InventoryTableViewController.swift */; };
+		B61F20CA21B357D900A85EDF /* KitchenProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61F20C921B357D900A85EDF /* KitchenProfileViewController.swift */; };
+		B61F20CC21B8D23400A85EDF /* CurrentOrdersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61F20CB21B8D23400A85EDF /* CurrentOrdersTableViewCell.swift */; };
 		B6287B4420E873C1009FF79D /* ChoiceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6287B4320E873C1009FF79D /* ChoiceDetailViewController.swift */; };
-		B62F26F0213B536100FA88D3 /* DeliveryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F26EF213B536100FA88D3 /* DeliveryTableViewController.swift */; };
-		B62F26F2213B537C00FA88D3 /* DeliveryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F26F1213B537C00FA88D3 /* DeliveryTableViewCell.swift */; };
+		B62F26F0213B536100FA88D3 /* CurrentOrdersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F26EF213B536100FA88D3 /* CurrentOrdersTableViewController.swift */; };
 		B62F26F4213CA20200FA88D3 /* LoadingScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F26F3213CA20200FA88D3 /* LoadingScreenViewController.swift */; };
 		B62F26F6213CA83000FA88D3 /* LoaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F26F5213CA83000FA88D3 /* LoaderController.swift */; };
 		B64393A220DFC7D800058C82 /* ChoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64393A120DFC7D800058C82 /* ChoiceTableViewCell.swift */; };
@@ -93,9 +95,11 @@
 		B61558DA20DF0B6700471718 /* Choice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choice.swift; sourceTree = "<group>"; };
 		B61558DC20DF0D4100471718 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		B61B78F121177BED000EDE80 /* UserInitializationErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInitializationErrorViewController.swift; sourceTree = "<group>"; };
+		B61F20C621B3467000A85EDF /* InventoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryTableViewController.swift; sourceTree = "<group>"; };
+		B61F20C921B357D900A85EDF /* KitchenProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitchenProfileViewController.swift; sourceTree = "<group>"; };
+		B61F20CB21B8D23400A85EDF /* CurrentOrdersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentOrdersTableViewCell.swift; sourceTree = "<group>"; };
 		B6287B4320E873C1009FF79D /* ChoiceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceDetailViewController.swift; sourceTree = "<group>"; };
-		B62F26EF213B536100FA88D3 /* DeliveryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryTableViewController.swift; sourceTree = "<group>"; };
-		B62F26F1213B537C00FA88D3 /* DeliveryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryTableViewCell.swift; sourceTree = "<group>"; };
+		B62F26EF213B536100FA88D3 /* CurrentOrdersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentOrdersTableViewController.swift; sourceTree = "<group>"; };
 		B62F26F3213CA20200FA88D3 /* LoadingScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreenViewController.swift; sourceTree = "<group>"; };
 		B62F26F5213CA83000FA88D3 /* LoaderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderController.swift; sourceTree = "<group>"; };
 		B64393A120DFC7D800058C82 /* ChoiceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceTableViewCell.swift; sourceTree = "<group>"; };
@@ -186,6 +190,39 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		B61F20C421B322A200A85EDF /* Kitchen Screens */ = {
+			isa = PBXGroup;
+			children = (
+				B61F20C821B3579200A85EDF /* Login */,
+				B61F20C521B3464A00A85EDF /* Inventory */,
+				B6B28ABF2187DF1B00818967 /* Current Orders */,
+			);
+			path = "Kitchen Screens";
+			sourceTree = "<group>";
+		};
+		B61F20C521B3464A00A85EDF /* Inventory */ = {
+			isa = PBXGroup;
+			children = (
+				B61F20C621B3467000A85EDF /* InventoryTableViewController.swift */,
+			);
+			path = Inventory;
+			sourceTree = "<group>";
+		};
+		B61F20C821B3579200A85EDF /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				B61F20C921B357D900A85EDF /* KitchenProfileViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		B61F20CD21B8D6F500A85EDF /* Delivery */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Delivery;
+			sourceTree = "<group>";
+		};
 		B64AB0AF20BCC706003B966C = {
 			isa = PBXGroup;
 			children = (
@@ -218,6 +255,7 @@
 				B6B28ABD2187DE8400818967 /* Initialization */,
 				B6B28AC22187E18C00818967 /* Primary Tabs */,
 				B6B28AC32187E1CF00818967 /* Secondary Screens */,
+				B61F20C421B322A200A85EDF /* Kitchen Screens */,
 			);
 			path = HomeKhaana;
 			sourceTree = "<group>";
@@ -271,6 +309,9 @@
 				B61558D020D7476700471718 /* User.swift */,
 				B69F54AF20CDE9B000E1B0EB /* Extensions.swift */,
 				B655FFC621A0D302008691D2 /* Cart.swift */,
+				B61558DA20DF0B6700471718 /* Choice.swift */,
+				B655FFC4219D1046008691D2 /* ChoiceGroup.swift */,
+				B64393A120DFC7D800058C82 /* ChoiceTableViewCell.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -332,21 +373,18 @@
 			path = "Order Confirmation";
 			sourceTree = "<group>";
 		};
-		B6B28ABF2187DF1B00818967 /* Delivery */ = {
+		B6B28ABF2187DF1B00818967 /* Current Orders */ = {
 			isa = PBXGroup;
 			children = (
-				B62F26F1213B537C00FA88D3 /* DeliveryTableViewCell.swift */,
-				B62F26EF213B536100FA88D3 /* DeliveryTableViewController.swift */,
+				B61F20CB21B8D23400A85EDF /* CurrentOrdersTableViewCell.swift */,
+				B62F26EF213B536100FA88D3 /* CurrentOrdersTableViewController.swift */,
 			);
-			path = Delivery;
+			path = "Current Orders";
 			sourceTree = "<group>";
 		};
 		B6B28AC02187DF5800818967 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				B61558DA20DF0B6700471718 /* Choice.swift */,
-				B655FFC4219D1046008691D2 /* ChoiceGroup.swift */,
-				B64393A120DFC7D800058C82 /* ChoiceTableViewCell.swift */,
 				B691C78920E9B09C0060CF98 /* HomeTabBarController.swift */,
 				B61558D820DF0AC800471718 /* HomeTableViewController.swift */,
 				B655FFBE219BA975008691D2 /* KitchensTableViewController.swift */,
@@ -378,8 +416,8 @@
 		B6B28AC32187E1CF00818967 /* Secondary Screens */ = {
 			isa = PBXGroup;
 			children = (
+				B61F20CD21B8D6F500A85EDF /* Delivery */,
 				B6B28AC12187DFE400818967 /* Choice Detail */,
-				B6B28ABF2187DF1B00818967 /* Delivery */,
 				B6B28ABE2187DEB400818967 /* Order Confirmation */,
 				B6B28AB92187DD5E00818967 /* Payment Sources */,
 				B6B28ABB2187DE6300818967 /* User Preferences */,
@@ -644,6 +682,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B61F20CC21B8D23400A85EDF /* CurrentOrdersTableViewCell.swift in Sources */,
 				B655FFC5219D1046008691D2 /* ChoiceGroup.swift in Sources */,
 				B691C79420FD82050060CF98 /* PaymentSourceTableViewCell.swift in Sources */,
 				B61558C920D6D7B400471718 /* NotificationsViewController.swift in Sources */,
@@ -663,7 +702,7 @@
 				B64AB0BC20BCC707003B966C /* AppDelegate.swift in Sources */,
 				B691C78820E9AA440060CF98 /* CartViewController.swift in Sources */,
 				B691C78E20EB3B480060CF98 /* Shared.swift in Sources */,
-				B62F26F0213B536100FA88D3 /* DeliveryTableViewController.swift in Sources */,
+				B62F26F0213B536100FA88D3 /* CurrentOrdersTableViewController.swift in Sources */,
 				B691C78C20E9B8D30060CF98 /* CartTableViewCell.swift in Sources */,
 				B61558D920DF0AC800471718 /* HomeTableViewController.swift in Sources */,
 				B61B78F221177BED000EDE80 /* UserInitializationErrorViewController.swift in Sources */,
@@ -676,9 +715,10 @@
 				B691C79220FBF97E0060CF98 /* PaymentSource.swift in Sources */,
 				B655FFBF219BA975008691D2 /* KitchensTableViewController.swift in Sources */,
 				B61558D320D8611F00471718 /* UserPreferencesViewController.swift in Sources */,
-				B62F26F2213B537C00FA88D3 /* DeliveryTableViewCell.swift in Sources */,
+				B61F20CA21B357D900A85EDF /* KitchenProfileViewController.swift in Sources */,
 				B691C78A20E9B09C0060CF98 /* HomeTabBarController.swift in Sources */,
 				B655FFC1219BA98F008691D2 /* Kitchen.swift in Sources */,
+				B61F20C721B3467000A85EDF /* InventoryTableViewController.swift in Sources */,
 				B61558D120D7476700471718 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -19,21 +19,44 @@ class DataManager {
     
     public static func initData(completion: @escaping () -> ()) -> Void {
         
-        LoaderController.sharedInstance.updateTitle(title: "Loading Kitchens")
-        let kitchensRef = db.child("Kitchens")
-        kitchensRef.observe(.value, with: { (snapshot) in
-            self.kitchens = [:]
-            for kitchenChild in snapshot.children {
-                if let snapshot = kitchenChild as? DataSnapshot,
-                    let kitchen:Kitchen = Kitchen(snapshot: snapshot)
+        if(!User.sharedInstance!.isKitchen)
+        {
+            // load all kitchens
+            LoaderController.sharedInstance.updateTitle(title: "Loading Kitchens")
+            let kitchensRef = db.child("Kitchens")
+            kitchensRef.observe(.value, with: { (snapshot) in
+                self.kitchens = [:]
+                for kitchenChild in snapshot.children {
+                    if let snapshot = kitchenChild as? DataSnapshot,
+                        let kitchen:Kitchen = Kitchen(snapshot: snapshot)
+                    {
+                        let kitchenId:String = snapshot.key
+                        self.kitchens[kitchenId] = kitchen
+                    }
+                }
+                
+                completion();
+            })
+        }
+        else
+        {
+            // load just the kitchen. For the very first time a kitchen is created, this will do nothing.
+            LoaderController.sharedInstance.updateTitle(title: "Loading...")
+            
+            let kitchenId:String = User.sharedInstance!.id
+            
+            db.child("Kitchens").child(kitchenId).observeSingleEvent(of: .value, with: { (snapshot) in
+                // Get user value
+                let value = snapshot.value as? NSDictionary
+                if(value != nil)
                 {
-                    let kitchenId:String = snapshot.key
+                    let kitchen = Kitchen(dictionary: value!, id: kitchenId)
                     self.kitchens[kitchenId] = kitchen
                 }
-            }
-            
-            completion();
-        })
+                
+                completion();
+            });
+        }
     }
     
     public static func getKitchens() -> [Kitchen]
