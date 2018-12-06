@@ -216,13 +216,6 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
-		B61F20CD21B8D6F500A85EDF /* Delivery */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Delivery;
-			sourceTree = "<group>";
-		};
 		B64AB0AF20BCC706003B966C = {
 			isa = PBXGroup;
 			children = (
@@ -416,7 +409,6 @@
 		B6B28AC32187E1CF00818967 /* Secondary Screens */ = {
 			isa = PBXGroup;
 			children = (
-				B61F20CD21B8D6F500A85EDF /* Delivery */,
 				B6B28AC12187DFE400818967 /* Choice Detail */,
 				B6B28ABE2187DEB400818967 /* Order Confirmation */,
 				B6B28AB92187DD5E00818967 /* Payment Sources */,
