@@ -57,7 +57,9 @@ class OrdersTableViewCell: UITableViewCell {
             let choice:Choice = order.cart[0]
             
             let kitchen:Kitchen? = DataManager.kitchens[order.kitchenId]
-            self.imgOrder.image = UIImage(named: kitchen?.imgName ?? "shopping-cart (1)")
+            self.imgOrder.image = kitchen?.image
+            
+            //self.imgOrder.image = UIImage(named: kitchen?.imgName ?? "shopping-cart (1)")
             
             //cart link title
             var cartLinkTitle:String = choice.displayTitle

@@ -49,7 +49,7 @@ class CurrentOrdersTableViewController: UITableViewController, CurrentOrderActio
     
     func listenToOrders()
     {
-        let currentOrdersQuery = db.child("CurrentOrders/\(User.sharedInstance!.id)") // let menuItemsRef = db.child("MenuItems/\(kitchenId)")
+        let currentOrdersQuery = db.child("CurrentOrders/\(User.sharedInstance!.id)") 
         currentOrdersQuery.removeAllObservers()
         currentOrdersQuery.observe(.value, with: { (snapshot) in
             self.currentOrders = []
@@ -125,11 +125,12 @@ class CurrentOrdersTableViewController: UITableViewController, CurrentOrderActio
             order.status = "Ready for Pick-Up"
             LoaderController.sharedInstance.showLoader(indicatorText: "Marking as Ready for Pick-Up", holdingView: self.view)
             let kitchenId=User.sharedInstance!.id
-            db.child("CurrentOrders/\(kitchenId)/\(order.orderingUserID)/\(order.id)/status").setValue("Ready for Pick-Up")
+            db.child("CurrentOrders/\(kitchenId)/\(order.orderingUserID)/\(order.id)/\("status")").setValue("Ready for Pick-Up")
             {
                 (error:Error?, ref:DatabaseReference) in
-                if error != nil {
-                    db.child("Orders/\(order.orderingUserID)/\(order.id)/status").setValue("Ready for Pick-Up"){
+                if error == nil {
+                    
+                    /*db.child("Orders/\(order.orderingUserID)/\(order.id)/\("status")").setValue("Ready for Pick-Up"){
                         (error:Error?, ref:DatabaseReference) in
                         if error != nil {
                             LoaderController.sharedInstance.updateTitle(title: "Failed. Try again")
@@ -138,7 +139,9 @@ class CurrentOrdersTableViewController: UITableViewController, CurrentOrderActio
                         }
                         LoaderController.sharedInstance.removeLoader()
                         self.tableView.reloadData()
-                    }
+                    }*/
+                    LoaderController.sharedInstance.removeLoader()
+                    self.tableView.reloadData()
                 } else {
                     LoaderController.sharedInstance.updateTitle(title: "Failed. Try again")
                     LoaderController.sharedInstance.removeLoader()
@@ -167,8 +170,8 @@ class CurrentOrdersTableViewController: UITableViewController, CurrentOrderActio
             db.child("CurrentOrders/\(kitchenId)/\(order.orderingUserID)/\(order.id)").setValue(nil)
             {
                 (error:Error?, ref:DatabaseReference) in
-                if error != nil {
-                    db.child("Orders/\(order.orderingUserID)/\(order.id)/status").setValue("Completed"){
+                if error == nil {
+                    /*db.child("Orders/\(order.orderingUserID)/\(order.id)/status").setValue("Completed"){
                         (error:Error?, ref:DatabaseReference) in
                         if error != nil {
                             LoaderController.sharedInstance.updateTitle(title: "Failed. Try again")
@@ -177,7 +180,9 @@ class CurrentOrdersTableViewController: UITableViewController, CurrentOrderActio
                         }
                         LoaderController.sharedInstance.removeLoader()
                         self.tableView.reloadData()
-                    }
+                    }*/
+                    LoaderController.sharedInstance.removeLoader()
+                    self.tableView.reloadData()
                 } else {
                     LoaderController.sharedInstance.updateTitle(title: "Failed. Try again")
                     LoaderController.sharedInstance.removeLoader()

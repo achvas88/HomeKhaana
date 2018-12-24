@@ -22,7 +22,7 @@ class KitchenTableViewCell: UITableViewCell {
         didSet {
             guard let kitchen = kitchen else { return }
             
-            kitchenImg.image = UIImage(named: kitchen.imgName)
+            kitchenImg.image = kitchen.image
             name.text = kitchen.name
             timeForFood.text = kitchen.timeForFood
             type.text = kitchen.type

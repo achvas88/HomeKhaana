@@ -10,6 +10,8 @@ import Foundation
 import Firebase
 import FirebaseDatabase
 import FirebaseFunctions
+import GoogleSignIn
+import FBSDKLoginKit
 
 final class User{
     
@@ -314,13 +316,45 @@ final class User{
                 {
                     db.child("Kitchens/\(id)").setValue(currentKitchen!.dictionary){
                         (error:Error?, ref:DatabaseReference) in
-                        if let error = error {
+                        
+                        if let error = error
+                        {
                             fatalError("Error uploading kitchen data: \(error).")
-                        } else {
-                            print("Kitchen updated successfully!")
+                        }
+                        else
+                        {
+                            print("Its done.")
                         }
                     }
+                    
+                    DataManager.saveMenuItems()
                 }
+            }
+        }
+    }
+    
+    public static func Logout(vcHost: UIViewController)
+    {
+        if Auth.auth().currentUser != nil
+        {
+            do
+            {
+                User.WriteToDatabase()
+                
+                try Auth.auth().signOut()
+                
+                GIDSignIn.sharedInstance().signOut()
+                
+                let loginManager: FBSDKLoginManager = FBSDKLoginManager()
+                loginManager.logOut()
+                
+                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignUp")
+                vcHost.present(vc, animated: true, completion: nil)
+                
+            }
+            catch let error as NSError
+            {
+                print(error.localizedDescription)
             }
         }
     }

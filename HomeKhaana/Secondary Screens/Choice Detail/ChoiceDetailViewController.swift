@@ -44,7 +44,7 @@ class ChoiceDetailViewController: UIViewController {
         self.lblKitchen.text = kitchen.name
         
         if(!theChoice!.isVegetarian) { stkVegetarian.isHidden = true }
-        imgRepresentation.image = UIImage(named: theChoice!.imgName)
+        imgRepresentation.image = theChoice!.image
         setAddToCartTitle()
         // Do any additional setup after loading the view.
     }

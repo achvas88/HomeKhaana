@@ -8,8 +8,8 @@
 
 import UIKit
 
-class KitchensTableViewController: UITableViewController {
-
+class KitchensTableViewController: UITableViewController,RefreshTableViewWhenImgLoadsDelegate {
+    
     var kitchens:[Kitchen] = []
     
     override func viewDidLoad() {
@@ -45,7 +45,6 @@ class KitchensTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return self.kitchens.count
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Configure the cell...
@@ -53,8 +52,13 @@ class KitchensTableViewController: UITableViewController {
         
         // Configure the cell...
         let kitchen = kitchens[indexPath.row]
+        kitchen.containingTableViewDelegate = self
         cell.kitchen = kitchen
         return cell
+    }
+    
+    func reloadTableView() {
+        self.tableView.reloadData()
     }
     
     /*

@@ -27,6 +27,11 @@ enum Constants
     static let publishableKey = "pk_test_E7O4iRuxgXcMDjnMPNJvVtXX"
 }
 
-let db: DatabaseReference! = Database.database().reference()
+protocol RefreshTableViewWhenImgLoadsDelegate: class
+{
+    func reloadTableView()
+}
 
+let db: DatabaseReference! = Database.database().reference()
 var functions = Functions.functions()
+

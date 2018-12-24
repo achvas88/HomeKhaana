@@ -8,19 +8,40 @@
 
 import UIKit
 
-class InventoryTableViewController: UITableViewController {
-
+class InventoryTableViewController: UITableViewController, RefreshTableViewWhenImgLoadsDelegate {
+    
+    @IBOutlet weak var btnAdd: UIBarButtonItem!
+    
     var menuItems: [ChoiceGroup] = []
+    
     
     var kitchen: Kitchen? = DataManager.kitchens[User.sharedInstance!.id]
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        var menuItems:[ChoiceGroup]? = DataManager.getChoiceGroups(kitchenId: self.kitchen!.id)
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+
+        //self.loadMenuItems()
+        
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        //self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+ 
+    func reloadTableView() {
+        self.tableView.reloadData()
+    }
+    
+    func loadMenuItems()
+    {
+        self.btnAdd.isEnabled = false
+        let menuItems:[ChoiceGroup]? = DataManager.menuItems[self.kitchen!.id]
         if(menuItems != nil)
         {
             self.menuItems = menuItems!
+            self.btnAdd.isEnabled = true
+            self.tableView.reloadData()
         }
         else
         {
@@ -28,25 +49,17 @@ class InventoryTableViewController: UITableViewController {
             DataManager.loadMenuItems(kitchenId: self.kitchen!.id, completion:
                 {
                     LoaderController.sharedInstance.removeLoader();
-                    menuItems = DataManager.getChoiceGroups(kitchenId: self.kitchen!.id)
-                    if(menuItems != nil)
-                    {
-                        self.menuItems = menuItems!
-                    }
+                    self.menuItems = DataManager.menuItems[self.kitchen!.id]!
+                    self.btnAdd.isEnabled = true
                     self.tableView.reloadData()
             }
             )
         }
-        
-        self.title = self.kitchen!.name
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
- 
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.loadMenuItems()
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -64,7 +77,7 @@ class InventoryTableViewController: UITableViewController {
         {
             return 1
         }
-        return menuItems[section].getChoices().count
+        return menuItems[section].getChoices(ignorePreferences: true).count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -80,7 +93,8 @@ class InventoryTableViewController: UITableViewController {
         // Configure the cell...
         //let choice = choices[indexPath.row]
         //cell.choice = choice
-        let choice = menuItems[indexPath.section].getChoices()[indexPath.row]
+        let choice = menuItems[indexPath.section].getChoices(ignorePreferences: true)[indexPath.row]
+        choice.containingTableViewDelegate = self
         cell.choice = choice
         return cell
     }
@@ -93,7 +107,7 @@ class InventoryTableViewController: UITableViewController {
             return menuItems[section].displayTitle
         }
     }
-
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -129,14 +143,20 @@ class InventoryTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+        // Pass the selected object to the new view controller.prepare
+        
+        if (segue.identifier == "addItem")
+        {
+            let addItemVC: InventoryAddItemViewController? = segue.destination as? InventoryAddItemViewController
+            addItemVC!.menuItems = menuItems
+        }
+    }*/
+ 
 
 }

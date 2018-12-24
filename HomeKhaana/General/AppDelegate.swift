@@ -28,7 +28,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
         
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         
-        if (FBSDKAccessToken.current() != nil || (GIDSignIn.sharedInstance().hasAuthInKeychain() == true)) {
+        GMSPlacesClient.provideAPIKey(googlePlacesAPIKey)
+        GMSServices.provideAPIKey(googlePlacesAPIKey)
+        
+        STPPaymentConfiguration.shared().publishableKey = Constants.publishableKey
+        
+        if (FBSDKAccessToken.current() != nil || (GIDSignIn.sharedInstance().hasAuthInKeychain() == true) || Auth.auth().currentUser != nil) {
             // User is logged in, use 'accessToken' here.
             
             // initialize user here for now. At this point, pakka there is a firebase user.
@@ -44,14 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
             if let window = self.window {
                 window.rootViewController = rootController
             }
-            
-            
         }
-        
-        GMSPlacesClient.provideAPIKey(googlePlacesAPIKey)
-        GMSServices.provideAPIKey(googlePlacesAPIKey)
-        
-        STPPaymentConfiguration.shared().publishableKey = Constants.publishableKey
         
         return true
     }

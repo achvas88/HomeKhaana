@@ -34,7 +34,7 @@ class CurrentOrdersTableViewCell: UITableViewCell {
             guard let order = order else { return }
             
             //cart link title
-            let choice:Choice = Cart.sharedInstance.cart[0]
+            let choice:Choice = order.cart[0]
             var cartLinkTitle:String = choice.displayTitle //+ " (\(order.cart.values.first!))"
             let totalInCart = order.cart.count - 1
             if(totalInCart>0)

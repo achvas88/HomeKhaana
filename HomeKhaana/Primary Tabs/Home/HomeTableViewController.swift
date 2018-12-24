@@ -8,12 +8,17 @@
 
 import UIKit
 
-class HomeTableViewController: UITableViewController {
-
+class HomeTableViewController: UITableViewController,RefreshTableViewWhenImgLoadsDelegate {
+    
     //var choices:[Choice] = []
     var menuItems: [ChoiceGroup] = []
     
     var kitchen: Kitchen?
+    
+    func reloadTableView()
+    {
+        self.tableView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,6 +89,7 @@ class HomeTableViewController: UITableViewController {
         //let choice = choices[indexPath.row]
         //cell.choice = choice
         let choice = menuItems[indexPath.section].getChoices()[indexPath.row]
+        choice.containingTableViewDelegate = self
         cell.choice = choice
         return cell
     }

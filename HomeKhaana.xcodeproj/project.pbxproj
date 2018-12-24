@@ -22,8 +22,10 @@
 		B61558DD20DF0D4200471718 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558DC20DF0D4100471718 /* DataManager.swift */; };
 		B61B78F221177BED000EDE80 /* UserInitializationErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B78F121177BED000EDE80 /* UserInitializationErrorViewController.swift */; };
 		B61F20C721B3467000A85EDF /* InventoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61F20C621B3467000A85EDF /* InventoryTableViewController.swift */; };
-		B61F20CA21B357D900A85EDF /* KitchenProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61F20C921B357D900A85EDF /* KitchenProfileViewController.swift */; };
+		B61F20CA21B357D900A85EDF /* KitchenDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61F20C921B357D900A85EDF /* KitchenDetailsViewController.swift */; };
 		B61F20CC21B8D23400A85EDF /* CurrentOrdersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61F20CB21B8D23400A85EDF /* CurrentOrdersTableViewCell.swift */; };
+		B621EC9221BDE08D00869BD8 /* KitchenProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B621EC9121BDE08D00869BD8 /* KitchenProfileViewController.swift */; };
+		B621EC9421BE1E2F00869BD8 /* InventoryAddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B621EC9321BE1E2F00869BD8 /* InventoryAddItemViewController.swift */; };
 		B6287B4420E873C1009FF79D /* ChoiceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6287B4320E873C1009FF79D /* ChoiceDetailViewController.swift */; };
 		B62F26F0213B536100FA88D3 /* CurrentOrdersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F26EF213B536100FA88D3 /* CurrentOrdersTableViewController.swift */; };
 		B62F26F4213CA20200FA88D3 /* LoadingScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F26F3213CA20200FA88D3 /* LoadingScreenViewController.swift */; };
@@ -96,8 +98,10 @@
 		B61558DC20DF0D4100471718 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		B61B78F121177BED000EDE80 /* UserInitializationErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInitializationErrorViewController.swift; sourceTree = "<group>"; };
 		B61F20C621B3467000A85EDF /* InventoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryTableViewController.swift; sourceTree = "<group>"; };
-		B61F20C921B357D900A85EDF /* KitchenProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitchenProfileViewController.swift; sourceTree = "<group>"; };
+		B61F20C921B357D900A85EDF /* KitchenDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitchenDetailsViewController.swift; sourceTree = "<group>"; };
 		B61F20CB21B8D23400A85EDF /* CurrentOrdersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentOrdersTableViewCell.swift; sourceTree = "<group>"; };
+		B621EC9121BDE08D00869BD8 /* KitchenProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitchenProfileViewController.swift; sourceTree = "<group>"; };
+		B621EC9321BE1E2F00869BD8 /* InventoryAddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryAddItemViewController.swift; sourceTree = "<group>"; };
 		B6287B4320E873C1009FF79D /* ChoiceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceDetailViewController.swift; sourceTree = "<group>"; };
 		B62F26EF213B536100FA88D3 /* CurrentOrdersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentOrdersTableViewController.swift; sourceTree = "<group>"; };
 		B62F26F3213CA20200FA88D3 /* LoadingScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreenViewController.swift; sourceTree = "<group>"; };
@@ -193,6 +197,7 @@
 		B61F20C421B322A200A85EDF /* Kitchen Screens */ = {
 			isa = PBXGroup;
 			children = (
+				B621EC9021BDE07B00869BD8 /* Kitchen Profile */,
 				B61F20C821B3579200A85EDF /* Login */,
 				B61F20C521B3464A00A85EDF /* Inventory */,
 				B6B28ABF2187DF1B00818967 /* Current Orders */,
@@ -204,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				B61F20C621B3467000A85EDF /* InventoryTableViewController.swift */,
+				B621EC9321BE1E2F00869BD8 /* InventoryAddItemViewController.swift */,
 			);
 			path = Inventory;
 			sourceTree = "<group>";
@@ -211,9 +217,17 @@
 		B61F20C821B3579200A85EDF /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				B61F20C921B357D900A85EDF /* KitchenProfileViewController.swift */,
+				B61F20C921B357D900A85EDF /* KitchenDetailsViewController.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		B621EC9021BDE07B00869BD8 /* Kitchen Profile */ = {
+			isa = PBXGroup;
+			children = (
+				B621EC9121BDE08D00869BD8 /* KitchenProfileViewController.swift */,
+			);
+			path = "Kitchen Profile";
 			sourceTree = "<group>";
 		};
 		B64AB0AF20BCC706003B966C = {
@@ -702,15 +716,17 @@
 				B69CE0802129F91B00B7CFDB /* OrdersTableViewController.swift in Sources */,
 				B64393A220DFC7D800058C82 /* ChoiceTableViewCell.swift in Sources */,
 				B69F54AE20CDDBCF00E1B0EB /* UserProfileViewController.swift in Sources */,
+				B621EC9421BE1E2F00869BD8 /* InventoryAddItemViewController.swift in Sources */,
 				B69F54B020CDE9B000E1B0EB /* Extensions.swift in Sources */,
 				B691C79820FD834C0060CF98 /* PaymentSourceTableViewController.swift in Sources */,
 				B691C79220FBF97E0060CF98 /* PaymentSource.swift in Sources */,
 				B655FFBF219BA975008691D2 /* KitchensTableViewController.swift in Sources */,
 				B61558D320D8611F00471718 /* UserPreferencesViewController.swift in Sources */,
-				B61F20CA21B357D900A85EDF /* KitchenProfileViewController.swift in Sources */,
+				B61F20CA21B357D900A85EDF /* KitchenDetailsViewController.swift in Sources */,
 				B691C78A20E9B09C0060CF98 /* HomeTabBarController.swift in Sources */,
 				B655FFC1219BA98F008691D2 /* Kitchen.swift in Sources */,
 				B61F20C721B3467000A85EDF /* InventoryTableViewController.swift in Sources */,
+				B621EC9221BDE08D00869BD8 /* KitchenProfileViewController.swift in Sources */,
 				B61558D120D7476700471718 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

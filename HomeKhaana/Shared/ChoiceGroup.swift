@@ -40,9 +40,9 @@ class ChoiceGroup
         if(choice.isVegetarian) { self.vegChoices.append(choice) }
     }
     
-    public func getChoices() -> [Choice]
+    public func getChoices(ignorePreferences:Bool = false) -> [Choice]
     {
-        if(!User.sharedInstance!.isVegetarian)
+        if(ignorePreferences || !User.sharedInstance!.isVegetarian)
         {
             return self.choices;
         }
@@ -50,5 +50,23 @@ class ChoiceGroup
         {
             return self.vegChoices
         }
+    }
+    
+    public func getDictionary() ->  Dictionary<String,Any>
+    {
+        return [
+            "name": self.displayTitle,
+            "items": getChoicesDictionary()
+        ]
+    }
+    
+    private func getChoicesDictionary() -> Dictionary<String,Any>
+    {
+        var retMap:Dictionary<String,Any> = [:]
+        for choice in self.choices
+        {
+            retMap[choice.id] = choice.getDictionary()
+        }
+        return retMap
     }
 }

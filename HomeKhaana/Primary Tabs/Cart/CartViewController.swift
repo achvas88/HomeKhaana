@@ -146,7 +146,7 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
         {
             self.lblKitchenName.text = kitchen!.name
             self.lblKitchenAddress.text = kitchen!.address
-            self.imgKitchen.image = UIImage(named: kitchen!.imgName)
+            self.imgKitchen.image = kitchen?.image
         }
         
         if(self.inCart.count == 0)

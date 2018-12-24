@@ -75,29 +75,7 @@ class UserProfileViewController: UIViewController {
     }
     
     @IBAction func btnLogOutClicked(_ sender: Any) {
-        
-        if Auth.auth().currentUser != nil
-        {
-            do
-            {
-                User.WriteToDatabase()
-                
-                try Auth.auth().signOut()
-                
-                GIDSignIn.sharedInstance().signOut()
-                
-                let loginManager: FBSDKLoginManager = FBSDKLoginManager()
-                loginManager.logOut()
-                
-                let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignUp")
-                present(vc, animated: true, completion: nil)
-                
-            }
-            catch let error as NSError
-            {
-                print(error.localizedDescription)
-            }
-        }
+        User.Logout(vcHost: self)
     }
 
     

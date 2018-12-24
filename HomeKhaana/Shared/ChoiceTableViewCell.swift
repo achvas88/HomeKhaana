@@ -35,7 +35,7 @@ class ChoiceTableViewCell: UITableViewCell {
             {
                 imgIsVegetarian.image = nil
             }
-            imgRepresentation.image = UIImage(named: choice.imgName)
+            imgRepresentation.image = choice.image
             lblItems.text = choice.items
         }
     }

@@ -16,6 +16,7 @@ class DataManager {
     static var choices:[Choice] = []  // total list of choices = kitchen id: menu items map
     static var kitchens:Dictionary<String, Kitchen> = [:]  // kitchen id: kitchen
     static var menuItems:Dictionary<String,[ChoiceGroup]> = [:] //kitchen Id: ChoiceGroup array. (Choice group is a group of choices)
+    static var inventoryLoaded = false
     
     public static func initData(completion: @escaping () -> ()) -> Void {
         
@@ -80,6 +81,7 @@ class DataManager {
         }
     }
     
+    // WARNING: Use only for user workflows. Not for kitchen workflows. Kitchen workflows do not care about isVegetarian flag that this function would check.
     public static func getChoiceGroups(kitchenId: String) -> [ChoiceGroup]?
     {
         var retChoiceGroups:[ChoiceGroup] = []
@@ -98,6 +100,40 @@ class DataManager {
         if(retChoiceGroups.count == 0) { return nil }
         return retChoiceGroups
     }
+    
+    public static func getChoiceGroup(kitchenId: String, groupTitle:String)-> ChoiceGroup?
+    {
+        let menuItems:[ChoiceGroup]? = DataManager.menuItems[kitchenId]
+        if(menuItems == nil)
+        {
+            return nil
+        }
+        else
+        {
+            for choiceGroup in menuItems!
+            {
+                if(choiceGroup.displayTitle == groupTitle)
+                {
+                    return choiceGroup
+                }
+            }
+            return nil
+        }
+    }
+    
+    public static func createChoiceGroup(kitchenId: String, displayTitle: String, choices: [Choice])
+    {
+        let choiceGroupID: String = UUID().uuidString
+        let newGroup:ChoiceGroup = ChoiceGroup(id: choiceGroupID, displayTitle: displayTitle, choices: choices)
+        
+        let allChoiceGroups:[ChoiceGroup]? = self.menuItems[kitchenId]
+        if(allChoiceGroups == nil)
+        {
+           self.menuItems[kitchenId] = []
+        }
+        self.menuItems[kitchenId]?.append(newGroup)
+    }
+    
     
     public static func loadMenuItems(kitchenId: String, completion: @escaping () -> ()) -> Void {
         let menuItemsRef = db.child("MenuItems/\(kitchenId)")
@@ -127,8 +163,48 @@ class DataManager {
                 }
             }
             
+            inventoryLoaded = true
+            
             completion();
         })
+    }
+    
+    public static func saveMenuItems()
+    {
+        if(inventoryLoaded)    //if inventory was never loaded, do not write back as that would clear out the inventory :)
+        {
+            db.child("MenuItems/\(User.sharedInstance!.id)").setValue(getMenuItemsDictionary()){
+                (error:Error?, ref:DatabaseReference) in
+                
+                if let error = error
+                {
+                    fatalError("Error uploading menu items data: \(error).")
+                }
+                else
+                {
+                    print("Its done.")
+                }
+            }
+        }
+    }
+    
+    private static func getMenuItemsDictionary() -> Dictionary<String, Any>
+    {
+        var retMap:Dictionary<String,Any> = [:]
+        
+        if(self.menuItems[User.sharedInstance!.id] == nil)
+        {
+            return retMap
+        }
+        
+        
+        let choiceGroups:[ChoiceGroup] = self.menuItems[User.sharedInstance!.id]!
+        for choiceGroup in choiceGroups
+        {
+            retMap[choiceGroup.id] = choiceGroup.getDictionary()
+        }
+        
+        return retMap
     }
 }
 

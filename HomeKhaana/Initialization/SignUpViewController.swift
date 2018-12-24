@@ -38,6 +38,11 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     }
     
     // Action Handlers ----------------------------------------------
+    @IBAction func kitchenUser(_ sender: Any) {
+        self.txtEmail.text = "ach.k@gmail.com"
+        self.txtPassword.text = "achyuth12"
+    }
+    
     @IBAction func btnRegisterClicked(_ sender: Any) {
         self.btnSignUpOrLogIn(isSignUp: true)
     }

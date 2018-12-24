@@ -32,6 +32,25 @@ exports.deleteUser = functions.database
       return stripe.customers.del(newUser.customerID);
 });
 
+//when an order's status is updated by the kitchen.
+exports.updateOrderStatus = functions.database.ref('/CurrentOrders/{kitchenId}/{orderingUserID}/{orderID}/status')
+.onWrite((change, context) => {
+         // Only edit data when it previously existed
+         if (!change.before.exists()) {
+         return null;
+         }
+         
+         // when the data is deleted, mark the corresponding order in the Orders location as complete.
+         if (!change.after.exists()) {
+            return admin.database().ref(`/Orders/${context.params.orderingUserID}/${context.params.orderID}/status`).set("Completed");
+         }
+         
+         // Grab the current value of what was written to the Realtime Database.
+         const newStatus = change.after.val();
+         console.log('Updating order status in the Orders location', context.params.orderID, newStatus);
+         return admin.database().ref(`/Orders/${context.params.orderingUserID}/${context.params.orderID}/status`).set(newStatus);
+});
+
 // add payment source
 exports.addPaymentSource = functions.database
     .ref('/PaymentSources/{userId}/{token}').onCreate((snap, context) => {
