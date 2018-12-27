@@ -52,3 +52,17 @@ extension UIImageView {
         downloadedFrom(url: url, contentMode: mode)
     }
 }
+
+extension Date {
+    func getCurrentTimeStamp() -> Int64! {
+        return Int64(self.timeIntervalSince1970 * 1000)
+    }
+}
+
+extension UIScrollView {
+    func scrollToBottom(animated: Bool) {
+        if self.contentSize.height < self.bounds.size.height { return }
+        let bottomOffset = CGPoint(x: 0, y: self.contentSize.height - self.bounds.size.height)
+        self.setContentOffset(bottomOffset, animated: animated)
+    }
+}

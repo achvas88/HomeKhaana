@@ -13,7 +13,7 @@ import FirebaseDatabase
 class Order
 {
     //other meta-data
-    var id:UInt
+    var id:String
     var orderDate:String
     var deliveryDate:String
     var orderRating:Int?
@@ -21,6 +21,8 @@ class Order
     var orderingUserID:String
     var orderingUserName:String
     var kitchenId: String
+    var timestamp: Int64
+    var customInstructions: String?
     
     //order items
     var cart:[Choice]
@@ -52,8 +54,24 @@ class Order
             "orderingUserID": self.orderingUserID,  //these values are used in delivery workflows
             "orderingUserName": self.orderingUserName, // these values are used in delivery workflows
             "kitchenId": self.kitchenId,
-            "cart": getMapFromCart()
+            "timestamp": self.timestamp,
+            "cart": getMapFromCart(),
+            "instructions": customInstructions ?? ""
         ]
+    }
+    
+    public func populateDates() -> Void
+    {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .medium
+        dateFormatter.locale = Locale(identifier: "en_US")
+        self.orderDate = dateFormatter.string(from: Date.init())
+        
+        dateFormatter.timeStyle = .none
+        self.deliveryDate = dateFormatter.string(from: Date.init(timeInterval: TimeInterval.init(exactly: (24*60*60))!, since: Date.init()))
+        
+        self.timestamp = Date().getCurrentTimeStamp()
     }
     
     private func getMapFromCart() -> Dictionary<String, String>
@@ -66,19 +84,13 @@ class Order
         return retMap
     }
     
-    public init(id:UInt)
+    public init()
     {
-        self.id=id
+        self.id=""
         self.status = "New"
-        //set date
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .medium
-        dateFormatter.locale = Locale(identifier: "en_US")
-        self.orderDate = dateFormatter.string(from: Date.init())
-        dateFormatter.timeStyle = .none
-        self.deliveryDate = dateFormatter.string(from: Date.init(timeInterval: TimeInterval.init(exactly: (24*60*60))!, since: Date.init()))
-        self.cart = [] //Dictionary<String,Int>()
+        self.orderDate = ""
+        self.deliveryDate = ""
+        self.cart = []
         self.orderRating = -1
         self.subTotal = 0
         self.tax = 0
@@ -88,9 +100,10 @@ class Order
         self.orderingUserName = User.sharedInstance!.name   // this function will be called from non-kitchen workflows. so, directly using the User variable is fine.
         self.orderingUserID = User.sharedInstance!.id
         self.kitchenId = ""
+        self.timestamp = -1
     }
     
-    public init(id: UInt, orderDate: String, deliveryDate: String, orderRating: Int?, status: String, cart: [Choice], subTotal: Float, tax: Float, convenienceFee: Float, discount: Float, orderTotal: Float, source: PaymentSource?, kitchenId: String, orderingUserId: String?, orderingUserName: String?)
+    public init(id: String, orderDate: String, deliveryDate: String, orderRating: Int?, status: String, cart: [Choice], subTotal: Float, tax: Float, convenienceFee: Float, discount: Float, orderTotal: Float, source: PaymentSource?, kitchenId: String, orderingUserId: String?, orderingUserName: String?, timestamp: Int64, instructions: String?)
     {
         self.id = id
         self.orderDate = orderDate
@@ -107,6 +120,8 @@ class Order
         self.orderingUserName = orderingUserName ?? User.sharedInstance!.name
         self.orderingUserID = orderingUserId ?? User.sharedInstance!.id
         self.kitchenId = kitchenId
+        self.timestamp = timestamp
+        self.customInstructions = instructions
     }
     
     public convenience init?(snapshot: DataSnapshot)
@@ -115,7 +130,7 @@ class Order
         let snapshot = snapshot.value as AnyObject
         
         //other meta-data
-        let id = snapshot["id"] as? UInt
+        let id = snapshot["id"] as? String
         let orderDate = snapshot["orderDate"] as? String
         let deliveryDate = snapshot["deliveryDate"] as? String
         let orderRating = snapshot["orderRating"] as? Int
@@ -123,6 +138,8 @@ class Order
         let kitchenId = snapshot["kitchenId"] as? String
         let orderingUserId = snapshot["orderingUserID"] as? String
         let orderingUserName = snapshot["orderingUserName"] as? String
+        let timestamp = snapshot["timestamp"] as? Int64
+        let customInstructions = snapshot["instructions"] as? String
         
         //order items
         var cart:[Choice] = []
@@ -153,7 +170,7 @@ class Order
         //payment source and address
         let selectedPayment:PaymentSource? = User.getPaymentSourceForID(id: selectedPaymentID!)
         
-        self.init(id: id!, orderDate: orderDate ?? "", deliveryDate: deliveryDate ?? "", orderRating: orderRating ?? -1, status: status ?? "New", cart: cart, subTotal: subTotal!, tax: tax!, convenienceFee: convenienceFee!, discount: discount!, orderTotal: orderTotal!, source: selectedPayment, kitchenId: kitchenId!, orderingUserId: orderingUserId, orderingUserName: orderingUserName)
+        self.init(id: id!, orderDate: orderDate ?? "", deliveryDate: deliveryDate ?? "", orderRating: orderRating ?? -1, status: status ?? "New", cart: cart, subTotal: subTotal!, tax: tax!, convenienceFee: convenienceFee!, discount: discount!, orderTotal: orderTotal!, source: selectedPayment, kitchenId: kitchenId!, orderingUserId: orderingUserId, orderingUserName: orderingUserName, timestamp: timestamp!, instructions: customInstructions)
     }
  
     func processResponse(snapshot: DataSnapshot) -> String

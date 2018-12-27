@@ -26,7 +26,6 @@ final class User{
     var email: String
     var customerID:String
     var paymentSources: [PaymentSource]?
-    var chargeID: UInt
     var defaultPaymentSourceID:String?
     var originalDefaultPaymentSourceID:String?
     var defaultPaymentSource:PaymentSource?
@@ -42,7 +41,6 @@ final class User{
             "isVegetarian": User.sharedInstance!.isVegetarian,
             "id": User.sharedInstance!.id,
             "email": User.sharedInstance!.email,
-            "chargeID": User.sharedInstance!.chargeID,
             "customerID": User.sharedInstance!.customerID,
             "defaultAddress": User.sharedInstance!.defaultAddress,
             "isKitchen": User.sharedInstance!.isKitchen
@@ -50,14 +48,13 @@ final class User{
     }
     
     //designated constructors
-    public init(name:String, isVegetarian:Bool, id:String, email:String, customerID:String, chargeID:UInt, defaultAddress: String, isKitchen: Bool)
+    public init(name:String, isVegetarian:Bool, id:String, email:String, customerID:String, defaultAddress: String, isKitchen: Bool)
     {
         self.name = name
         self.isVegetarian = isVegetarian
         self.id = id
         self.email = email
         self.customerID = customerID
-        self.chargeID = chargeID          // these will also be set later on.
         self.defaultAddress = defaultAddress
         self.isUserImageLoaded = false
         self.paymentSourcesToDeleteOnQuit = []
@@ -71,14 +68,13 @@ final class User{
         guard let name = dictionary["name"] as? String,
               let isVegetarian = dictionary["isVegetarian"] as? Bool,
               let email = dictionary["email"] as? String,
-              let chargeID = dictionary["chargeID"] as? UInt,
               let customerID = dictionary["customerID"] as? String
         else { return nil}
         
         let defaultAddress = dictionary["defaultAddress"] as? String
         let isKitchen = dictionary["isKitchen"] as? Bool
         
-        self.init(name: name, isVegetarian: isVegetarian, id: id, email: email, customerID:customerID, chargeID: chargeID, defaultAddress: (defaultAddress ?? ""), isKitchen: isKitchen ?? false)
+        self.init(name: name, isVegetarian: isVegetarian, id: id, email: email, customerID:customerID, defaultAddress: (defaultAddress ?? ""), isKitchen: isKitchen ?? false)
     }
     
     //intializes User data from the database
@@ -103,7 +99,7 @@ final class User{
                 let value = snapshot.value as? NSDictionary
                 if(value == nil){
                     //new user! yayy!!
-                    User.sharedInstance = User(name: user.displayName ?? user.email!, isVegetarian: false, id: uid, email: user.email!, customerID: "", chargeID: 1, defaultAddress: "", isKitchen: false)
+                    User.sharedInstance = User(name: user.displayName ?? user.email!, isVegetarian: false, id: uid, email: user.email!, customerID: "", defaultAddress: "", isKitchen: false)
                     
                     //write back to the database
                     db.child("Users").child(uid).setValue(User.dictionary, withCompletionBlock: { (err:Error?, ref:DatabaseReference) in

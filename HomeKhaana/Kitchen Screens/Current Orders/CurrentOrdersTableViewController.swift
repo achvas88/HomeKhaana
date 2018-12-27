@@ -114,6 +114,17 @@ class CurrentOrdersTableViewController: UITableViewController, CurrentOrderActio
         present(alertController, animated: true)
     }
     
+    func lblInstructionsClicked(at index: IndexPath) {
+        let order:Order = self.currentOrders![index.row]
+        
+        let alertController = UIAlertController(title: "Instructions",
+                                                message: order.customInstructions ?? "None",
+                                                preferredStyle: .actionSheet)
+        let alertAction = UIAlertAction(title: "OK", style: .default)
+        alertController.addAction(alertAction)
+        present(alertController, animated: true)
+    }
+    
     func markAsReadyforPickupClicked(at index: IndexPath) {
         let order:Order = self.currentOrders![index.row]
         

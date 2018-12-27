@@ -32,6 +32,7 @@ class OrdersTableViewCell: UITableViewCell {
     //@IBOutlet weak var btnRateIt: UIButton!
     @IBOutlet weak var btnCartLink: UIButton!
     @IBOutlet weak var orderOuterView: UIView!
+    @IBOutlet weak var imgHeightConstraint: NSLayoutConstraint!
     
     var order:Order? {
         didSet {
@@ -51,6 +52,15 @@ class OrdersTableViewCell: UITableViewCell {
                 {
                     imgRating.isHidden = false
                 }
+            }
+            
+            if(order.status != "Ordered" && order.status != "Ready for Pick-Up")
+            {
+                imgHeightConstraint.constant = 0
+            }
+            else
+            {
+                imgHeightConstraint.constant = 120
             }
             
             //order image
@@ -123,6 +133,14 @@ class OrdersTableViewCell: UITableViewCell {
         maskLayer.path = path.cgPath
         self.imgOrder.layer.mask = maskLayer
         
+        if (self.order?.status != "Ordered" && self.order?.status != "Ready for Pick-Up")
+        {
+            orderOuterView.layer.backgroundColor = UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 1).cgColor
+        }
+        else
+        {
+            orderOuterView.layer.backgroundColor = UIColor.white.cgColor
+        }
         orderOuterView.layer.cornerRadius = 6
         orderOuterView.layer.masksToBounds = false
         orderOuterView.layer.shadowColor = UIColor.lightGray.cgColor

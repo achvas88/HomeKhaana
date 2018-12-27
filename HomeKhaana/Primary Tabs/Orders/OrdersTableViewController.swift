@@ -43,7 +43,7 @@ class OrdersTableViewController: UITableViewController {
 
     func listenToOrders()
     {
-        let mostRecentOrdersQuery = db.child("Orders/\(User.sharedInstance!.id)").queryLimited(toLast: 10)
+        let mostRecentOrdersQuery = db.child("Orders/\(User.sharedInstance!.id)").queryOrdered(byChild: "timestamp").queryLimited(toLast: 10)
         
         mostRecentOrdersQuery.observe(.value, with: { (snapshot) in
             self.mostRecentOrders = []
@@ -67,6 +67,18 @@ class OrdersTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        let order:Order = self.mostRecentOrders![indexPath.row]
+        if(order.status != "Ordered" && order.status != "Ready for Pick-Up")
+        {
+            return 343 - 120; // here 120 is the height of the image.
+        }
+        else
+        {
+            return 343;
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.

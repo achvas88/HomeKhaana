@@ -11,7 +11,7 @@ import Stripe
 import Firebase
 import FirebaseDatabase
 
-class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceDelegate {
+class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceDelegate,UITextViewDelegate {
     
     
     @IBOutlet weak var lblTime: UILabel!
@@ -30,6 +30,8 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
     @IBOutlet weak var lblKitchenName: UILabel!
     @IBOutlet weak var lblKitchenAddress: UILabel!
     @IBOutlet weak var imgKitchen: UIImageView!
+    @IBOutlet weak var txtCustomInstr: UITextView!
+    @IBOutlet weak var cnstBottom: NSLayoutConstraint!
     
     var inCart:[Choice] = []
     var currentOrder:Order?
@@ -41,7 +43,7 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
         // Do any additional setup after loading the view.
         if(self.currentOrder == nil)
         {
-            self.currentOrder = Order(id:User.sharedInstance!.chargeID)
+            self.currentOrder = Order()
             self.currentOrder!.selectedPayment = self.currentOrder!.selectedPayment ?? User.sharedInstance!.defaultPaymentSource
         }
         else
@@ -49,11 +51,79 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
             self.lblTime.text = self.currentOrder!.deliveryDate
         }
         
+    NotificationCenter.default.addObserver(self,
+                                           selector: #selector(self.keyboardNotification(notification:)),
+                                           name: NSNotification.Name.UIKeyboardWillChangeFrame,
+                                           object: nil)
+        
+        //setup the description textview to make it look like the other textfields
+        txtCustomInstr.layer.cornerRadius = 5
+        txtCustomInstr.layer.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
+        txtCustomInstr.layer.borderWidth = 0.5
+        txtCustomInstr.clipsToBounds = true
+        txtCustomInstr.text = "Optionally enter custom instructions here"
+        txtCustomInstr.textColor = UIColor.lightGray
+        txtCustomInstr.delegate = self
+        
         self.tblItems.dataSource = self
         self.setupButtons()
         self.updateDisplay(initialize: true)
+        
+        self.hideKeyboardWhenTappedAround()
+        
+        self.view.snapshotView(afterScreenUpdates: true)
     }
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func keyboardNotification(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            let endFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+            let endFrameY = endFrame?.origin.y ?? 0
+            let duration:TimeInterval = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+            let animationCurveRawNSN = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
+            let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
+            let animationCurve:UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
+            if endFrameY >= UIScreen.main.bounds.size.height {
+                self.cnstBottom.constant = 0.0
+            } else {
+                var frameHeight = endFrame?.size.height
+                if(frameHeight == nil)
+                {
+                    frameHeight = 0
+                }
+                else
+                {
+                    frameHeight = frameHeight! - btnCheckout.frame.height - btnAddPayment.frame.height - 20
+                }
+                self.cnstBottom.constant =  frameHeight!;
+            }
+            UIView.animate(withDuration: duration,
+                           delay: TimeInterval(0),
+                           options: animationCurve,
+                           animations: { self.view.layoutIfNeeded() },
+                           completion: nil)
+            
+        self.scrScrollArea.scrollToBottom(animated: true)
+        }
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Optionally enter custom instructions here"
+            textView.textColor = UIColor.lightGray
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
@@ -108,7 +178,7 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
         super.viewWillAppear(animated)
         
         //if the payment processing has failed, then we need to update the order's ID with the updated charge ID.
-        self.currentOrder?.id = User.sharedInstance!.chargeID
+        self.currentOrder?.id = ""
         
         //update display
         self.updateDisplay(initialize: false)
@@ -335,6 +405,7 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
         else if (segue.identifier == "checkout")
         {
             // set the kitchen id before we pass it along to confirm
+            self.currentOrder?.customInstructions = txtCustomInstr.text
             self.currentOrder?.kitchenId = Cart.sharedInstance.kitchenId
             
             let orderConfirmationVC: OrderConfirmationViewController? = segue.destination as? OrderConfirmationViewController

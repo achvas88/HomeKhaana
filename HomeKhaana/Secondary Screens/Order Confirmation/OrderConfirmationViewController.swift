@@ -34,18 +34,14 @@ class OrderConfirmationViewController: UIViewController {
         if (User.isUserInitialized)
         {
             let id = User.sharedInstance!.id
-            let chargeID=User.sharedInstance!.chargeID
-            
-            let newChargeRef = Database.database().reference().child("Orders/\(id)").child(String(chargeID))
-            
-            //make sure the order id is the same as the charge id. It could be different when charge transactions fail.
+            let chargeID = UUID().uuidString
             self.order!.id = chargeID
+            self.order!.populateDates()
+            
+            let newChargeRef = Database.database().reference().child("Orders/\(id)").child(chargeID)
             
             //create the charge dcitionary that will be filed.
             let theCharge:Dictionary<String,Any>=self.order!.dictionary
-            
-            //update the chargeID immediately (idempotency key for Stripe)
-            User.sharedInstance!.chargeID = User.sharedInstance!.chargeID + 1
             
             //file a charge
             newChargeRef.setValue(theCharge) {
@@ -58,7 +54,7 @@ class OrderConfirmationViewController: UIViewController {
             }
             
             //listen to payment posting updates
-            listenToPaymentPostingUpdates(uid: id, chargeID: String(chargeID))
+            listenToPaymentPostingUpdates(uid: id, chargeID: chargeID)
         }
     }
 

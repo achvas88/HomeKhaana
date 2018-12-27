@@ -13,6 +13,7 @@ protocol CurrentOrderActionsDelegate{
     func markAsReadyforPickupClicked(at index:IndexPath)
     func markAsCompletedClicked(at index:IndexPath)
     func btnCartLinkClicked(at index:IndexPath)
+    func lblInstructionsClicked(at index:IndexPath)
 }
 
 class CurrentOrdersTableViewCell: UITableViewCell {
@@ -25,6 +26,8 @@ class CurrentOrdersTableViewCell: UITableViewCell {
     @IBOutlet weak var lblStatus: UILabel!
     @IBOutlet weak var btnMarkAsReady: UIButton!
     @IBOutlet weak var btnMarkAsCompleted: UIButton!
+    @IBOutlet weak var lblCost: UILabel!
+    @IBOutlet weak var lblInstructions: UIButton!
     
     var indexPath: IndexPath?
     var delegate:CurrentOrderActionsDelegate?
@@ -47,6 +50,23 @@ class CurrentOrdersTableViewCell: UITableViewCell {
             lblOrderID.text = String(self.order!.id)
             lblOrderTime.text = self.order!.orderDate
             lblStatus.text = self.order!.status
+           
+            if(self.order!.customInstructions == nil || self.order!.customInstructions! == "")
+            {
+                lblInstructions.setTitle("None", for: .disabled)
+                lblInstructions.isEnabled = false
+            }
+            else
+            {
+                lblInstructions.setTitle(self.order!.customInstructions!, for: .normal)
+                lblInstructions.isEnabled = true
+            }
+            
+            let formatter = NumberFormatter()
+            formatter.maximumFractionDigits = 2
+            formatter.numberStyle = .currency
+            lblCost.text = formatter.string(from: NSNumber(value: self.order!.orderTotal))
+            
             if(self.order!.status == "Ready for Pick-Up")
             {
                 self.btnMarkAsCompleted.isHidden = false
@@ -82,6 +102,10 @@ class CurrentOrdersTableViewCell: UITableViewCell {
     
     @IBAction func btnCartLinkClicked(_ sender: Any) {
         self.delegate?.btnCartLinkClicked(at: self.indexPath!)
+    }
+    
+    @IBAction func lblInstructionsClicked(_ sender: Any) {
+        self.delegate?.lblInstructionsClicked(at: self.indexPath!)
     }
     
     override func layoutSubviews() {
