@@ -26,7 +26,7 @@ class InventoryTableViewController: UITableViewController, RefreshTableViewWhenI
         //self.loadMenuItems()
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        //self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
  
     func reloadTableView() {
@@ -108,55 +108,84 @@ class InventoryTableViewController: UITableViewController, RefreshTableViewWhenI
         }
     }
     
-    /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
+        if(menuItems.count == 0)
+        {
+            return false
+        }
         return true
     }
-    */
-
-    /*
+ 
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
 
-    /*
+            // Delete the row from the data source
+            let _ = DataManager.menuItems[self.kitchen!.id]?[indexPath.section].removeChoice(atIndex: indexPath.row)
+            if(DataManager.menuItems[self.kitchen!.id]?[indexPath.section].getChoices(ignorePreferences: true).count == 0) // if no more choices in the group, delete group.
+            {
+                DataManager.menuItems[self.kitchen!.id]?.remove(at: indexPath.section)
+            }
+            
+            self.loadMenuItems()
+        }
+    }
+    
+    
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+        
+        // at this point there is a guarantee that the sections in 'moveRowAt' and 'to' are the same.
+        DataManager.menuItems[self.kitchen!.id]?[fromIndexPath.section].rearrangeChoice(fromIndex: fromIndexPath.row, toIndex: to.row)
+        self.loadMenuItems()
     }
-    */
-
-    /*
+    
+    
     // Override to support conditional rearranging of the table view.
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the item to be re-orderable.
         return true
     }
-    */
-
+    
+    override func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+        
+        if sourceIndexPath.section != proposedDestinationIndexPath.section {
+            var row = 0
+            if sourceIndexPath.section < proposedDestinationIndexPath.section {
+                row = self.tableView(tableView, numberOfRowsInSection: sourceIndexPath.section) - 1
+            }
+            return NSIndexPath(row: row, section: sourceIndexPath.section) as IndexPath
+        }
+        return proposedDestinationIndexPath
+    }
+    
+    
+    /*override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableView.setEditing(editing, animated: animated)
+    }*/
     
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    /*override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.prepare
         
-        if (segue.identifier == "addItem")
+        if (segue.identifier == "editDetails")
         {
             let addItemVC: InventoryAddItemViewController? = segue.destination as? InventoryAddItemViewController
-            addItemVC!.menuItems = menuItems
+            
+            let currentRow: ChoiceTableViewCell? = sender as! ChoiceTableViewCell?
+            addItemVC!.choice = currentRow!.choice!
+            
+            if let indexPath = self.tableView.indexPathForSelectedRow
+            {
+                addItemVC!.choiceGroupTitle = menuItems[indexPath.section].displayTitle
+            }
         }
-    }*/
- 
-
+    }
 }

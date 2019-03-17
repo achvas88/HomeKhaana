@@ -11,6 +11,8 @@
 		5AC040A5B34E858B379C52B2 /* Pods_HomeKhaanaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BDDC88BE19ACB80C0892354 /* Pods_HomeKhaanaTests.framework */; };
 		B609AC3F2120C8C000C45C49 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609AC3E2120C8C000C45C49 /* Order.swift */; };
 		B609AC412128A4F500C45C49 /* OrderConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609AC402128A4F500C45C49 /* OrderConfirmationViewController.swift */; };
+		B610D6AE223DA23300E94E27 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B610D6AD223DA23300E94E27 /* LocationSearchTable.swift */; };
+		B610D6B0223DB0B700E94E27 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B610D6AF223DB0B700E94E27 /* LocationViewController.swift */; };
 		B61558C920D6D7B400471718 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558C820D6D7B400471718 /* NotificationsViewController.swift */; };
 		B61558CF20D6D93D00471718 /* HowItWorksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558CE20D6D93D00471718 /* HowItWorksViewController.swift */; };
 		B61558D120D7476700471718 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558D020D7476700471718 /* User.swift */; };
@@ -87,6 +89,8 @@
 		7D1B59AC1C89897F71B06C5F /* Pods-HomeKhaana.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeKhaana.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeKhaana/Pods-HomeKhaana.release.xcconfig"; sourceTree = "<group>"; };
 		B609AC3E2120C8C000C45C49 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		B609AC402128A4F500C45C49 /* OrderConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmationViewController.swift; sourceTree = "<group>"; };
+		B610D6AD223DA23300E94E27 /* LocationSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
+		B610D6AF223DB0B700E94E27 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		B61558C820D6D7B400471718 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
 		B61558CE20D6D93D00471718 /* HowItWorksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowItWorksViewController.swift; sourceTree = "<group>"; };
 		B61558D020D7476700471718 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -218,6 +222,8 @@
 			isa = PBXGroup;
 			children = (
 				B61F20C921B357D900A85EDF /* KitchenDetailsViewController.swift */,
+				B610D6AD223DA23300E94E27 /* LocationSearchTable.swift */,
+				B610D6AF223DB0B700E94E27 /* LocationViewController.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -709,6 +715,7 @@
 				B691C78820E9AA440060CF98 /* CartViewController.swift in Sources */,
 				B691C78E20EB3B480060CF98 /* Shared.swift in Sources */,
 				B62F26F0213B536100FA88D3 /* CurrentOrdersTableViewController.swift in Sources */,
+				B610D6B0223DB0B700E94E27 /* LocationViewController.swift in Sources */,
 				B691C78C20E9B8D30060CF98 /* CartTableViewCell.swift in Sources */,
 				B61558D920DF0AC800471718 /* HomeTableViewController.swift in Sources */,
 				B61B78F221177BED000EDE80 /* UserInitializationErrorViewController.swift in Sources */,
@@ -719,6 +726,7 @@
 				B621EC9421BE1E2F00869BD8 /* InventoryAddItemViewController.swift in Sources */,
 				B69F54B020CDE9B000E1B0EB /* Extensions.swift in Sources */,
 				B691C79820FD834C0060CF98 /* PaymentSourceTableViewController.swift in Sources */,
+				B610D6AE223DA23300E94E27 /* LocationSearchTable.swift in Sources */,
 				B691C79220FBF97E0060CF98 /* PaymentSource.swift in Sources */,
 				B655FFBF219BA975008691D2 /* KitchensTableViewController.swift in Sources */,
 				B61558D320D8611F00471718 /* UserPreferencesViewController.swift in Sources */,

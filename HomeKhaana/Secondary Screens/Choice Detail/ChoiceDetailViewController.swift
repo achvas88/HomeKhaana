@@ -13,6 +13,7 @@ class ChoiceDetailViewController: UIViewController {
     var theChoice:Choice?
     var isAddingToCart:Bool = true
     var buttonCaption:String = "ADD TO CART"
+    var comingFromHome:Bool = false
     
     @IBOutlet weak var imgRepresentation: UIImageView!
     @IBOutlet weak var lblDisplayTitle: UILabel!
@@ -30,7 +31,7 @@ class ChoiceDetailViewController: UIViewController {
         
         self.isAddingToCart = true
         let quantity:Int? = theChoice?.quantity
-        if(quantity != nil && quantity! != 0)
+        if(quantity != nil && quantity! != 0 && comingFromHome != true)
         {
             self.lblQuantity.text=String(quantity!)
             self.buttonCaption = "UPDATE CART"

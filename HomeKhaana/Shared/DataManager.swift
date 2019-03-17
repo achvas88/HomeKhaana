@@ -159,6 +159,7 @@ class DataManager {
                                 }
                             }
                         }
+                        self.menuItems[kitchenId]![menuItemCount].sortChoicesByID()
                     }
                 }
             }
@@ -173,7 +174,7 @@ class DataManager {
     {
         if(inventoryLoaded)    //if inventory was never loaded, do not write back as that would clear out the inventory :)
         {
-            db.child("MenuItems/\(User.sharedInstance!.id)").setValue(getMenuItemsDictionary()){
+            db.child("MenuItems/\(User.sharedInstance!.id)").setValue(getMenuItemsDictionary(), withCompletionBlock:{
                 (error:Error?, ref:DatabaseReference) in
                 
                 if let error = error
@@ -184,7 +185,7 @@ class DataManager {
                 {
                     print("Its done.")
                 }
-            }
+            })
         }
     }
     

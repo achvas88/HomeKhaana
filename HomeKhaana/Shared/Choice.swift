@@ -10,8 +10,12 @@ import Foundation
 import FirebaseDatabase
 import Firebase
 
-class Choice
+class Choice: Equatable
 {
+    static func == (lhs: Choice, rhs: Choice) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     weak var containingTableViewDelegate: RefreshTableViewWhenImgLoadsDelegate?
     var displayTitle: String
     var description:String
@@ -22,6 +26,7 @@ class Choice
     var items: String // In the future this can be different. For now, this is good enough.
     var kitchenId: String
     var quantity: Int?
+    var order: Int
     
     var image: UIImage? {
         didSet {
@@ -29,7 +34,7 @@ class Choice
         }
     }
     
-    init(id:String, title:String,description:String,cost:Float,isVegetarian:Bool,hasImage:Bool, items: String, kitchenId: String) {
+    init(id:String, title:String,description:String,cost:Float,isVegetarian:Bool,hasImage:Bool, items: String, kitchenId: String, order: Int) {
         self.id = id
         self.displayTitle = title
         self.description = description
@@ -38,6 +43,7 @@ class Choice
         self.hasImage = hasImage
         self.items = items
         self.kitchenId = kitchenId
+        self.order = order
         
         if(self.hasImage)
         {
@@ -47,7 +53,7 @@ class Choice
     
     public convenience init?(displayTitle: String, quantity: Int, cost: Float)
     {
-        self.init(id: "", title: displayTitle, description: "", cost: cost, isVegetarian: true, hasImage: false, items: "", kitchenId: "")
+        self.init(id: "", title: displayTitle, description: "", cost: cost, isVegetarian: true, hasImage: false, items: "", kitchenId: "", order: 0)
         self.quantity = quantity
     }
     
@@ -62,8 +68,9 @@ class Choice
         let hasImage = snapshot["hasImage"] as! Bool
         let id = snapshot["id"] as! String
         let items = snapshot["items"] as! String
+        let order = snapshot["order"] as! Int
         
-        self.init(id: id, title: displayTitle , description: description, cost: cost, isVegetarian: isVegetarian, hasImage: hasImage, items: items, kitchenId: kitchenId)
+        self.init(id: id, title: displayTitle , description: description, cost: cost, isVegetarian: isVegetarian, hasImage: hasImage, items: items, kitchenId: kitchenId, order: order)
     }
     
     public func getDictionary() -> Dictionary<String,Any>
@@ -76,6 +83,7 @@ class Choice
             "hasImage": self.hasImage,
             "id": self.id,
             "items": self.items
+            // Note that the value of the 'order' property is calculated only in the ChoiceGroup code. So, the dictionary doesnt return it.
         ]
     }
     

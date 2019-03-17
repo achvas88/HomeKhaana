@@ -50,8 +50,8 @@ class ChoiceTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    override func layoutSubviews() {
-        self.selectionStyle = .none
+    /*override func layoutSubviews() {
+        /*self.selectionStyle = .none
 
         let path = UIBezierPath(roundedRect:self.imgRepresentation.bounds,
                                 byRoundingCorners:[.bottomLeft,.topRight],
@@ -67,6 +67,6 @@ class ChoiceTableViewCell: UITableViewCell {
         choiceOuterView.layer.shadowOffset = CGSize(width: 3, height: 3);
         choiceOuterView.layer.shadowOpacity = 0.2
         choiceOuterView.layer.borderWidth = 1.0
-        choiceOuterView.layer.borderColor = UIColor(red:0.87, green:0.87, blue:0.87, alpha:1).cgColor
-    }
+        choiceOuterView.layer.borderColor = UIColor(red:0.87, green:0.87, blue:0.87, alpha:1).cgColor*/
+    }*/
 }

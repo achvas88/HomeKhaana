@@ -12,6 +12,10 @@ const admin = require('firebase-admin');
 admin.initializeApp();
 const stripe = require('stripe')(functions.config().stripe.token);
 const currency = functions.config().stripe.currency || 'usd';
+const googleCloudStorage = require('@google-cloud/storage');
+//const googleCloudStorage = require('@firebase/storage')()
+//const storage = require('firebase-storage');
+//import '@firebase/storage'
 
 // create stripe customer when user is created 
 exports.createUser = functions.database
@@ -31,6 +35,26 @@ exports.deleteUser = functions.database
       const newUser = snap.val();
       return stripe.customers.del(newUser.customerID);
 });
+
+//when an inventory item is deleted, delete the corresponding image in the google cloud storage
+exports.sanitizePhoto = functions.database.ref('MenuItems/{kitchenID}/{sectionID}/items/{itemID}')
+.onDelete((snap, context) => {
+    const filePath = `${context.params.kitchenID}/MenuItems/{itemID}/itemPhoto.jpg`
+                                                                                                            
+    //const bucket = googleCloudStorage.bucket('myBucket-12345.appspot.com')
+    //gs://homekhaanamain.appspot.com/
+    const bucket = googleCloudStorage.bucket('homekhaanamain.appspot.com')
+    
+    const file = bucket.file(filePath)
+
+    file.delete().then(() => {
+        console.log(`Successfully deleted photo with UID: ${photoUID}, userUID : ${userUID}`)
+      })
+      .catch(err => {
+        console.log(`Failed to remove photo, error: ${err}`)
+      });
+});
+
 
 //when an order's status is updated by the kitchen.
 exports.updateOrderStatus = functions.database.ref('/CurrentOrders/{kitchenId}/{orderingUserID}/{orderID}/status')

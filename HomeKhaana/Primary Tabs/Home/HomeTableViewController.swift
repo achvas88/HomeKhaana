@@ -152,6 +152,7 @@ class HomeTableViewController: UITableViewController,RefreshTableViewWhenImgLoad
             if(detailsVC != nil && currentRow != nil)
             {
                 detailsVC!.theChoice = currentRow!.choice
+                detailsVC!.comingFromHome = true
             }
         }
         // Get the new view controller using segue.destinationViewController.

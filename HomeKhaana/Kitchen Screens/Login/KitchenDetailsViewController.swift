@@ -7,8 +7,12 @@
 //
 
 import UIKit
+//import GooglePlaces
+//import GooglePlacePicker
+import CoreLocation
+import MapKit
 
-class KitchenDetailsViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class KitchenDetailsViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,CLLocationManagerDelegate {
 
     @IBOutlet weak var txtName: UITextField!
     @IBOutlet weak var txtAddress: UITextField!
@@ -61,7 +65,6 @@ class KitchenDetailsViewController: UIViewController, UIImagePickerControllerDel
         imagePicker.delegate = self
         
         currentKitchen = DataManager.kitchens[User.sharedInstance!.id]
-        
         // load values if already exists
         if(currentKitchen != nil)
         {
@@ -72,8 +75,8 @@ class KitchenDetailsViewController: UIViewController, UIImagePickerControllerDel
         }
         self.imageChanged = false
     }
+ 
     
-
     /*
     // MARK: - Navigation
 

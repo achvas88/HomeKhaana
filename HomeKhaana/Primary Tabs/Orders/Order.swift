@@ -15,7 +15,6 @@ class Order
     //other meta-data
     var id:String
     var orderDate:String
-    var deliveryDate:String
     var orderRating:Int?
     var status:String
     var orderingUserID:String
@@ -41,7 +40,6 @@ class Order
         return [
             "id": id,
             "orderDate": self.orderDate,
-            "deliveryDate": self.deliveryDate,
             "orderRating": orderRating ?? -1,
             "subTotal": subTotal,
             "tax": tax,
@@ -69,7 +67,7 @@ class Order
         self.orderDate = dateFormatter.string(from: Date.init())
         
         dateFormatter.timeStyle = .none
-        self.deliveryDate = dateFormatter.string(from: Date.init(timeInterval: TimeInterval.init(exactly: (24*60*60))!, since: Date.init()))
+        //self.deliveryDate = dateFormatter.string(from: Date.init(timeInterval: TimeInterval.init(exactly: (24*60*60))!, since: Date.init()))
         
         self.timestamp = Date().getCurrentTimeStamp()
     }
@@ -89,7 +87,6 @@ class Order
         self.id=""
         self.status = "New"
         self.orderDate = ""
-        self.deliveryDate = ""
         self.cart = []
         self.orderRating = -1
         self.subTotal = 0
@@ -103,11 +100,10 @@ class Order
         self.timestamp = -1
     }
     
-    public init(id: String, orderDate: String, deliveryDate: String, orderRating: Int?, status: String, cart: [Choice], subTotal: Float, tax: Float, convenienceFee: Float, discount: Float, orderTotal: Float, source: PaymentSource?, kitchenId: String, orderingUserId: String?, orderingUserName: String?, timestamp: Int64, instructions: String?)
+    public init(id: String, orderDate: String, orderRating: Int?, status: String, cart: [Choice], subTotal: Float, tax: Float, convenienceFee: Float, discount: Float, orderTotal: Float, source: PaymentSource?, kitchenId: String, orderingUserId: String?, orderingUserName: String?, timestamp: Int64, instructions: String?)
     {
         self.id = id
         self.orderDate = orderDate
-        self.deliveryDate = deliveryDate
         self.orderRating = orderRating
         self.status = status
         self.cart = cart
@@ -132,7 +128,6 @@ class Order
         //other meta-data
         let id = snapshot["id"] as? String
         let orderDate = snapshot["orderDate"] as? String
-        let deliveryDate = snapshot["deliveryDate"] as? String
         let orderRating = snapshot["orderRating"] as? Int
         let status = snapshot["status"] as? String
         let kitchenId = snapshot["kitchenId"] as? String
@@ -170,7 +165,7 @@ class Order
         //payment source and address
         let selectedPayment:PaymentSource? = User.getPaymentSourceForID(id: selectedPaymentID!)
         
-        self.init(id: id!, orderDate: orderDate ?? "", deliveryDate: deliveryDate ?? "", orderRating: orderRating ?? -1, status: status ?? "New", cart: cart, subTotal: subTotal!, tax: tax!, convenienceFee: convenienceFee!, discount: discount!, orderTotal: orderTotal!, source: selectedPayment, kitchenId: kitchenId!, orderingUserId: orderingUserId, orderingUserName: orderingUserName, timestamp: timestamp!, instructions: customInstructions)
+        self.init(id: id!, orderDate: orderDate ?? "", orderRating: orderRating ?? -1, status: status ?? "New", cart: cart, subTotal: subTotal!, tax: tax!, convenienceFee: convenienceFee!, discount: discount!, orderTotal: orderTotal!, source: selectedPayment, kitchenId: kitchenId!, orderingUserId: orderingUserId, orderingUserName: orderingUserName, timestamp: timestamp!, instructions: customInstructions)
     }
  
     func processResponse(snapshot: DataSnapshot) -> String

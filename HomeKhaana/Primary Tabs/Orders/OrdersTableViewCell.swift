@@ -27,7 +27,6 @@ class OrdersTableViewCell: UITableViewCell {
     @IBOutlet weak var lblOrderDate: UILabel!
     @IBOutlet weak var lblStatus: UILabel!
     @IBOutlet weak var lblWhere: UILabel!
-    @IBOutlet weak var lblWhen: UILabel!
     @IBOutlet weak var lblTotal: UILabel!
     //@IBOutlet weak var btnRateIt: UIButton!
     @IBOutlet weak var btnCartLink: UIButton!
@@ -86,14 +85,6 @@ class OrdersTableViewCell: UITableViewCell {
             lblStatus.text = self.order!.status
             lblWhere.text = DataManager.kitchens[self.order!.kitchenId]?.name
             
-            if(self.order!.status != "Completed")
-            {
-                lblWhen.text = "11-12PM, " + self.order!.deliveryDate
-            }
-            else
-            {
-                lblWhen.text = self.order!.deliveryDate
-            }
             lblTotal.text = "$\(convertToCurrency(input: self.order!.orderTotal))"
         }
     }

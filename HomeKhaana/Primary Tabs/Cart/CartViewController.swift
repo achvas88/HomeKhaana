@@ -14,7 +14,7 @@ import FirebaseDatabase
 class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceDelegate,UITextViewDelegate {
     
     
-    @IBOutlet weak var lblTime: UILabel!
+    @IBOutlet weak var lblTime: UILabel!  //currenty not used. but can be used in the future 
     @IBOutlet weak var lblSubtotal: UILabel!
     @IBOutlet weak var lblConvenienceFee: UILabel!
     @IBOutlet weak var lblTotal: UILabel!
@@ -46,10 +46,7 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
             self.currentOrder = Order()
             self.currentOrder!.selectedPayment = self.currentOrder!.selectedPayment ?? User.sharedInstance!.defaultPaymentSource
         }
-        else
-        {
-            self.lblTime.text = self.currentOrder!.deliveryDate
-        }
+        
         
     NotificationCenter.default.addObserver(self,
                                            selector: #selector(self.keyboardNotification(notification:)),

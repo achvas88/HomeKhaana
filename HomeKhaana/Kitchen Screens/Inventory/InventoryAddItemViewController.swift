@@ -21,12 +21,14 @@ class InventoryAddItemViewController: UIViewController, UIImagePickerControllerD
     @IBOutlet weak var txtCost: UITextField!
     @IBOutlet weak var txtDescription: UITextView!
     @IBOutlet weak var lblRemainingChars: UILabel!
+    @IBOutlet weak var lblScreenHdr: UILabel!
+    @IBOutlet weak var btnAdd: UIButton!
     
     let imagePicker = UIImagePickerController()
     
-    var menuItems:[ChoiceGroup]?
     var imageChanged: Bool = false
-    
+    var choice:Choice?
+    var choiceGroupTitle: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,9 +50,28 @@ class InventoryAddItemViewController: UIViewController, UIImagePickerControllerD
         
         txtCost.delegate = self
         
-        //do not use the following statement because we still want to get groups that ahve only vegetarian options. This should not really be a problem, but if the kitchen user acceidentally has "isVegetarian" set, which doesnt make sense, then the following commented line will be problematic. Hence it is safer to directly manipulate the menuItems in the DataManager.
-        //menuItems = DataManager.getChoiceGroups(kitchenId: User.sharedInstance!.id)
-        self.menuItems = DataManager.menuItems[User.sharedInstance!.id] //for kitchens, user id = kitchen id
+        self.lblScreenHdr.text = "ADD ITEM"
+        
+        if(choice != nil)
+        {
+            setupFields()
+        }
+    }
+    
+    private func setupFields()
+    {
+        self.txtTitle.text! = choice!.displayTitle
+        self.txtGroup.text! = choiceGroupTitle!
+        self.txtGroup.isEnabled = false
+        self.txtDescription.text! = choice!.description
+        self.txtDescription.textColor = UIColor.black
+        self.txtCost.text! = String(choice!.cost)
+        tglVegetarian.isOn = choice!.isVegetarian
+        self.txtItemContents.text = choice!.items
+        self.imgItem.image = choice!.image
+        self.lblScreenHdr.text = "EDIT ITEM"
+        self.btnAdd.setTitle("Save", for: .normal)
+        self.imageChanged = true
     }
     
     @IBAction func autoPopulate(_ sender: Any) {
@@ -58,6 +79,7 @@ class InventoryAddItemViewController: UIViewController, UIImagePickerControllerD
         self.txtGroup.text = "Lunch"
         self.txtCost.text = "7.59"
         self.txtDescription.text = "This non-vegetarian thali is a perfect mid-day meal. The ingredients are carefully chosen in each of these items and is cooked home-style!"
+        self.txtDescription.textColor = UIColor.black
         self.txtItemContents.text = "4 Chapathis, Rice, Aloo Mutter, Chicken Tikka Masala, Dal Tadka"
     }
     
@@ -128,7 +150,7 @@ class InventoryAddItemViewController: UIViewController, UIImagePickerControllerD
             return
         }
         
-        if(self.txtDescription.text == nil || self.txtDescription.text! == "")
+        if(self.txtDescription.text == nil || self.txtDescription.text! == "" || self.txtDescription.text! == "Please enter the item description here")
         {
             self.showError(message: "Enter description for item")
             return
@@ -160,18 +182,29 @@ class InventoryAddItemViewController: UIViewController, UIImagePickerControllerD
             return
         }
         
-        let choiceID: String = UUID().uuidString
-        let newChoice: Choice = Choice(id: choiceID, title: self.txtTitle.text!, description: self.txtDescription.text!, cost: costValue, isVegetarian: tglVegetarian.isOn, hasImage: false, items: self.txtItemContents.text ?? "", kitchenId: User.sharedInstance!.id)
-        newChoice.image = self.imgItem.image
-        
-        self.addChoiceToGroup(newChoice: newChoice)
+        if(choice == nil)
+        {
+            let choiceID: String = UUID().uuidString
+            let newChoice: Choice = Choice(id: choiceID, title: self.txtTitle.text!, description: self.txtDescription.text!, cost: costValue, isVegetarian: tglVegetarian.isOn, hasImage: false, items: self.txtItemContents.text ?? "", kitchenId: User.sharedInstance!.id, order: 0)
+            newChoice.image = self.imgItem.image
+            
+            self.addChoiceToGroup(newChoice: newChoice)
+        }
+        else
+        {
+            choice!.displayTitle = self.txtTitle.text!
+            choice!.description = self.txtDescription.text!
+            choice!.cost = costValue
+            choice!.isVegetarian = tglVegetarian.isOn
+            choice!.items = self.txtItemContents.text ?? ""
+            choice!.image = self.imgItem.image
+        }
         
         self.dismiss(animated: true, completion: nil)
     }
     
     func addChoiceToGroup(newChoice: Choice)
     {
-        //menuItems
         let choiceGroupTitle:String = self.txtGroup.text ?? "Other"
         let choiceGroup:ChoiceGroup? = DataManager.getChoiceGroup(kitchenId: User.sharedInstance!.id, groupTitle: choiceGroupTitle)
         
