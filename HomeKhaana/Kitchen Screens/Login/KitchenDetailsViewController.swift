@@ -12,13 +12,19 @@ import UIKit
 import CoreLocation
 import MapKit
 
-class KitchenDetailsViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,CLLocationManagerDelegate {
+protocol UpdateAddressDelegate {
+    func updateAddress(latitude: Double, longitude: Double, title: String) -> Void
+}
+
+class KitchenDetailsViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var txtName: UITextField!
     @IBOutlet weak var txtAddress: UITextField!
     @IBOutlet weak var txtFoodType: UITextField!
     @IBOutlet weak var imgKitchen: UIImageView!
     
+    var latitude: Double?
+    var longitude: Double?
     let imagePicker = UIImagePickerController()
     var imageChanged: Bool = false
     
@@ -57,6 +63,7 @@ class KitchenDetailsViewController: UIViewController, UIImagePickerControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.keyboardNotification(notification:)),
                                                name: NSNotification.Name.UIKeyboardWillChangeFrame,
@@ -72,20 +79,33 @@ class KitchenDetailsViewController: UIViewController, UIImagePickerControllerDel
             self.txtAddress!.text = currentKitchen!.address
             self.imgKitchen!.image = currentKitchen!.image
             self.txtFoodType!.text = currentKitchen!.type
+            self.latitude = currentKitchen!.latitude
+            self.longitude = currentKitchen!.longitude
         }
         self.imageChanged = false
     }
  
-    
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        if (segue.identifier == "location")
+        {
+            let destinationNavigationController = segue.destination as! UINavigationController
+            let locationVC: LocationViewController? = destinationNavigationController.topViewController as? LocationViewController
+            
+            if(locationVC != nil)
+            {
+                locationVC!.updateAddressDelegate = self
+                print("latitude: \(latitude ?? -999)")
+                print("longitude: \(longitude ?? -999)")
+                locationVC!.currentLatitude = latitude
+                locationVC!.currentLongitude = longitude
+            }
+        }
     }
-    */
     
     @IBAction func pickImage(_ sender: Any) {
         imagePicker.allowsEditing = false
@@ -118,9 +138,9 @@ class KitchenDetailsViewController: UIViewController, UIImagePickerControllerDel
             return
         }
         
-        if(self.txtAddress.text == nil || self.txtAddress.text! == "")
+        if(self.txtAddress.text == nil || self.txtAddress.text! == "" || latitude == nil || longitude == nil)
         {
-            self.showError(message: "Please enter your kitchen's address")
+            self.showError(message: "Please pick your kitchen's address")
             return
         }
         
@@ -147,7 +167,7 @@ class KitchenDetailsViewController: UIViewController, UIImagePickerControllerDel
         //we are good to go here as all values are set. let us update the kitchen's values right away or create the kitchen if need be.
         if (currentKitchen == nil)
         {
-            currentKitchen = Kitchen(id: User.sharedInstance!.id, name: self.txtName.text!, rating: -1, timeForFood: "15 mins", address: self.txtAddress.text!, type: self.txtFoodType.text!, ratingCount: 0, hasImage: true, offersVegetarian: false)
+            currentKitchen = Kitchen(id: User.sharedInstance!.id, name: self.txtName.text!, rating: -1, timeForFood: "15 mins", address: self.txtAddress.text!, type: self.txtFoodType.text!, ratingCount: 0, hasImage: true, offersVegetarian: false, latitude: latitude!, longitude: longitude!)
             vcToPresent = "KitchenHome"
         }
         else
@@ -155,6 +175,8 @@ class KitchenDetailsViewController: UIViewController, UIImagePickerControllerDel
             currentKitchen!.name = self.txtName.text!
             currentKitchen!.address = self.txtAddress.text!
             currentKitchen!.type = self.txtFoodType.text!
+            currentKitchen!.longitude = longitude!
+            currentKitchen!.latitude = latitude!
         }
         
         currentKitchen!.hasImage = true
@@ -185,5 +207,14 @@ class KitchenDetailsViewController: UIViewController, UIImagePickerControllerDel
         let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alertController.addAction(defaultAction)
         self.present(alertController, animated: true, completion: nil)
+    }
+}
+
+extension KitchenDetailsViewController: UpdateAddressDelegate
+{
+    func updateAddress(latitude: Double, longitude: Double, title: String) {
+        self.txtAddress.text = title
+        self.latitude = latitude
+        self.longitude = longitude
     }
 }

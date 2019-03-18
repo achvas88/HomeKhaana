@@ -22,6 +22,9 @@ class Kitchen
     var ratingCount: NSNumber
     var hasImage: Bool
     var offersVegetarian: Bool
+    var longitude: Double
+    var latitude: Double
+    
     var image: UIImage? {
         didSet {
             self.writeImagetoDB()
@@ -39,11 +42,13 @@ class Kitchen
             "hasImage": self.hasImage,
             "ratingCount": self.ratingCount,
             "timeForFood": self.timeForFood,
-            "type": self.type
+            "type": self.type,
+            "latitude": self.latitude,
+            "longitude": self.longitude
         ]
     }
     
-    init(id:String, name:String, rating:NSNumber, timeForFood:String, address: String, type: String, ratingCount: NSNumber, hasImage: Bool, offersVegetarian: Bool) {
+    init(id:String, name:String, rating:NSNumber, timeForFood:String, address: String, type: String, ratingCount: NSNumber, hasImage: Bool, offersVegetarian: Bool, latitude: Double, longitude: Double) {
         self.id = id
         self.name = name
         self.rating = rating
@@ -54,6 +59,8 @@ class Kitchen
         self.offersVegetarian = offersVegetarian
         self.hasImage = hasImage
         self.imageChanged = false
+        self.latitude = latitude
+        self.longitude = longitude
         
         if(self.hasImage)
         {
@@ -72,10 +79,12 @@ class Kitchen
             let type = dictionary["type"] as? String,
             let ratingCount = dictionary["ratingCount"] as? NSNumber,
             let offersVegetarian = dictionary["offersVegetarian"] as? Bool,
-            let hasImage =  dictionary["hasImage"] as? Bool
+            let hasImage =  dictionary["hasImage"] as? Bool,
+            let latitude = dictionary["latitude"] as? Double,
+            let longitude = dictionary["longitude"] as? Double
             else { return nil }
         
-         self.init(id: id, name:name, rating: rating, timeForFood: timeForFood,address: address, type: type, ratingCount: ratingCount, hasImage: hasImage, offersVegetarian: offersVegetarian)
+        self.init(id: id, name:name, rating: rating, timeForFood: timeForFood,address: address, type: type, ratingCount: ratingCount, hasImage: hasImage, offersVegetarian: offersVegetarian, latitude: latitude, longitude: longitude)
     }
     
     public convenience init?(snapshot: DataSnapshot)
@@ -91,8 +100,10 @@ class Kitchen
         let ratingCount = snapshot["ratingCount"] as! NSNumber
         let offersVegetarian = snapshot["offersVegetarian"] as! Bool
         let hasImage = snapshot["hasImage"] as! Bool
+        let latitude = snapshot["latitude"] as! Double
+        let longitude = snapshot["longitude"] as! Double
         
-        self.init(id: id, name:name, rating: rating, timeForFood: timeForFood,address: address, type: type, ratingCount: ratingCount, hasImage: hasImage, offersVegetarian: offersVegetarian)
+        self.init(id: id, name:name, rating: rating, timeForFood: timeForFood,address: address, type: type, ratingCount: ratingCount, hasImage: hasImage, offersVegetarian: offersVegetarian, latitude: latitude, longitude: longitude)
     }
     
     func loadImageFromDB()

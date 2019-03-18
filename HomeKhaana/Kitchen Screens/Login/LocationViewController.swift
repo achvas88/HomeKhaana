@@ -18,7 +18,10 @@ class LocationViewController: UIViewController {
     let locationManager = CLLocationManager()
     var resultSearchController:UISearchController? = nil
     var selectedPin:MKPlacemark? = nil
-    
+    var updateAddressDelegate:UpdateAddressDelegate? = nil
+    public var currentLatitude: Double?
+    public var currentLongitude: Double?
+
     @IBOutlet weak var btnAccept: UIButton!
     @IBOutlet weak var mapView: MKMapView!
     
@@ -43,7 +46,15 @@ class LocationViewController: UIViewController {
         resultSearchController?.dimsBackgroundDuringPresentation = true
         definesPresentationContext = true
         
-        self.enableDisableButtons()
+        if(currentLatitude != nil && currentLongitude != nil)
+        {
+            LoaderController.sharedInstance.showLoader(indicatorText: "Loading your location", holdingView: self.view)
+            lookupLocationAndDropPin(location: CLLocation(latitude: currentLatitude!, longitude: currentLongitude!))
+        }
+        else
+        {
+            self.enableDisableButtons()
+        }
     }
     
     @IBAction func cancelClicked(_ sender: Any) {
@@ -51,6 +62,7 @@ class LocationViewController: UIViewController {
     }
     
     @IBAction func acceptClicked(_ sender: Any) {
+        self.updateAddressDelegate?.updateAddress(latitude: self.selectedPin!.coordinate.latitude, longitude: self.selectedPin!.coordinate.longitude, title: parseAddress(selectedItem: self.selectedPin!))
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -133,32 +145,37 @@ extension LocationViewController : CLLocationManagerDelegate {
             let region = MKCoordinateRegion(center: location.coordinate, span: span)
             mapView.setRegion(region, animated: true)
             
-            lookUpCurrentLocation(completionHandler: {(placeMark) in
-                LoaderController.sharedInstance.removeLoader()
-                if(placeMark != nil)
-                {
-                    self.dropPinZoomIn(placemark: MKPlacemark(placemark: placeMark!))
-                }
-                else
-                {
-                    self.dropPinZoomIn(placemark: MKPlacemark(coordinate: location.coordinate))
-                }
-            })
+            lookupLocationAndDropPin(location: self.locationManager.location)
         }
+    }
+    
+    func lookupLocationAndDropPin(location: CLLocation?)
+    {
+        lookUpLocation(location: location, completionHandler: {(placeMark) in
+            LoaderController.sharedInstance.removeLoader()
+            if(placeMark != nil)
+            {
+                self.dropPinZoomIn(placemark: MKPlacemark(placemark: placeMark!))
+            }
+            else
+            {
+                self.showError(message: "Error occurred while identifying location. Please try again later. ")
+            }
+        })
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         showLocationDisabledPopUp()
     }
     
-    func lookUpCurrentLocation(completionHandler: @escaping (CLPlacemark?)
+    func lookUpLocation(location:CLLocation? ,completionHandler: @escaping (CLPlacemark?)
         -> Void ) {
         // Use the last reported location.
-        if let lastLocation = self.locationManager.location {
+        if let location = location {
             let geocoder = CLGeocoder()
             
             // Look up the location and pass it to the completion handler
-            geocoder.reverseGeocodeLocation(lastLocation,
+            geocoder.reverseGeocodeLocation(location,
                                             completionHandler: { (placemarks, error) in
                                                 if error == nil {
                                                     let firstLocation = placemarks?[0]
@@ -175,6 +192,14 @@ extension LocationViewController : CLLocationManagerDelegate {
             completionHandler(nil)
         }
     }
+    
+    func showError(message: String, title: String = "Error")
+    {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alertController.addAction(defaultAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
 }
 
 extension LocationViewController: HandleMapSearch {
@@ -187,8 +212,8 @@ extension LocationViewController: HandleMapSearch {
         mapView.removeAnnotations(mapView.annotations)
         let annotation = MKPointAnnotation()
         annotation.coordinate = placemark.coordinate
-        annotation.title = placemark.title
-        annotation.subtitle = parseAddress(selectedItem: placemark)
+        annotation.title = parseAddress(selectedItem: placemark)
+        annotation.subtitle = placemark.title
         mapView.addAnnotation(annotation)
         let span = MKCoordinateSpanMake(0.05, 0.05)
         let region = MKCoordinateRegionMake(placemark.coordinate, span)
