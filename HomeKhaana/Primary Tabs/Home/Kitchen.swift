@@ -10,13 +10,13 @@
 import Foundation
 import FirebaseDatabase
 import Firebase
+import MapKit
 
 class Kitchen
 {
     var id: String
     var name: String
     var rating:NSNumber
-    var timeForFood:String
     var address: String
     var type: String
     var ratingCount: NSNumber
@@ -24,6 +24,7 @@ class Kitchen
     var offersVegetarian: Bool
     var longitude: Double
     var latitude: Double
+    var kitchenLocation: CLLocation
     
     var image: UIImage? {
         didSet {
@@ -41,18 +42,16 @@ class Kitchen
             "rating": self.rating,
             "hasImage": self.hasImage,
             "ratingCount": self.ratingCount,
-            "timeForFood": self.timeForFood,
             "type": self.type,
             "latitude": self.latitude,
             "longitude": self.longitude
         ]
     }
     
-    init(id:String, name:String, rating:NSNumber, timeForFood:String, address: String, type: String, ratingCount: NSNumber, hasImage: Bool, offersVegetarian: Bool, latitude: Double, longitude: Double) {
+    init(id:String, name:String, rating:NSNumber, address: String, type: String, ratingCount: NSNumber, hasImage: Bool, offersVegetarian: Bool, latitude: Double, longitude: Double, image: UIImage? = nil) {
         self.id = id
         self.name = name
         self.rating = rating
-        self.timeForFood = timeForFood
         self.address = address
         self.type = type
         self.ratingCount = ratingCount
@@ -61,8 +60,12 @@ class Kitchen
         self.imageChanged = false
         self.latitude = latitude
         self.longitude = longitude
-        
-        if(self.hasImage)
+        self.kitchenLocation = CLLocation(latitude: self.latitude, longitude: self.longitude)
+        if(image != nil)
+        {
+            self.image = image
+        }
+        if(self.hasImage && self.image == nil)
         {
             self.loadImageFromDB()
         }
@@ -74,7 +77,6 @@ class Kitchen
     {
         guard let name = dictionary["name"] as? String,
             let rating = dictionary["rating"] as? NSNumber,
-            let timeForFood = dictionary["timeForFood"] as? String,
             let address = dictionary["address"] as? String,
             let type = dictionary["type"] as? String,
             let ratingCount = dictionary["ratingCount"] as? NSNumber,
@@ -84,7 +86,7 @@ class Kitchen
             let longitude = dictionary["longitude"] as? Double
             else { return nil }
         
-        self.init(id: id, name:name, rating: rating, timeForFood: timeForFood,address: address, type: type, ratingCount: ratingCount, hasImage: hasImage, offersVegetarian: offersVegetarian, latitude: latitude, longitude: longitude)
+        self.init(id: id, name:name, rating: rating, address: address, type: type, ratingCount: ratingCount, hasImage: hasImage, offersVegetarian: offersVegetarian, latitude: latitude, longitude: longitude)
     }
     
     public convenience init?(snapshot: DataSnapshot)
@@ -94,7 +96,6 @@ class Kitchen
         
         let name = snapshot["name"] as! String
         let rating = snapshot["rating"] as! NSNumber
-        let timeForFood = snapshot["timeForFood"] as! String
         let address = snapshot["address"] as! String
         let type = snapshot["type"] as! String
         let ratingCount = snapshot["ratingCount"] as! NSNumber
@@ -103,7 +104,7 @@ class Kitchen
         let latitude = snapshot["latitude"] as! Double
         let longitude = snapshot["longitude"] as! Double
         
-        self.init(id: id, name:name, rating: rating, timeForFood: timeForFood,address: address, type: type, ratingCount: ratingCount, hasImage: hasImage, offersVegetarian: offersVegetarian, latitude: latitude, longitude: longitude)
+        self.init(id: id, name:name, rating: rating,address: address, type: type, ratingCount: ratingCount, hasImage: hasImage, offersVegetarian: offersVegetarian, latitude: latitude, longitude: longitude)
     }
     
     func loadImageFromDB()

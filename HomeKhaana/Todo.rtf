@@ -5,64 +5,73 @@
 \margl1440\margr1440\vieww9000\viewh8400\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
-\f0\fs24 \cf0 \
-\strike \strikec0 Maps enhancements:\
-1. Save addresses to firebase using lattitude/longitude \
-2. Restrict addresses to only office locations\
-3. Start maps showing the seattle area.\
-4. Add ability to choose multiple addresses and mark something as primary. May be a separate table view controller?\
-\strike0\striked0 \
+\f0\b\fs24 \cf0 \
+General:\
 
-\b Credit card:
+\b0 - have a time-out everytime the server is contacted. - MODERATE\
+- Delete image when deleting item in Inventory - TOUGH\
+- Make sure app shuts down properly - TOUGH\
+- Database security - TOUGH\
+
+\b \
+Testing: \
+
+\b0 - Test without network connection - MODERATE\
+
+\b \
+End user:
 \b0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 - Don't calculate distance in tableview cell - MODERATE\
+- Show no prior orders + no kitchens screens - MODERATE\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 - Credits screen, Help, FAQ, Legal pages - MODERATE\
+- Rate once delivered - MODERATE\
+- Dont allow adding items with different availability times. - MODERATE\
+- Cash only checkout - MODERATE\
+- Allow user to choose location - MODERATE\
+- Advertisements - MODERATE\
+- Edit order details within x minutes of placing order - MODERATE \
+- think about and get rid of taxes  - MODERATE\
+- Notification - TOUGH\
+- DEV: Sort the kitchens by distance - TOUGH\
+\
+
+\b Kitchen\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\b0 \cf0 - show method of payment - cash on receipt - MODERATE\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 - Set pickup times/show when I will get food - MODERATE\
+- Rate user - MODERATE\
+DEV: Reorder sections Inventory (low priority) - MODERATE\
+\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \outl\strokewidth60 \strokec0 If credit card is developed, then these are mandatory before release, \
+Credit card:\
 TEST: Check duplicate credit cards\
 TEST: Test indicator hiding when credit card addition fail. \
 TEST: Test without any card. \
 TEST: test card addition failing - make sure that a line doesnt show up for a failed paymentsource. \
 TEST: make sure that after all cards are deleted, the cart updates appropriately. \
 DEV: Where does the money go??\
-\
-
-\b Main App:
-\b0 \
-DEV: Delete image when deleting item in Inventory\
-DEV: Reorder sections Inventory (low priority)\
-DEV: Notifications\
-TEST: Test without network connection\
-DEV:  Show how far in terms of miles is the kitchen\
-DEV: Allow end users to sort the kitchens by distance\
-FIX: Make sure app shuts down properly\
-\
-
-\b Registration workflows:
-\b0 \
-DEV: Fix Facebook email issue\
-TEST: test with facebook \
-DEV: if things dont work, delete facebook login. \
-FIX: Bug when creating a new user - default payment source fails\
-DEV: If user gmail/fb user newly created take through walkthrough\
-\
-
-\b Risk Avertion:
-\b0 \
-have a time-out everytime the server is contacted. \
-DEV: Database security\
-\
-
-\b Kitchen Workflows:
-\b0 \
-DEV:  add ability to pick a location\
-\
-
-\b NEEDS TO BE TESTED:
-\b0 \
-\pard\tx543\pardeftab543\pardirnatural\partightenfactor0
-\cf0 Updated list of Orders screen - replaced When with the order date\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 Should only Add to Cart when you are placing an order. \
-\pard\tx543\pardeftab543\pardirnatural\partightenfactor0
-\cf0 Updated Cart - Will always show "Right Away"\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 Removed use of delivery date\
+\cf0 \outl0\strokewidth0 \
 \
-}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \outl\strokewidth60 \strokec0 DONE\outl0\strokewidth0 \
+\outl\strokewidth60 Registration workflows:\
+- Delete Facebook login. - EASY\
+- Dont allow adding items from different kitchens - EASY\
+- Add same item to cart should increase quantity in cart - EASY\
+- Clear cart - EASY\
+- DEV:  Show how far in terms of miles is the kitchen - Fix thousands of miles bug - EASY\
+- Quantity of food should show up right away - EASY\
+- Detele Time for Food - EASY\
+- Log in as Kitchen add icon - EASY\
+- Dont add custom instructions once order is placed.  - EASY\
+- "optionally enter custom instructions here" bug - EASY\
+- get rid of convenience fee - EASY\
+- Don't crash when you switch to kitchen and then log out - EASY\
+- fix vegetarian only bug - MODERATE - PARTIAL FIX. }

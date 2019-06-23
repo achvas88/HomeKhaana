@@ -69,10 +69,9 @@ class ChoiceDetailViewController: UIViewController {
     }
     
     @IBAction func btnAddToCartClicked(_ sender: Any) {
-        //DataManager.updateCart(choiceID: theChoice!.id, quantity: Int(lblQuantity.text!)!)
         let quantity:Int = Int(self.lblQuantity.text!)!
         theChoice!.quantity = quantity
-        Cart.sharedInstance.updateCart(choice: theChoice!, vc: self, completion:
+        Cart.sharedInstance.updateCart(choice: theChoice!, vc: self, isAddingNew: comingFromHome, completion:
             {
                 self.dismiss(animated: true, completion: nil)
             }

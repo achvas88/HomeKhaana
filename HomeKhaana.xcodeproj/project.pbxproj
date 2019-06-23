@@ -28,6 +28,8 @@
 		B61F20CC21B8D23400A85EDF /* CurrentOrdersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61F20CB21B8D23400A85EDF /* CurrentOrdersTableViewCell.swift */; };
 		B621EC9221BDE08D00869BD8 /* KitchenProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B621EC9121BDE08D00869BD8 /* KitchenProfileViewController.swift */; };
 		B621EC9421BE1E2F00869BD8 /* InventoryAddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B621EC9321BE1E2F00869BD8 /* InventoryAddItemViewController.swift */; };
+		B6241BFD22431B0200199845 /* LocationServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6241BFC22431B0200199845 /* LocationServicesViewController.swift */; };
+		B6241BFF2249A8C500199845 /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6241BFE2249A8C500199845 /* RatingControl.swift */; };
 		B6287B4420E873C1009FF79D /* ChoiceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6287B4320E873C1009FF79D /* ChoiceDetailViewController.swift */; };
 		B62F26F0213B536100FA88D3 /* CurrentOrdersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F26EF213B536100FA88D3 /* CurrentOrdersTableViewController.swift */; };
 		B62F26F4213CA20200FA88D3 /* LoadingScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F26F3213CA20200FA88D3 /* LoadingScreenViewController.swift */; };
@@ -106,6 +108,8 @@
 		B61F20CB21B8D23400A85EDF /* CurrentOrdersTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentOrdersTableViewCell.swift; sourceTree = "<group>"; };
 		B621EC9121BDE08D00869BD8 /* KitchenProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitchenProfileViewController.swift; sourceTree = "<group>"; };
 		B621EC9321BE1E2F00869BD8 /* InventoryAddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryAddItemViewController.swift; sourceTree = "<group>"; };
+		B6241BFC22431B0200199845 /* LocationServicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServicesViewController.swift; sourceTree = "<group>"; };
+		B6241BFE2249A8C500199845 /* RatingControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
 		B6287B4320E873C1009FF79D /* ChoiceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceDetailViewController.swift; sourceTree = "<group>"; };
 		B62F26EF213B536100FA88D3 /* CurrentOrdersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentOrdersTableViewController.swift; sourceTree = "<group>"; };
 		B62F26F3213CA20200FA88D3 /* LoadingScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreenViewController.swift; sourceTree = "<group>"; };
@@ -325,6 +329,7 @@
 				B61558DA20DF0B6700471718 /* Choice.swift */,
 				B655FFC4219D1046008691D2 /* ChoiceGroup.swift */,
 				B64393A120DFC7D800058C82 /* ChoiceTableViewCell.swift */,
+				B6241BFE2249A8C500199845 /* RatingControl.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -374,6 +379,7 @@
 				B61558C820D6D7B400471718 /* NotificationsViewController.swift */,
 				B69F54AB20CDD67900E1B0EB /* SignUpViewController.swift */,
 				B61B78F121177BED000EDE80 /* UserInitializationErrorViewController.swift */,
+				B6241BFC22431B0200199845 /* LocationServicesViewController.swift */,
 			);
 			path = Initialization;
 			sourceTree = "<group>";
@@ -706,6 +712,7 @@
 				B61558DB20DF0B6700471718 /* Choice.swift in Sources */,
 				B609AC3F2120C8C000C45C49 /* Order.swift in Sources */,
 				B6287B4420E873C1009FF79D /* ChoiceDetailViewController.swift in Sources */,
+				B6241BFF2249A8C500199845 /* RatingControl.swift in Sources */,
 				B62F26F6213CA83000FA88D3 /* LoaderController.swift in Sources */,
 				B69CE0822129F93200B7CFDB /* OrdersTableViewCell.swift in Sources */,
 				B655FFC3219BA9A4008691D2 /* KitchenTableViewCell.swift in Sources */,
@@ -726,6 +733,7 @@
 				B621EC9421BE1E2F00869BD8 /* InventoryAddItemViewController.swift in Sources */,
 				B69F54B020CDE9B000E1B0EB /* Extensions.swift in Sources */,
 				B691C79820FD834C0060CF98 /* PaymentSourceTableViewController.swift in Sources */,
+				B6241BFD22431B0200199845 /* LocationServicesViewController.swift in Sources */,
 				B610D6AE223DA23300E94E27 /* LocationSearchTable.swift in Sources */,
 				B691C79220FBF97E0060CF98 /* PaymentSource.swift in Sources */,
 				B655FFBF219BA975008691D2 /* KitchensTableViewController.swift in Sources */,

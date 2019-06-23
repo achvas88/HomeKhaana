@@ -45,7 +45,7 @@ class Choice: Equatable
         self.kitchenId = kitchenId
         self.order = order
         
-        if(self.hasImage)
+        if(self.hasImage && self.image == nil)
         {
             self.loadImageFromDB()
         }

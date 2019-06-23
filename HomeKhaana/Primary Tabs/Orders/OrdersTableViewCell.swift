@@ -22,8 +22,6 @@ class OrdersTableViewCell: UITableViewCell {
      order total
      */
     @IBOutlet weak var imgOrder: UIImageView!
-    @IBOutlet weak var imgRating: UIImageView!
-    @IBOutlet weak var lblOrderID: UILabel!
     @IBOutlet weak var lblOrderDate: UILabel!
     @IBOutlet weak var lblStatus: UILabel!
     @IBOutlet weak var lblWhere: UILabel!
@@ -32,24 +30,27 @@ class OrdersTableViewCell: UITableViewCell {
     @IBOutlet weak var btnCartLink: UIButton!
     @IBOutlet weak var orderOuterView: UIView!
     @IBOutlet weak var imgHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var stkRating: RatingControl!
+    @IBOutlet weak var btnRate: UIButton!
+    
     
     var order:Order? {
         didSet {
             guard let order = order else { return }
             
             //ratings related
-            imgRating.isHidden = true
-            //btnRateIt.isHidden = true
-            if(order.status == "Completed")
+            stkRating.isHidden = true
+            btnRate.isHidden = true
+            if(order.status == "Ordered")//Completed")
             {
                 // if not already rated
                 if(order.orderRating == nil || order.orderRating == -1)
                 {
-                    //btnRateIt.isHidden = false
+                    btnRate.isHidden = false
                 }
                 else
                 {
-                    imgRating.isHidden = false
+                    stkRating.isHidden = false
                 }
             }
             
@@ -80,7 +81,6 @@ class OrdersTableViewCell: UITableViewCell {
             self.btnCartLink.setTitle(cartLinkTitle, for: .normal)
             
             //others
-            lblOrderID.text = String(self.order!.id)
             lblOrderDate.text = self.order!.orderDate
             lblStatus.text = self.order!.status
             lblWhere.text = DataManager.kitchens[self.order!.kitchenId]?.name

@@ -18,6 +18,7 @@ class UserProfileViewController: UIViewController {
     @IBOutlet weak var btnHelp: CustomUIButton!
     @IBOutlet weak var btnFAQ: CustomUIButton!
     @IBOutlet weak var btnLogout: CustomUIButton!
+    @IBOutlet weak var btnKitchenLogin: UIButton!
     
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var imgUser: UIImageView!
@@ -70,6 +71,11 @@ class UserProfileViewController: UIViewController {
         self.btnPayment.setImage(UIImage(named: "credit-card")?.withRenderingMode(.alwaysOriginal), for: .normal)
         self.btnHelp.setImage(UIImage(named: "Help")?.withRenderingMode(.alwaysOriginal), for: .normal)
         self.btnFAQ.setImage(UIImage(named: "FAQ")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        self.btnKitchenLogin.setImage(UIImage(named: "chef")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        if(User.sharedInstance!.isKitchen)
+        {
+            self.btnKitchenLogin.isHidden = true
+        }
         let logoutBgColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1.0)
         self.btnLogout.backgroundColor = logoutBgColor
     }
@@ -78,6 +84,30 @@ class UserProfileViewController: UIViewController {
         User.Logout(vcHost: self)
     }
 
+    @IBAction func loginAsKitchenClicked(_ sender: Any) {
+        
+        let alertController = UIAlertController(title: "Confirmation",
+                                                message: "This will cause your logged in email address to be marked permanently as a kitchen.  Are you sure?",
+                                                preferredStyle: .alert)
+        var alertAction = UIAlertAction(title: "Yes", style: .default, handler: { (action) -> Void in
+            
+            let alertController2 = UIAlertController(title: "What happens now... ",
+                                                    message: "You will be logged out now. While you log back in, you will launch into kitchen mode.",
+                                                    preferredStyle: .alert)
+            let alertAction2 = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+                
+                User.sharedInstance!.markingAsKitchen = true
+                User.Logout(vcHost: self)
+            })
+            alertController2.addAction(alertAction2)
+            self.present(alertController2, animated: true)
+        })
+        
+        alertController.addAction(alertAction)
+        alertAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alertController.addAction(alertAction)
+        present(alertController, animated: true)
+    }
     
     // MARK: - Navigation
 
@@ -93,5 +123,5 @@ class UserProfileViewController: UIViewController {
         }
     }
     
-
+    
 }

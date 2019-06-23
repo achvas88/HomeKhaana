@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import MapKit
 
 class KitchenTableViewCell: UITableViewCell {
 
     @IBOutlet weak var kitchenImg: UIImageView!
     @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var timeForFood: UILabel!
+    @IBOutlet weak var distance: UILabel!
     @IBOutlet weak var type: UILabel!
     @IBOutlet weak var rating: UILabel!
     @IBOutlet weak var ratingCount: UILabel!
@@ -24,10 +25,36 @@ class KitchenTableViewCell: UITableViewCell {
             
             kitchenImg.image = kitchen.image
             name.text = kitchen.name
-            timeForFood.text = kitchen.timeForFood
+            self.distanceBetweenPoints(location1: User.sharedInstance!.userLocation.coordinate, location2: kitchen.kitchenLocation.coordinate)
             type.text = kitchen.type
             rating.text = String(kitchen.rating.floatValue)
             ratingCount.text = "(" + String(kitchen.ratingCount.intValue) + ")"
+        }
+    }
+    
+    func distanceBetweenPoints(location1: CLLocationCoordinate2D, location2:CLLocationCoordinate2D)
+    {
+        let mapItemLoc1 = MKMapItem(placemark: MKPlacemark(coordinate: location1))
+        let mapItemLoc2 = MKMapItem(placemark: MKPlacemark(coordinate: location2))
+        
+        let req = MKDirections.Request()
+        req.source = mapItemLoc1
+        req.destination = mapItemLoc2
+        let dir = MKDirections(request:req)
+        dir.calculate { response, error in
+            guard let response = response else {
+                // if error in route calculation, just print out direct distance.
+                let distance:CLLocationDistance = User.sharedInstance!.userLocation.distance(from: self.kitchen!.kitchenLocation)
+                let distanceInMiles:Double = distance * 0.62137 / 1000
+                let distanceStr = NSString(format: "~ %.1f mi", distanceInMiles)
+                self.distance.text = distanceStr as String
+                return
+            }
+            let route:MKRoute = response.routes[0] // I'm feeling insanely lucky
+            let distance = route.distance
+            let distanceInMiles:Double = distance * 0.62137 / 1000
+            let distanceStr = NSString(format: "%.2f mi", distanceInMiles)
+            self.distance.text = distanceStr as String
         }
     }
     

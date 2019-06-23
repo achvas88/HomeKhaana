@@ -25,7 +25,7 @@ class Cart: NSObject {
         return self.cart.count==0
     }
     
-    public func updateCart(choice: Choice, vc: UIViewController, completion: @escaping () -> ())    // TODO: TEST THIS
+    public func updateCart(choice: Choice, vc: UIViewController, isAddingNew: Bool, completion: @escaping () -> ())    // TODO: TEST THIS
     {
         if(choice.quantity == nil || choice.quantity! == 0) //we are removing an item from the cart.
         {
@@ -44,7 +44,14 @@ class Cart: NSObject {
                 let choiceInCart:Choice? = cartContainsChoice(choiceToFind: choice)
                 if(choiceInCart != nil) // if the cart already contains the choice, then update the quantity
                 {
-                    choiceInCart!.quantity = choice.quantity
+                    if(isAddingNew) //if adding a new item.
+                    {
+                    choiceInCart!.quantity = choiceInCart!.quantity! + choice.quantity!
+                    }
+                    else    // if updating an item already in the cart (Update button visible)
+                    {
+                        choiceInCart!.quantity = choice.quantity!
+                    }
                     completion()
                 }
                 else    //cart doesnt contain the choice
@@ -93,7 +100,7 @@ class Cart: NSObject {
                                                 message: "Do you wish to clear the cart and then add the current item?",
                                                 preferredStyle: .alert)
         var alertAction = UIAlertAction(title: "Yes", style: .default, handler: { (action) -> Void in
-            self.cart.removeAll()
+            self.clearCart()
             self.cart.append(choice)
             self.kitchenId = choice.kitchenId
             completion()
@@ -104,5 +111,11 @@ class Cart: NSObject {
         })
         alertController.addAction(alertAction)
         vc.present(alertController, animated: true)
+    }
+    
+    public func clearCart() -> Void
+    {
+        self.cart.removeAll()
+        self.kitchenId = ""
     }
 }

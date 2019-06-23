@@ -16,7 +16,6 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
     
     @IBOutlet weak var lblTime: UILabel!  //currenty not used. but can be used in the future 
     @IBOutlet weak var lblSubtotal: UILabel!
-    @IBOutlet weak var lblConvenienceFee: UILabel!
     @IBOutlet weak var lblTotal: UILabel!
     @IBOutlet weak var lblTax: UILabel!
     @IBOutlet weak var btnAddPayment: CustomUIButton!
@@ -32,6 +31,7 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
     @IBOutlet weak var imgKitchen: UIImageView!
     @IBOutlet weak var txtCustomInstr: UITextView!
     @IBOutlet weak var cnstBottom: NSLayoutConstraint!
+    @IBOutlet weak var btnClearCart: UIButton!
     
     var inCart:[Choice] = []
     var currentOrder:Order?
@@ -221,7 +221,9 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
             self.btnCheckout.isHidden = true
             self.scrScrollArea.isHidden = true
             self.btnAddPayment.isHidden = true
+            self.btnClearCart.isHidden = true
             self.stkEmptyCart.isHidden = false
+            self.tblItems.isUserInteractionEnabled = false
         }
         else
         {
@@ -230,11 +232,15 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
             if(self.currentOrder!.status == "New")
             {
                 self.btnAddPayment.isHidden = false
+                self.btnClearCart.isHidden = false
+                self.tblItems.isUserInteractionEnabled = true
             }
             else
             {
                 self.btnAddPayment.isHidden = true
+                self.btnClearCart.isHidden = true
                 self.cnstAddPaymentHeight.constant = 0
+                self.tblItems.isUserInteractionEnabled = false
             }
             self.stkEmptyCart.isHidden = true
             if(!initialize)
@@ -271,14 +277,12 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
             self.currentOrder!.cart = self.inCart
             self.currentOrder!.subTotal = limitToTwoDecimal(input: subTotal)
             self.currentOrder!.tax = limitToTwoDecimal(input: (self.currentOrder!.subTotal*0.05))
-            self.currentOrder!.convenienceFee = limitToTwoDecimal(input:2)
-            self.currentOrder!.orderTotal = limitToTwoDecimal(input:(self.currentOrder!.subTotal+(self.currentOrder!.subTotal*0.05)+2))
+            self.currentOrder!.orderTotal = limitToTwoDecimal(input:(self.currentOrder!.subTotal+(self.currentOrder!.subTotal*0.05)))
         }
         
         //update labels
         self.lblSubtotal.text = "$\(convertToCurrency(input: self.currentOrder!.subTotal))"
         self.lblTax.text = "$\(convertToCurrency(input: self.currentOrder!.tax))"
-        self.lblConvenienceFee.text = "$\(convertToCurrency(input: self.currentOrder!.convenienceFee))"
         self.lblTotal.text = "$\(convertToCurrency(input: self.currentOrder!.orderTotal))"
         
         if(self.currentOrder!.status == "New")
@@ -290,7 +294,7 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
     
     func setupButtons()
     {
-        
+        self.btnClearCart.layer.cornerRadius = 3
         self.btnCheckout.backgroundColor = UIColor(red: 69/255, green: 191/255, blue: 34/255, alpha: 1.0)
         self.btnCheckout.setTitleColor(UIColor.white, for: .normal)
         
@@ -304,6 +308,13 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
             self.btnCheckout.isHidden = false
             self.btnCheckout.setTitle("Okay", for: .normal)
             self.btnAddPayment.isHidden = true
+            self.btnClearCart.isHidden = true
+            self.tblItems.isUserInteractionEnabled = false
+            self.txtCustomInstr.isUserInteractionEnabled = false
+            if(self.txtCustomInstr.text == "" || self.txtCustomInstr.text == "Optionally enter custom instructions here")
+            {
+               self.txtCustomInstr.text = "None specified"
+            }
         }
     }
     
@@ -324,6 +335,22 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
         cell.choice = self.inCart[indexPath.row]
         
         return cell
+    }
+    
+    @IBAction func btnClearCartClicked(_ sender: Any) {
+        let alertController = UIAlertController(title: "This will clear the cart",
+                                                message: "Are you sure?",
+                                                preferredStyle: .alert)
+        var alertAction = UIAlertAction(title: "Yes", style: .default, handler: { (action) -> Void in
+          
+            Cart.sharedInstance.clearCart()
+            self.updateDisplay(initialize: false)
+            
+        })
+        alertController.addAction(alertAction)
+        alertAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alertController.addAction(alertAction)
+        self.present(alertController, animated: true)
     }
     
     @IBAction func btnCheckoutClicked(_ sender: Any) {
@@ -402,6 +429,10 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
         else if (segue.identifier == "checkout")
         {
             // set the kitchen id before we pass it along to confirm
+            if(txtCustomInstr.text == "Optionally enter custom instructions here")
+            {
+               txtCustomInstr.text = "None specified"
+            }
             self.currentOrder?.customInstructions = txtCustomInstr.text
             self.currentOrder?.kitchenId = Cart.sharedInstance.kitchenId
             

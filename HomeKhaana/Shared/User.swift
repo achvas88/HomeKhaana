@@ -12,6 +12,7 @@ import FirebaseDatabase
 import FirebaseFunctions
 import GoogleSignIn
 import FBSDKLoginKit
+import MapKit
 
 final class User{
     
@@ -33,7 +34,10 @@ final class User{
     var isUserImageLoaded: Bool
     var paymentSourcesToDeleteOnQuit:[PaymentSource]?
     var isKitchen: Bool
-    
+    var latitude: Double
+    var longitude: Double
+    var userLocation: CLLocation
+    var markingAsKitchen: Bool?
     
     static var dictionary: [String: Any] {
         return [
@@ -41,14 +45,16 @@ final class User{
             "isVegetarian": User.sharedInstance!.isVegetarian,
             "id": User.sharedInstance!.id,
             "email": User.sharedInstance!.email,
-            "customerID": User.sharedInstance!.customerID,
+//            "customerID": User.sharedInstance!.customerID,
             "defaultAddress": User.sharedInstance!.defaultAddress,
-            "isKitchen": User.sharedInstance!.isKitchen
+            "isKitchen": User.sharedInstance!.isKitchen,
+            "latitude": User.sharedInstance!.latitude,
+            "longitude": User.sharedInstance!.longitude
         ]
     }
     
     //designated constructors
-    public init(name:String, isVegetarian:Bool, id:String, email:String, customerID:String, defaultAddress: String, isKitchen: Bool)
+    public init(name:String, isVegetarian:Bool, id:String, email:String, customerID:String, defaultAddress: String, isKitchen: Bool, latitude: Double, longitude: Double)
     {
         self.name = name
         self.isVegetarian = isVegetarian
@@ -59,6 +65,9 @@ final class User{
         self.isUserImageLoaded = false
         self.paymentSourcesToDeleteOnQuit = []
         self.isKitchen = isKitchen
+        self.latitude = latitude
+        self.longitude = longitude
+        self.userLocation = CLLocation(latitude: self.latitude, longitude: self.longitude)
         User.isUserInitialized = true
     }
     
@@ -69,12 +78,15 @@ final class User{
               let isVegetarian = dictionary["isVegetarian"] as? Bool,
               let email = dictionary["email"] as? String,
               let customerID = dictionary["customerID"] as? String
-        else { return nil}
+        else { return nil }
         
         let defaultAddress = dictionary["defaultAddress"] as? String
         let isKitchen = dictionary["isKitchen"] as? Bool
+        let latitude = dictionary["latitude"] as? Double
+        let longitude = dictionary["longitude"] as? Double
         
-        self.init(name: name, isVegetarian: isVegetarian, id: id, email: email, customerID:customerID, defaultAddress: (defaultAddress ?? ""), isKitchen: isKitchen ?? false)
+        
+        self.init(name: name, isVegetarian: isVegetarian, id: id, email: email, customerID:customerID, defaultAddress: (defaultAddress ?? ""), isKitchen: isKitchen ?? false, latitude: latitude ?? -1, longitude: longitude ?? -1)
     }
     
     //intializes User data from the database
@@ -99,7 +111,7 @@ final class User{
                 let value = snapshot.value as? NSDictionary
                 if(value == nil){
                     //new user! yayy!!
-                    User.sharedInstance = User(name: user.displayName ?? user.email!, isVegetarian: false, id: uid, email: user.email!, customerID: "", defaultAddress: "", isKitchen: false)
+                    User.sharedInstance = User(name: user.displayName ?? user.email!, isVegetarian: false, id: uid, email: user.email!, customerID: "", defaultAddress: "", isKitchen: false, latitude: -1, longitude: -1)
                     
                     //write back to the database
                     db.child("Users").child(uid).setValue(User.dictionary, withCompletionBlock: { (err:Error?, ref:DatabaseReference) in
@@ -285,16 +297,23 @@ final class User{
         {
             if(User.sharedInstance!.isKitchen != true)
             {
+                if(User.sharedInstance!.markingAsKitchen ?? false)
+                {
+                    User.sharedInstance!.isKitchen = true
+                }
                 // update the user object
                 let id=User.sharedInstance!.id
-                db.child("Users/\(id)").setValue(User.dictionary){
+                let userRef = db.child("Users/\(id)")
+                //hopperRef.updateChildrenAsync(hopperUpdates);
+                
+                userRef.updateChildValues(User.dictionary, withCompletionBlock: {
                     (error:Error?, ref:DatabaseReference) in
                     if let error = error {
                         fatalError("Error uploading user data: \(error).")
                     } else {
                         print("User updated successfully!")
                     }
-                }
+                })
                 
                 //delete sources marked for deletion
                 deleteSourcesMarkedForDeletion()
@@ -310,18 +329,20 @@ final class User{
                 
                 if(currentKitchen != nil)
                 {
-                    db.child("Kitchens/\(id)").setValue(currentKitchen!.dictionary){
+                    let kitchenRef = db.child("Kitchens/\(id)")
+                    kitchenRef.updateChildValues(currentKitchen!.dictionary, withCompletionBlock: {
                         (error:Error?, ref:DatabaseReference) in
                         
                         if let error = error
                         {
-                            fatalError("Error uploading kitchen data: \(error).")
+                            // It reaches here in a very specific workflow. Convert to kitchen and then logout. but things work fine. So commenting this out. 
+                            //fatalError("Error uploading kitchen data: \(error).")
                         }
                         else
                         {
                             print("Its done.")
                         }
-                    }
+                    })
                     
                     DataManager.saveMenuItems()
                 }

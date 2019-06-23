@@ -29,7 +29,6 @@ class Order
     //cost
     var subTotal:Float
     var tax:Float
-    var convenienceFee:Float
     var discount:Float
     var orderTotal:Float
     
@@ -43,7 +42,6 @@ class Order
             "orderRating": orderRating ?? -1,
             "subTotal": subTotal,
             "tax": tax,
-            "convenienceFee": convenienceFee,
             "discount": discount,
             "orderTotal": orderTotal,
             "source": self.selectedPayment!.id,
@@ -91,7 +89,6 @@ class Order
         self.orderRating = -1
         self.subTotal = 0
         self.tax = 0
-        self.convenienceFee = 0
         self.discount = 0
         self.orderTotal = 0
         self.orderingUserName = User.sharedInstance!.name   // this function will be called from non-kitchen workflows. so, directly using the User variable is fine.
@@ -100,7 +97,7 @@ class Order
         self.timestamp = -1
     }
     
-    public init(id: String, orderDate: String, orderRating: Int?, status: String, cart: [Choice], subTotal: Float, tax: Float, convenienceFee: Float, discount: Float, orderTotal: Float, source: PaymentSource?, kitchenId: String, orderingUserId: String?, orderingUserName: String?, timestamp: Int64, instructions: String?)
+    public init(id: String, orderDate: String, orderRating: Int?, status: String, cart: [Choice], subTotal: Float, tax: Float, discount: Float, orderTotal: Float, source: PaymentSource?, kitchenId: String, orderingUserId: String?, orderingUserName: String?, timestamp: Int64, instructions: String?)
     {
         self.id = id
         self.orderDate = orderDate
@@ -109,7 +106,6 @@ class Order
         self.cart = cart
         self.subTotal = subTotal
         self.tax = tax
-        self.convenienceFee = convenienceFee
         self.discount = discount
         self.orderTotal = orderTotal
         self.selectedPayment = source
@@ -157,7 +153,6 @@ class Order
         //cost
         let subTotal = snapshot["subTotal"] as? Float
         let tax = snapshot["tax"] as? Float
-        let convenienceFee = snapshot["convenienceFee"] as? Float
         let discount = snapshot["discount"] as? Float
         let orderTotal = snapshot["orderTotal"] as? Float
         
@@ -165,7 +160,7 @@ class Order
         //payment source and address
         let selectedPayment:PaymentSource? = User.getPaymentSourceForID(id: selectedPaymentID!)
         
-        self.init(id: id!, orderDate: orderDate ?? "", orderRating: orderRating ?? -1, status: status ?? "New", cart: cart, subTotal: subTotal!, tax: tax!, convenienceFee: convenienceFee!, discount: discount!, orderTotal: orderTotal!, source: selectedPayment, kitchenId: kitchenId!, orderingUserId: orderingUserId, orderingUserName: orderingUserName, timestamp: timestamp!, instructions: customInstructions)
+        self.init(id: id!, orderDate: orderDate ?? "", orderRating: orderRating ?? -1, status: status ?? "New", cart: cart, subTotal: subTotal!, tax: tax!, discount: discount!, orderTotal: orderTotal!, source: selectedPayment, kitchenId: kitchenId!, orderingUserId: orderingUserId, orderingUserName: orderingUserName, timestamp: timestamp!, instructions: customInstructions)
     }
  
     func processResponse(snapshot: DataSnapshot) -> String
