@@ -38,7 +38,15 @@ class OrdersTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return mostRecentOrders?.count ?? 0
+        if(mostRecentOrders == nil)
+        {
+            return 1
+        }
+        if(mostRecentOrders!.count == 0)
+        {
+            return 1
+        }
+        return mostRecentOrders!.count
     }
 
     func listenToOrders()
@@ -62,21 +70,38 @@ class OrdersTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "order", for: indexPath) as! OrdersTableViewCell
-        cell.order = self.mostRecentOrders![indexPath.row]
-        return cell
+        if(self.mostRecentOrders != nil && self.mostRecentOrders!.count>0)
+        {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "order", for: indexPath) as! OrdersTableViewCell
+            cell.order = self.mostRecentOrders![indexPath.row]
+            return cell
+        }
+        else
+        {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "emptyOrder", for: indexPath) as! EmptyOrderTableViewCell
+            cell.mainText!.text = "Nothing here yet"
+            cell.subText!.text = "Order something for it to show up here"
+            return cell
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        let order:Order = self.mostRecentOrders![indexPath.row]
-        if(order.status != "Ordered" && order.status != "Ready for Pick-Up")
+        if(self.mostRecentOrders != nil && self.mostRecentOrders!.count>0)
         {
-            return 343 - 120; // here 120 is the height of the image.
+            let order:Order = self.mostRecentOrders![indexPath.row]
+            if(order.status != "Ordered" && order.status != "Ready for Pick-Up")
+            {
+                return 343 - 120; // here 120 is the height of the image.
+            }
+            else
+            {
+                return 343;
+            }
         }
         else
         {
-            return 343;
+            return self.view.frame.height - 100; // 100 is for the tab at the bottom
         }
     }
 

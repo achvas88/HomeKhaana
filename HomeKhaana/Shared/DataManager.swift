@@ -8,6 +8,7 @@
 
 import Foundation
 import FirebaseDatabase
+import MapKit
 
 class DataManager {
     
@@ -36,6 +37,7 @@ class DataManager {
                     }
                 }
                 
+                
                 completion();
             })
         }
@@ -57,6 +59,34 @@ class DataManager {
                 
                 completion();
             });
+        }
+    }
+    
+    public static func calculateDistanceOfKitchenFromCurrentUser(kitchen: Kitchen) -> Void
+    {
+        let location1 =  User.sharedInstance!.userLocation.coordinate
+        let location2 =  kitchen.kitchenLocation.coordinate
+        let mapItemLoc1 = MKMapItem(placemark: MKPlacemark(coordinate: location1))
+        let mapItemLoc2 = MKMapItem(placemark: MKPlacemark(coordinate: location2))
+        
+        let req = MKDirections.Request()
+        req.source = mapItemLoc1
+        req.destination = mapItemLoc2
+        let dir = MKDirections(request:req)
+        dir.calculate { response, error in
+            guard let response = response else {
+                // if error in route calculation, just print out direct distance.
+                let distance:CLLocationDistance = User.sharedInstance!.userLocation.distance(from: kitchen.kitchenLocation)
+                let distanceInMiles:Double = distance * 0.62137 / 1000
+                let distanceStr = NSString(format: "~ %.2f mi", distanceInMiles)
+                kitchen.distanceFromLoggedInUser = (distanceStr as String)
+                return
+            }
+            let route:MKRoute = response.routes[0] // I'm feeling insanely lucky
+            let distance = route.distance
+            let distanceInMiles:Double = distance * 0.62137 / 1000
+            let distanceStr = NSString(format: "%.2f mi", distanceInMiles)
+            kitchen.distanceFromLoggedInUser = (distanceStr as String)
         }
     }
     

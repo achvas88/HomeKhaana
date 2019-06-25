@@ -40,65 +40,50 @@ class KitchensTableViewController: UITableViewController,RefreshTableViewWhenImg
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        if(self.kitchens.count == 0)
+        {
+            return 1
+        }
         return self.kitchens.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Configure the cell...
-        let cell = tableView.dequeueReusableCell(withIdentifier: "kitchenTableViewCell", for: indexPath) as! KitchenTableViewCell
         
-        // Configure the cell...
-        let kitchen = kitchens[indexPath.row]
-        kitchen.containingTableViewDelegate = self
-        cell.kitchen = kitchen
-        return cell
+        if(self.kitchens.count > 0)
+        {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "kitchenTableViewCell", for: indexPath) as! KitchenTableViewCell
+            let kitchen = kitchens[indexPath.row]
+            kitchen.containingTableViewDelegate = self
+            cell.kitchen = kitchen
+            return cell
+        }
+        else
+        {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "emptyKitchen", for: indexPath) as! EmptyOrderTableViewCell
+            cell.mainText.text = "Sorry! There are no providers nearby!"
+            cell.subText.text = "We are working on getting some in your area... "
+            return cell
+        }
     }
     
     func reloadTableView() {
         self.tableView.reloadData()
     }
     
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if(self.kitchens.count == 0)
+        {
+            return self.view.frame.height - 100
+        }
+        else
+        {
+            return 306
+        }
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
     
     // MARK: - Navigation
 

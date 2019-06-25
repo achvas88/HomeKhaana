@@ -18,6 +18,7 @@ class KitchenTableViewCell: UITableViewCell {
     @IBOutlet weak var rating: UILabel!
     @IBOutlet weak var ratingCount: UILabel!
     @IBOutlet weak var outerView: UIView!
+    @IBOutlet weak var star: UIImageView!
     
     var kitchen: Kitchen? {
         didSet {
@@ -25,36 +26,22 @@ class KitchenTableViewCell: UITableViewCell {
             
             kitchenImg.image = kitchen.image
             name.text = kitchen.name
-            self.distanceBetweenPoints(location1: User.sharedInstance!.userLocation.coordinate, location2: kitchen.kitchenLocation.coordinate)
+            distance.text = kitchen.distanceFromLoggedInUser
             type.text = kitchen.type
-            rating.text = String(kitchen.rating.floatValue)
-            ratingCount.text = "(" + String(kitchen.ratingCount.intValue) + ")"
-        }
-    }
-    
-    func distanceBetweenPoints(location1: CLLocationCoordinate2D, location2:CLLocationCoordinate2D)
-    {
-        let mapItemLoc1 = MKMapItem(placemark: MKPlacemark(coordinate: location1))
-        let mapItemLoc2 = MKMapItem(placemark: MKPlacemark(coordinate: location2))
-        
-        let req = MKDirections.Request()
-        req.source = mapItemLoc1
-        req.destination = mapItemLoc2
-        let dir = MKDirections(request:req)
-        dir.calculate { response, error in
-            guard let response = response else {
-                // if error in route calculation, just print out direct distance.
-                let distance:CLLocationDistance = User.sharedInstance!.userLocation.distance(from: self.kitchen!.kitchenLocation)
-                let distanceInMiles:Double = distance * 0.62137 / 1000
-                let distanceStr = NSString(format: "~ %.1f mi", distanceInMiles)
-                self.distance.text = distanceStr as String
-                return
+            if(kitchen.rating.floatValue != -1)
+            {
+                rating.text = String(kitchen.rating.floatValue)
+                ratingCount.text = "(" + String(kitchen.ratingCount.intValue) + ")"
+                rating.isHidden = false
+                ratingCount.isHidden = false
+                star.isHidden = false
             }
-            let route:MKRoute = response.routes[0] // I'm feeling insanely lucky
-            let distance = route.distance
-            let distanceInMiles:Double = distance * 0.62137 / 1000
-            let distanceStr = NSString(format: "%.2f mi", distanceInMiles)
-            self.distance.text = distanceStr as String
+            else
+            {
+                rating.isHidden = true
+                ratingCount.isHidden = true
+                star.isHidden = true
+            }
         }
     }
     

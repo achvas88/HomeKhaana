@@ -25,6 +25,7 @@ class Kitchen
     var longitude: Double
     var latitude: Double
     var kitchenLocation: CLLocation
+    var distanceFromLoggedInUser: String?
     
     var image: UIImage? {
         didSet {
@@ -69,6 +70,8 @@ class Kitchen
         {
             self.loadImageFromDB()
         }
+        
+        DataManager.calculateDistanceOfKitchenFromCurrentUser(kitchen: self)
     }
     
     

@@ -62,6 +62,7 @@
 		B69F54AC20CDD67900E1B0EB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69F54AB20CDD67900E1B0EB /* SignUpViewController.swift */; };
 		B69F54AE20CDDBCF00E1B0EB /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69F54AD20CDDBCF00E1B0EB /* UserProfileViewController.swift */; };
 		B69F54B020CDE9B000E1B0EB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69F54AF20CDE9B000E1B0EB /* Extensions.swift */; };
+		B6FC081922C23E4800A232AD /* EmptyOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FC081822C23E4800A232AD /* EmptyOrderTableViewCell.swift */; };
 		C9A6C1ACD528FB79021F8FDC /* Pods_HomeKhaana.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06406288B39D9646E7ECC0D4 /* Pods_HomeKhaana.framework */; };
 /* End PBXBuildFile section */
 
@@ -146,6 +147,7 @@
 		B69F54AB20CDD67900E1B0EB /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		B69F54AD20CDDBCF00E1B0EB /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		B69F54AF20CDE9B000E1B0EB /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		B6FC081822C23E4800A232AD /* EmptyOrderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyOrderTableViewCell.swift; sourceTree = "<group>"; };
 		BBBD316E896632323B2713CD /* Pods_HomeKhaanaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HomeKhaanaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD4603C2E9D37B0C0F1C4E42 /* Pods-HomeKhaanaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeKhaanaUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HomeKhaanaUITests/Pods-HomeKhaanaUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		E2F4720502791857AA8EBD9B /* Pods-HomeKhaanaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeKhaanaTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HomeKhaanaTests/Pods-HomeKhaanaTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -351,6 +353,7 @@
 				B609AC3E2120C8C000C45C49 /* Order.swift */,
 				B69CE0812129F93200B7CFDB /* OrdersTableViewCell.swift */,
 				B69CE07F2129F91B00B7CFDB /* OrdersTableViewController.swift */,
+				B6FC081822C23E4800A232AD /* EmptyOrderTableViewCell.swift */,
 			);
 			path = Orders;
 			sourceTree = "<group>";
@@ -707,6 +710,7 @@
 				B609AC412128A4F500C45C49 /* OrderConfirmationViewController.swift in Sources */,
 				B691C79620FD823D0060CF98 /* AddPaymentTableViewCell.swift in Sources */,
 				B61558DD20DF0D4200471718 /* DataManager.swift in Sources */,
+				B6FC081922C23E4800A232AD /* EmptyOrderTableViewCell.swift in Sources */,
 				B62F26F4213CA20200FA88D3 /* LoadingScreenViewController.swift in Sources */,
 				B69F54AC20CDD67900E1B0EB /* SignUpViewController.swift in Sources */,
 				B61558DB20DF0B6700471718 /* Choice.swift in Sources */,
