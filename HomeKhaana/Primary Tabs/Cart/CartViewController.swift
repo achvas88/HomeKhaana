@@ -44,7 +44,7 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
         if(self.currentOrder == nil)
         {
             self.currentOrder = Order()
-            self.currentOrder!.selectedPayment = self.currentOrder!.selectedPayment ?? User.sharedInstance!.defaultPaymentSource
+            //self.currentOrder!.selectedPayment = self.currentOrder!.selectedPayment ?? User.sharedInstance!.defaultPaymentSource
         }
         
         
@@ -160,7 +160,7 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
         }
     }
     
-    func clearOffSelectedPaymentSource()
+    func clearOffSelectedPaymentSource()    //WILL BE CALLED ONCE CREDIT CARD IS ADDED
     {
         self.currentOrder!.selectedPayment = nil
         self.btnAddPayment.setTitle("Add Payment", for: .normal)
@@ -259,8 +259,8 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
             if(self.inCart.count == 0) {self.navigationController?.tabBarController?.tabBar.items?[1].badgeValue = nil}
             else {self.navigationController?.tabBarController?.tabBar.items?[1].badgeValue = String(self.inCart.count)}
         
-            //ensure payment source is still valid.
-            ensurePaymentSourceValidity()
+            //ensure payment source is still valid. This will be uncommented once credit card payment is open.
+            //ensurePaymentSourceValidity()
         }
     }
     
@@ -276,14 +276,13 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
             //setup order object
             self.currentOrder!.cart = self.inCart
             self.currentOrder!.subTotal = limitToTwoDecimal(input: subTotal)
-            self.currentOrder!.tax = limitToTwoDecimal(input: (self.currentOrder!.subTotal*0.05))
-            self.currentOrder!.orderTotal = limitToTwoDecimal(input:(self.currentOrder!.subTotal+(self.currentOrder!.subTotal*0.05)))
+            //self.currentOrder!.tax = limitToTwoDecimal(input: (self.currentOrder!.subTotal*0.05))
+            self.currentOrder!.orderTotal = self.currentOrder!.subTotal //limitToTwoDecimal(input:(self.currentOrder!.subTotal+(self.currentOrder!.subTotal*0.05)))
         }
         
         //update labels
         self.lblSubtotal.text = "$\(convertToCurrency(input: self.currentOrder!.subTotal))"
-        self.lblTax.text = "$\(convertToCurrency(input: self.currentOrder!.tax))"
-        self.lblTotal.text = "$\(convertToCurrency(input: self.currentOrder!.orderTotal))"
+        self.lblTotal.text = "$\(convertToCurrency(input: self.currentOrder!.orderTotal)) + taxes"
         
         if(self.currentOrder!.status == "New")
         {
@@ -338,8 +337,8 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
     }
     
     @IBAction func btnClearCartClicked(_ sender: Any) {
-        let alertController = UIAlertController(title: "This will clear the cart",
-                                                message: "Are you sure?",
+        let alertController = UIAlertController(title: "Are you sure?",
+                                                message: "This will clear the cart",
                                                 preferredStyle: .alert)
         var alertAction = UIAlertAction(title: "Yes", style: .default, handler: { (action) -> Void in
           
@@ -379,7 +378,8 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
                 return false
             }
             
-            guard self.currentOrder!.selectedPayment != nil else {
+            //THIS WILL BE UNCOMMENTED ONCE CREDIT CARD PAYMENT IS AVAILABLE.
+            /*guard self.currentOrder!.selectedPayment != nil else {
                 //make sure that there is a payment source selected
                 let alertController = UIAlertController(title: "No Payment Source Specified",
                                                         message: "Please add a valid payment source to continue",
@@ -388,7 +388,7 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
                 alertController.addAction(alertAction)
                 present(alertController, animated: true)
                 return false
-            }
+            }*/
             
             return true
         }
@@ -419,13 +419,14 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
                 detailsVC!.theChoice = currentRow!.choice
             }
         }
-        else if(segue.identifier == "choosePayment")
+        //THIS WILL BE UNCOMMENTED ONCE CREDIT CARD PAYMENT IS AVAILABLE.
+        /*else if(segue.identifier == "choosePayment")
         {
             let paymentsVC: PaymentSourceTableViewController? = segue.destination as? PaymentSourceTableViewController
             paymentsVC?.mgmtMode = false
             paymentsVC?.selectedPayment = self.currentOrder!.selectedPayment ?? User.sharedInstance!.defaultPaymentSource
             paymentsVC?.paymentSourceDelegate = self
-        }
+        }*/
         else if (segue.identifier == "checkout")
         {
             // set the kitchen id before we pass it along to confirm
@@ -441,7 +442,7 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
         }
     }
     
-    func updatePaymentSource(_ paymentSource: PaymentSource?) {
+    func updatePaymentSource(_ paymentSource: PaymentSource?) { //WILL NOT BE CALLED UNTIL CREDIT PAYMENT IS AVAILABLE
         self.currentOrder!.selectedPayment = paymentSource
     }
     

@@ -437,7 +437,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="wa9-lf-UBp">
-                                <rect key="frame" x="0.0" y="259.5" width="375" height="150"/>
+                                <rect key="frame" x="0.0" y="259.5" width="375" height="120"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZF1-Mg-5Bn" customClass="CustomUIButton" customModule="HomeKhaana" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
@@ -446,23 +446,23 @@
                                             <segue destination="VGf-9h-Wt0" kind="show" id="5hC-WK-9BY"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M7l-V4-yDi" customClass="CustomUIButton" customModule="HomeKhaana" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="30" width="375" height="30"/>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M7l-V4-yDi" customClass="CustomUIButton" customModule="HomeKhaana" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="30" width="375" height="0.0"/>
                                         <state key="normal" title="Payment"/>
                                         <connections>
                                             <segue destination="9fq-Ab-qtc" kind="show" identifier="showPayment" id="auW-X4-2bE"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NgZ-Yc-FnO" customClass="CustomUIButton" customModule="HomeKhaana" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="60" width="375" height="30"/>
+                                        <rect key="frame" x="0.0" y="30" width="375" height="30"/>
                                         <state key="normal" title="Help"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lIM-J9-8KL" customClass="CustomUIButton" customModule="HomeKhaana" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="90" width="375" height="30"/>
+                                        <rect key="frame" x="0.0" y="60" width="375" height="30"/>
                                         <state key="normal" title="FAQ"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BW1-bE-qiK" customClass="CustomUIButton" customModule="HomeKhaana" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="120" width="375" height="30"/>
+                                        <rect key="frame" x="0.0" y="90" width="375" height="30"/>
                                         <state key="normal" title="Log in as a Kitchen"/>
                                         <connections>
                                             <action selector="loginAsKitchenClicked:" destination="ADJ-pU-Ol8" eventType="touchUpInside" id="YEg-qs-oZz"/>
@@ -779,6 +779,15 @@
                                     <constraint firstItem="4eg-6v-zoR" firstAttribute="width" secondItem="bNd-GH-rJP" secondAttribute="width" id="l75-Gx-LnD"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ly-be-48a">
+                                <rect key="frame" x="16" y="35" width="68" height="28"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
+                                <state key="normal" title="&lt; Back"/>
+                                <connections>
+                                    <action selector="backBtnClicked:" destination="z1H-hW-b2Y" eventType="touchUpInside" id="PfG-ij-JGU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -786,8 +795,10 @@
                             <constraint firstItem="sPl-yg-dzP" firstAttribute="centerX" secondItem="XGE-01-C7B" secondAttribute="centerX" id="L5g-HW-MAK"/>
                             <constraint firstItem="XGE-01-C7B" firstAttribute="bottom" secondItem="enn-Gd-3k6" secondAttribute="bottom" id="aev-A0-vMH"/>
                             <constraint firstItem="mLJ-lf-G5e" firstAttribute="height" secondItem="vrt-0S-22j" secondAttribute="height" multiplier="0.4" id="bp1-qL-K2p"/>
+                            <constraint firstItem="1ly-be-48a" firstAttribute="top" secondItem="XGE-01-C7B" secondAttribute="top" constant="15" id="fVg-24-WbI"/>
                             <constraint firstItem="PTT-9y-ab9" firstAttribute="centerX" secondItem="XGE-01-C7B" secondAttribute="centerX" id="gIG-Wo-jfj"/>
                             <constraint firstItem="bNd-GH-rJP" firstAttribute="width" secondItem="vrt-0S-22j" secondAttribute="width" multiplier="0.85" id="hbV-DY-okz"/>
+                            <constraint firstItem="1ly-be-48a" firstAttribute="leading" secondItem="XGE-01-C7B" secondAttribute="leading" constant="16" id="heL-jo-iIe"/>
                             <constraint firstItem="mLJ-lf-G5e" firstAttribute="top" secondItem="XGE-01-C7B" secondAttribute="top" id="hw3-ZT-czq"/>
                             <constraint firstItem="sPl-yg-dzP" firstAttribute="top" secondItem="PTT-9y-ab9" secondAttribute="bottom" constant="10" id="k0L-MO-dNp"/>
                             <constraint firstItem="enn-Gd-3k6" firstAttribute="centerX" secondItem="XGE-01-C7B" secondAttribute="centerX" id="ol6-XI-xVd"/>
@@ -874,15 +885,15 @@
                                     <constraint firstItem="bSM-8O-0uD" firstAttribute="width" secondItem="Kef-w4-aBm" secondAttribute="width" id="Gha-8I-37V"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ajA-9w-URi">
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ajA-9w-URi">
                                 <rect key="frame" x="0.0" y="557" width="375" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="1Fz-U9-ybP"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <inset key="imageEdgeInsets" minX="-20" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="Add Payment" image="credit-card">
-                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <inset key="imageEdgeInsets" minX="-20" minY="0.0" maxX="10" maxY="0.0"/>
+                                <state key="normal" title="Paying by cash" image="invoice">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <segue destination="9fq-Ab-qtc" kind="show" identifier="choosePayment" id="sdt-pM-Hwp"/>
@@ -1069,10 +1080,10 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$0.75" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nKN-oW-ASU">
-                                                        <rect key="frame" x="307.5" y="0.0" width="37.5" height="17"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Taxed while paying at vendor location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nKN-oW-ASU">
+                                                        <rect key="frame" x="103" y="0.0" width="242" height="17"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <nil key="textColor"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -1089,8 +1100,8 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$8.75" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mLe-OW-Zui">
-                                                        <rect key="frame" x="305.5" y="0.0" width="39.5" height="17"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$8 + taxes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mLe-OW-Zui">
+                                                        <rect key="frame" x="273.5" y="0.0" width="71.5" height="17"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -1457,20 +1468,28 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="g2O-NW-aZp" userLabel="id">
                                                     <rect key="frame" x="15" y="135" width="325" height="30"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XJY-Ic-mT4" customClass="RatingControl" customModule="HomeKhaana" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="39" height="30"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="30" id="PkC-AZ-bgx"/>
-                                                            </constraints>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mbM-fX-yk9">
+                                                            <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
+                                                            <subviews>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XJY-Ic-mT4" customClass="RatingControl" customModule="HomeKhaana" customModuleProvider="target">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="30" id="PkC-AZ-bgx"/>
+                                                                    </constraints>
+                                                                </stackView>
+                                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ykW-lb-kEM">
+                                                                    <rect key="frame" x="150" y="0.0" width="0.0" height="30"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="NNS-hv-l2G"/>
+                                                                    </constraints>
+                                                                    <state key="normal" title="Rate"/>
+                                                                </button>
+                                                            </subviews>
                                                         </stackView>
-                                                        <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ykW-lb-kEM">
-                                                            <rect key="frame" x="44" y="0.0" width="25" height="30"/>
-                                                            <state key="normal" title="Rate"/>
-                                                        </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ordered" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p76-rV-3nN">
-                                                            <rect key="frame" x="74" y="0.0" width="251" height="30"/>
+                                                            <rect key="frame" x="155" y="0.0" width="170" height="30"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="6dh-l7-ZeR"/>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="6dh-l7-ZeR"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                                             <color key="textColor" red="0.81472641229629517" green="0.33966463804244995" blue="0.025419101119041443" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3074,7 +3093,6 @@
         <image name="NNVT" width="748" height="593"/>
         <image name="NVT" width="400" height="400"/>
         <image name="SVT" width="500" height="354"/>
-        <image name="credit-card" width="16" height="16"/>
         <image name="dancing" width="64" height="64"/>
         <image name="delivery-truck (1)" width="64" height="64"/>
         <image name="empty shopping cart" width="128" height="128"/>
@@ -3082,7 +3100,7 @@
         <image name="healthy" width="64" height="64"/>
         <image name="home" width="32" height="32"/>
         <image name="icon-google" width="246" height="54"/>
-        <image name="invoice" width="32" height="32"/>
+        <image name="invoice" width="21" height="21"/>
         <image name="leaf" width="8" height="8"/>
         <image name="minus" width="32" height="32"/>
         <image name="placeholder" width="21" height="21"/>
@@ -3099,7 +3117,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="DvV-qM-doP"/>
-        <segue reference="auW-X4-2bE"/>
+        <segue reference="sdt-pM-Hwp"/>
         <segue reference="jSY-jj-Mgi"/>
         <segue reference="Gmd-Ol-96N"/>
     </inferredMetricsTieBreakers>

@@ -65,7 +65,7 @@ class CurrentOrdersTableViewCell: UITableViewCell {
             let formatter = NumberFormatter()
             formatter.maximumFractionDigits = 2
             formatter.numberStyle = .currency
-            lblCost.text = formatter.string(from: NSNumber(value: self.order!.orderTotal))
+            lblCost.text = formatter.string(from: NSNumber(value: self.order!.orderTotal))! + " (excludes taxes)"
             
             if(self.order!.status == "Ready for Pick-Up")
             {

@@ -28,7 +28,7 @@ class OrderConfirmationViewController: UIViewController {
     
     func processPayment()
     {
-        LoaderController.sharedInstance.showLoader(indicatorText: "Payment Processing", holdingView: self.view)
+        LoaderController.sharedInstance.showLoader(indicatorText: "Placing order", holdingView: self.view)
         
         //post payment
         if (User.isUserInitialized)
@@ -44,21 +44,48 @@ class OrderConfirmationViewController: UIViewController {
             let theCharge:Dictionary<String,Any>=self.order!.dictionary
             
             //file a charge
-            newChargeRef.setValue(theCharge) {
+            newChargeRef.setValue(theCharge)
+            {
                 (error:Error?, ref:DatabaseReference) in
-                if error != nil {
-                    LoaderController.sharedInstance.updateTitle(title: "Error Processing Payment")
-                } else {
-                    LoaderController.sharedInstance.updateTitle(title: "Charging Initiated")
+                if error != nil
+                {
+                    LoaderController.sharedInstance.updateTitle(title: "Error placing order. Please try again later.")
+                    let timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.waitBeforeDismissing(timer:)), userInfo: ["passFail": 0], repeats: false)
+                    timer.tolerance = 0.2
+                }
+                else
+                {
+                    LoaderController.sharedInstance.updateTitle(title: "Success!")
+                    Cart.sharedInstance.cart.removeAll()
+                    self.navigationController?.tabBarController?.tabBar.items?[1].badgeValue = nil
+                    let timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.waitBeforeDismissing(timer:)), userInfo: ["passFail": 1], repeats: false)
+                    timer.tolerance = 0.2
                 }
             }
             
             //listen to payment posting updates
-            listenToPaymentPostingUpdates(uid: id, chargeID: chargeID)
+            //listenToPaymentPostingUpdates(uid: id, chargeID: chargeID)
+        }
+    }
+    
+    @objc func waitBeforeDismissing(timer: Timer)
+    {
+        if  let userInfo = timer.userInfo as? [String: Int],
+            let passFail = userInfo["passFail"]
+        {
+            LoaderController.sharedInstance.removeLoader()
+            if(passFail == 0)
+            {
+                self.dismiss(animated: true, completion: nil)
+            }
+            else
+            {
+                self.performSegue(withIdentifier: "returnAfterConfirmation", sender: self)
+            }
         }
     }
 
-    func listenToPaymentPostingUpdates(uid: String, chargeID: String)
+    /*func listenToPaymentPostingUpdates(uid: String, chargeID: String)
     {
         let paymentSourcesRef = db.child("Orders/\(uid)/\(chargeID)/stripeResponse")
         paymentSourcesRef.observe(.value, with: { (snapshot) in
@@ -90,7 +117,7 @@ class OrderConfirmationViewController: UIViewController {
                 self.dismiss(animated: true, completion: nil)
             }
         })
-    }
+    }*/
     /*
     // MARK: - Navigation
 

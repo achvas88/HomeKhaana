@@ -44,7 +44,7 @@ class Order
             "tax": tax,
             "discount": discount,
             "orderTotal": orderTotal,
-            "source": self.selectedPayment!.id,
+            "source": self.selectedPayment?.id ?? "",
             "amount": Int(floor(self.orderTotal*100)),
             "status": self.status,
             "orderingUserID": self.orderingUserID,  //these values are used in delivery workflows

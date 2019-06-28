@@ -104,8 +104,18 @@ exports.removePaymentSource = functions.database.ref('/PaymentSources/{userId}/{
      );
 });
 
+
 //charge the customer
 exports.charge = functions.database.ref('/Orders/{userId}/{id}').onCreate((snap, context) => {
+      const val = snap.val();
+      snap.ref.child('status').set("Ordered");
+      val.status = "Ordered";
+      const kitchenId = val.kitchenId;
+      admin.database().ref(`/CurrentOrders/${kitchenId}/${context.params.userId}/${context.params.id}`).set(val);
+});
+
+//charge the customer - credit card charging
+/*exports.charge = functions.database.ref('/Orders/{userId}/{id}').onCreate((snap, context) => {
   const val = snap.val();
   return admin.database().ref(`/Users/${context.params.userId}/customerID`).once('value').then((snapshot) => {
         return snapshot.val();
@@ -133,7 +143,7 @@ exports.charge = functions.database.ref('/Orders/{userId}/{id}').onCreate((snap,
                //return snap.ref.child('stripeResponse/error').set(error.message);
                return snap.ref.child('stripeResponse/error').set(userFacingMessage(error));
       });
-});
+});*/
 
 //sanitize error message
 function userFacingMessage(error) {
