@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		010DA0F83AEC7B10E3C7125D /* Pods_HomeKhaanaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBBD316E896632323B2713CD /* Pods_HomeKhaanaUITests.framework */; };
 		5AC040A5B34E858B379C52B2 /* Pods_HomeKhaanaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BDDC88BE19ACB80C0892354 /* Pods_HomeKhaanaTests.framework */; };
+		B609916022CE59A700A3543A /* KitchenHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609915F22CE59A700A3543A /* KitchenHeaderTableViewCell.swift */; };
 		B609AC3F2120C8C000C45C49 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609AC3E2120C8C000C45C49 /* Order.swift */; };
 		B609AC412128A4F500C45C49 /* OrderConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609AC402128A4F500C45C49 /* OrderConfirmationViewController.swift */; };
 		B610D6AE223DA23300E94E27 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B610D6AD223DA23300E94E27 /* LocationSearchTable.swift */; };
@@ -62,6 +63,7 @@
 		B69F54AC20CDD67900E1B0EB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69F54AB20CDD67900E1B0EB /* SignUpViewController.swift */; };
 		B69F54AE20CDDBCF00E1B0EB /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69F54AD20CDDBCF00E1B0EB /* UserProfileViewController.swift */; };
 		B69F54B020CDE9B000E1B0EB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69F54AF20CDE9B000E1B0EB /* Extensions.swift */; };
+		B6E5B08522D0D5EF009D3BE0 /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E5B08422D0D5EF009D3BE0 /* RatingViewController.swift */; };
 		B6FC081922C23E4800A232AD /* EmptyOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FC081822C23E4800A232AD /* EmptyOrderTableViewCell.swift */; };
 		C9A6C1ACD528FB79021F8FDC /* Pods_HomeKhaana.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06406288B39D9646E7ECC0D4 /* Pods_HomeKhaana.framework */; };
 /* End PBXBuildFile section */
@@ -90,6 +92,7 @@
 		531257BB9DFCAC0EA5AB0085 /* Pods-HomeKhaanaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeKhaanaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeKhaanaTests/Pods-HomeKhaanaTests.release.xcconfig"; sourceTree = "<group>"; };
 		77D503372F21770E7F3882CC /* Pods-HomeKhaanaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeKhaanaUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeKhaanaUITests/Pods-HomeKhaanaUITests.release.xcconfig"; sourceTree = "<group>"; };
 		7D1B59AC1C89897F71B06C5F /* Pods-HomeKhaana.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeKhaana.release.xcconfig"; path = "Pods/Target Support Files/Pods-HomeKhaana/Pods-HomeKhaana.release.xcconfig"; sourceTree = "<group>"; };
+		B609915F22CE59A700A3543A /* KitchenHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitchenHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		B609AC3E2120C8C000C45C49 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		B609AC402128A4F500C45C49 /* OrderConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmationViewController.swift; sourceTree = "<group>"; };
 		B610D6AD223DA23300E94E27 /* LocationSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
@@ -147,6 +150,7 @@
 		B69F54AB20CDD67900E1B0EB /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		B69F54AD20CDDBCF00E1B0EB /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		B69F54AF20CDE9B000E1B0EB /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		B6E5B08422D0D5EF009D3BE0 /* RatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
 		B6FC081822C23E4800A232AD /* EmptyOrderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyOrderTableViewCell.swift; sourceTree = "<group>"; };
 		BBBD316E896632323B2713CD /* Pods_HomeKhaanaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HomeKhaanaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD4603C2E9D37B0C0F1C4E42 /* Pods-HomeKhaanaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HomeKhaanaUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HomeKhaanaUITests/Pods-HomeKhaanaUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -354,6 +358,7 @@
 				B69CE0812129F93200B7CFDB /* OrdersTableViewCell.swift */,
 				B69CE07F2129F91B00B7CFDB /* OrdersTableViewController.swift */,
 				B6FC081822C23E4800A232AD /* EmptyOrderTableViewCell.swift */,
+				B6E5B08422D0D5EF009D3BE0 /* RatingViewController.swift */,
 			);
 			path = Orders;
 			sourceTree = "<group>";
@@ -412,6 +417,7 @@
 				B655FFBE219BA975008691D2 /* KitchensTableViewController.swift */,
 				B655FFC0219BA98F008691D2 /* Kitchen.swift */,
 				B655FFC2219BA9A4008691D2 /* KitchenTableViewCell.swift */,
+				B609915F22CE59A700A3543A /* KitchenHeaderTableViewCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -723,10 +729,12 @@
 				B61558D520D8641F00471718 /* CustomUIButton.swift in Sources */,
 				B655FFC721A0D302008691D2 /* Cart.swift in Sources */,
 				B64AB0BC20BCC707003B966C /* AppDelegate.swift in Sources */,
+				B609916022CE59A700A3543A /* KitchenHeaderTableViewCell.swift in Sources */,
 				B691C78820E9AA440060CF98 /* CartViewController.swift in Sources */,
 				B691C78E20EB3B480060CF98 /* Shared.swift in Sources */,
 				B62F26F0213B536100FA88D3 /* CurrentOrdersTableViewController.swift in Sources */,
 				B610D6B0223DB0B700E94E27 /* LocationViewController.swift in Sources */,
+				B6E5B08522D0D5EF009D3BE0 /* RatingViewController.swift in Sources */,
 				B691C78C20E9B8D30060CF98 /* CartTableViewCell.swift in Sources */,
 				B61558D920DF0AC800471718 /* HomeTableViewController.swift in Sources */,
 				B61B78F221177BED000EDE80 /* UserInitializationErrorViewController.swift in Sources */,

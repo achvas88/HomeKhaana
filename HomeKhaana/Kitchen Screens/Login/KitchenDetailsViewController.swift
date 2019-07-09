@@ -20,6 +20,9 @@ class KitchenDetailsViewController: UIViewController, UIImagePickerControllerDel
     @IBOutlet weak var txtAddress: UITextField!
     @IBOutlet weak var txtFoodType: UITextField!
     @IBOutlet weak var imgKitchen: UIImageView!
+    @IBOutlet weak var swhCash: UISwitch!
+    @IBOutlet weak var swhDebit: UISwitch!
+    @IBOutlet weak var swhCredit: UISwitch!
     
     var latitude: Double?
     var longitude: Double?
@@ -79,6 +82,12 @@ class KitchenDetailsViewController: UIViewController, UIImagePickerControllerDel
             self.txtFoodType!.text = currentKitchen!.type
             self.latitude = currentKitchen!.latitude
             self.longitude = currentKitchen!.longitude
+            
+            //setup payment methods
+            self.swhCash.isEnabled = false
+            self.swhCash.isOn = true
+            self.swhDebit.isOn = currentKitchen!.acceptsDebit ?? false
+            self.swhCredit.isOn = currentKitchen!.acceptsCredit ?? false
         }
         self.imageChanged = false
     }
@@ -165,7 +174,7 @@ class KitchenDetailsViewController: UIViewController, UIImagePickerControllerDel
         //we are good to go here as all values are set. let us update the kitchen's values right away or create the kitchen if need be.
         if (currentKitchen == nil)
         {
-            currentKitchen = Kitchen(id: User.sharedInstance!.id, name: self.txtName.text!, rating: -1, address: self.txtAddress.text!, type: self.txtFoodType.text!, ratingCount: 0, hasImage: true, offersVegetarian: true, latitude: latitude!, longitude: longitude!, image: self.imgKitchen!.image)
+            currentKitchen = Kitchen(id: User.sharedInstance!.id, name: self.txtName.text!, rating: -1, address: self.txtAddress.text!, type: self.txtFoodType.text!, ratingCount: 0, hasImage: true, offersVegetarian: true, latitude: latitude!, longitude: longitude!, image: self.imgKitchen!.image, acceptsDebit: self.swhDebit.isOn, acceptsCredit: self.swhCredit.isOn)
             vcToPresent = "KitchenHome"
         }
         else
@@ -175,6 +184,8 @@ class KitchenDetailsViewController: UIViewController, UIImagePickerControllerDel
             currentKitchen!.type = self.txtFoodType.text!
             currentKitchen!.longitude = longitude!
             currentKitchen!.latitude = latitude!
+            currentKitchen!.acceptsDebit = self.swhDebit.isOn
+            currentKitchen!.acceptsCredit = self.swhCredit.isOn
         }
         
         currentKitchen!.hasImage = true

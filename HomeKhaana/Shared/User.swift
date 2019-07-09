@@ -14,11 +14,14 @@ import GoogleSignIn
 import FBSDKLoginKit
 import MapKit
 
-final class User{
+final class User: NSObject{
     
     static var sharedInstance:User? = nil   //singleton
     static var isUserInitialized: Bool = false
     static var userJustCreated: Bool = false
+    static let locationManager = CLLocationManager()
+    static var dispatchGroupLocation = DispatchGroup();
+    static var loadingLocation: Bool = false
     
     //member variables
     var name:String
@@ -38,6 +41,7 @@ final class User{
     var longitude: Double
     var userLocation: CLLocation
     var markingAsKitchen: Bool?
+    
     
     static var dictionary: [String: Any] {
         return [
@@ -132,7 +136,7 @@ final class User{
             });
             
             //next load payments
-            dispatchGroupUser.notify(queue: DispatchQueue.main) {
+            /*dispatchGroupUser.notify(queue: DispatchQueue.main) {
                 if(User.userJustCreated != true && User.sharedInstance!.isKitchen != true)
                 {
                     loadPayments(completion: completion)
@@ -142,9 +146,37 @@ final class User{
                     User.sharedInstance!.paymentSources = []
                     allDone(completion: completion)
                 }
+            }*/
+            
+            dispatchGroupUser.notify(queue: DispatchQueue.main) {
+                User.sharedInstance!.paymentSources = []
+                if(User.sharedInstance!.isKitchen != true)
+                {
+                    loadUserLocation(completion: completion)
+                }
+                else
+                {
+                    allDone(completion: completion)
+                }
             }
         }
     }
+    
+    public static func loadUserLocation(completion: @escaping () -> ())
+    {
+        LoaderController.sharedInstance.updateTitle(title: "Loading User Location")
+        
+        User.dispatchGroupLocation.enter()
+        User.loadingLocation = true
+        
+        lookupUserLocation()
+    
+        User.dispatchGroupLocation.notify(queue: DispatchQueue.main) {
+            User.loadingLocation = false
+            allDone(completion: completion)
+        }
+    }
+    
     
     public static func loadPayments(completion: @escaping () -> ())
     {
@@ -216,11 +248,13 @@ final class User{
     
     public static func allDone(completion: @escaping () -> ())
     {
-        print("Finished Loading User Default Payments")
+        print("Finished Loading")
         LoaderController.sharedInstance.updateTitle(title: "Finished Loading")
         completion();
     }
     
+    
+//     These will be used once credit card payment is available.
     public static func updateDefaultPayment()
     {
         if(User.sharedInstance!.defaultPaymentSource == nil) { return; }
@@ -316,10 +350,10 @@ final class User{
                 })
                 
                 //delete sources marked for deletion
-                deleteSourcesMarkedForDeletion()
+                //deleteSourcesMarkedForDeletion()
                 
                 //update the default payment source.
-                updateDefaultPayment()
+                //updateDefaultPayment()
             }
             else
             {
@@ -373,6 +407,45 @@ final class User{
             {
                 print(error.localizedDescription)
             }
+        }
+    }
+    
+    public static func lookupUserLocation() {
+        // setup location manager
+        User.locationManager.delegate = User.sharedInstance!
+        User.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        if(CLLocationManager.locationServicesEnabled())
+        {
+            locationManager.requestLocation()
+        }
+        else
+        {
+            if(User.loadingLocation)
+            {
+                User.dispatchGroupLocation.leave()
+            }
+        }
+        // if you do not have access, let the user go through with this screen. The latitude longitude should have still been stored during user initialization.
+    }
+}
+
+
+extension User : CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            User.sharedInstance!.userLocation =  location
+            
+            if(User.loadingLocation)
+            {
+                User.dispatchGroupLocation.leave()
+            }
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        if(User.loadingLocation)
+        {
+            User.dispatchGroupLocation.leave()
         }
     }
 }

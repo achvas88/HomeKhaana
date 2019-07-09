@@ -158,7 +158,7 @@ class Order
         
         let selectedPaymentID = snapshot["source"] as? String
         //payment source and address
-        let selectedPayment:PaymentSource? = User.getPaymentSourceForID(id: selectedPaymentID!)
+        let selectedPayment:PaymentSource? = User.getPaymentSourceForID(id: selectedPaymentID ?? "")
         
         self.init(id: id!, orderDate: orderDate ?? "", orderRating: orderRating ?? -1, status: status ?? "New", cart: cart, subTotal: subTotal!, tax: tax!, discount: discount!, orderTotal: orderTotal!, source: selectedPayment, kitchenId: kitchenId!, orderingUserId: orderingUserId, orderingUserName: orderingUserName, timestamp: timestamp!, instructions: customInstructions)
     }
@@ -182,5 +182,11 @@ class Order
         }
         
         return ""
+    }
+    
+    public func setRating(rating: Int)
+    {
+        self.orderRating = rating
+        db.child("Orders/\(self.orderingUserID)/\(self.id)/\("orderRating")").setValue(rating)
     }
 }

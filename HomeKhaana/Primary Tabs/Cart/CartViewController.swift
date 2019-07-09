@@ -32,10 +32,13 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
     @IBOutlet weak var txtCustomInstr: UITextView!
     @IBOutlet weak var cnstBottom: NSLayoutConstraint!
     @IBOutlet weak var btnClearCart: UIButton!
+    @IBOutlet weak var btnRate: UIButton!
+    @IBOutlet weak var stkRating: RatingControl!
     
     var inCart:[Choice] = []
     var currentOrder:Order?
     var navigateToOrdersScreen:Bool = false
+    var justRated: Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -175,7 +178,7 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
         super.viewWillAppear(animated)
         
         //if the payment processing has failed, then we need to update the order's ID with the updated charge ID.
-        self.currentOrder?.id = ""
+        //self.currentOrder?.id = "" -> this caused problems when viewing a completed order (it cleared off the id. hence rating the order was not working)
         
         //update display
         self.updateDisplay(initialize: false)
@@ -184,6 +187,24 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func setAddPaymentTitle(kitchen: Kitchen)
+    {
+        let acceptsDebit = kitchen.acceptsDebit ?? false
+        let acceptsCredit = kitchen.acceptsCredit ?? false
+        var credit:String = "";
+        var debit:String = "";
+        if(acceptsDebit)
+        {
+            debit = "/Debit"
+        }
+        if(acceptsCredit)
+        {
+            credit = "/Credit"
+        }
+        
+        self.btnAddPayment.setTitle("Pay by Cash" + debit + credit , for: .normal)
     }
     
     func updateDisplay(initialize:Bool)
@@ -224,14 +245,18 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
             self.btnClearCart.isHidden = true
             self.stkEmptyCart.isHidden = false
             self.tblItems.isUserInteractionEnabled = false
+            self.btnRate.isHidden = true
+            self.stkRating.isHidden = true
         }
         else
         {
             self.scrScrollArea.isHidden = false
             self.btnCheckout.isHidden = false
+            
             if(self.currentOrder!.status == "New")
             {
                 self.btnAddPayment.isHidden = false
+                self.setAddPaymentTitle(kitchen: kitchen!)
                 self.btnClearCart.isHidden = false
                 self.tblItems.isUserInteractionEnabled = true
             }
@@ -242,6 +267,36 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
                 self.cnstAddPaymentHeight.constant = 0
                 self.tblItems.isUserInteractionEnabled = false
             }
+            
+            if(self.currentOrder!.status == "Completed")
+            {
+                if(self.currentOrder!.orderRating == nil || self.currentOrder!.orderRating == -1  )
+                {
+                    self.btnRate.isHidden = false
+                    self.stkRating.isHidden = true
+                }
+                else
+                {
+                    self.stkRating.isHidden = false
+                    self.stkRating.isUserInteractionEnabled = false
+                    self.stkRating.rating = self.currentOrder!.orderRating!
+                    
+                    if(justRated == nil || justRated! == false)
+                    {
+                        self.btnRate.isHidden = true
+                    }
+                    else
+                    {
+                        self.btnRate.isHidden = false
+                    }
+                }
+            }
+            else
+            {
+                self.btnRate.isHidden = true
+                self.stkRating.isHidden = true
+            }
+            
             self.stkEmptyCart.isHidden = true
             if(!initialize)
             {
@@ -294,6 +349,7 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
     func setupButtons()
     {
         self.btnClearCart.layer.cornerRadius = 3
+        self.btnRate.layer.cornerRadius = 3
         self.btnCheckout.backgroundColor = UIColor(red: 69/255, green: 191/255, blue: 34/255, alpha: 1.0)
         self.btnCheckout.setTitleColor(UIColor.white, for: .normal)
         
@@ -357,6 +413,19 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
         {
             self.dismiss(animated: true, completion: nil)
         }
+        else
+        {
+            let alertController = UIAlertController(title: "Confirm?",
+                                                    message: "This will place the order.",
+                                                    preferredStyle: .alert)
+            var alertAction = UIAlertAction(title: "Yes", style: .default, handler: { (action) -> Void in
+                self.performSegue(withIdentifier: "checkout", sender: self)
+            })
+            alertController.addAction(alertAction)
+            alertAction = UIAlertAction(title: "No", style: .default)
+            alertController.addAction(alertAction)
+            present(alertController, animated: true)
+        }
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool
@@ -419,6 +488,15 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
                 detailsVC!.theChoice = currentRow!.choice
             }
         }
+        else if (segue.identifier == "rate")
+        {
+            let ratingVC: RatingViewController? = segue.destination as? RatingViewController
+            
+            if(ratingVC != nil && self.currentOrder != nil)
+            {
+                ratingVC!.currentOrder = self.currentOrder!
+            }
+        }
         //THIS WILL BE UNCOMMENTED ONCE CREDIT CARD PAYMENT IS AVAILABLE.
         /*else if(segue.identifier == "choosePayment")
         {
@@ -448,5 +526,11 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
     
     @IBAction func backFromModal(_ segue: UIStoryboardSegue) {
         self.navigateToOrdersScreen = true
+    }
+    
+    @IBAction func backFromRating(_ segue: UIStoryboardSegue)
+    {
+        self.justRated = true
+        self.updateDisplay(initialize: false)
     }
 }

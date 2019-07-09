@@ -18,13 +18,14 @@ class DataManager {
     static var kitchens:Dictionary<String, Kitchen> = [:]  // kitchen id: kitchen
     static var menuItems:Dictionary<String,[ChoiceGroup]> = [:] //kitchen Id: ChoiceGroup array. (Choice group is a group of choices)
     static var inventoryLoaded = false
+    static var kitchenDistancesToBeCalculated = 0
     
     public static func initData(completion: @escaping () -> ()) -> Void {
         
         if(!User.sharedInstance!.isKitchen)
         {
             // load all kitchens
-            LoaderController.sharedInstance.updateTitle(title: "Loading Kitchens")
+            LoaderController.sharedInstance.updateTitle(title: "Loading Service Providers")
             let kitchensRef = db.child("Kitchens")
             kitchensRef.observe(.value, with: { (snapshot) in
                 self.kitchens = [:]
@@ -37,8 +38,7 @@ class DataManager {
                     }
                 }
                 
-                
-                completion();
+                loadDistanceOfKitchensFromUser(completion: completion)
             })
         }
         else
@@ -57,12 +57,22 @@ class DataManager {
                     self.kitchens[kitchenId] = kitchen
                 }
                 
-                completion();
+                completion()
             });
         }
     }
     
-    public static func calculateDistanceOfKitchenFromCurrentUser(kitchen: Kitchen) -> Void
+    private static func loadDistanceOfKitchensFromUser(completion: @escaping () -> ())
+    {
+        LoaderController.sharedInstance.updateTitle(title: "Triangulating")
+        
+        kitchenDistancesToBeCalculated = self.kitchens.count
+        for (_, kitchen) in self.kitchens {
+            calculateDistanceOfKitchenFromCurrentUser(kitchen: kitchen, completion: completion)
+        }
+    }
+    
+    public static func calculateDistanceOfKitchenFromCurrentUser(kitchen: Kitchen, completion: @escaping () -> ()) -> Void
     {
         let location1 =  User.sharedInstance!.userLocation.coordinate
         let location2 =  kitchen.kitchenLocation.coordinate
@@ -74,31 +84,50 @@ class DataManager {
         req.destination = mapItemLoc2
         let dir = MKDirections(request:req)
         dir.calculate { response, error in
+            
+            kitchenDistancesToBeCalculated = kitchenDistancesToBeCalculated-1
             guard let response = response else {
                 // if error in route calculation, just print out direct distance.
                 let distance:CLLocationDistance = User.sharedInstance!.userLocation.distance(from: kitchen.kitchenLocation)
                 let distanceInMiles:Double = distance * 0.62137 / 1000
+                kitchen.distanceInMiles = distanceInMiles
                 let distanceStr = NSString(format: "~ %.2f mi", distanceInMiles)
                 kitchen.distanceFromLoggedInUser = (distanceStr as String)
+                
+                if(kitchenDistancesToBeCalculated == 0)
+                {
+                    completion()
+                }
                 return
             }
-            let route:MKRoute = response.routes[0] // I'm feeling insanely lucky
+            let route:MKRoute = response.routes[0] 
             let distance = route.distance
             let distanceInMiles:Double = distance * 0.62137 / 1000
+            kitchen.distanceInMiles = distanceInMiles
             let distanceStr = NSString(format: "%.2f mi", distanceInMiles)
             kitchen.distanceFromLoggedInUser = (distanceStr as String)
+            if(kitchenDistancesToBeCalculated == 0)
+            {
+                completion()
+            }
         }
     }
     
     public static func getKitchens() -> [Kitchen]
     {
+        var kitchenArray:Array = Array(self.kitchens.values)
+        
+        kitchenArray.sort(by: {(kitchen1: Kitchen, kitchen2: Kitchen) in
+            return kitchen1.distanceInMiles! < kitchen2.distanceInMiles!
+        })
+        
         if(!User.sharedInstance!.isVegetarian)
         {
-            return Array(self.kitchens.values)
+            return kitchenArray
         }
         else
         {
-            let allKitchens:[Kitchen] = Array(self.kitchens.values)
+            let allKitchens:[Kitchen] = kitchenArray
             var hasVegKitchens:[Kitchen] = []
             for kitchen in allKitchens
             {

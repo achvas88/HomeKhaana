@@ -55,10 +55,10 @@ class HomeTableViewController: UITableViewController,RefreshTableViewWhenImgLoad
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        if(self.menuItems.count>0)
-        {
-            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableViewScrollPosition.top, animated: true)
-        }
+//        if(self.menuItems.count>0)
+//        {
+//            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableViewScrollPosition.top, animated: true)
+//        }
         
         if(Cart.sharedInstance.cart.count == 0) {self.navigationController?.tabBarController?.tabBar.items?[1].badgeValue = nil}
         else {self.navigationController?.tabBarController?.tabBar.items?[1].badgeValue = String(Cart.sharedInstance.cart.count)}
@@ -72,38 +72,57 @@ class HomeTableViewController: UITableViewController,RefreshTableViewWhenImgLoad
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return menuItems.count
+        return menuItems.count + 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         //return choices.count
-        return menuItems[section].getChoices().count
+        if(section == 0)
+        {
+            return 1
+        }
+        return menuItems[section-1].getChoices().count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "choiceCell", for: indexPath) as! ChoiceTableViewCell
+        if(indexPath.section == 0)
+        {
+           let cell = tableView.dequeueReusableCell(withIdentifier: "kitchenHeader", for: indexPath) as! KitchenHeaderTableViewCell
+            cell.kitchen = self.kitchen!
+            return cell
+        }
+        else
+        {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "choiceCell", for: indexPath) as! ChoiceTableViewCell
 
-        // Configure the cell...
-        //let choice = choices[indexPath.row]
-        //cell.choice = choice
-        let choice = menuItems[indexPath.section].getChoices()[indexPath.row]
-        choice.containingTableViewDelegate = self
-        cell.choice = choice
-        return cell
+            // Configure the cell...
+            //let choice = choices[indexPath.row]
+            //cell.choice = choice
+            let choice = menuItems[indexPath.section-1].getChoices()[indexPath.row]
+            choice.containingTableViewDelegate = self
+            cell.choice = choice
+            return cell
+        }
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if(menuItems.count == 1) {
+        if(menuItems.count == 1 || section == 0) {
             return ""   // do not show section title if there is only one section
         }
         else {
-            return menuItems[section].displayTitle
+            return menuItems[section-1].displayTitle
         }
-        
     }
 
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if(indexPath.section == 0)
+        {
+            return 160
+        }
+        return 220
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

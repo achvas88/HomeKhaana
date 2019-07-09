@@ -28,10 +28,10 @@ class KitchenTableViewCell: UITableViewCell {
             name.text = kitchen.name
             distance.text = kitchen.distanceFromLoggedInUser
             type.text = kitchen.type
-            if(kitchen.rating.floatValue != -1)
+            if(kitchen.rating != -1)
             {
-                rating.text = String(kitchen.rating.floatValue)
-                ratingCount.text = "(" + String(kitchen.ratingCount.intValue) + ")"
+                rating.text = String(kitchen.rating)
+                ratingCount.text = "(" + String(kitchen.ratingCount) + ")"
                 rating.isHidden = false
                 ratingCount.isHidden = false
                 star.isHidden = false

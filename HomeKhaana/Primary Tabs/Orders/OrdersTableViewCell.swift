@@ -26,12 +26,10 @@ class OrdersTableViewCell: UITableViewCell {
     @IBOutlet weak var lblStatus: UILabel!
     @IBOutlet weak var lblWhere: UILabel!
     @IBOutlet weak var lblTotal: UILabel!
-    //@IBOutlet weak var btnRateIt: UIButton!
     @IBOutlet weak var btnCartLink: UIButton!
     @IBOutlet weak var orderOuterView: UIView!
     @IBOutlet weak var imgHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var stkRating: RatingControl!
-    @IBOutlet weak var btnRate: UIButton!
     
     
     var order:Order? {
@@ -40,16 +38,17 @@ class OrdersTableViewCell: UITableViewCell {
             
             //ratings related
             stkRating.isHidden = true
-            btnRate.isHidden = true
-            if(order.status == "Ordered")//Completed")
+            stkRating.isUserInteractionEnabled = false
+            if(order.status == "Completed")
             {
                 // if not already rated
                 if(order.orderRating == nil || order.orderRating == -1)
                 {
-                    btnRate.isHidden = false
+                    // do nothing
                 }
                 else
                 {
+                    stkRating.rating = order.orderRating!
                     stkRating.isHidden = false
                 }
             }
