@@ -174,7 +174,7 @@ class KitchenDetailsViewController: UIViewController, UIImagePickerControllerDel
         //we are good to go here as all values are set. let us update the kitchen's values right away or create the kitchen if need be.
         if (currentKitchen == nil)
         {
-            currentKitchen = Kitchen(id: User.sharedInstance!.id, name: self.txtName.text!, rating: -1, address: self.txtAddress.text!, type: self.txtFoodType.text!, ratingCount: 0, hasImage: true, offersVegetarian: true, latitude: latitude!, longitude: longitude!, image: self.imgKitchen!.image, acceptsDebit: self.swhDebit.isOn, acceptsCredit: self.swhCredit.isOn)
+            currentKitchen = Kitchen(id: User.sharedInstance!.id, name: self.txtName.text!, rating: -1, address: self.txtAddress.text!, type: self.txtFoodType.text!, ratingCount: 0, hasImage: true, offersVegetarian: true, latitude: latitude!, longitude: longitude!, isOnline: false, image: self.imgKitchen!.image, acceptsDebit: self.swhDebit.isOn, acceptsCredit: self.swhCredit.isOn)
             vcToPresent = "KitchenHome"
         }
         else

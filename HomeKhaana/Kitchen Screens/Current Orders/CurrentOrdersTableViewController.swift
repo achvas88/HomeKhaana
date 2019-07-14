@@ -13,6 +13,7 @@ import FirebaseDatabase
 class CurrentOrdersTableViewController: UITableViewController, CurrentOrderActionsDelegate {
     
     var currentOrders:[Order]?
+    var userBeingRated: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -182,24 +183,17 @@ class CurrentOrdersTableViewController: UITableViewController, CurrentOrderActio
             {
                 (error:Error?, ref:DatabaseReference) in
                 if error == nil {
-                    /*db.child("Orders/\(order.orderingUserID)/\(order.id)/status").setValue("Completed"){
-                        (error:Error?, ref:DatabaseReference) in
-                        if error != nil {
-                            LoaderController.sharedInstance.updateTitle(title: "Failed. Try again")
-                        } else {
-                            LoaderController.sharedInstance.updateTitle(title: "Complete!")
-                        }
-                        LoaderController.sharedInstance.removeLoader()
-                        self.tableView.reloadData()
-                    }*/
                     LoaderController.sharedInstance.removeLoader()
+                    
+                    //rate the user segue
+                    self.rateUser(order: order)
+                    
                     self.tableView.reloadData()
                 } else {
                     LoaderController.sharedInstance.updateTitle(title: "Failed. Try again")
                     LoaderController.sharedInstance.removeLoader()
                 }
             }
-            
         })
         
         alertController.addAction(alertAction)
@@ -207,7 +201,6 @@ class CurrentOrdersTableViewController: UITableViewController, CurrentOrderActio
         alertController.addAction(alertAction)
         present(alertController, animated: true)
     }
-    
 
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -254,14 +247,32 @@ class CurrentOrdersTableViewController: UITableViewController, CurrentOrderActio
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
+    private func rateUser(order: Order)
+    {
+        User.loadUserFromServer(userID: order.orderingUserID, completion: { (user) in
+            if(user != nil)
+            {
+                self.userBeingRated = user
+                self.performSegue(withIdentifier: "rateUser", sender: self)
+            }
+        })
+    }
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if (segue.identifier == "rateUser")
+        {
+            let ratingVC: RatingViewController? = segue.destination as? RatingViewController
+            
+            if(ratingVC != nil && self.userBeingRated != nil)
+            {
+                ratingVC!.currentUser = self.userBeingRated
+            }
+        }
     }
-    */
-
 }

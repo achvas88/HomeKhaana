@@ -31,7 +31,8 @@ class DataManager {
                 self.kitchens = [:]
                 for kitchenChild in snapshot.children {
                     if let snapshot = kitchenChild as? DataSnapshot,
-                        let kitchen:Kitchen = Kitchen(snapshot: snapshot)
+                        let kitchen:Kitchen = Kitchen(snapshot: snapshot),
+                        kitchen.isOnline == true
                     {
                         let kitchenId:String = snapshot.key
                         self.kitchens[kitchenId] = kitchen

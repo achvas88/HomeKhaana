@@ -41,7 +41,9 @@ final class User: NSObject{
     var longitude: Double
     var userLocation: CLLocation
     var markingAsKitchen: Bool?
-    
+    var rating: Float
+    var ratingThisSession: Int?
+    var ratingCount: Int
     
     static var dictionary: [String: Any] {
         return [
@@ -53,12 +55,14 @@ final class User: NSObject{
             "defaultAddress": User.sharedInstance!.defaultAddress,
             "isKitchen": User.sharedInstance!.isKitchen,
             "latitude": User.sharedInstance!.latitude,
-            "longitude": User.sharedInstance!.longitude
+            "longitude": User.sharedInstance!.longitude,
+            "rating": User.sharedInstance!.rating,
+            "ratingCount": User.sharedInstance!.ratingCount
         ]
     }
     
     //designated constructors
-    public init(name:String, isVegetarian:Bool, id:String, email:String, customerID:String, defaultAddress: String, isKitchen: Bool, latitude: Double, longitude: Double)
+    public init(name:String, isVegetarian:Bool, id:String, email:String, customerID:String, defaultAddress: String, isKitchen: Bool, latitude: Double, longitude: Double, rating: Float, ratingCount: Int)
     {
         self.name = name
         self.isVegetarian = isVegetarian
@@ -72,6 +76,8 @@ final class User: NSObject{
         self.latitude = latitude
         self.longitude = longitude
         self.userLocation = CLLocation(latitude: self.latitude, longitude: self.longitude)
+        self.rating = rating
+        self.ratingCount = ratingCount
         User.isUserInitialized = true
     }
     
@@ -88,9 +94,10 @@ final class User: NSObject{
         let isKitchen = dictionary["isKitchen"] as? Bool
         let latitude = dictionary["latitude"] as? Double
         let longitude = dictionary["longitude"] as? Double
-        
-        
-        self.init(name: name, isVegetarian: isVegetarian, id: id, email: email, customerID:customerID, defaultAddress: (defaultAddress ?? ""), isKitchen: isKitchen ?? false, latitude: latitude ?? -1, longitude: longitude ?? -1)
+        let rating = dictionary["rating"] as? Float
+        let ratingCount = dictionary["ratingCount"] as? Int
+            
+        self.init(name: name, isVegetarian: isVegetarian, id: id, email: email, customerID:customerID, defaultAddress: (defaultAddress ?? ""), isKitchen: isKitchen ?? false, latitude: latitude ?? -1, longitude: longitude ?? -1, rating: rating ?? -1, ratingCount: ratingCount ?? 0)
     }
     
     //intializes User data from the database
@@ -115,7 +122,7 @@ final class User: NSObject{
                 let value = snapshot.value as? NSDictionary
                 if(value == nil){
                     //new user! yayy!!
-                    User.sharedInstance = User(name: user.displayName ?? user.email!, isVegetarian: false, id: uid, email: user.email!, customerID: "", defaultAddress: "", isKitchen: false, latitude: -1, longitude: -1)
+                    User.sharedInstance = User(name: user.displayName ?? user.email!, isVegetarian: false, id: uid, email: user.email!, customerID: "", defaultAddress: "", isKitchen: false, latitude: -1, longitude: -1, rating: -1, ratingCount: 0)
                     
                     //write back to the database
                     db.child("Users").child(uid).setValue(User.dictionary, withCompletionBlock: { (err:Error?, ref:DatabaseReference) in
@@ -252,7 +259,7 @@ final class User: NSObject{
         LoaderController.sharedInstance.updateTitle(title: "Finished Loading")
         completion();
     }
-    
+
     
 //     These will be used once credit card payment is available.
     public static func updateDefaultPayment()
@@ -426,6 +433,68 @@ final class User: NSObject{
             }
         }
         // if you do not have access, let the user go through with this screen. The latitude longitude should have still been stored during user initialization.
+    }
+    
+    // ratings related
+    public func addRating(rating: Float)
+    {
+        if(self.rating == -1)
+        {
+            self.rating = rating
+        }
+        else
+        {
+            self.rating = limitToTwoDecimal(input: ((self.rating * Float(self.ratingCount) + rating)/Float(self.ratingCount + 1)))
+        }
+        
+        self.ratingCount = self.ratingCount + 1
+        self.ratingThisSession = Int(rating)
+        
+        //write it to the server
+        writeRatingToServer()
+    }
+    
+    public static func loadUserFromServer(userID: String,completion: @escaping (User?) -> Void)
+    {
+        db.child("Users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+            if(value == nil){
+                completion(nil)
+            }
+            else {
+                let userLoaded = User(dictionary: value!, id: userID)
+                completion(userLoaded)
+            }
+        });
+    }
+    
+    private func writeRatingToServer()
+    {
+        let userRef = db.child("Users/\(id)")
+        userRef.child("rating").setValue(self.rating)
+        userRef.child("ratingCount").setValue(self.ratingCount)
+    }
+    
+    public func updateRating(oldRating: Float, newRating:Float)
+    {
+        if(oldRating == newRating)  //do nothing if they are both the same
+        {
+            return
+        }
+        
+        if(self.ratingCount == 1)   //if the oldRating was the first time the kitchen was rated ever, simply update to the new rating
+        {
+            self.rating = newRating
+        }
+        else
+        {
+            self.rating = limitToTwoDecimal(input: (((self.rating * Float(self.ratingCount)) - oldRating + newRating)/Float(self.ratingCount)))
+        }
+        
+        self.ratingThisSession = Int(newRating)
+        
+        writeRatingToServer()
     }
 }
 

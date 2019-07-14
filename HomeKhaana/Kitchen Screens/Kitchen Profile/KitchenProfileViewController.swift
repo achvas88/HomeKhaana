@@ -12,6 +12,9 @@ class KitchenProfileViewController: UIViewController {
 
     @IBOutlet weak var imgKitchen: UIImageView!
     @IBOutlet weak var txtKitchenName: UILabel!
+    @IBOutlet weak var swhOnline: UISwitch!
+    @IBOutlet weak var stkKitchenRating: UIStackView!
+    @IBOutlet weak var lblKitchenRating: UILabel!
     
     var kitchen: Kitchen?
     
@@ -34,12 +37,33 @@ class KitchenProfileViewController: UIViewController {
         }
         self.imgKitchen.image = kitchen!.image
         self.txtKitchenName.text = kitchen!.name
+        self.swhOnline.isOn = kitchen!.isOnline
+        if(kitchen!.ratingCount > 0)
+        {
+            self.lblKitchenRating.text = "\(kitchen!.rating)"
+            self.stkKitchenRating.isHidden = false
+        }
+        else
+        {
+            self.stkKitchenRating.isHidden = true
+        }
     }
         
     @IBAction func logoutClicked(_ sender: Any) {
         User.Logout(vcHost: self)
     }
 
+    @IBAction func swhOnlineToggled(_ sender: Any) {
+        kitchen!.isOnline = self.swhOnline.isOn
+        if(!self.swhOnline.isOn)
+        {
+            let alertController = UIAlertController(title: "Reminder", message: "You still need to complete ongoing orders.", preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alertController.addAction(defaultAction)
+            present(alertController, animated: true, completion: nil)
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

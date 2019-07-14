@@ -419,7 +419,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="deU-dR-nr3">
-                                <rect key="frame" x="104" y="94" width="167.5" height="135.5"/>
+                                <rect key="frame" x="104" y="94" width="167.5" height="167.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="Lhw-fc-qRG">
                                         <rect key="frame" x="33.5" y="0.0" width="100" height="100"/>
@@ -434,10 +434,24 @@
                                         <color key="textColor" red="1" green="0.40770110446292707" blue="0.011894053709529229" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="uLh-dK-8On">
+                                        <rect key="frame" x="60" y="150.5" width="47.5" height="17"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.50" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xBQ-vp-atp">
+                                                <rect key="frame" x="0.0" y="0.0" width="29.5" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="Y1n-73-iXa">
+                                                <rect key="frame" x="31.5" y="0.0" width="16" height="17"/>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="wa9-lf-UBp">
-                                <rect key="frame" x="0.0" y="259.5" width="375" height="120"/>
+                                <rect key="frame" x="0.0" y="291.5" width="375" height="120"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZF1-Mg-5Bn" customClass="CustomUIButton" customModule="HomeKhaana" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
@@ -513,7 +527,9 @@
                         <outlet property="btnPayment" destination="M7l-V4-yDi" id="6tr-UP-u5V"/>
                         <outlet property="btnPreferences" destination="ZF1-Mg-5Bn" id="rWr-OM-EMg"/>
                         <outlet property="imgUser" destination="Lhw-fc-qRG" id="DNC-sr-b3m"/>
+                        <outlet property="lblRating" destination="xBQ-vp-atp" id="OnK-dL-3Nc"/>
                         <outlet property="lblTitle" destination="CDp-R3-TPr" id="tuJ-kP-cxU"/>
+                        <outlet property="stkUserRating" destination="uLh-dK-8On" id="Zpq-Tj-5nz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pUh-I2-byh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -894,13 +910,13 @@
                                         <rect key="frame" x="0.0" y="15" width="250" height="130"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RATING" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qzS-CE-fL3">
-                                                <rect key="frame" x="94" y="0.0" width="62" height="20.5"/>
+                                                <rect key="frame" x="94" y="0.0" width="62" height="19"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                 <color key="textColor" red="1" green="0.40643951839999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bQG-0c-rDg" customClass="RatingControl" customModule="HomeKhaana" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28.5" width="250" height="48.5"/>
+                                                <rect key="frame" x="0.0" y="27" width="250" height="50"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="size" keyPath="starSize">
                                                         <size key="value" width="50" height="50"/>
@@ -1634,13 +1650,13 @@
                                                     <rect key="frame" x="15" y="135" width="325" height="30"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XJY-Ic-mT4" customClass="RatingControl" customModule="HomeKhaana" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="61" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="50.5" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="PkC-AZ-bgx"/>
                                                             </constraints>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready for Pick-Up" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p76-rV-3nN">
-                                                            <rect key="frame" x="66" y="0.0" width="259" height="30"/>
+                                                            <rect key="frame" x="55.5" y="0.0" width="269.5" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" id="6dh-l7-ZeR"/>
                                                             </constraints>
@@ -2087,6 +2103,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Current Orders" id="P59-V6-t4D"/>
+                    <connections>
+                        <segue destination="8yz-M1-7Fp" kind="presentation" identifier="rateUser" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="gZN-iS-vUy"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LuM-rR-XG8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2949,7 +2968,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="gnb-Vw-87U">
-                                <rect key="frame" x="0.0" y="249.5" width="375" height="90"/>
+                                <rect key="frame" x="0.0" y="331" width="375" height="90"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hot-Nb-JJ1" customClass="CustomUIButton" customModule="HomeKhaana" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
@@ -2985,7 +3004,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="CeF-T2-L5G">
-                                <rect key="frame" x="0.0" y="34" width="375" height="185.5"/>
+                                <rect key="frame" x="0.0" y="34" width="375" height="267"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="bKG-FX-Jrc">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
@@ -2999,6 +3018,37 @@
                                         <color key="textColor" red="1" green="0.40770110450000002" blue="0.01189405371" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ZsW-2j-ODR">
+                                        <rect key="frame" x="129" y="200.5" width="117.5" height="31"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Online:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nbf-UT-ego">
+                                                <rect key="frame" x="0.0" y="0.0" width="53.5" height="31"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dMQ-VH-08H">
+                                                <rect key="frame" x="68.5" y="0.0" width="51" height="31"/>
+                                                <connections>
+                                                    <action selector="swhOnlineToggled:" destination="jO4-AM-1lA" eventType="valueChanged" id="aBl-an-nrv"/>
+                                                </connections>
+                                            </switch>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="yfj-ua-y0F">
+                                        <rect key="frame" x="161" y="246.5" width="53" height="20.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.50" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8zF-tw-QMr">
+                                                <rect key="frame" x="0.0" y="0.0" width="35" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="Wyt-od-RUg">
+                                                <rect key="frame" x="37" y="0.0" width="16" height="20.5"/>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="bKG-FX-Jrc" firstAttribute="width" secondItem="CeF-T2-L5G" secondAttribute="width" id="y0P-xO-uTZ"/>
@@ -3025,6 +3075,9 @@
                     <navigationItem key="navigationItem" id="YLi-z7-Lah"/>
                     <connections>
                         <outlet property="imgKitchen" destination="bKG-FX-Jrc" id="Tgm-bf-qJZ"/>
+                        <outlet property="lblKitchenRating" destination="8zF-tw-QMr" id="Cwu-f6-VzO"/>
+                        <outlet property="stkKitchenRating" destination="yfj-ua-y0F" id="1BW-x1-6c0"/>
+                        <outlet property="swhOnline" destination="dMQ-VH-08H" id="YXb-yU-7Sn"/>
                         <outlet property="txtKitchenName" destination="E9h-x5-tU5" id="bAo-jb-WbH"/>
                     </connections>
                 </viewController>
@@ -3329,8 +3382,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="DvV-qM-doP"/>
-        <segue reference="sdt-pM-Hwp"/>
+        <segue reference="auW-X4-2bE"/>
         <segue reference="jSY-jj-Mgi"/>
+        <segue reference="gZN-iS-vUy"/>
         <segue reference="Gmd-Ol-96N"/>
     </inferredMetricsTieBreakers>
 </document>

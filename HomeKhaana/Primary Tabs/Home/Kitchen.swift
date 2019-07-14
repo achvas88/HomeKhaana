@@ -29,6 +29,7 @@ class Kitchen
     var distanceInMiles: Double?
     var acceptsDebit: Bool?
     var acceptsCredit: Bool?
+    var isOnline: Bool
     
     var image: UIImage? {
         didSet {
@@ -50,11 +51,12 @@ class Kitchen
             "latitude": self.latitude,
             "longitude": self.longitude,
             "acceptsCredit": self.acceptsCredit ?? false,
-            "acceptsDebit": self.acceptsDebit ?? false
+            "acceptsDebit": self.acceptsDebit ?? false,
+            "isOnline": self.isOnline
         ]
     }
     
-    init(id:String, name:String, rating:Float, address: String, type: String, ratingCount: Int, hasImage: Bool, offersVegetarian: Bool, latitude: Double, longitude: Double, image: UIImage? = nil, acceptsDebit: Bool = false, acceptsCredit: Bool = false) {
+    init(id:String, name:String, rating:Float, address: String, type: String, ratingCount: Int, hasImage: Bool, offersVegetarian: Bool, latitude: Double, longitude: Double, isOnline:Bool, image: UIImage? = nil, acceptsDebit: Bool = false, acceptsCredit: Bool = false) {
         self.id = id
         self.name = name
         self.rating = rating
@@ -67,6 +69,9 @@ class Kitchen
         self.latitude = latitude
         self.longitude = longitude
         self.kitchenLocation = CLLocation(latitude: self.latitude, longitude: self.longitude)
+        self.acceptsDebit = acceptsDebit
+        self.acceptsCredit = acceptsCredit
+        self.isOnline = isOnline
         if(image != nil)
         {
             self.image = image
@@ -75,8 +80,6 @@ class Kitchen
         {
             self.loadImageFromDB()
         }
-        self.acceptsDebit = acceptsDebit
-        self.acceptsCredit = acceptsCredit
     }
     
     
@@ -91,13 +94,14 @@ class Kitchen
             let offersVegetarian = dictionary["offersVegetarian"] as? Bool,
             let hasImage =  dictionary["hasImage"] as? Bool,
             let latitude = dictionary["latitude"] as? Double,
-            let longitude = dictionary["longitude"] as? Double
+            let longitude = dictionary["longitude"] as? Double,
+            let isOnline = dictionary["isOnline"] as? Bool
             else { return nil }
         
         let acceptsDebit = dictionary["acceptsDebit"] as? Bool
         let acceptsCredit = dictionary["acceptsCredit"] as? Bool
         
-        self.init(id: id, name:name, rating: rating, address: address, type: type, ratingCount: ratingCount, hasImage: hasImage, offersVegetarian: offersVegetarian, latitude: latitude, longitude: longitude, acceptsDebit: acceptsDebit ?? false, acceptsCredit: acceptsCredit ?? false)
+        self.init(id: id, name:name, rating: rating, address: address, type: type, ratingCount: ratingCount, hasImage: hasImage, offersVegetarian: offersVegetarian, latitude: latitude, longitude: longitude, isOnline: isOnline, acceptsDebit: acceptsDebit ?? false, acceptsCredit: acceptsCredit ?? false)
     }
     
     public convenience init?(snapshot: DataSnapshot)
@@ -116,8 +120,9 @@ class Kitchen
         let longitude = snapshot["longitude"] as! Double
         let acceptsDebit = snapshot["acceptsDebit"] as? Bool
         let acceptsCredit = snapshot["acceptsCredit"] as? Bool
+        let isOnline = snapshot["isOnline"] as! Bool
         
-        self.init(id: id, name:name, rating: rating,address: address, type: type, ratingCount: ratingCount, hasImage: hasImage, offersVegetarian: offersVegetarian, latitude: latitude, longitude: longitude, acceptsDebit: acceptsDebit ?? false, acceptsCredit: acceptsCredit ?? false)
+        self.init(id: id, name:name, rating: rating,address: address, type: type, ratingCount: ratingCount, hasImage: hasImage, offersVegetarian: offersVegetarian, latitude: latitude, longitude: longitude, isOnline: isOnline, acceptsDebit: acceptsDebit ?? false, acceptsCredit: acceptsCredit ?? false)
     }
     
     func loadImageFromDB()

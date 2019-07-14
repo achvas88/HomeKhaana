@@ -19,6 +19,8 @@ class UserProfileViewController: UIViewController {
     @IBOutlet weak var btnFAQ: CustomUIButton!
     @IBOutlet weak var btnLogout: CustomUIButton!
     @IBOutlet weak var btnKitchenLogin: UIButton!
+    @IBOutlet weak var stkUserRating: UIStackView!
+    @IBOutlet weak var lblRating: UILabel!
     
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var imgUser: UIImageView!
@@ -31,6 +33,16 @@ class UserProfileViewController: UIViewController {
         {
             let name = user.displayName
             self.lblTitle.text = name
+        }
+        
+        if (User.sharedInstance!.ratingCount > 0)
+        {
+            self.lblRating.text = String(User.sharedInstance!.rating)
+            self.stkUserRating.isHidden = false
+        }
+        else
+        {
+            self.stkUserRating.isHidden = true
         }
         
         self.imgUser.layer.borderWidth = 3
