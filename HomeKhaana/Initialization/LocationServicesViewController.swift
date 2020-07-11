@@ -40,7 +40,7 @@ class LocationServicesViewController: UIViewController {
         alertController.addAction(cancelAction)
         
         let openAction = UIAlertAction(title: "Open Settings", style: .default) { (action) in
-            if let url = URL(string: UIApplicationOpenSettingsURLString) {
+            if let url = URL(string: UIApplication.openSettingsURLString) {
                 UIApplication.shared.open(url, options: [:], completionHandler:
                     nil)
             }

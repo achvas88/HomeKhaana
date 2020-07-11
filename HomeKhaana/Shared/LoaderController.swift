@@ -29,7 +29,7 @@ class LoaderController: NSObject {
         
         //setup indicator
         indActivityIndicator.hidesWhenStopped = true
-        indActivityIndicator.activityIndicatorViewStyle = .gray
+        indActivityIndicator.style = .gray
         indActivityIndicator.heightAnchor.constraint(equalToConstant: 45.0).isActive = true
         indActivityIndicator.widthAnchor.constraint(equalToConstant: 45.0).isActive = true
 

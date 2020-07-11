@@ -11,7 +11,7 @@ import Firebase
 import FirebaseDatabase
 import FirebaseFunctions
 import GoogleSignIn
-import FBSDKLoginKit
+//import FBSDKLoginKit
 import MapKit
 
 final class User: NSObject{
@@ -403,8 +403,8 @@ final class User: NSObject{
                 
                 GIDSignIn.sharedInstance().signOut()
                 
-                let loginManager: FBSDKLoginManager = FBSDKLoginManager()
-                loginManager.logOut()
+                //let loginManager: FBSDKLoginManager = FBSDKLoginManager()
+                //loginManager.logOut()
                 
                 let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignUp")
                 vcHost.present(vc, animated: true, completion: nil)

@@ -119,7 +119,7 @@ class PaymentSourceTableViewController: UITableViewController {
     }
     
     // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             var updateDefaultPayment: Bool = false
             let card:PaymentSource = User.sharedInstance!.paymentSources![indexPath.row]
@@ -226,12 +226,12 @@ extension PaymentSourceTableViewController: STPAddCardViewControllerDelegate {
     {
         if(self.indicator == nil)
         {
-            self.indicator  = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+            self.indicator  = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
             self.indicator!.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
             self.indicator!.center = self.view.center
             self.indicator!.hidesWhenStopped = true
             self.view.addSubview(self.indicator!)
-            self.view.bringSubview(toFront: self.indicator!)
+            self.view.bringSubviewToFront(self.indicator!)
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
             self.indicator!.startAnimating()
         }

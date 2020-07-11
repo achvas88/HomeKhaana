@@ -32,7 +32,7 @@ class KitchensTableViewController: UITableViewController,RefreshTableViewWhenImg
     override func viewDidAppear(_ animated: Bool) {
         if(self.kitchens.count>0)
         {
-            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableViewScrollPosition.top, animated: true)
+            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: true)
         }
         
         if(Cart.sharedInstance.cart.count == 0) {self.navigationController?.tabBarController?.tabBar.items?[1].badgeValue = nil}

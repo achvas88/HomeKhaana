@@ -140,7 +140,7 @@ class Kitchen
     {
         if (self.image != nil && self.imageChanged == true)
         {
-            let data = UIImageJPEGRepresentation(self.image!, 0.8)!
+            let data = self.image!.jpegData(compressionQuality: 0.8)!
             
             // set upload path
             let filePath = "\(id)/\("kitchenPhoto")"

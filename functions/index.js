@@ -61,12 +61,37 @@ exports.updateOrderStatus = functions.database.ref('/CurrentOrders/{kitchenId}/{
 .onWrite((change, context) => {
          // Only edit data when it previously existed
          if (!change.before.exists()) {
-         return null;
+            return null;
          }
          
          // when the data is deleted, mark the corresponding order in the Orders location as complete.
-         if (!change.after.exists()) {
-            return admin.database().ref(`/Orders/${context.params.orderingUserID}/${context.params.orderID}/status`).set("Completed");
+         if (!change.after.exists()) 
+         {
+            const registrationToken = "eM6uzy--NaY:APA91bFcNZ64dNNFpIx0LvRxEpqXEyRbBAKYlHkHWJ4T9xLJ0h1M6H_ajWsjFOX23Ptm5Mu1jOKzWvINK6CgS4WF2nfgfNxEYQ6egWZ3c46VFvyWnq2iHjS6rqrEj7lAiUK69PwX1iJ0";
+            const payload = {
+               notification: {
+                    title: 'You have been invited to a trip.',
+                    body: 'Tap here to check it out!'
+                },
+                data: {
+                    score: '850',
+                    time: '2:45'
+                },
+                token: registrationToken
+            };
+        
+            // Send a message to the device corresponding to the provided
+            // registration token.
+            return admin.messaging().send(payload)
+               .then((response) => {
+                  // Response is a message ID string.
+                  console.log('Successfully sent message:', response);
+                  return admin.database().ref(`/Orders/${context.params.orderingUserID}/${context.params.orderID}/status`).set("Completed");
+                })
+                .catch((error) => {
+                    console.log('Error sending message:', error);
+                });
+            //return admin.database().ref(`/Orders/${context.params.orderingUserID}/${context.params.orderID}/status`).set("Completed");
          }
          
          // Grab the current value of what was written to the Realtime Database.

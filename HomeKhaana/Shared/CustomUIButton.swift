@@ -31,8 +31,8 @@ class CustomUIButton: UIButton {
         //self.layer.cornerRadius = 3
         
         //set padding
-        self.contentEdgeInsets = UIEdgeInsetsMake(10,90,10,20)
-        self.imageEdgeInsets = UIEdgeInsetsMake(0,-30,0,0)
+        self.contentEdgeInsets = UIEdgeInsets(top: 10,left: 90,bottom: 10,right: 20)
+        self.imageEdgeInsets = UIEdgeInsets(top: 0,left: -30,bottom: 0,right: 0)
         
         //set font
         //self.titleLabel?.font = UIFont(name: "Segoe UI", size: 8)

@@ -10,8 +10,8 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import GoogleSignIn
-import FBSDKCoreKit
-import FBSDKLoginKit
+//import FBSDKCoreKit
+//import FBSDKLoginKit
 
 class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate{ //}, FBSDKLoginButtonDelegate  {
     
@@ -119,7 +119,7 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     }
     
     // Facebook Sign In --------------------------------------------------
-    @IBAction func btnFacebookClicked(_ sender: Any)
+    /*@IBAction func btnFacebookClicked(_ sender: Any)
     {
         let loginManager = FBSDKLoginManager()
         loginManager.logIn(withReadPermissions: ["public_profile", "email", "user_friends"], from: self, handler: {
@@ -148,7 +148,7 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                     })
                 }
             })
-    }
+    }*/
     
     // Supporting Functions ----------------------------------------------
     func btnSignUpOrLogIn(isSignUp: Bool)

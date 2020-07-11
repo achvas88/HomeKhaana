@@ -102,7 +102,7 @@ class Choice: Equatable
     {
         if (self.image != nil)
         {
-            let data = UIImageJPEGRepresentation(self.image!, 0.8)!
+            let data = self.image!.jpegData(compressionQuality: 0.8)!
             
             // set upload path
             let filePath = "\(User.sharedInstance!.id)/\("MenuItems")/\(id)/\("itemPhoto")"
