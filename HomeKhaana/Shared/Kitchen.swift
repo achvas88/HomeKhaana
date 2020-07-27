@@ -11,15 +11,14 @@ import Foundation
 import FirebaseDatabase
 import Firebase
 import MapKit
+import FirebaseStorage
 
 class Kitchen
 {
     var id: String
     var name: String
-    var rating: Float
     var address: String
     var type: String
-    var ratingCount: Int
     var hasImage: Bool
     var offersVegetarian: Bool
     var longitude: Double
@@ -30,6 +29,7 @@ class Kitchen
     var acceptsDebit: Bool?
     var acceptsCredit: Bool?
     var isOnline: Bool
+    var ratingHandler: RatingHandler
     
     var image: UIImage? {
         didSet {
@@ -44,9 +44,9 @@ class Kitchen
             "address": self.address,
             "name": self.name,
             "offersVegetarian": self.offersVegetarian,
-            "rating": self.rating,
+            "rating": self.ratingHandler.rating,
             "hasImage": self.hasImage,
-            "ratingCount": self.ratingCount,
+            "ratingCount": self.ratingHandler.ratingCount,
             "type": self.type,
             "latitude": self.latitude,
             "longitude": self.longitude,
@@ -56,13 +56,12 @@ class Kitchen
         ]
     }
     
-    init(id:String, name:String, rating:Float, address: String, type: String, ratingCount: Int, hasImage: Bool, offersVegetarian: Bool, latitude: Double, longitude: Double, isOnline:Bool, image: UIImage? = nil, acceptsDebit: Bool = false, acceptsCredit: Bool = false) {
+    init(id:String, name:String, rating:Double, address: String, type: String, ratingCount: Int, hasImage: Bool, offersVegetarian: Bool, latitude: Double, longitude: Double, isOnline:Bool, image: UIImage? = nil, acceptsDebit: Bool = false, acceptsCredit: Bool = false) {
         self.id = id
         self.name = name
-        self.rating = rating
         self.address = address
         self.type = type
-        self.ratingCount = ratingCount
+        self.ratingHandler = RatingHandler(rating: rating, ratingCount: ratingCount, isForKitchen: true, id: self.id)
         self.offersVegetarian = offersVegetarian
         self.hasImage = hasImage
         self.imageChanged = false
@@ -82,12 +81,11 @@ class Kitchen
         }
     }
     
-    
     //convenience constructors
     public convenience init?(dictionary: NSDictionary, id: String)
     {
         guard let name = dictionary["name"] as? String,
-            let rating = dictionary["rating"] as? Float,
+            let rating = dictionary["rating"] as? Double,
             let address = dictionary["address"] as? String,
             let type = dictionary["type"] as? String,
             let ratingCount = dictionary["ratingCount"] as? Int,
@@ -110,10 +108,10 @@ class Kitchen
         let snapshot = snapshot.value as AnyObject
         
         let name = snapshot["name"] as! String
-        let rating = snapshot["rating"] as! Float
+        let rating = snapshot["rating"] as? Double
         let address = snapshot["address"] as! String
         let type = snapshot["type"] as! String
-        let ratingCount = snapshot["ratingCount"] as! Int
+        let ratingCount = snapshot["ratingCount"] as? Int
         let offersVegetarian = snapshot["offersVegetarian"] as! Bool
         let hasImage = snapshot["hasImage"] as! Bool
         let latitude = snapshot["latitude"] as! Double
@@ -122,7 +120,7 @@ class Kitchen
         let acceptsCredit = snapshot["acceptsCredit"] as? Bool
         let isOnline = snapshot["isOnline"] as! Bool
         
-        self.init(id: id, name:name, rating: rating,address: address, type: type, ratingCount: ratingCount, hasImage: hasImage, offersVegetarian: offersVegetarian, latitude: latitude, longitude: longitude, isOnline: isOnline, acceptsDebit: acceptsDebit ?? false, acceptsCredit: acceptsCredit ?? false)
+        self.init(id: id, name:name, rating: rating ?? -1, address: address, type: type, ratingCount: ratingCount ?? 0, hasImage: hasImage, offersVegetarian: offersVegetarian, latitude: latitude, longitude: longitude, isOnline: isOnline, acceptsDebit: acceptsDebit ?? false, acceptsCredit: acceptsCredit ?? false)
     }
     
     func loadImageFromDB()
@@ -169,48 +167,5 @@ class Kitchen
                 }
             }
         }
-    }
-    
-    public func addRating(rating: Float)
-    {
-        if(self.rating == -1)
-        {
-            self.rating = rating
-        }
-        else
-        {
-            self.rating = limitToTwoDecimal(input: ((self.rating * Float(self.ratingCount) + rating)/Float(self.ratingCount + 1)))
-        }
-        
-        self.ratingCount = self.ratingCount + 1
-        
-        //write it to the server
-        writeRatingToServer()
-    }
-    
-    private func writeRatingToServer()
-    {
-        let kitchenRef = db.child("Kitchens/\(id)")
-        kitchenRef.child("rating").setValue(self.rating)
-        kitchenRef.child("ratingCount").setValue(self.ratingCount)
-    }
-    
-    public func updateRating(oldRating: Float, newRating:Float)
-    {
-        if(oldRating == newRating)  //do nothing if they are both the same
-        {
-            return
-        }
-        
-        if(self.ratingCount == 1)   //if the oldRating was the first time the kitchen was rated ever, simply update to the new rating
-        {
-            self.rating = newRating
-        }
-        else
-        {
-            self.rating = limitToTwoDecimal(input: (((self.rating * Float(self.ratingCount)) - oldRating + newRating)/Float(self.ratingCount)))
-        }
-        
-        writeRatingToServer()
     }
 }

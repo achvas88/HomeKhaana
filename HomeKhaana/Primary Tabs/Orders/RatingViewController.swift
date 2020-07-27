@@ -32,9 +32,9 @@ class RatingViewController: UIViewController {
         }
         else
         {
-            if(self.currentUser!.ratingThisSession != nil)
+            if(self.currentUser!.ratingHandler.ratingThisSession != nil)
             {
-                self.stkRating.rating = self.currentUser!.ratingThisSession!
+                self.stkRating.rating = self.currentUser!.ratingHandler.ratingThisSession!
             }
         }
     }
@@ -45,7 +45,7 @@ class RatingViewController: UIViewController {
             return
         }
         
-        //if and end user (not a kitchen is logged in, then set the rating for the kitchen
+        //if an end user (not a kitchen) is logged in, then set the rating for the kitchen
         if(self.currentOrder != nil)
         {
             let kitchenId = self.currentOrder!.kitchenId
@@ -54,11 +54,11 @@ class RatingViewController: UIViewController {
             {
                 if(self.currentOrder!.orderRating != nil && self.currentOrder!.orderRating != -1)
                 {
-                    kitchen!.updateRating(oldRating: Float(self.currentOrder!.orderRating!), newRating: Float(stkRating!.rating))
+                    kitchen!.ratingHandler.updateRating(oldRating: Double(self.currentOrder!.orderRating!), newRating: Double(stkRating!.rating))
                 }
                 else
                 {
-                    kitchen!.addRating(rating: Float(stkRating!.rating))
+                    kitchen!.ratingHandler.addRating(rating: Double(stkRating!.rating))
                 }
             }
             self.currentOrder!.setRating(rating: stkRating!.rating)
@@ -66,13 +66,13 @@ class RatingViewController: UIViewController {
         }
         else if(self.currentUser != nil)  //if a kitchen is logged in, set the rating for the user.
         {
-            if(self.currentUser!.ratingThisSession != nil)
+            if(self.currentUser!.ratingHandler.ratingThisSession != nil)
             {
-                self.currentUser!.updateRating(oldRating: Float(self.currentUser!.ratingThisSession!), newRating: Float(self.stkRating!.rating))
+                self.currentUser!.ratingHandler.updateRating(oldRating: Double(self.currentUser!.ratingHandler.ratingThisSession!), newRating: Double(self.stkRating!.rating))
             }
             else
             {
-                self.currentUser!.addRating(rating: Float(stkRating!.rating))
+                self.currentUser!.ratingHandler.addRating(rating: Double(stkRating!.rating))
             }
             self.dismiss(animated: true, completion: nil)
         }

@@ -10,6 +10,7 @@ import UIKit
 import Stripe
 import Firebase
 import FirebaseDatabase
+import FirebaseAuth
 
 protocol PaymentSourceDelegate: class {
     func updatePaymentSource(_ paymentSource:PaymentSource?)
@@ -129,7 +130,7 @@ class PaymentSourceTableViewController: UITableViewController {
             }
             
             // Delete the row from the data source
-            User.markPaymentSourceForDeletion(paymentSource: card)
+            //User.markPaymentSourceForDeletion(paymentSource: card)
             User.sharedInstance!.paymentSources?.remove(at: indexPath.row)
             
             tableView.deleteRows(at: [indexPath], with: .fade)
@@ -253,10 +254,10 @@ extension PaymentSourceTableViewController: STPAddCardViewControllerDelegate {
                 if let snapshot = card as? DataSnapshot,
                     let paymentSource = PaymentSource(snapshot: snapshot)
                 {
-                    if(!User.paymentIsMarkedForDeletion(paymentSource: paymentSource))
+                    /*if(!User.paymentIsMarkedForDeletion(paymentSource: paymentSource))
                     {
                         User.sharedInstance!.paymentSources!.append(paymentSource)
-                    }
+                    }*/
                 }
             }
             

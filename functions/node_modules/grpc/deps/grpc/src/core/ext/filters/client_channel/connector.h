@@ -22,6 +22,7 @@
 #include <grpc/support/port_platform.h>
 
 #include "src/core/lib/channel/channel_stack.h"
+#include "src/core/lib/channel/channelz.h"
 #include "src/core/lib/iomgr/resolve_address.h"
 #include "src/core/lib/transport/transport.h"
 
@@ -47,6 +48,16 @@ typedef struct {
 
   /** channel arguments (to be passed to the filters) */
   grpc_channel_args* channel_args;
+
+  /** channelz socket node of the connected transport. nullptr if not available
+   */
+  grpc_core::RefCountedPtr<grpc_core::channelz::SocketNode> socket;
+
+  void reset() {
+    transport = nullptr;
+    channel_args = nullptr;
+    socket = nullptr;
+  }
 } grpc_connect_out_args;
 
 struct grpc_connector_vtable {

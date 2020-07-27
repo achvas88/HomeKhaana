@@ -48,6 +48,9 @@
 		B655FFC3219BA9A4008691D2 /* KitchenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B655FFC2219BA9A4008691D2 /* KitchenTableViewCell.swift */; };
 		B655FFC5219D1046008691D2 /* ChoiceGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B655FFC4219D1046008691D2 /* ChoiceGroup.swift */; };
 		B655FFC721A0D302008691D2 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = B655FFC621A0D302008691D2 /* Cart.swift */; };
+		B66BA41E24BB742300190CEA /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66BA41D24BB742300190CEA /* UserDataManager.swift */; };
+		B66BA42024BB743400190CEA /* KitchenDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66BA41F24BB743400190CEA /* KitchenDataManager.swift */; };
+		B66BA42224BB8DF100190CEA /* RatingHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66BA42124BB8DF100190CEA /* RatingHandler.swift */; };
 		B691C78820E9AA440060CF98 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B691C78720E9AA440060CF98 /* CartViewController.swift */; };
 		B691C78A20E9B09C0060CF98 /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B691C78920E9B09C0060CF98 /* HomeTabBarController.swift */; };
 		B691C78C20E9B8D30060CF98 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B691C78B20E9B8D30060CF98 /* CartTableViewCell.swift */; };
@@ -136,6 +139,9 @@
 		B655FFC2219BA9A4008691D2 /* KitchenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitchenTableViewCell.swift; sourceTree = "<group>"; };
 		B655FFC4219D1046008691D2 /* ChoiceGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceGroup.swift; sourceTree = "<group>"; };
 		B655FFC621A0D302008691D2 /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
+		B66BA41D24BB742300190CEA /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
+		B66BA41F24BB743400190CEA /* KitchenDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitchenDataManager.swift; sourceTree = "<group>"; };
+		B66BA42124BB8DF100190CEA /* RatingHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingHandler.swift; sourceTree = "<group>"; };
 		B691C78720E9AA440060CF98 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		B691C78920E9B09C0060CF98 /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
 		B691C78B20E9B8D30060CF98 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
@@ -327,9 +333,13 @@
 			children = (
 				B62F26F5213CA83000FA88D3 /* LoaderController.swift */,
 				B61558D420D8641F00471718 /* CustomUIButton.swift */,
-				B61558DC20DF0D4100471718 /* DataManager.swift */,
 				B691C78D20EB3B480060CF98 /* Shared.swift */,
+				B61558DC20DF0D4100471718 /* DataManager.swift */,
 				B61558D020D7476700471718 /* User.swift */,
+				B66BA41D24BB742300190CEA /* UserDataManager.swift */,
+				B655FFC0219BA98F008691D2 /* Kitchen.swift */,
+				B66BA41F24BB743400190CEA /* KitchenDataManager.swift */,
+				B66BA42124BB8DF100190CEA /* RatingHandler.swift */,
 				B69F54AF20CDE9B000E1B0EB /* Extensions.swift */,
 				B655FFC621A0D302008691D2 /* Cart.swift */,
 				B61558DA20DF0B6700471718 /* Choice.swift */,
@@ -340,7 +350,7 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
-		B6B28AB92187DD5E00818967 /* Payment Sources */ = {
+		B6B28AB92187DD5E00818967 /* Payment Sources (Not using for now) */ = {
 			isa = PBXGroup;
 			children = (
 				B691C79520FD823D0060CF98 /* AddPaymentTableViewCell.swift */,
@@ -348,7 +358,7 @@
 				B691C79320FD82050060CF98 /* PaymentSourceTableViewCell.swift */,
 				B691C79720FD834C0060CF98 /* PaymentSourceTableViewController.swift */,
 			);
-			path = "Payment Sources";
+			path = "Payment Sources (Not using for now)";
 			sourceTree = "<group>";
 		};
 		B6B28ABA2187DDAF00818967 /* Orders */ = {
@@ -415,7 +425,6 @@
 				B691C78920E9B09C0060CF98 /* HomeTabBarController.swift */,
 				B61558D820DF0AC800471718 /* HomeTableViewController.swift */,
 				B655FFBE219BA975008691D2 /* KitchensTableViewController.swift */,
-				B655FFC0219BA98F008691D2 /* Kitchen.swift */,
 				B655FFC2219BA9A4008691D2 /* KitchenTableViewCell.swift */,
 				B609915F22CE59A700A3543A /* KitchenHeaderTableViewCell.swift */,
 			);
@@ -446,7 +455,7 @@
 			children = (
 				B6B28AC12187DFE400818967 /* Choice Detail */,
 				B6B28ABE2187DEB400818967 /* Order Confirmation */,
-				B6B28AB92187DD5E00818967 /* Payment Sources */,
+				B6B28AB92187DD5E00818967 /* Payment Sources (Not using for now) */,
 				B6B28ABB2187DE6300818967 /* User Preferences */,
 			);
 			path = "Secondary Screens";
@@ -463,8 +472,8 @@
 				B64AB0B420BCC706003B966C /* Sources */,
 				B64AB0B520BCC706003B966C /* Frameworks */,
 				B64AB0B620BCC706003B966C /* Resources */,
-				B339C7F2D49BC54FAE8D4085 /* [CP] Embed Pods Frameworks */,
-				C9422E130BCA4D6883796F4C /* [CP] Copy Pods Resources */,
+				E89814EF526ECD4FAC80CF2D /* [CP] Embed Pods Frameworks */,
+				07B528BE12679F43611F9D35 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -526,6 +535,9 @@
 					B64AB0B720BCC706003B966C = {
 						CreatedOnToolsVersion = 9.3.1;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -591,6 +603,30 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		07B528BE12679F43611F9D35 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-HomeKhaana/Pods-HomeKhaana-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlacePicker/Frameworks/GooglePlacePicker.framework/Resources/GooglePlacePicker.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlacePicker.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HomeKhaana/Pods-HomeKhaana-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		27C491568AFCBA54B9C37F2F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -645,7 +681,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B339C7F2D49BC54FAE8D4085 /* [CP] Embed Pods Frameworks */ = {
+		E89814EF526ECD4FAC80CF2D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -679,30 +715,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HomeKhaana/Pods-HomeKhaana-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C9422E130BCA4D6883796F4C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-HomeKhaana/Pods-HomeKhaana-resources.sh",
-				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
-				"${PODS_ROOT}/GooglePlacePicker/Frameworks/GooglePlacePicker.framework/Resources/GooglePlacePicker.bundle",
-				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
-				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlacePicker.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HomeKhaana/Pods-HomeKhaana-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -729,10 +741,13 @@
 				B655FFC3219BA9A4008691D2 /* KitchenTableViewCell.swift in Sources */,
 				B61558D520D8641F00471718 /* CustomUIButton.swift in Sources */,
 				B655FFC721A0D302008691D2 /* Cart.swift in Sources */,
+				B66BA42024BB743400190CEA /* KitchenDataManager.swift in Sources */,
 				B64AB0BC20BCC707003B966C /* AppDelegate.swift in Sources */,
+				B66BA41E24BB742300190CEA /* UserDataManager.swift in Sources */,
 				B609916022CE59A700A3543A /* KitchenHeaderTableViewCell.swift in Sources */,
 				B691C78820E9AA440060CF98 /* CartViewController.swift in Sources */,
 				B691C78E20EB3B480060CF98 /* Shared.swift in Sources */,
+				B66BA42224BB8DF100190CEA /* RatingHandler.swift in Sources */,
 				B62F26F0213B536100FA88D3 /* CurrentOrdersTableViewController.swift in Sources */,
 				B610D6B0223DB0B700E94E27 /* LocationViewController.swift in Sources */,
 				B6E5B08522D0D5EF009D3BE0 /* RatingViewController.swift in Sources */,
@@ -846,6 +861,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -862,7 +878,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -906,6 +922,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -916,8 +933,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -932,8 +950,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				CODE_SIGN_ENTITLEMENTS = HomeKhaana/HomeKhaana.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 45Q3EPGGF2;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/Bolts\"",
@@ -961,15 +980,119 @@
 					"\"${PODS_ROOT}/GooglePlaces/Frameworks\"",
 					"\"${PODS_ROOT}/GoogleSignIn/Frameworks\"",
 				);
+				GCC_NO_COMMON_BLOCKS = NO;
 				INFOPLIST_FILE = HomeKhaana/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"c++\"",
+					"-l\"icucore\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreImage\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"FBLPromises\"",
+					"-framework",
+					"\"FIRAnalyticsConnector\"",
+					"-framework",
+					"\"FirebaseAnalytics\"",
+					"-framework",
+					"\"FirebaseAuth\"",
+					"-framework",
+					"\"FirebaseCore\"",
+					"-framework",
+					"\"FirebaseCoreDiagnostics\"",
+					"-framework",
+					"\"FirebaseDatabase\"",
+					"-framework",
+					"\"FirebaseFunctions\"",
+					"-framework",
+					"\"FirebaseInstallations\"",
+					"-framework",
+					"\"FirebaseInstanceID\"",
+					"-framework",
+					"\"FirebaseMessaging\"",
+					"-framework",
+					"\"FirebaseStorage\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GLKit\"",
+					"-framework",
+					"\"GTMOAuth2\"",
+					"-framework",
+					"\"GTMSessionFetcher\"",
+					"-framework",
+					"\"GoogleAppMeasurement\"",
+					"-framework",
+					"\"GoogleDataTransport\"",
+					"-framework",
+					"\"GoogleMaps\"",
+					"-framework",
+					"\"GoogleMapsBase\"",
+					"-framework",
+					"\"GoogleMapsCore\"",
+					"-framework",
+					"\"GooglePlacePicker\"",
+					"-framework",
+					"\"GooglePlaces\"",
+					"-framework",
+					"\"GoogleSignIn\"",
+					"-framework",
+					"\"GoogleToolboxForMac\"",
+					"-framework",
+					"\"GoogleUtilities\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"Protobuf\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"Stripe\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"leveldb\"",
+					"-framework",
+					"\"nanopb\"",
+					"-weak_framework",
+					"\"UserNotifications\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = HomeKhaana.Main.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "AV Provisioning Profile for Notifications";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -982,8 +1105,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-2";
 				CODE_SIGN_ENTITLEMENTS = HomeKhaana/HomeKhaana.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 45Q3EPGGF2;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/Bolts\"",
@@ -1007,15 +1131,119 @@
 					"\"${PODS_ROOT}/GooglePlacePicker/Frameworks\"",
 					"\"${PODS_ROOT}/FirebaseInstanceID/Frameworks\"",
 				);
+				GCC_NO_COMMON_BLOCKS = NO;
 				INFOPLIST_FILE = HomeKhaana/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-l\"c++\"",
+					"-l\"icucore\"",
+					"-l\"sqlite3\"",
+					"-l\"z\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreData\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreImage\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"FBLPromises\"",
+					"-framework",
+					"\"FIRAnalyticsConnector\"",
+					"-framework",
+					"\"FirebaseAnalytics\"",
+					"-framework",
+					"\"FirebaseAuth\"",
+					"-framework",
+					"\"FirebaseCore\"",
+					"-framework",
+					"\"FirebaseCoreDiagnostics\"",
+					"-framework",
+					"\"FirebaseDatabase\"",
+					"-framework",
+					"\"FirebaseFunctions\"",
+					"-framework",
+					"\"FirebaseInstallations\"",
+					"-framework",
+					"\"FirebaseInstanceID\"",
+					"-framework",
+					"\"FirebaseMessaging\"",
+					"-framework",
+					"\"FirebaseStorage\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GLKit\"",
+					"-framework",
+					"\"GTMOAuth2\"",
+					"-framework",
+					"\"GTMSessionFetcher\"",
+					"-framework",
+					"\"GoogleAppMeasurement\"",
+					"-framework",
+					"\"GoogleDataTransport\"",
+					"-framework",
+					"\"GoogleMaps\"",
+					"-framework",
+					"\"GoogleMapsBase\"",
+					"-framework",
+					"\"GoogleMapsCore\"",
+					"-framework",
+					"\"GooglePlacePicker\"",
+					"-framework",
+					"\"GooglePlaces\"",
+					"-framework",
+					"\"GoogleSignIn\"",
+					"-framework",
+					"\"GoogleToolboxForMac\"",
+					"-framework",
+					"\"GoogleUtilities\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"Protobuf\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"Stripe\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-framework",
+					"\"leveldb\"",
+					"-framework",
+					"\"nanopb\"",
+					"-weak_framework",
+					"\"UserNotifications\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = HomeKhaana.Main.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "AV Provisioning Profile for Notifications";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

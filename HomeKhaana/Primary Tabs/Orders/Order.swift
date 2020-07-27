@@ -51,33 +51,9 @@ class Order
             "orderingUserName": self.orderingUserName, // these values are used in delivery workflows
             "kitchenId": self.kitchenId,
             "timestamp": self.timestamp,
-            "cart": getMapFromCart(),
+            "cart": getCartDetails(),
             "instructions": customInstructions ?? ""
         ]
-    }
-    
-    public func populateDates() -> Void
-    {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .medium
-        dateFormatter.locale = Locale(identifier: "en_US")
-        self.orderDate = dateFormatter.string(from: Date.init())
-        
-        dateFormatter.timeStyle = .none
-        //self.deliveryDate = dateFormatter.string(from: Date.init(timeInterval: TimeInterval.init(exactly: (24*60*60))!, since: Date.init()))
-        
-        self.timestamp = Date().getCurrentTimeStamp()
-    }
-    
-    private func getMapFromCart() -> Dictionary<String, String>
-    {
-        var retMap:Dictionary<String,String> = [:]
-        for choice in self.cart
-        {
-            retMap[choice.displayTitle] = String(choice.cost) + ":" + String(choice.quantity!)
-        }
-        return retMap
     }
     
     public init()
@@ -158,35 +134,59 @@ class Order
         
         let selectedPaymentID = snapshot["source"] as? String
         //payment source and address
-        let selectedPayment:PaymentSource? = User.getPaymentSourceForID(id: selectedPaymentID ?? "")
+        let selectedPayment:PaymentSource? = nil //User.getPaymentSourceForID(id: selectedPaymentID ?? "")
         
         self.init(id: id!, orderDate: orderDate ?? "", orderRating: orderRating ?? -1, status: status ?? "New", cart: cart, subTotal: subTotal!, tax: tax!, discount: discount!, orderTotal: orderTotal!, source: selectedPayment, kitchenId: kitchenId!, orderingUserId: orderingUserId, orderingUserName: orderingUserName, timestamp: timestamp!, instructions: customInstructions)
     }
  
-    func processResponse(snapshot: DataSnapshot) -> String
-    {
-        guard
-            let value = snapshot.value as? AnyObject
-            else { return "" }
-        
-        let errorString = value["error"] as? String
-        if(errorString != nil)
-        {
-            return errorString!
-        }
-        
-        let statusString = value["status"] as? String
-        if(statusString != nil)
-        {
-            return statusString!
-        }
-        
-        return ""
-    }
-    
     public func setRating(rating: Int)
     {
         self.orderRating = rating
         db.child("Orders/\(self.orderingUserID)/\(self.id)/\("orderRating")").setValue(rating)
     }
+    
+    public func populateDates() -> Void
+    {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .medium
+        dateFormatter.locale = Locale(identifier: "en_US")
+        self.orderDate = dateFormatter.string(from: Date.init())
+        
+        dateFormatter.timeStyle = .none
+        //self.deliveryDate = dateFormatter.string(from: Date.init(timeInterval: TimeInterval.init(exactly: (24*60*60))!, since: Date.init()))
+        
+        self.timestamp = Date().getCurrentTimeStamp()
+    }
+    
+    private func getCartDetails() -> Dictionary<String, String>
+    {
+        var retMap:Dictionary<String,String> = [:]
+        for choice in self.cart
+        {
+            retMap[choice.displayTitle] = String(choice.cost) + ":" + String(choice.quantity!)
+        }
+        return retMap
+    }
+    
+    /*func processResponse(snapshot: DataSnapshot) -> String
+     {
+     guard
+     let value = snapshot.value as? AnyObject
+     else { return "" }
+     
+     let errorString = value["error"] as? String
+     if(errorString != nil)
+     {
+     return errorString!
+     }
+     
+     let statusString = value["status"] as? String
+     if(statusString != nil)
+     {
+     return statusString!
+     }
+     
+     return ""
+     }*/
 }

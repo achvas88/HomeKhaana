@@ -58,9 +58,6 @@ class LoaderController: NSObject {
     
     //MARK: - Public Methods -
     func showLoader(indicatorText: String, holdingView: UIView) {
-        //let appDel = UIApplication.shared.delegate as! AppDelegate
-        //let holdingView = appDel.window!.rootViewController!.view!
-        
         setupLoader(indicatorText: indicatorText, holdingView: holdingView)
         
         DispatchQueue.main.async {

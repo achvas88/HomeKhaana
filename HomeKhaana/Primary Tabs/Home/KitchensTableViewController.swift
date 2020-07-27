@@ -14,15 +14,7 @@ class KitchensTableViewController: UITableViewController,RefreshTableViewWhenImg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
-    // MARK: - Table view data source
 
     override func viewWillAppear(_ animated: Bool) {
         self.kitchens = DataManager.getKitchens()
@@ -35,8 +27,7 @@ class KitchensTableViewController: UITableViewController,RefreshTableViewWhenImg
             self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: true)
         }
         
-        if(Cart.sharedInstance.cart.count == 0) {self.navigationController?.tabBarController?.tabBar.items?[1].badgeValue = nil}
-        else {self.navigationController?.tabBarController?.tabBar.items?[1].badgeValue = String(Cart.sharedInstance.cart.count)}
+        Cart.sharedInstance.updateCartBadge(vc: self)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

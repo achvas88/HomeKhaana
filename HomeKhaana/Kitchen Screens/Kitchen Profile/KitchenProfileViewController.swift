@@ -38,9 +38,9 @@ class KitchenProfileViewController: UIViewController {
         self.imgKitchen.image = kitchen!.image
         self.txtKitchenName.text = kitchen!.name
         self.swhOnline.isOn = kitchen!.isOnline
-        if(kitchen!.ratingCount > 0)
+        if(kitchen!.ratingHandler.ratingCount > 0)
         {
-            self.lblKitchenRating.text = "\(kitchen!.rating)"
+            self.lblKitchenRating.text = "\(kitchen!.ratingHandler.rating)"
             self.stkKitchenRating.isHidden = false
         }
         else

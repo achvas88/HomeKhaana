@@ -9,6 +9,7 @@
 import Foundation
 import FirebaseDatabase
 import Firebase
+import FirebaseStorage
 
 class Choice: Equatable
 {
@@ -63,7 +64,7 @@ class Choice: Equatable
         
         let displayTitle = snapshot["title"] as! String
         let description = snapshot["description"] as! String
-        let cost = snapshot["cost"] as! Float
+        let cost = (snapshot["cost"] as! NSNumber).floatValue
         let isVegetarian = snapshot["isVegetarian"] as! Bool
         let hasImage = snapshot["hasImage"] as! Bool
         let id = snapshot["id"] as! String
@@ -94,6 +95,7 @@ class Choice: Equatable
         let storageRef = Storage.storage().reference()
         storageRef.child(filePath).getData(maxSize: 10*1024*1024, completion: { (data, error) in
             self.image = UIImage(data: data!)
+            // TODO: reloading table view for every image load seems a bit much. we need to come up with a better way of displaying the image.
             self.containingTableViewDelegate?.reloadTableView()
         })
     }

@@ -11,8 +11,8 @@ import Foundation
 class ChoiceGroup
 {
     var displayTitle: String
-    private var choices:[Choice]
     var id: String
+    private var choices:[Choice]
     private var vegChoices:[Choice]
     
     init(id: String, displayTitle: String, choices: [Choice]) {
@@ -21,17 +21,6 @@ class ChoiceGroup
         self.choices = choices
         self.vegChoices = []
         if(self.choices.count>0) { self.populateVegChoices() }
-    }
-    
-    private func populateVegChoices() -> Void
-    {
-        for choice in self.choices
-        {
-            if(choice.isVegetarian)
-            {
-                self.vegChoices.append(choice)
-            }
-        }
     }
     
     public func removeChoice(atIndex: Int) -> Choice
@@ -79,6 +68,58 @@ class ChoiceGroup
         ]
     }
     
+    public func sortChoicesByID()
+    {
+        self.choices.sort(by: { $0.order < $1.order })
+        self.vegChoices.sort(by: { $0.order < $1.order })
+    }
+    
+    //get a specific choice group for a specific kitchen. Obtains data from the Datamanager's menuItems dictionary
+    public static func getChoiceGroup(kitchenId: String, groupTitle:String)-> ChoiceGroup?
+    {
+        let menuItems:[ChoiceGroup]? = DataManager.menuItems[kitchenId]
+        if(menuItems == nil)
+        {
+            return nil
+        }
+        else
+        {
+            for choiceGroup in menuItems!
+            {
+                if(choiceGroup.displayTitle == groupTitle)
+                {
+                    return choiceGroup
+                }
+            }
+            return nil
+        }
+    }
+    
+    //creates a choice group and appends it to the menuItems dictionary in the DataManager class
+    public static func createChoiceGroup(kitchenId: String, displayTitle: String, choices: [Choice])
+    {
+        let choiceGroupID: String = UUID().uuidString
+        let newGroup:ChoiceGroup = ChoiceGroup(id: choiceGroupID, displayTitle: displayTitle, choices: choices)
+        
+        let allChoiceGroups:[ChoiceGroup]? = DataManager.menuItems[kitchenId]
+        if(allChoiceGroups == nil)
+        {
+            DataManager.menuItems[kitchenId] = []
+        }
+        DataManager.menuItems[kitchenId]?.append(newGroup)
+    }
+    
+    private func populateVegChoices() -> Void
+    {
+        for choice in self.choices
+        {
+            if(choice.isVegetarian)
+            {
+                self.vegChoices.append(choice)
+            }
+        }
+    }
+    
     private func getChoicesDictionary() -> Dictionary<String,Any>
     {
         var retMap:Dictionary<String,Any> = [:]
@@ -91,11 +132,5 @@ class ChoiceGroup
             retMap[choice.id] = choiceDic
         }
         return retMap
-    }
-    
-    public func sortChoicesByID()
-    {
-        self.choices.sort(by: { $0.order < $1.order })
-        self.vegChoices.sort(by: { $0.order < $1.order })
     }
 }

@@ -28,6 +28,18 @@ class LocationServicesViewController: UIViewController {
         locationManager.requestLocation()
     }
     
+    func moveOn()
+    {
+        LoaderController.sharedInstance.removeLoader()
+        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "howItWorks")
+        self.present(vc!, animated: false, completion: nil)
+    }
+
+    @IBAction func nextClicked(_ sender: Any) {
+        getLocation()
+    }
+    
     func showLocationDisabledPopUp() {
         
         LoaderController.sharedInstance.removeLoader()
@@ -49,29 +61,6 @@ class LocationServicesViewController: UIViewController {
         
         self.present(alertController, animated: true, completion: nil)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
-    func moveOn()
-    {
-        LoaderController.sharedInstance.removeLoader()
-        
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "howItWorks")
-        self.present(vc!, animated: false, completion: nil)
-    }
-
-    @IBAction func nextClicked(_ sender: Any) {
-        getLocation()
-    }
-    
 }
 
 extension LocationServicesViewController : CLLocationManagerDelegate {

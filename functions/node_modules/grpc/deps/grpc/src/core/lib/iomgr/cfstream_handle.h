@@ -29,16 +29,23 @@
 #ifdef GRPC_CFSTREAM
 #import <CoreFoundation/CoreFoundation.h>
 
+#include "src/core/lib/gprpp/memory.h"
 #include "src/core/lib/iomgr/closure.h"
 #include "src/core/lib/iomgr/lockfree_event.h"
 
-class CFStreamHandle final {
+class GrpcLibraryInitHolder {
+ public:
+  GrpcLibraryInitHolder();
+  virtual ~GrpcLibraryInitHolder();
+};
+
+class CFStreamHandle : public GrpcLibraryInitHolder {
  public:
   static CFStreamHandle* CreateStreamHandle(CFReadStreamRef read_stream,
                                             CFWriteStreamRef write_stream);
-  ~CFStreamHandle();
-  CFStreamHandle(const CFReadStreamRef& ref) = delete;
-  CFStreamHandle(CFReadStreamRef&& ref) = delete;
+  ~CFStreamHandle() override;
+  CFStreamHandle(const CFStreamHandle& ref) = delete;
+  CFStreamHandle(CFStreamHandle&& ref) = delete;
   CFStreamHandle& operator=(const CFStreamHandle& rhs) = delete;
 
   void NotifyOnOpen(grpc_closure* closure);
@@ -62,7 +69,12 @@ class CFStreamHandle final {
   grpc_core::LockfreeEvent read_event_;
   grpc_core::LockfreeEvent write_event_;
 
+  dispatch_queue_t dispatch_queue_;
+
   gpr_refcount refcount_;
+
+  GRPC_ALLOW_CLASS_TO_USE_NON_PUBLIC_NEW
+  GRPC_ALLOW_CLASS_TO_USE_NON_PUBLIC_DELETE
 };
 
 #ifdef DEBUG

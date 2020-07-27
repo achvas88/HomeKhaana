@@ -11,16 +11,6 @@ import UIKit
 // TODO: need to update this.
 class OrdersTableViewCell: UITableViewCell {
 
-    /*
-     image
-     order id,
-     order status,
-     order date,
-     delivery address,
-     order rating if status = Completed
-     cart
-     order total
-     */
     @IBOutlet weak var imgOrder: UIImageView!
     @IBOutlet weak var lblOrderDate: UILabel!
     @IBOutlet weak var lblStatus: UILabel!
@@ -67,9 +57,7 @@ class OrdersTableViewCell: UITableViewCell {
             
             let kitchen:Kitchen? = DataManager.kitchens[order.kitchenId]
             self.imgOrder.image = kitchen?.image
-            
-            //self.imgOrder.image = UIImage(named: kitchen?.imgName ?? "shopping-cart (1)")
-            
+
             //cart link title
             var cartLinkTitle:String = choice.displayTitle
             let totalInCart = order.cart.count - 1
@@ -112,9 +100,6 @@ class OrdersTableViewCell: UITableViewCell {
 
         self.selectionStyle = .none
         
-        // just use the layer's shadow... adding the Bezier
-        //let shadowPath = UIBezierPath(roundedRect: orderOuterView.bounds, cornerRadius: cornerRadius)
-        //orderOuterView.layer.shadowPath = shadowPath.cgPath
         let path = UIBezierPath(roundedRect:self.imgOrder.bounds,
                                 byRoundingCorners:[.topRight, .topLeft],
                                 cornerRadii: CGSize(width: 6, height:  6))

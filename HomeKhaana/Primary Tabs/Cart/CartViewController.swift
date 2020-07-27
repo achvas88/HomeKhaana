@@ -128,46 +128,6 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
         super.viewDidAppear(animated)
     }
     
-    func ensurePaymentSourceValidity()
-    {
-        //if not a new order, nothing to do, quit
-        if(self.currentOrder!.status != "New")
-        {
-            return
-        }
-        
-        if(User.sharedInstance!.paymentSources == nil) //if no payment sources on file, show the "Add Payment" button
-        {
-            clearOffSelectedPaymentSource()
-            return
-        }
-        if (self.currentOrder!.selectedPayment != nil) // if there is a selected payment method, check for its validity
-        {
-            var isValidCard:Bool = false
-            for card in User.sharedInstance!.paymentSources!
-            {
-                if(self.currentOrder!.selectedPayment!.id == card.id)
-                {
-                    isValidCard = true
-                }
-            }
-            if(isValidCard)
-            {
-                self.btnAddPayment.setTitle("**** " + self.currentOrder!.selectedPayment!.cardNumber, for: .normal)
-                self.btnAddPayment.setImage(self.currentOrder!.selectedPayment!.cardImage, for: .normal)
-            }
-            else
-            {
-                clearOffSelectedPaymentSource()
-            }
-        }
-    }
-    
-    func clearOffSelectedPaymentSource()    //WILL BE CALLED ONCE CREDIT CARD IS ADDED
-    {
-        self.currentOrder!.selectedPayment = nil
-        self.btnAddPayment.setTitle("Add Payment", for: .normal)
-    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -187,24 +147,6 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func setAddPaymentTitle(kitchen: Kitchen)
-    {
-        let acceptsDebit = kitchen.acceptsDebit ?? false
-        let acceptsCredit = kitchen.acceptsCredit ?? false
-        var credit:String = "";
-        var debit:String = "";
-        if(acceptsDebit)
-        {
-            debit = "/Debit"
-        }
-        if(acceptsCredit)
-        {
-            credit = "/Credit"
-        }
-        
-        self.btnAddPayment.setTitle("Pay by Cash" + debit + credit , for: .normal)
     }
     
     func updateDisplay(initialize:Bool)
@@ -239,65 +181,12 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
         
         if(self.inCart.count == 0)
         {
-            self.btnCheckout.isHidden = true
-            self.scrScrollArea.isHidden = true
-            self.btnAddPayment.isHidden = true
-            self.btnClearCart.isHidden = true
-            self.stkEmptyCart.isHidden = false
-            self.tblItems.isUserInteractionEnabled = false
-            self.btnRate.isHidden = true
-            self.stkRating.isHidden = true
+            updateDisplayWhenCartIsEmpty()
         }
         else
         {
-            self.scrScrollArea.isHidden = false
-            self.btnCheckout.isHidden = false
+            updateDisplayWhenCartHasItems(kitchen)
             
-            if(self.currentOrder!.status == "New")
-            {
-                self.btnAddPayment.isHidden = false
-                self.setAddPaymentTitle(kitchen: kitchen!)
-                self.btnClearCart.isHidden = false
-                self.tblItems.isUserInteractionEnabled = true
-            }
-            else
-            {
-                self.btnAddPayment.isHidden = true
-                self.btnClearCart.isHidden = true
-                self.cnstAddPaymentHeight.constant = 0
-                self.tblItems.isUserInteractionEnabled = false
-            }
-            
-            if(self.currentOrder!.status == "Completed")
-            {
-                if(self.currentOrder!.orderRating == nil || self.currentOrder!.orderRating == -1  )
-                {
-                    self.btnRate.isHidden = false
-                    self.stkRating.isHidden = true
-                }
-                else
-                {
-                    self.stkRating.isHidden = false
-                    self.stkRating.isUserInteractionEnabled = false
-                    self.stkRating.rating = self.currentOrder!.orderRating!
-                    
-                    if(justRated == nil || justRated! == false)
-                    {
-                        self.btnRate.isHidden = true
-                    }
-                    else
-                    {
-                        self.btnRate.isHidden = false
-                    }
-                }
-            }
-            else
-            {
-                self.btnRate.isHidden = true
-                self.stkRating.isHidden = true
-            }
-            
-            self.stkEmptyCart.isHidden = true
             if(!initialize)
             {
                 self.tblItems.reloadData()
@@ -311,26 +200,106 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
         //update badge
         if(self.currentOrder!.status == "New")
         {
-            if(self.inCart.count == 0) {self.navigationController?.tabBarController?.tabBar.items?[1].badgeValue = nil}
-            else {self.navigationController?.tabBarController?.tabBar.items?[1].badgeValue = String(self.inCart.count)}
+            Cart.sharedInstance.updateCartBadge(vc: self)
         
             //ensure payment source is still valid. This will be uncommented once credit card payment is open.
             //ensurePaymentSourceValidity()
         }
     }
     
+    private func updateDisplayWhenCartHasItems(_ kitchen: Kitchen?)
+    {
+        self.scrScrollArea.isHidden = false
+        self.btnCheckout.isHidden = false
+        self.stkEmptyCart.isHidden = true
+        
+        if(self.currentOrder!.status == "New")
+        {
+            self.btnAddPayment.isHidden = false
+            self.setAddPaymentTitle(kitchen: kitchen!)
+            self.btnClearCart.isHidden = false
+            self.tblItems.isUserInteractionEnabled = true
+        }
+        else
+        {
+            self.btnAddPayment.isHidden = true
+            self.btnClearCart.isHidden = true
+            self.cnstAddPaymentHeight.constant = 0
+            self.tblItems.isUserInteractionEnabled = false
+        }
+        
+        if(self.currentOrder!.status == "Completed")
+        {
+            if(self.currentOrder!.orderRating == nil || self.currentOrder!.orderRating == -1  )
+            {
+                self.btnRate.isHidden = false
+                self.stkRating.isHidden = true
+            }
+            else
+            {
+                self.stkRating.isHidden = false
+                self.stkRating.isUserInteractionEnabled = false
+                self.stkRating.rating = self.currentOrder!.orderRating!
+                
+                if(justRated == nil || justRated! == false)
+                {
+                    self.btnRate.isHidden = true
+                }
+                else
+                {
+                    self.btnRate.isHidden = false
+                }
+            }
+        }
+        else
+        {
+            self.btnRate.isHidden = true
+            self.stkRating.isHidden = true
+        }
+    }
+    
+    func updateDisplayWhenCartIsEmpty()
+    {
+        self.btnCheckout.isHidden = true
+        self.scrScrollArea.isHidden = true
+        self.btnAddPayment.isHidden = true
+        self.btnClearCart.isHidden = true
+        self.stkEmptyCart.isHidden = false
+        self.tblItems.isUserInteractionEnabled = false
+        self.btnRate.isHidden = true
+        self.stkRating.isHidden = true
+    }
+    
+    func setAddPaymentTitle(kitchen: Kitchen)
+    {
+        let acceptsDebit = kitchen.acceptsDebit ?? false
+        let acceptsCredit = kitchen.acceptsCredit ?? false
+        var credit:String = "";
+        var debit:String = "";
+        if(acceptsDebit)
+        {
+            debit = "/Debit"
+        }
+        if(acceptsCredit)
+        {
+            credit = "/Credit"
+        }
+        
+        self.btnAddPayment.setTitle("Pay by Cash" + debit + credit , for: .normal)
+    }
+    
     func calculatePrice()
     {
         if(self.currentOrder!.status == "New")
         {
-            var subTotal:Float = 0
+            var subTotal:Double = 0
             for choice in self.inCart {
-                subTotal = subTotal + (choice.cost * Float(choice.quantity!))
+                subTotal = subTotal + Double(choice.cost * Float(choice.quantity!))
             }
         
             //setup order object
             self.currentOrder!.cart = self.inCart
-            self.currentOrder!.subTotal = limitToTwoDecimal(input: subTotal)
+            self.currentOrder!.subTotal = Float(limitToTwoDecimal(input: subTotal))
             //self.currentOrder!.tax = limitToTwoDecimal(input: (self.currentOrder!.subTotal*0.05))
             self.currentOrder!.orderTotal = self.currentOrder!.subTotal //limitToTwoDecimal(input:(self.currentOrder!.subTotal+(self.currentOrder!.subTotal*0.05)))
         }
@@ -474,10 +443,7 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
     
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
         if (segue.identifier == "cartChoiceDetail")
         {
             let detailsVC: ChoiceDetailViewController? = segue.destination as? ChoiceDetailViewController
@@ -533,4 +499,47 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
         self.justRated = true
         self.updateDisplay(initialize: false)
     }
+    
+    /*func ensurePaymentSourceValidity()
+     {
+     //if not a new order, nothing to do, quit
+     if(self.currentOrder!.status != "New")
+     {
+     return
+     }
+     
+     if(User.sharedInstance!.paymentSources == nil) //if no payment sources on file, show the "Add Payment" button
+     {
+     clearOffSelectedPaymentSource()
+     return
+     }
+     if (self.currentOrder!.selectedPayment != nil) // if there is a selected payment method, check for its validity
+     {
+     var isValidCard:Bool = false
+     for card in User.sharedInstance!.paymentSources!
+     {
+     if(self.currentOrder!.selectedPayment!.id == card.id)
+     {
+     isValidCard = true
+     }
+     }
+     if(isValidCard)
+     {
+     self.btnAddPayment.setTitle("**** " + self.currentOrder!.selectedPayment!.cardNumber, for: .normal)
+     self.btnAddPayment.setImage(self.currentOrder!.selectedPayment!.cardImage, for: .normal)
+     }
+     else
+     {
+     clearOffSelectedPaymentSource()
+     }
+     }
+     }
+     
+     func clearOffSelectedPaymentSource()    //WILL BE CALLED ONCE CREDIT CARD IS ADDED
+     {
+     self.currentOrder!.selectedPayment = nil
+     self.btnAddPayment.setTitle("Add Payment", for: .normal)
+     }
+     */
+    
 }

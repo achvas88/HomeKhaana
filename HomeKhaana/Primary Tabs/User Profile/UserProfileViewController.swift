@@ -35,9 +35,9 @@ class UserProfileViewController: UIViewController {
             self.lblTitle.text = name
         }
         
-        if (User.sharedInstance!.ratingCount > 0)
+        if (User.sharedInstance!.ratingHandler.ratingCount > 0)
         {
-            self.lblRating.text = String(User.sharedInstance!.rating)
+            self.lblRating.text = String(User.sharedInstance!.ratingHandler.rating)
             self.stkUserRating.isHidden = false
         }
         else
@@ -99,12 +99,12 @@ class UserProfileViewController: UIViewController {
     @IBAction func loginAsKitchenClicked(_ sender: Any) {
         
         let alertController = UIAlertController(title: "Confirmation",
-                                                message: "This will cause your logged in email address to be marked permanently as a kitchen.  Are you sure?",
+                                                message: "This will cause your logged in email address to be marked permanently as a kitchen. This means you cannot place orders from this account again. Are you sure?",
                                                 preferredStyle: .alert)
         var alertAction = UIAlertAction(title: "Yes", style: .default, handler: { (action) -> Void in
             
             let alertController2 = UIAlertController(title: "What happens now... ",
-                                                    message: "You will be logged out now. While you log back in, you will launch into kitchen mode.",
+                                                    message: "You will be logged out now. When you log back in, you will launch into kitchen mode.",
                                                     preferredStyle: .alert)
             let alertAction2 = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
                 
@@ -120,19 +120,14 @@ class UserProfileViewController: UIViewController {
         alertController.addAction(alertAction)
         present(alertController, animated: true)
     }
-    
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        if(segue.identifier == "showPayment")
+        /*if(segue.identifier == "showPayment")
         {
             let paymentSourcesVC: PaymentSourceTableViewController? = segue.destination as? PaymentSourceTableViewController
             paymentSourcesVC?.selectedPayment = User.sharedInstance!.defaultPaymentSource
             paymentSourcesVC?.mgmtMode = true;
-        }
+        }*/
     }
     
     

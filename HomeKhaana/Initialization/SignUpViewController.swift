@@ -10,15 +10,12 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import GoogleSignIn
-//import FBSDKCoreKit
-//import FBSDKLoginKit
 
 class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate{ //}, FBSDKLoginButtonDelegate  {
     
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
-    //@IBOutlet weak var btnFacebookView: FBSDKLoginButton!
     @IBOutlet weak var btnFacebook: UIButton!
     
     override func viewDidLoad() {
@@ -26,7 +23,6 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
         
         self.hideKeyboardWhenTappedAround()
         // Do any additional setup after loading the view.
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -34,7 +30,6 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // Action Handlers ----------------------------------------------
@@ -82,7 +77,7 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                     self.txtEmail.text = ""
                 }
                 
-                self.showError(message: message,title: title)
+                showError(vc: self, message: message,title: title)
             })
         }
     }
@@ -102,8 +97,7 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
         }
         
         guard let authentication = user.authentication else { return }
-        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
-                                                       accessToken: authentication.accessToken)
+        let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
         Auth.auth().signInAndRetrieveData(with: credential)
         {
             (user, error) in
@@ -113,42 +107,10 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
             }
             else
             {
-                self.showError(message: error!.localizedDescription)
+                showError(vc: self, message: error!.localizedDescription)
             }
         }
     }
-    
-    // Facebook Sign In --------------------------------------------------
-    /*@IBAction func btnFacebookClicked(_ sender: Any)
-    {
-        let loginManager = FBSDKLoginManager()
-        loginManager.logIn(withReadPermissions: ["public_profile", "email", "user_friends"], from: self, handler: {
-                result, error in
-                if error != nil
-                {
-                    self.showError(message: error!.localizedDescription)
-                }
-                else if result?.isCancelled == true
-                {
-                    //do nothing
-                }
-                else
-                {
-                    let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-                    Auth.auth().signInAndRetrieveData(with: credential, completion: {
-                            (user, error) in
-                            if (error != nil)
-                            {
-                                self.showError(message: error!.localizedDescription)
-                            }
-                            else
-                            {
-                                self.navigateToLoadUserScreen()
-                            }
-                    })
-                }
-            })
-    }*/
     
     // Supporting Functions ----------------------------------------------
     func btnSignUpOrLogIn(isSignUp: Bool)
@@ -176,7 +138,7 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                     }
                     else
                     {
-                        self.showError(message: error!.localizedDescription)
+                        showError(vc: self, message: error!.localizedDescription)
                     }
                 }
             }
@@ -191,7 +153,7 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
                     }
                     else
                     {
-                        self.showError(message: error!.localizedDescription)
+                        showError(vc: self, message: error!.localizedDescription)
                     }
                 }
             }
@@ -203,23 +165,4 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoadUser")
         self.present(vc!, animated: true, completion: nil)
     }
-    
-    func showError(message: String, title: String = "Error")
-    {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let defaultAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        alertController.addAction(defaultAction)
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

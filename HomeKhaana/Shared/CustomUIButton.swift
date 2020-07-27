@@ -9,15 +9,6 @@
 import UIKit
 
 class CustomUIButton: UIButton {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-    
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
@@ -41,14 +32,5 @@ class CustomUIButton: UIButton {
         
         //height anchor
         self.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-        //set image
-        /*guard let image = UIImage(named: "right-arrow")?.withRenderingMode(.alwaysOriginal) else
-        {
-            return
-        }
-        self.imageView?.contentMode = .center
-        self.setImage(image, for: .normal)
-        self.imageEdgeInsets = UIEdgeInsetsMake(0, self.bounds.size.width-image.size.width*1.5, 0, 0);*/
     }
 }

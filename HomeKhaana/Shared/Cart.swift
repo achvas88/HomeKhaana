@@ -25,6 +25,18 @@ class Cart: NSObject {
         return self.cart.count==0
     }
     
+    public func updateCartBadge(vc: UIViewController)
+    {
+        if(self.cart.count == 0)
+        {
+            vc.navigationController?.tabBarController?.tabBar.items?[1].badgeValue = nil
+        }
+        else
+        {
+            vc.navigationController?.tabBarController?.tabBar.items?[1].badgeValue = String(self.cart.count)
+        }
+    }
+    
     public func updateCart(choice: Choice, vc: UIViewController, isAddingNew: Bool, completion: @escaping () -> ())    // TODO: TEST THIS
     {
         if(choice.quantity == nil || choice.quantity! == 0) //we are removing an item from the cart.
@@ -70,6 +82,12 @@ class Cart: NSObject {
         }
     }
     
+    public func clearCart() -> Void
+    {
+        self.cart.removeAll()
+        self.kitchenId = ""
+    }
+    
     private func cartContainsChoice(choiceToFind: Choice) -> Choice?
     {
         for choice in self.cart
@@ -111,11 +129,5 @@ class Cart: NSObject {
         })
         alertController.addAction(alertAction)
         vc.present(alertController, animated: true)
-    }
-    
-    public func clearCart() -> Void
-    {
-        self.cart.removeAll()
-        self.kitchenId = ""
     }
 }

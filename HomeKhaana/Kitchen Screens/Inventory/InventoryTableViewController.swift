@@ -46,7 +46,7 @@ class InventoryTableViewController: UITableViewController, RefreshTableViewWhenI
         else
         {
             LoaderController.sharedInstance.showLoader(indicatorText: "Loading Menu Items", holdingView: self.view)
-            DataManager.loadMenuItems(kitchenId: self.kitchen!.id, completion:
+            KitchenDataManager.loadMenuItems(kitchenId: self.kitchen!.id, completion:
                 {
                     LoaderController.sharedInstance.removeLoader();
                     self.menuItems = DataManager.menuItems[self.kitchen!.id]!

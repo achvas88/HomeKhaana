@@ -206,11 +206,11 @@ class InventoryAddItemViewController: UIViewController, UIImagePickerControllerD
     func addChoiceToGroup(newChoice: Choice)
     {
         let choiceGroupTitle:String = self.txtGroup.text ?? "Other"
-        let choiceGroup:ChoiceGroup? = DataManager.getChoiceGroup(kitchenId: User.sharedInstance!.id, groupTitle: choiceGroupTitle)
+        let choiceGroup:ChoiceGroup? = ChoiceGroup.getChoiceGroup(kitchenId: User.sharedInstance!.id, groupTitle: choiceGroupTitle)
         
         if(choiceGroup == nil)
         {
-            DataManager.createChoiceGroup(kitchenId: User.sharedInstance!.id, displayTitle: choiceGroupTitle, choices: [newChoice])
+            ChoiceGroup.createChoiceGroup(kitchenId: User.sharedInstance!.id, displayTitle: choiceGroupTitle, choices: [newChoice])
         }
         else
         {
