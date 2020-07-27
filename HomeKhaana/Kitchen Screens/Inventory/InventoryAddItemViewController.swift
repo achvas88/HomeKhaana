@@ -119,17 +119,19 @@ class InventoryAddItemViewController: UIViewController, UIImagePickerControllerD
     @IBAction func pickImage(_ sender: Any) {
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
-        
+        imagePicker.delegate = self
         self.present(imagePicker, animated: true, completion: nil)
     }
     
-    private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        
-        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage {
-            imgItem.contentMode = .scaleAspectFill
-            imgItem.image = pickedImage
-            self.imageChanged = true
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        print("image selected");
+        guard let pickedImage = info[.originalImage] as? UIImage else {
+            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)");
         }
+        
+        imgItem.contentMode = .scaleAspectFill
+        imgItem.image = pickedImage
+        self.imageChanged = true
         
         self.dismiss(animated: true, completion: nil)
     }

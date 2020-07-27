@@ -285,8 +285,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HOW IT WORKS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2v8-1w-foY">
-                                <rect key="frame" x="116.5" y="120" width="142" height="23"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                <rect key="frame" x="77.5" y="120" width="220.5" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
                                 <color key="textColor" red="1" green="0.40643951839999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -297,14 +297,14 @@
                                     <constraint firstAttribute="width" constant="60" id="dJZ-qI-I1S"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ORDER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Pe-k6-XVB">
-                                <rect key="frame" x="101" y="213" width="56" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="1: ORDER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Pe-k6-XVB">
+                                <rect key="frame" x="103" y="210" width="210" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.40643951836335646" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Choose from a whole lot of options near you. " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w2q-sV-bcG">
-                                <rect key="frame" x="103" y="231" width="210" height="54"/>
+                                <rect key="frame" x="103" y="231" width="210" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -316,14 +316,14 @@
                                     <constraint firstAttribute="height" constant="60" id="V5P-I0-Jab"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GET NOTIFIED" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UuU-3O-Iq2">
-                                <rect key="frame" x="101" y="323" width="112" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="2: GET NOTIFIED" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UuU-3O-Iq2">
+                                <rect key="frame" x="101" y="320" width="212" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.40643951839999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Once your item is ready, we will send you a notification" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vf2-Rk-exA">
-                                <rect key="frame" x="101" y="330" width="212" height="65"/>
+                                <rect key="frame" x="101" y="339" width="212" height="50"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -335,12 +335,6 @@
                                     <constraint firstAttribute="width" constant="60" id="B3s-po-aMi"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PICK-UP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydW-1z-CBv">
-                                <rect key="frame" x="101" y="433" width="66" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="0.40643951839999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oe2-aP-u5n">
                                 <rect key="frame" x="172.5" y="617" width="30" height="30"/>
                                 <state key="normal" title="OK"/>
@@ -348,8 +342,14 @@
                                     <segue destination="BCx-ix-CQG" kind="show" id="rDr-KS-uJ9"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Pay at vendor location in methods accepted by the vendor and pick up your item. Enjoy!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ebr-gi-Pi0">
-                                <rect key="frame" x="101" y="446" width="237" height="75"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="3: PICK-UP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydW-1z-CBv">
+                                <rect key="frame" x="101" y="431" width="212" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.40643951839999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Pay at vendor location and pick up your item. Enjoy!" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ebr-gi-Pi0">
+                                <rect key="frame" x="101" y="451" width="212" height="54"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -556,7 +556,7 @@
             </objects>
             <point key="canvasLocation" x="1012" y="284"/>
         </scene>
-        <!--Home-->
+        <!--Caterers Near You-->
         <scene sceneID="lBw-As-hfV">
             <objects>
                 <tableViewController id="0EU-zF-ieT" customClass="HomeTableViewController" customModule="HomeKhaana" customModuleProvider="target" sceneMemberID="viewController">
@@ -713,7 +713,7 @@
                             <outlet property="delegate" destination="0EU-zF-ieT" id="8XR-mK-vx2"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Home" id="BNS-Xf-a0R"/>
+                    <navigationItem key="navigationItem" title="Caterers Near You" id="BNS-Xf-a0R"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fV7-YQ-i4C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -910,13 +910,13 @@
                                         <rect key="frame" x="0.0" y="15" width="250" height="130"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RATING" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qzS-CE-fL3">
-                                                <rect key="frame" x="94" y="0.0" width="62" height="19"/>
+                                                <rect key="frame" x="94" y="0.0" width="62" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                 <color key="textColor" red="1" green="0.40643951839999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bQG-0c-rDg" customClass="RatingControl" customModule="HomeKhaana" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="27" width="250" height="50"/>
+                                                <rect key="frame" x="0.0" y="28.5" width="250" height="48.5"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="size" keyPath="starSize">
                                                         <size key="value" width="50" height="50"/>
@@ -1413,19 +1413,19 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="AQI-Bw-rpp">
-                                <rect key="frame" x="50" y="237" width="275" height="31"/>
+                                <rect key="frame" x="20" y="237" width="335" height="31"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="7r4-QW-5CW">
-                                        <rect key="frame" x="0.0" y="0.0" width="275" height="31"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="31"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vegetarian?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KDo-jx-9oL">
-                                                <rect key="frame" x="0.0" y="0.0" width="201" height="31"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show only vegetarian items" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KDo-jx-9oL">
+                                                <rect key="frame" x="0.0" y="0.0" width="261" height="31"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kG0-pl-h2D">
-                                                <rect key="frame" x="226" y="0.0" width="51" height="31"/>
+                                                <rect key="frame" x="286" y="0.0" width="51" height="31"/>
                                                 <connections>
                                                     <action selector="tglVegetarianToggled:" destination="VGf-9h-Wt0" eventType="valueChanged" id="QJF-qe-f19"/>
                                                 </connections>
@@ -1438,8 +1438,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="ShP-6N-G3u" firstAttribute="top" secondItem="SlL-bp-eUG" secondAttribute="top" constant="100" id="D7K-8t-2e8"/>
-                            <constraint firstItem="SlL-bp-eUG" firstAttribute="trailing" secondItem="AQI-Bw-rpp" secondAttribute="trailing" constant="50" id="OZq-GB-nUd"/>
-                            <constraint firstItem="AQI-Bw-rpp" firstAttribute="leading" secondItem="SlL-bp-eUG" secondAttribute="leading" constant="50" id="aJP-c0-V01"/>
+                            <constraint firstItem="SlL-bp-eUG" firstAttribute="trailing" secondItem="AQI-Bw-rpp" secondAttribute="trailing" constant="20" id="OZq-GB-nUd"/>
+                            <constraint firstItem="AQI-Bw-rpp" firstAttribute="leading" secondItem="SlL-bp-eUG" secondAttribute="leading" constant="20" id="aJP-c0-V01"/>
                             <constraint firstItem="SlL-bp-eUG" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="AQI-Bw-rpp" secondAttribute="bottom" constant="50" id="hgk-Dp-kiW"/>
                             <constraint firstItem="ShP-6N-G3u" firstAttribute="centerX" secondItem="SlL-bp-eUG" secondAttribute="centerX" id="pRF-MP-jTa"/>
                             <constraint firstItem="AQI-Bw-rpp" firstAttribute="top" secondItem="ShP-6N-G3u" secondAttribute="bottom" constant="50" id="twg-dh-6fd"/>
@@ -1454,7 +1454,7 @@
             </objects>
             <point key="canvasLocation" x="3878" y="1681"/>
         </scene>
-        <!--Home-->
+        <!--Caterers Near You-->
         <scene sceneID="pZd-l5-Dfc">
             <objects>
                 <tableViewController id="KmN-EH-RGJ" customClass="KitchensTableViewController" customModule="HomeKhaana" customModuleProvider="target" sceneMemberID="viewController">
@@ -1607,7 +1607,7 @@
                             <outlet property="delegate" destination="KmN-EH-RGJ" id="BFc-hk-Azl"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Home" id="jgy-Cz-xZ8"/>
+                    <navigationItem key="navigationItem" title="Caterers Near You" id="jgy-Cz-xZ8"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FMq-ww-3B4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1650,13 +1650,13 @@
                                                     <rect key="frame" x="15" y="135" width="325" height="30"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XJY-Ic-mT4" customClass="RatingControl" customModule="HomeKhaana" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="50.5" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="43" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="PkC-AZ-bgx"/>
                                                             </constraints>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready for Pick-Up" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p76-rV-3nN">
-                                                            <rect key="frame" x="55.5" y="0.0" width="269.5" height="30"/>
+                                                            <rect key="frame" x="48" y="0.0" width="277" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" id="6dh-l7-ZeR"/>
                                                             </constraints>
@@ -2923,7 +2923,7 @@
                     </view>
                     <connections>
                         <outlet property="btnAdd" destination="oA0-IA-vZ4" id="LvR-NR-Jdd"/>
-                        <outlet property="imgItem" destination="nPu-qV-ROl" id="g1H-xD-HSI"/>
+                        <outlet property="imgItem" destination="nPu-qV-ROl" id="Pda-fA-csK"/>
                         <outlet property="keyboardHeightLayoutConstraint" destination="kPK-Ot-elM" id="NBW-2H-T8f"/>
                         <outlet property="lblRemainingChars" destination="ZPI-FF-Kz2" id="H5z-1S-TfX"/>
                         <outlet property="lblScreenHdr" destination="HZ0-c6-M4z" id="vdO-jR-oUj"/>
@@ -3385,6 +3385,6 @@
         <segue reference="auW-X4-2bE"/>
         <segue reference="jSY-jj-Mgi"/>
         <segue reference="gZN-iS-vUy"/>
-        <segue reference="Gmd-Ol-96N"/>
+        <segue reference="Va9-yg-nDQ"/>
     </inferredMetricsTieBreakers>
 </document>

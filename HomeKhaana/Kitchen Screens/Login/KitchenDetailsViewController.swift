@@ -117,18 +117,19 @@ class KitchenDetailsViewController: UIViewController, UIImagePickerControllerDel
     @IBAction func pickImage(_ sender: Any) {
         imagePicker.allowsEditing = false
         imagePicker.sourceType = .photoLibrary
-        
+        imagePicker.delegate = self
         self.present(imagePicker, animated: true, completion: nil)
     }
     
-    private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage {
-            imgKitchen.contentMode = .scaleAspectFill
-            imgKitchen.image = pickedImage
-            
-            self.imageChanged = true
+        guard let pickedImage = info[.originalImage] as? UIImage else {
+            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)");
         }
+        
+        imgKitchen.contentMode = .scaleAspectFill
+        imgKitchen.image = pickedImage
+        self.imageChanged = true
         
         self.dismiss(animated: true, completion: nil)
     }
