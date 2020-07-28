@@ -36,6 +36,8 @@
 		B62F26F4213CA20200FA88D3 /* LoadingScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F26F3213CA20200FA88D3 /* LoadingScreenViewController.swift */; };
 		B62F26F6213CA83000FA88D3 /* LoaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F26F5213CA83000FA88D3 /* LoaderController.swift */; };
 		B64393A220DFC7D800058C82 /* ChoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64393A120DFC7D800058C82 /* ChoiceTableViewCell.swift */; };
+		B646F95E24CF71B000338198 /* DishTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646F95D24CF71AF00338198 /* DishTableViewCell.swift */; };
+		B646F96024CF75B900338198 /* DishCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646F95F24CF75B900338198 /* DishCollectionViewCell.swift */; };
 		B64AB0BC20BCC707003B966C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64AB0BB20BCC707003B966C /* AppDelegate.swift */; };
 		B64AB0C120BCC707003B966C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B64AB0BF20BCC707003B966C /* Main.storyboard */; };
 		B64AB0C320BCC70A003B966C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B64AB0C220BCC70A003B966C /* Assets.xcassets */; };
@@ -120,6 +122,8 @@
 		B62F26F3213CA20200FA88D3 /* LoadingScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreenViewController.swift; sourceTree = "<group>"; };
 		B62F26F5213CA83000FA88D3 /* LoaderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderController.swift; sourceTree = "<group>"; };
 		B64393A120DFC7D800058C82 /* ChoiceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceTableViewCell.swift; sourceTree = "<group>"; };
+		B646F95D24CF71AF00338198 /* DishTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishTableViewCell.swift; sourceTree = "<group>"; };
+		B646F95F24CF75B900338198 /* DishCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishCollectionViewCell.swift; sourceTree = "<group>"; };
 		B64AB0B820BCC706003B966C /* HomeKhaana.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeKhaana.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B64AB0BB20BCC707003B966C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B64AB0C020BCC707003B966C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -427,6 +431,8 @@
 				B655FFBE219BA975008691D2 /* KitchensTableViewController.swift */,
 				B655FFC2219BA9A4008691D2 /* KitchenTableViewCell.swift */,
 				B609915F22CE59A700A3543A /* KitchenHeaderTableViewCell.swift */,
+				B646F95D24CF71AF00338198 /* DishTableViewCell.swift */,
+				B646F95F24CF75B900338198 /* DishCollectionViewCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -764,6 +770,8 @@
 				B6241BFD22431B0200199845 /* LocationServicesViewController.swift in Sources */,
 				B610D6AE223DA23300E94E27 /* LocationSearchTable.swift in Sources */,
 				B691C79220FBF97E0060CF98 /* PaymentSource.swift in Sources */,
+				B646F96024CF75B900338198 /* DishCollectionViewCell.swift in Sources */,
+				B646F95E24CF71B000338198 /* DishTableViewCell.swift in Sources */,
 				B655FFBF219BA975008691D2 /* KitchensTableViewController.swift in Sources */,
 				B61558D320D8611F00471718 /* UserPreferencesViewController.swift in Sources */,
 				B61F20CA21B357D900A85EDF /* KitchenDetailsViewController.swift in Sources */,

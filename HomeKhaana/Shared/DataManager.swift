@@ -28,8 +28,9 @@ class DataManager {
     }
     
     //returns an array of kitchens
-    public static func getKitchens() -> [Kitchen]
+    public static func getKitchens(onlyPopular: Bool = false) -> [Kitchen]
     {
+        let popularityThreshold = 4.0
         var kitchenArray:Array = Array(DataManager.kitchens.values)
         
         kitchenArray.sort(by: {(kitchen1: Kitchen, kitchen2: Kitchen) in
@@ -38,7 +39,22 @@ class DataManager {
         
         if(!User.sharedInstance!.isVegetarian)
         {
-            return kitchenArray
+            if(onlyPopular)
+            {
+                var popKitchens:[Kitchen] = []
+                for kitchen in kitchenArray
+                {
+                    if(kitchen.ratingHandler.rating >= popularityThreshold)
+                    {
+                        popKitchens.append(kitchen)
+                    }
+                }
+                return popKitchens
+            }
+            else
+            {
+                return kitchenArray
+            }
         }
         else
         {
@@ -48,10 +64,55 @@ class DataManager {
             {
                 if(kitchen.offersVegetarian)
                 {
-                    hasVegKitchens.append(kitchen)
+                    if(onlyPopular)
+                    {
+                        if(kitchen.ratingHandler.rating >= popularityThreshold)
+                        {
+                            hasVegKitchens.append(kitchen)
+                        }
+                    }
+                    else
+                    {
+                        hasVegKitchens.append(kitchen)
+                    }
                 }
             }
             return hasVegKitchens
         }
+    }
+    
+    //returns the top 10 items. Right now it just returns the first 10 dishes across all kitchens
+    public static func getPopularDishes() -> [Choice]
+    {
+        var retChoices:[Choice] = []
+        let kitchenArray:Array = Array(DataManager.kitchens.values)
+        for kitchen in kitchenArray
+        {
+            var choiceGroups: [ChoiceGroup]? = KitchenDataManager.getChoiceGroups(kitchenId: kitchen.id)
+            /*if(choiceGroups == nil)
+            {
+                KitchenDataManager.loadMenuItems(kitchenId: kitchen.id, completion:
+                {
+                    choiceGroups = KitchenDataManager.getChoiceGroups(kitchenId: kitchen.id)
+                })
+            }*/
+            
+            if(choiceGroups != nil)
+            {
+                for choiceGroup in choiceGroups!
+                {
+                    let choices:[Choice] = choiceGroup.getChoices()
+                    for choice in choices
+                    {
+                        retChoices.append(choice)
+                        if (retChoices.count > 9) //show only the top 10 items
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return retChoices
     }
 }

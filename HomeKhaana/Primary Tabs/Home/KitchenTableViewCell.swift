@@ -68,12 +68,12 @@ class KitchenTableViewCell: UITableViewCell {
         maskLayer.path = path.cgPath
         self.kitchenImg.layer.mask = maskLayer
         
-        outerView.layer.cornerRadius = 6
+        //outerView.layer.cornerRadius = 6
         outerView.layer.masksToBounds = false
         outerView.layer.shadowColor = UIColor.lightGray.cgColor
         outerView.layer.shadowOffset = CGSize(width: 3, height: 3);
-        outerView.layer.shadowOpacity = 0.2
-        outerView.layer.borderWidth = 1.0
+        outerView.layer.shadowOpacity = 0.1
+        outerView.layer.borderWidth = 0.5
         outerView.layer.borderColor = UIColor(red:0.87, green:0.87, blue:0.87, alpha:1).cgColor
     }
     
