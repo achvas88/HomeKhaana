@@ -47,4 +47,24 @@ class ChoiceTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
+    
+    override func layoutSubviews() {
+        
+        let path = UIBezierPath(roundedRect:self.imgRepresentation.bounds,
+                                byRoundingCorners:[.bottomLeft],
+                                cornerRadii: CGSize(width: 6, height:  6))
+        
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = path.cgPath
+        self.imgRepresentation.layer.mask = maskLayer
+        
+        
+        self.choiceOuterView.layer.cornerRadius = 6
+        self.choiceOuterView.layer.masksToBounds = true
+        self.choiceOuterView.layer.shadowColor = UIColor.lightGray.cgColor
+        self.choiceOuterView.layer.shadowOffset = CGSize(width: 3, height: 3);
+        self.choiceOuterView.layer.shadowOpacity = 0.2
+        self.choiceOuterView.layer.borderWidth = 1.0
+        self.choiceOuterView.layer.borderColor = UIColor(red:0.87, green:0.87, blue:0.87, alpha:1).cgColor
+    }
 }
