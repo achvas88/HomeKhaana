@@ -22,6 +22,7 @@ final class User: NSObject{
     static var userJustCreated: Bool = false
     static let locationManager = CLLocationManager()
     static var dispatchGroupLocation = DispatchGroup();
+    static var dispatchGroupFavorites = DispatchGroup();
     static var loadingLocation: Bool = false
     
     //member variables
@@ -43,6 +44,7 @@ final class User: NSObject{
     var userLocation: CLLocation
     var markingAsKitchen: Bool?
     var ratingHandler: RatingHandler
+    var mostRecentOrders: [Order]?
     
     static var dictionary: [String: Any] {
         return [
@@ -234,8 +236,41 @@ final class User: NSObject{
         
         User.dispatchGroupLocation.notify(queue: DispatchQueue.main) {
             User.loadingLocation = false
+            lookupFavoriteKitchens(completion: completion)
+        }
+    }
+    
+    private static func lookupFavoriteKitchens(completion: @escaping () -> ())
+    {
+        LoaderController.sharedInstance.updateTitle(title: "Loading User Favorites")
+        
+        User.dispatchGroupFavorites.enter()
+        
+        getMostRecentOrders()
+        
+        User.dispatchGroupFavorites.notify(queue: DispatchQueue.main) {
             allDone(completion: completion)
         }
+    }
+    
+    public static func getMostRecentOrders()
+    {
+        let mostRecentOrdersQuery = db.child("Orders/\(User.sharedInstance!.id)").queryOrdered(byChild: "timestamp").queryLimited(toLast: 10)
+        
+        mostRecentOrdersQuery.observeSingleEvent(of: .value, with: { (snapshot) in
+            User.sharedInstance!.mostRecentOrders = []
+            for orderChild in snapshot.children {
+                if let snapshot = orderChild as? DataSnapshot,
+                    let order:Order? = Order(snapshot: snapshot)
+                {
+                    if(order != nil)
+                    {
+                        User.sharedInstance!.mostRecentOrders!.insert(order!, at: 0)
+                    }
+                }
+            }
+            User.dispatchGroupFavorites.leave()
+        })
     }
     
     //helper function to actually load the user location

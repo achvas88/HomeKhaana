@@ -1,5 +1,5 @@
 //
-//  DishCollectionViewCell.swift
+//  SpecialKitchenCollectionViewCell.swift
 //  HomeKhaana
 //
 //  Created by Achyuthan Vasanth on 7/27/20.
@@ -12,15 +12,6 @@ class SpecialKitchenCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imgCollCell: UIImageView!
     @IBOutlet weak var lblCollCell: UILabel!
-    
-    var choice: Choice? {
-        didSet {
-            guard let choice = choice else { return }
-            
-            imgCollCell.image = choice.image
-            lblCollCell.text = choice.displayTitle
-        }
-    }
     
     var kitchen: Kitchen? {
         didSet {

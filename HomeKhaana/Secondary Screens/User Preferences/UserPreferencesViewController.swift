@@ -26,6 +26,9 @@ class UserPreferencesViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func btnClose(_ sender: Any) {
+        _ = navigationController?.popViewController(animated: true)
+    }
     
     @IBAction func tglVegetarianToggled(_ sender: Any) {
         User.sharedInstance!.isVegetarian = tglVegetarian.isOn

@@ -18,6 +18,7 @@ class InventoryAddItemViewController: UIViewController, UIImagePickerControllerD
     @IBOutlet weak var txtGroup: UITextField!
     @IBOutlet weak var txtItemContents: UITextField!
     @IBOutlet weak var tglVegetarian: UISwitch!
+    @IBOutlet weak var tglFeatured: UISwitch!
     @IBOutlet weak var txtCost: UITextField!
     @IBOutlet weak var txtDescription: UITextView!
     @IBOutlet weak var lblRemainingChars: UILabel!
@@ -72,6 +73,7 @@ class InventoryAddItemViewController: UIViewController, UIImagePickerControllerD
         self.lblScreenHdr.text = "EDIT ITEM"
         self.btnAdd.setTitle("Save", for: .normal)
         self.imageChanged = true
+        tglFeatured.isOn = choice!.isFeatured
     }
     
     @IBAction func autoPopulate(_ sender: Any) {
@@ -187,7 +189,7 @@ class InventoryAddItemViewController: UIViewController, UIImagePickerControllerD
         if(choice == nil)
         {
             let choiceID: String = UUID().uuidString
-            let newChoice: Choice = Choice(id: choiceID, title: self.txtTitle.text!, description: self.txtDescription.text!, cost: costValue, isVegetarian: tglVegetarian.isOn, hasImage: false, items: self.txtItemContents.text ?? "", kitchenId: User.sharedInstance!.id, order: 0)
+            let newChoice: Choice = Choice(id: choiceID, title: self.txtTitle.text!, description: self.txtDescription.text!, cost: costValue, isVegetarian: tglVegetarian.isOn, hasImage: false, items: self.txtItemContents.text ?? "", kitchenId: User.sharedInstance!.id, order: 0, isFeatured: false)
             newChoice.image = self.imgItem.image
             
             self.addChoiceToGroup(newChoice: newChoice)
@@ -198,6 +200,7 @@ class InventoryAddItemViewController: UIViewController, UIImagePickerControllerD
             choice!.description = self.txtDescription.text!
             choice!.cost = costValue
             choice!.isVegetarian = tglVegetarian.isOn
+            choice!.isFeatured = tglFeatured.isOn
             choice!.items = self.txtItemContents.text ?? ""
             choice!.image = self.imgItem.image
         }
@@ -227,15 +230,6 @@ class InventoryAddItemViewController: UIViewController, UIImagePickerControllerD
         alertController.addAction(defaultAction)
         self.present(alertController, animated: true, completion: nil)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     deinit {
         NotificationCenter.default.removeObserver(self)

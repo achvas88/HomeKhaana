@@ -1,5 +1,5 @@
 //
-//  DishTableViewCell.swift
+//  SpecialKitchenTableViewCell
 //  HomeKhaana
 //
 //  Created by Achyuthan Vasanth on 7/27/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DishTableViewCell: UITableViewCell {
+class SpecialKitchenTableViewCell: UITableViewCell {
 
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet weak var hdrCollection: UILabel!

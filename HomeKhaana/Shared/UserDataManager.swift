@@ -56,4 +56,29 @@ class UserDataManager {
         //updateDefaultPayment() <- this now exists commented in UserDataManager.swift
     }
     
+    public static func getUserFavoriteKitchens() -> [Kitchen]
+    {
+        var retKitchens:[Kitchen] = []
+        var kitchenDic: Dictionary<String,Bool> = [:]
+        let mostRecentOrders:[Order]? = User.sharedInstance!.mostRecentOrders
+        
+        if(mostRecentOrders != nil)
+        {
+            for order in mostRecentOrders!
+            {
+                let kitchenId = order.kitchenId
+                if(kitchenDic[kitchenId] != true)
+                {
+                    kitchenDic[kitchenId] = true
+                    let kitchen = DataManager.kitchens[kitchenId]
+                    if(kitchen != nil)
+                    {
+                        retKitchens.append(kitchen!)
+                    }
+                }
+            }
+        }
+        
+        return retKitchens
+    }
 }

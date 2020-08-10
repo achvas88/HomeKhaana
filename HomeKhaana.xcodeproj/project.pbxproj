@@ -20,7 +20,6 @@
 		B61558D320D8611F00471718 /* UserPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558D220D8611F00471718 /* UserPreferencesViewController.swift */; };
 		B61558D520D8641F00471718 /* CustomUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558D420D8641F00471718 /* CustomUIButton.swift */; };
 		B61558D720DCA74B00471718 /* Todo.rtf in Resources */ = {isa = PBXBuildFile; fileRef = B61558D620DCA74B00471718 /* Todo.rtf */; };
-		B61558D920DF0AC800471718 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558D820DF0AC800471718 /* HomeTableViewController.swift */; };
 		B61558DB20DF0B6700471718 /* Choice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558DA20DF0B6700471718 /* Choice.swift */; };
 		B61558DD20DF0D4200471718 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558DC20DF0D4100471718 /* DataManager.swift */; };
 		B61B78F221177BED000EDE80 /* UserInitializationErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B78F121177BED000EDE80 /* UserInitializationErrorViewController.swift */; };
@@ -36,8 +35,8 @@
 		B62F26F4213CA20200FA88D3 /* LoadingScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F26F3213CA20200FA88D3 /* LoadingScreenViewController.swift */; };
 		B62F26F6213CA83000FA88D3 /* LoaderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62F26F5213CA83000FA88D3 /* LoaderController.swift */; };
 		B64393A220DFC7D800058C82 /* ChoiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64393A120DFC7D800058C82 /* ChoiceTableViewCell.swift */; };
-		B646F95E24CF71B000338198 /* DishTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646F95D24CF71AF00338198 /* DishTableViewCell.swift */; };
-		B646F96024CF75B900338198 /* DishCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646F95F24CF75B900338198 /* DishCollectionViewCell.swift */; };
+		B646F95E24CF71B000338198 /* SpecialKitchenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646F95D24CF71AF00338198 /* SpecialKitchenTableViewCell.swift */; };
+		B646F96024CF75B900338198 /* SpecialKitchenCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B646F95F24CF75B900338198 /* SpecialKitchenCollectionViewCell.swift */; };
 		B64AB0BC20BCC707003B966C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64AB0BB20BCC707003B966C /* AppDelegate.swift */; };
 		B64AB0C120BCC707003B966C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B64AB0BF20BCC707003B966C /* Main.storyboard */; };
 		B64AB0C320BCC70A003B966C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B64AB0C220BCC70A003B966C /* Assets.xcassets */; };
@@ -53,6 +52,9 @@
 		B66BA41E24BB742300190CEA /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66BA41D24BB742300190CEA /* UserDataManager.swift */; };
 		B66BA42024BB743400190CEA /* KitchenDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66BA41F24BB743400190CEA /* KitchenDataManager.swift */; };
 		B66BA42224BB8DF100190CEA /* RatingHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66BA42124BB8DF100190CEA /* RatingHandler.swift */; };
+		B6728AF224DF4C7C00A99DCD /* FeaturedChoiceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6728AF124DF4C7C00A99DCD /* FeaturedChoiceCollectionViewCell.swift */; };
+		B6728AF824DF4D3700A99DCD /* FeatureChoicesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6728AF724DF4D3700A99DCD /* FeatureChoicesTableViewCell.swift */; };
+		B6728AFA24DF4F6700A99DCD /* KitchenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6728AF924DF4F6700A99DCD /* KitchenViewController.swift */; };
 		B691C78820E9AA440060CF98 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B691C78720E9AA440060CF98 /* CartViewController.swift */; };
 		B691C78A20E9B09C0060CF98 /* HomeTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B691C78920E9B09C0060CF98 /* HomeTabBarController.swift */; };
 		B691C78C20E9B8D30060CF98 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B691C78B20E9B8D30060CF98 /* CartTableViewCell.swift */; };
@@ -106,7 +108,6 @@
 		B61558D220D8611F00471718 /* UserPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferencesViewController.swift; sourceTree = "<group>"; };
 		B61558D420D8641F00471718 /* CustomUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIButton.swift; sourceTree = "<group>"; };
 		B61558D620DCA74B00471718 /* Todo.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Todo.rtf; sourceTree = "<group>"; };
-		B61558D820DF0AC800471718 /* HomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
 		B61558DA20DF0B6700471718 /* Choice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choice.swift; sourceTree = "<group>"; };
 		B61558DC20DF0D4100471718 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		B61B78F121177BED000EDE80 /* UserInitializationErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInitializationErrorViewController.swift; sourceTree = "<group>"; };
@@ -122,8 +123,8 @@
 		B62F26F3213CA20200FA88D3 /* LoadingScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreenViewController.swift; sourceTree = "<group>"; };
 		B62F26F5213CA83000FA88D3 /* LoaderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderController.swift; sourceTree = "<group>"; };
 		B64393A120DFC7D800058C82 /* ChoiceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceTableViewCell.swift; sourceTree = "<group>"; };
-		B646F95D24CF71AF00338198 /* DishTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishTableViewCell.swift; sourceTree = "<group>"; };
-		B646F95F24CF75B900338198 /* DishCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DishCollectionViewCell.swift; sourceTree = "<group>"; };
+		B646F95D24CF71AF00338198 /* SpecialKitchenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialKitchenTableViewCell.swift; sourceTree = "<group>"; };
+		B646F95F24CF75B900338198 /* SpecialKitchenCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialKitchenCollectionViewCell.swift; sourceTree = "<group>"; };
 		B64AB0B820BCC706003B966C /* HomeKhaana.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeKhaana.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B64AB0BB20BCC707003B966C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B64AB0C020BCC707003B966C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -146,6 +147,9 @@
 		B66BA41D24BB742300190CEA /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
 		B66BA41F24BB743400190CEA /* KitchenDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitchenDataManager.swift; sourceTree = "<group>"; };
 		B66BA42124BB8DF100190CEA /* RatingHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingHandler.swift; sourceTree = "<group>"; };
+		B6728AF124DF4C7C00A99DCD /* FeaturedChoiceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedChoiceCollectionViewCell.swift; sourceTree = "<group>"; };
+		B6728AF724DF4D3700A99DCD /* FeatureChoicesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureChoicesTableViewCell.swift; sourceTree = "<group>"; };
+		B6728AF924DF4F6700A99DCD /* KitchenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitchenViewController.swift; sourceTree = "<group>"; };
 		B691C78720E9AA440060CF98 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		B691C78920E9B09C0060CF98 /* HomeTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarController.swift; sourceTree = "<group>"; };
 		B691C78B20E9B8D30060CF98 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
@@ -427,12 +431,14 @@
 			isa = PBXGroup;
 			children = (
 				B691C78920E9B09C0060CF98 /* HomeTabBarController.swift */,
-				B61558D820DF0AC800471718 /* HomeTableViewController.swift */,
+				B6728AF924DF4F6700A99DCD /* KitchenViewController.swift */,
 				B655FFBE219BA975008691D2 /* KitchensTableViewController.swift */,
 				B655FFC2219BA9A4008691D2 /* KitchenTableViewCell.swift */,
 				B609915F22CE59A700A3543A /* KitchenHeaderTableViewCell.swift */,
-				B646F95D24CF71AF00338198 /* DishTableViewCell.swift */,
-				B646F95F24CF75B900338198 /* DishCollectionViewCell.swift */,
+				B646F95D24CF71AF00338198 /* SpecialKitchenTableViewCell.swift */,
+				B646F95F24CF75B900338198 /* SpecialKitchenCollectionViewCell.swift */,
+				B6728AF124DF4C7C00A99DCD /* FeaturedChoiceCollectionViewCell.swift */,
+				B6728AF724DF4D3700A99DCD /* FeatureChoicesTableViewCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -749,6 +755,7 @@
 				B655FFC721A0D302008691D2 /* Cart.swift in Sources */,
 				B66BA42024BB743400190CEA /* KitchenDataManager.swift in Sources */,
 				B64AB0BC20BCC707003B966C /* AppDelegate.swift in Sources */,
+				B6728AF224DF4C7C00A99DCD /* FeaturedChoiceCollectionViewCell.swift in Sources */,
 				B66BA41E24BB742300190CEA /* UserDataManager.swift in Sources */,
 				B609916022CE59A700A3543A /* KitchenHeaderTableViewCell.swift in Sources */,
 				B691C78820E9AA440060CF98 /* CartViewController.swift in Sources */,
@@ -756,9 +763,9 @@
 				B66BA42224BB8DF100190CEA /* RatingHandler.swift in Sources */,
 				B62F26F0213B536100FA88D3 /* CurrentOrdersTableViewController.swift in Sources */,
 				B610D6B0223DB0B700E94E27 /* LocationViewController.swift in Sources */,
+				B6728AF824DF4D3700A99DCD /* FeatureChoicesTableViewCell.swift in Sources */,
 				B6E5B08522D0D5EF009D3BE0 /* RatingViewController.swift in Sources */,
 				B691C78C20E9B8D30060CF98 /* CartTableViewCell.swift in Sources */,
-				B61558D920DF0AC800471718 /* HomeTableViewController.swift in Sources */,
 				B61B78F221177BED000EDE80 /* UserInitializationErrorViewController.swift in Sources */,
 				B61558CF20D6D93D00471718 /* HowItWorksViewController.swift in Sources */,
 				B69CE0802129F91B00B7CFDB /* OrdersTableViewController.swift in Sources */,
@@ -770,8 +777,9 @@
 				B6241BFD22431B0200199845 /* LocationServicesViewController.swift in Sources */,
 				B610D6AE223DA23300E94E27 /* LocationSearchTable.swift in Sources */,
 				B691C79220FBF97E0060CF98 /* PaymentSource.swift in Sources */,
-				B646F96024CF75B900338198 /* DishCollectionViewCell.swift in Sources */,
-				B646F95E24CF71B000338198 /* DishTableViewCell.swift in Sources */,
+				B646F96024CF75B900338198 /* SpecialKitchenCollectionViewCell.swift in Sources */,
+				B6728AFA24DF4F6700A99DCD /* KitchenViewController.swift in Sources */,
+				B646F95E24CF71B000338198 /* SpecialKitchenTableViewCell.swift in Sources */,
 				B655FFBF219BA975008691D2 /* KitchensTableViewController.swift in Sources */,
 				B61558D320D8611F00471718 /* UserPreferencesViewController.swift in Sources */,
 				B61F20CA21B357D900A85EDF /* KitchenDetailsViewController.swift in Sources */,

@@ -27,6 +27,11 @@ class DataManager {
         }
     }
     
+    public static func getUserFavoriteKitchens() -> [Kitchen]
+    {
+        return UserDataManager.getUserFavoriteKitchens()
+    }
+    
     //returns an array of kitchens
     public static func getKitchens(onlyPopular: Bool = false) -> [Kitchen]
     {
@@ -79,40 +84,5 @@ class DataManager {
             }
             return hasVegKitchens
         }
-    }
-    
-    //returns the top 10 items. Right now it just returns the first 10 dishes across all kitchens
-    public static func getPopularDishes() -> [Choice]
-    {
-        var retChoices:[Choice] = []
-        let kitchenArray:Array = Array(DataManager.kitchens.values)
-        for kitchen in kitchenArray
-        {
-            var choiceGroups: [ChoiceGroup]? = KitchenDataManager.getChoiceGroups(kitchenId: kitchen.id)
-            /*if(choiceGroups == nil)
-            {
-                KitchenDataManager.loadMenuItems(kitchenId: kitchen.id, completion:
-                {
-                    choiceGroups = KitchenDataManager.getChoiceGroups(kitchenId: kitchen.id)
-                })
-            }*/
-            
-            if(choiceGroups != nil)
-            {
-                for choiceGroup in choiceGroups!
-                {
-                    let choices:[Choice] = choiceGroup.getChoices()
-                    for choice in choices
-                    {
-                        retChoices.append(choice)
-                        if (retChoices.count > 9) //show only the top 10 items
-                        {
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-        return retChoices
     }
 }

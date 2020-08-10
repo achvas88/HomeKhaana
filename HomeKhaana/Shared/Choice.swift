@@ -28,6 +28,7 @@ class Choice: Equatable
     var kitchenId: String
     var quantity: Int?
     var order: Int
+    var isFeatured: Bool
     
     var image: UIImage? {
         didSet {
@@ -35,7 +36,7 @@ class Choice: Equatable
         }
     }
     
-    init(id:String, title:String,description:String,cost:Float,isVegetarian:Bool,hasImage:Bool, items: String, kitchenId: String, order: Int) {
+    init(id:String, title:String,description:String,cost:Float,isVegetarian:Bool,hasImage:Bool, items: String, kitchenId: String, order: Int, isFeatured: Bool) {
         self.id = id
         self.displayTitle = title
         self.description = description
@@ -45,6 +46,7 @@ class Choice: Equatable
         self.items = items
         self.kitchenId = kitchenId
         self.order = order
+        self.isFeatured = isFeatured
         
         if(self.hasImage && self.image == nil)
         {
@@ -54,7 +56,7 @@ class Choice: Equatable
     
     public convenience init?(displayTitle: String, quantity: Int, cost: Float)
     {
-        self.init(id: "", title: displayTitle, description: "", cost: cost, isVegetarian: true, hasImage: false, items: "", kitchenId: "", order: 0)
+        self.init(id: "", title: displayTitle, description: "", cost: cost, isVegetarian: true, hasImage: false, items: "", kitchenId: "", order: 0, isFeatured: false)
         self.quantity = quantity
     }
     
@@ -70,8 +72,11 @@ class Choice: Equatable
         let id = snapshot["id"] as! String
         let items = snapshot["items"] as! String
         let order = snapshot["order"] as! Int
+        var isFeatured = snapshot["isFeatured"] as? Bool
         
-        self.init(id: id, title: displayTitle , description: description, cost: cost, isVegetarian: isVegetarian, hasImage: hasImage, items: items, kitchenId: kitchenId, order: order)
+        isFeatured = isFeatured ?? false
+        
+        self.init(id: id, title: displayTitle , description: description, cost: cost, isVegetarian: isVegetarian, hasImage: hasImage, items: items, kitchenId: kitchenId, order: order, isFeatured: isFeatured!)
     }
     
     public func getDictionary() -> Dictionary<String,Any>
@@ -83,7 +88,8 @@ class Choice: Equatable
             "isVegetarian": self.isVegetarian,
             "hasImage": self.hasImage,
             "id": self.id,
-            "items": self.items
+            "items": self.items,
+            "isFeatured": self.isFeatured
             // Note that the value of the 'order' property is calculated only in the ChoiceGroup code. So, the dictionary doesnt return it.
         ]
     }

@@ -11,18 +11,19 @@ import UIKit
 class KitchensTableViewController: UITableViewController,RefreshTableViewWhenImgLoadsDelegate {
     
     var kitchens:[Kitchen] = []
-    var popularDishes: [Choice] = []
-    var popularDishesStoredOffset: CGFloat = 0.0
+    var yourKitchens: [Kitchen] = []
+    var yourKitchensStoredOffset: CGFloat = 0.0
     var popularKitchensStoredOffset: CGFloat = 0.0
     var popularKitchens: [Kitchen] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
         self.kitchens = DataManager.getKitchens()
-        self.popularDishes = DataManager.getPopularDishes()
+        self.yourKitchens = DataManager.getUserFavoriteKitchens()
         self.popularKitchens = DataManager.getKitchens(onlyPopular: true)
         self.tableView.reloadData()
     }
@@ -45,31 +46,89 @@ class KitchensTableViewController: UITableViewController,RefreshTableViewWhenImg
         {
             return 1
         }
-        return self.kitchens.count + 2
+        var retKitchenCount:Int = self.kitchens.count
+        if(self.yourKitchens.count > 0)
+        {
+            retKitchenCount = retKitchenCount + 1
+        }
+        if(self.popularKitchens.count > 0)
+        {
+            retKitchenCount = retKitchenCount + 1
+        }
+        return retKitchenCount
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        let yourKitchensExists:Bool = (self.kitchens.count > 0)
+        let popularKitchensExists:Bool = (self.yourKitchens.count > 0)
         if(self.kitchens.count > 0)
         {
-            if(indexPath.row == 0)
+            if(yourKitchensExists && popularKitchensExists)
             {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "dishTableViewCell", for: indexPath) as! DishTableViewCell
-                cell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row, headerString: "Recommended for you")
-                cell.collectionViewOffset = popularDishesStoredOffset
-                return cell
+                if(indexPath.row == 0)
+                {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "specialKitchenTableViewCell", for: indexPath) as! SpecialKitchenTableViewCell
+                    cell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row, headerString: "Your favorites")
+                    cell.collectionViewOffset = yourKitchensStoredOffset
+                    return cell
+                }
+                else if(indexPath.row == 1)
+                {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "specialKitchenTableViewCell", for: indexPath) as! SpecialKitchenTableViewCell
+                    cell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row, headerString: "Popular in your area")
+                    cell.collectionViewOffset = popularKitchensStoredOffset
+                    return cell
+                }
+                else
+                {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "kitchenTableViewCell", for: indexPath) as! KitchenTableViewCell
+                    let kitchen = kitchens[indexPath.row - 2]
+                    kitchen.containingTableViewDelegate = self
+                    cell.kitchen = kitchen
+                    return cell
+                }
             }
-            else if(indexPath.row == 1)
+            else if(!yourKitchensExists && popularKitchensExists)
             {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "dishTableViewCell", for: indexPath) as! DishTableViewCell
-                cell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row, headerString: "Popular Kitchens")
-                cell.collectionViewOffset = popularKitchensStoredOffset
-                return cell
+                if(indexPath.row == 0)
+                {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "specialKitchenTableViewCell", for: indexPath) as! SpecialKitchenTableViewCell
+                    cell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row, headerString: "Popular in your area")
+                    cell.collectionViewOffset = popularKitchensStoredOffset
+                    return cell
+                }
+                else
+                {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "kitchenTableViewCell", for: indexPath) as! KitchenTableViewCell
+                    let kitchen = kitchens[indexPath.row - 1]
+                    kitchen.containingTableViewDelegate = self
+                    cell.kitchen = kitchen
+                    return cell
+                }
+            }
+            else if(yourKitchensExists && !popularKitchensExists)
+            {
+                if(indexPath.row == 0)
+                {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "specialKitchenTableViewCell", for: indexPath) as! SpecialKitchenTableViewCell
+                    cell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row, headerString: "Your favorites")
+                    cell.collectionViewOffset = yourKitchensStoredOffset
+                    return cell
+                }
+                else
+                {
+                    let cell = tableView.dequeueReusableCell(withIdentifier: "kitchenTableViewCell", for: indexPath) as! KitchenTableViewCell
+                    let kitchen = kitchens[indexPath.row - 1]
+                    kitchen.containingTableViewDelegate = self
+                    cell.kitchen = kitchen
+                    return cell
+                }
             }
             else
             {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "kitchenTableViewCell", for: indexPath) as! KitchenTableViewCell
-                let kitchen = kitchens[indexPath.row - 2]
+                let kitchen = kitchens[indexPath.row]
                 kitchen.containingTableViewDelegate = self
                 cell.kitchen = kitchen
                 return cell
@@ -86,19 +145,43 @@ class KitchensTableViewController: UITableViewController,RefreshTableViewWhenImg
     
     
     override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let yourKitchensExists:Bool = (self.kitchens.count > 0)
+        let popularKitchensExists:Bool = (self.yourKitchens.count > 0)
+        
         if(self.kitchens.count > 0)
         {
-            if(indexPath.row == 0)
+            if(yourKitchensExists && popularKitchensExists)
             {
-                guard let tableViewCell = cell as? DishTableViewCell else { return }
-                
-                popularDishesStoredOffset = tableViewCell.collectionViewOffset
+                if(indexPath.row == 0)
+                {
+                    guard let tableViewCell = cell as? SpecialKitchenTableViewCell else { return }
+                    
+                    yourKitchensStoredOffset = tableViewCell.collectionViewOffset
+                }
+                else if(indexPath.row == 1)
+                {
+                    guard let tableViewCell = cell as? SpecialKitchenTableViewCell else { return }
+                    
+                    popularKitchensStoredOffset = tableViewCell.collectionViewOffset
+                }
             }
-            else if(indexPath.row == 1)
+            else if(!yourKitchensExists && popularKitchensExists)
             {
-                guard let tableViewCell = cell as? DishTableViewCell else { return }
-                
-                popularKitchensStoredOffset = tableViewCell.collectionViewOffset
+                if(indexPath.row == 0)
+                {
+                    guard let tableViewCell = cell as? SpecialKitchenTableViewCell else { return }
+                    
+                    popularKitchensStoredOffset = tableViewCell.collectionViewOffset
+                }
+            }
+            else if(yourKitchensExists && !popularKitchensExists)
+            {
+                if(indexPath.row == 0)
+                {
+                    guard let tableViewCell = cell as? SpecialKitchenTableViewCell else { return }
+                    
+                    yourKitchensStoredOffset = tableViewCell.collectionViewOffset
+                }
             }
         }
     }
@@ -109,20 +192,30 @@ class KitchensTableViewController: UITableViewController,RefreshTableViewWhenImg
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let yourKitchensExists:Bool = (self.kitchens.count > 0)
+        let popularKitchensExists:Bool = (self.yourKitchens.count > 0)
+        
         if(self.kitchens.count == 0)
         {
             return self.view.frame.height - 100
         }
         else
         {
-            if(indexPath.row != 0 && indexPath.row != 1)
+            if(yourKitchensExists && popularKitchensExists)
             {
-                return 226
+                if(indexPath.row == 0 || indexPath.row == 1)
+                {
+                    return 185
+                }
             }
-            else
+            if(yourKitchensExists || popularKitchensExists)
             {
-                return 185
+                if(indexPath.row == 0)
+                {
+                    return 185
+                }
             }
+            return 226
         }
     }
     
@@ -132,12 +225,22 @@ class KitchensTableViewController: UITableViewController,RefreshTableViewWhenImg
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "showMenuItems")
         {
-            let menuItemsVC: HomeTableViewController? = segue.destination as? HomeTableViewController
+            let menuItemsVC: KitchenViewController? = segue.destination as? KitchenViewController
             let currentRow: KitchenTableViewCell? = sender as! KitchenTableViewCell?
             
             if(menuItemsVC != nil && currentRow != nil)
             {
                 menuItemsVC!.kitchen = currentRow!.kitchen!
+            }
+        }
+        else if (segue.identifier == "showMenuItems2")
+        {
+            let menuItemsVC: KitchenViewController? = segue.destination as? KitchenViewController
+            let currentKitchen: SpecialKitchenCollectionViewCell? = sender as! SpecialKitchenCollectionViewCell?
+            
+            if(menuItemsVC != nil && currentKitchen != nil)
+            {
+                menuItemsVC!.kitchen = currentKitchen!.kitchen!
             }
         }
         
@@ -151,13 +254,33 @@ extension KitchensTableViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         
-        if(collectionView.tag == 0)
+        let yourKitchensExists:Bool = (self.kitchens.count > 0)
+        let popularKitchensExists:Bool = (self.yourKitchens.count > 0)
+        
+        if(yourKitchensExists && popularKitchensExists)
         {
-            return popularDishes.count
+            if(collectionView.tag == 0)
+            {
+                return yourKitchens.count
+            }
+            else if(collectionView.tag == 1)
+            {
+                return popularKitchens.count
+            }
         }
-        else if(collectionView.tag == 1)
+        else if(!yourKitchensExists && popularKitchensExists)
         {
-            return popularKitchens.count
+            if(collectionView.tag == 0)
+            {
+                return popularKitchens.count
+            }
+        }
+        else if(yourKitchensExists && !popularKitchensExists)
+        {
+            if(collectionView.tag == 0)
+            {
+                return yourKitchens.count
+            }
         }
         return 0
     }
@@ -165,18 +288,36 @@ extension KitchensTableViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "dishCollectionViewCell",
-                                                      for: indexPath) as! DishCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "specialKitchenCollectionViewCell",
+                                                      for: indexPath) as! SpecialKitchenCollectionViewCell
+        let yourKitchensExists:Bool = (self.kitchens.count > 0)
+        let popularKitchensExists:Bool = (self.yourKitchens.count > 0)
         
-        if(collectionView.tag == 0)
+        if(yourKitchensExists && popularKitchensExists)
         {
-            cell.choice = popularDishes[indexPath.item]
+            if(collectionView.tag == 0)
+            {
+                cell.kitchen = yourKitchens[indexPath.item]
+            }
+            else if(collectionView.tag == 1)
+            {
+                cell.kitchen = popularKitchens[indexPath.item]
+            }
         }
-        else if(collectionView.tag == 1)
+        else if(!yourKitchensExists && popularKitchensExists)
         {
-            cell.kitchen = popularKitchens[indexPath.item]
+            if(collectionView.tag == 0)
+            {
+                cell.kitchen = popularKitchens[indexPath.item]
+            }
         }
-        
+        else if(yourKitchensExists && !popularKitchensExists)
+        {
+            if(collectionView.tag == 0)
+            {
+                cell.kitchen = yourKitchens[indexPath.item]
+            }
+        }
         return cell
     }
 }

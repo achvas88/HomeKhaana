@@ -29,6 +29,8 @@ class UserProfileViewController: UIViewController {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         
+        self.navigationController?.isNavigationBarHidden = true
+        
         if let user = Auth.auth().currentUser
         {
             let name = user.displayName

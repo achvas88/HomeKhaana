@@ -50,6 +50,7 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
             //self.currentOrder!.selectedPayment = self.currentOrder!.selectedPayment ?? User.sharedInstance!.defaultPaymentSource
         }
         
+        self.navigationController?.isNavigationBarHidden = true
         
     NotificationCenter.default.addObserver(self,
                                            selector: #selector(self.keyboardNotification(notification:)),
