@@ -92,7 +92,6 @@ class CurrentOrdersTableViewController: UITableViewController, CurrentOrderActio
         //generate cart text
         let inCart:[Choice] = order.cart
         
-        var choice:Choice
         for choice in inCart
         {
             if(cartContents != "") {

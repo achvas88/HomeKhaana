@@ -27,8 +27,6 @@ class ChoiceDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setupButtons()
-        
         self.isAddingToCart = true
         let quantity:Int? = theChoice?.quantity
         if(quantity != nil && quantity! != 0 && comingFromHome != true)
@@ -81,12 +79,6 @@ class ChoiceDetailViewController: UIViewController {
     func setAddToCartTitle()
     {
         btnAddToCart.setTitle("\(self.buttonCaption)  -  $\(convertToCurrency(input:(theChoice!.cost * Float(lblQuantity.text!)!)))", for: .normal)
-    }
-    
-    func setupButtons()
-    {
-        self.btnAddToCart.backgroundColor = UIColor(red: 69/255, green: 191/255, blue: 34/255, alpha: 1.0)
-        self.btnAddToCart.setTitleColor(UIColor.white, for: .normal)
     }
     
     override func didReceiveMemoryWarning() {

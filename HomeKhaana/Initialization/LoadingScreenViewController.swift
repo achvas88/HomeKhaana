@@ -47,24 +47,28 @@ class LoadingScreenViewController: UIViewController {
     func takeMeToKitchenInitialization()
     {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "KitchenInitialization")
+        vc!.modalPresentationStyle = .fullScreen
         self.present(vc!, animated: false, completion: nil)
     }
     
     func takeMeToKitchenHome()
     {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "KitchenHome")
+        vc!.modalPresentationStyle = .fullScreen
         self.present(vc!, animated: false, completion: nil)
     }
     
     func takeMeToUserHome()
     {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "UserHome")
+        vc!.modalPresentationStyle = .fullScreen
         self.present(vc!, animated: false, completion: nil)
     }
     
     func takeUserToInitialWalkThrough()
     {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "Notifications")
+        vc!.modalPresentationStyle = .fullScreen
         self.present(vc!, animated: false, completion: nil)
     }
     

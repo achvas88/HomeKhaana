@@ -23,13 +23,21 @@ class LoaderController: NSObject {
     private func oneTimeSetup()
     {
         //setup text
-        lblIndicator.textColor = UIColor.gray
+        if #available(iOS 13.0, *) {
+            lblIndicator.textColor = UIColor.secondaryLabel
+        } else {
+            lblIndicator.textColor = UIColor.systemGray
+        }
         lblIndicator.heightAnchor.constraint(equalToConstant: 45.0).isActive = true
         lblIndicator.textAlignment = .center
         
         //setup indicator
         indActivityIndicator.hidesWhenStopped = true
-        indActivityIndicator.style = .gray
+        if #available(iOS 13.0, *) {
+            indActivityIndicator.style = .medium
+        } else {
+            indActivityIndicator.style = .white
+        }
         indActivityIndicator.heightAnchor.constraint(equalToConstant: 45.0).isActive = true
         indActivityIndicator.widthAnchor.constraint(equalToConstant: 45.0).isActive = true
 
@@ -37,7 +45,11 @@ class LoaderController: NSObject {
         stkContainer.axis = .vertical
         stkContainer.addArrangedSubview(indActivityIndicator)
         stkContainer.addArrangedSubview(lblIndicator)
-        stkContainer.addBackground(color: UIColor(white: 1, alpha: 0.7))
+        if #available(iOS 13.0, *) {
+            stkContainer.addBackground(color: UIColor.secondarySystemBackground)
+        } else {
+            stkContainer.addBackground(color: UIColor.systemGray)
+        }
         stkContainer.distribution = .fillProportionally;
         stkContainer.alignment = .center;
         stkContainer.spacing = 0;

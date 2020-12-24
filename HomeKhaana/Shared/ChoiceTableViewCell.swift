@@ -24,7 +24,6 @@ class ChoiceTableViewCell: UITableViewCell {
         didSet {
             guard let choice = choice else { return }
             
-            lblDisplayTitle.text = choice.displayTitle
             lblDescription.text = choice.description
             lblCost.text = "$\(convertToCurrency(input:choice.cost))"
             if(choice.isVegetarian)
@@ -37,6 +36,7 @@ class ChoiceTableViewCell: UITableViewCell {
             }
             imgRepresentation.image = choice.image
             lblItems.text = choice.items
+            lblDisplayTitle.text = choice.displayTitle
         }
     }
     
@@ -61,11 +61,16 @@ class ChoiceTableViewCell: UITableViewCell {
         
         self.choiceOuterView.layer.cornerRadius = 6
         self.choiceOuterView.layer.masksToBounds = true
-        self.choiceOuterView.layer.shadowColor = UIColor.lightGray.cgColor
+        self.choiceOuterView.layer.shadowColor = UIColor.systemGray.cgColor
         self.choiceOuterView.layer.shadowOffset = CGSize(width: 3, height: 3)
         self.choiceOuterView.layer.shadowOpacity = 0.2
         self.choiceOuterView.layer.borderWidth = 1.0
-        self.choiceOuterView.layer.borderColor = UIColor(red:0.87, green:0.87, blue:0.87, alpha:1).cgColor
          
+        if #available(iOS 13.0, *) {
+            self.choiceOuterView.layer.borderColor = UIColor.systemGray4.cgColor
+        } else {
+            self.choiceOuterView.layer.borderColor = UIColor.systemGray.cgColor
+        }
+        
     }
 }

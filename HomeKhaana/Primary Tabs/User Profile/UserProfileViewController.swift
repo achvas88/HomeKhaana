@@ -90,8 +90,11 @@ class UserProfileViewController: UIViewController {
         {
             self.btnKitchenLogin.isHidden = true
         }
-        let logoutBgColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1.0)
-        self.btnLogout.backgroundColor = logoutBgColor
+        if #available(iOS 13.0, *) {
+            self.btnLogout.backgroundColor = UIColor.secondarySystemBackground
+        } else {
+            self.btnLogout.backgroundColor = UIColor.systemGray
+        }
     }
     
     @IBAction func btnLogOutClicked(_ sender: Any) {

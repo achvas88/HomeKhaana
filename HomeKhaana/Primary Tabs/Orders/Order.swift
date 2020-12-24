@@ -132,7 +132,7 @@ class Order
         let discount = snapshot["discount"] as? Float
         let orderTotal = snapshot["orderTotal"] as? Float
         
-        let selectedPaymentID = snapshot["source"] as? String
+        //let selectedPaymentID = snapshot["source"] as? String
         //payment source and address
         let selectedPayment:PaymentSource? = nil //User.getPaymentSourceForID(id: selectedPaymentID ?? "")
         

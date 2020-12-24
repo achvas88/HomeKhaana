@@ -91,11 +91,15 @@ class OrdersTableViewCell: UITableViewCell {
         
         if(self.order!.status == "Completed")
         {
-            lblStatus.textColor = UIColor.darkGray
+            if #available(iOS 13.0, *) {
+                lblStatus.textColor = UIColor.secondaryLabel
+            } else {
+                lblStatus.textColor = UIColor.systemGray
+            }
         }
         else
         {
-            lblStatus.textColor = UIColor(red: 65, green: 117/255, blue: 79/255, alpha: 1)
+            lblStatus.textColor = UIColor.systemOrange
         }
 
         self.selectionStyle = .none
@@ -108,20 +112,16 @@ class OrdersTableViewCell: UITableViewCell {
         maskLayer.path = path.cgPath
         self.imgOrder.layer.mask = maskLayer
         
-        if (self.order?.status != "Ordered" && self.order?.status != "Ready for Pick-Up")
-        {
-            orderOuterView.layer.backgroundColor = UIColor(red: 243/255, green: 243/255, blue: 243/255, alpha: 1).cgColor
-        }
-        else
-        {
-            orderOuterView.layer.backgroundColor = UIColor.white.cgColor
-        }
         orderOuterView.layer.cornerRadius = 6
         orderOuterView.layer.masksToBounds = false
-        orderOuterView.layer.shadowColor = UIColor.lightGray.cgColor
+        orderOuterView.layer.shadowColor = UIColor.systemGray.cgColor
         orderOuterView.layer.shadowOffset = CGSize(width: 3, height: 3);
         orderOuterView.layer.shadowOpacity = 0.2
         orderOuterView.layer.borderWidth = 1.0
-        orderOuterView.layer.borderColor = UIColor(red:0.87, green:0.87, blue:0.87, alpha:1).cgColor
+        if #available(iOS 13.0, *) {
+            orderOuterView.layer.borderColor = UIColor.systemGray4.cgColor
+        } else {
+            orderOuterView.layer.borderColor = UIColor.systemGray.cgColor
+        }
     }
 }

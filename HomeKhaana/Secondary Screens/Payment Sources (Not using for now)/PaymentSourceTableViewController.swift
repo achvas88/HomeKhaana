@@ -250,16 +250,16 @@ extension PaymentSourceTableViewController: STPAddCardViewControllerDelegate {
             
             User.sharedInstance!.paymentSources = []
             
-            for card in snapshot.children {
+            /*for card in snapshot.children {
                 if let snapshot = card as? DataSnapshot,
                     let paymentSource = PaymentSource(snapshot: snapshot)
                 {
-                    /*if(!User.paymentIsMarkedForDeletion(paymentSource: paymentSource))
+                    if(!User.paymentIsMarkedForDeletion(paymentSource: paymentSource))
                     {
                         User.sharedInstance!.paymentSources!.append(paymentSource)
-                    }*/
+                    }
                 }
-            }
+            }*/
             
             if(User.sharedInstance!.defaultPaymentSource == nil)
             {

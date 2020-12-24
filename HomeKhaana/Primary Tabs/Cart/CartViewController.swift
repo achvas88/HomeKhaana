@@ -320,11 +320,22 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
     {
         self.btnClearCart.layer.cornerRadius = 3
         self.btnRate.layer.cornerRadius = 3
-        self.btnCheckout.backgroundColor = UIColor(red: 69/255, green: 191/255, blue: 34/255, alpha: 1.0)
-        self.btnCheckout.setTitleColor(UIColor.white, for: .normal)
+        if #available(iOS 13.0, *) {
+            self.btnCheckout.backgroundColor = UIColor.systemGray6
+            self.btnCheckout.setTitleColor(UIColor.label, for: .normal)
+        } else {
+            self.btnCheckout.backgroundColor = UIColor.systemGray
+            self.btnCheckout.setTitleColor(UIColor.white, for: .normal)
+        }
+        
         
         self.tblItems.layer.borderWidth = 0.5
-        let borderColor : UIColor = UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1.0)
+        let borderColor : UIColor
+        if #available(iOS 13.0, *) {
+            borderColor = UIColor.separator
+        } else {
+            borderColor = UIColor.systemGray
+        }
         self.tblItems.layer.borderColor = borderColor.cgColor
         self.tblItems.layer.cornerRadius = 3
         

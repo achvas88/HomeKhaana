@@ -42,7 +42,7 @@ class KitchenDataManager {
             kitchenRef.updateChildValues(currentKitchen!.dictionary, withCompletionBlock: {
                 (error:Error?, ref:DatabaseReference) in
                 
-                if let error = error
+                if error != nil
                 {
                     // It reaches here in a very specific workflow. Convert to kitchen and then logout. but things work fine. So commenting this out.
                     //fatalError("Error uploading kitchen data: \(error).")

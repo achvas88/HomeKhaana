@@ -35,10 +35,15 @@ class SpecialKitchenCollectionViewCell: UICollectionViewCell {
         
         self.layer.cornerRadius = 6
         self.layer.masksToBounds = false
-        self.layer.shadowColor = UIColor.lightGray.cgColor
+        self.layer.shadowColor = UIColor.systemGray.cgColor
         self.layer.shadowOffset = CGSize(width: 3, height: 3);
         self.layer.shadowOpacity = 0.2
         self.layer.borderWidth = 1.0
-        self.layer.borderColor = UIColor(red:0.87, green:0.87, blue:0.87, alpha:1).cgColor
+        if #available(iOS 13.0, *) {
+            self.layer.borderColor = UIColor.systemGray4.cgColor
+        } else {
+            self.layer.borderColor = UIColor.systemGray.cgColor
+        }
+        
     }
 }
