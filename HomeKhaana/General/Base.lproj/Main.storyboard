@@ -1661,7 +1661,7 @@
             </objects>
             <point key="canvasLocation" x="3877.5999999999999" y="1680.8095952023989"/>
         </scene>
-        <!--Caterers Near You-->
+        <!--Home Khaana-->
         <scene sceneID="pZd-l5-Dfc">
             <objects>
                 <tableViewController id="KmN-EH-RGJ" customClass="KitchensTableViewController" customModule="HomeKhaana" customModuleProvider="target" sceneMemberID="viewController">
@@ -1678,7 +1678,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dgr-Gs-rQN">
-                                            <rect key="frame" x="0.0" y="41.5" width="375" height="143.5"/>
+                                            <rect key="frame" x="0.0" y="44.5" width="375" height="140.5"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mmy-Ui-Szy">
                                                 <size key="itemSize" width="200" height="130"/>
@@ -1688,7 +1688,7 @@
                                             </collectionViewFlowLayout>
                                             <cells>
                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="specialKitchenCollectionViewCell" id="Jnn-M9-hxc" customClass="SpecialKitchenCollectionViewCell" customModule="HomeKhaana" customModuleProvider="target">
-                                                    <rect key="frame" x="20" y="7" width="200" height="130"/>
+                                                    <rect key="frame" x="20" y="5.5" width="200" height="130"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                         <rect key="frame" x="0.0" y="0.0" width="200" height="130"/>
@@ -1724,8 +1724,8 @@
                                             </cells>
                                         </collectionView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recommended for you" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vTi-sG-3lE">
-                                            <rect key="frame" x="16" y="16" width="179.5" height="20.5"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                            <rect key="frame" x="16" y="16" width="219" height="23.5"/>
+                                            <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="18"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -1881,7 +1881,7 @@
                             <outlet property="delegate" destination="KmN-EH-RGJ" id="BFc-hk-Azl"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Caterers Near You" id="jgy-Cz-xZ8"/>
+                    <navigationItem key="navigationItem" title="Home Khaana" id="jgy-Cz-xZ8"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FMq-ww-3B4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -18,9 +18,42 @@ class KitchensTableViewController: UITableViewController,RefreshTableViewWhenImg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.isNavigationBarHidden = true
+        setupNavigationBar()
     }
 
+    func setupNavigationBar()
+    {
+        // Create a navView to add to the navigation bar
+        let navView = UIView()
+
+        // Create the label
+        let label = UILabel()
+        label.text = "Home Khaana"
+        label.font = UIFont(name: "Noteworthy Light", size: 19)!
+        label.sizeToFit()
+        label.center = navView.center
+        label.textAlignment = NSTextAlignment.center
+
+        // Create the image view
+        let image = UIImageView()
+        image.image = UIImage(named: "vegetables.png")
+        // To maintain the image's aspect ratio:
+        let imageAspect = image.image!.size.width/image.image!.size.height
+        // Setting the image frame so that it's immediately before the text:
+        image.frame = CGRect(x: label.frame.origin.x-label.frame.size.height*imageAspect - 5, y: label.frame.origin.y, width: label.frame.size.height*imageAspect, height: label.frame.size.height)
+        image.contentMode = UIView.ContentMode.scaleAspectFit
+
+        // Add both the label and image view to the navView
+        navView.addSubview(label)
+        navView.addSubview(image)
+
+        // Set the navigation bar's navigation item's titleView to the navView
+        self.navigationItem.titleView = navView
+
+        // Set the navView's frame to fit within the titleView
+        navView.sizeToFit()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         self.kitchens = DataManager.getKitchens()
         self.yourKitchens = DataManager.getUserFavoriteKitchens()
@@ -29,10 +62,10 @@ class KitchensTableViewController: UITableViewController,RefreshTableViewWhenImg
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if(self.kitchens.count>0)
-        {
-            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: true)
-        }
+//        if(self.kitchens.count>0)
+//        {
+//            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: true)
+//        }
         
         Cart.sharedInstance.updateCartBadge(vc: self)
     }
@@ -69,14 +102,14 @@ class KitchensTableViewController: UITableViewController,RefreshTableViewWhenImg
                 if(indexPath.row == 0)
                 {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "specialKitchenTableViewCell", for: indexPath) as! SpecialKitchenTableViewCell
-                    cell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row, headerString: "Your favorites")
+                    cell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row, headerString: "Your Favorites")
                     cell.collectionViewOffset = yourKitchensStoredOffset
                     return cell
                 }
                 else if(indexPath.row == 1)
                 {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "specialKitchenTableViewCell", for: indexPath) as! SpecialKitchenTableViewCell
-                    cell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row, headerString: "Popular in your area")
+                    cell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row, headerString: "Popular in Your Area")
                     cell.collectionViewOffset = popularKitchensStoredOffset
                     return cell
                 }
@@ -94,7 +127,7 @@ class KitchensTableViewController: UITableViewController,RefreshTableViewWhenImg
                 if(indexPath.row == 0)
                 {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "specialKitchenTableViewCell", for: indexPath) as! SpecialKitchenTableViewCell
-                    cell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row, headerString: "Popular in your area")
+                    cell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row, headerString: "Popular in Your Area")
                     cell.collectionViewOffset = popularKitchensStoredOffset
                     return cell
                 }
@@ -112,7 +145,7 @@ class KitchensTableViewController: UITableViewController,RefreshTableViewWhenImg
                 if(indexPath.row == 0)
                 {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "specialKitchenTableViewCell", for: indexPath) as! SpecialKitchenTableViewCell
-                    cell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row, headerString: "Your favorites")
+                    cell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row, headerString: "Your Favorites")
                     cell.collectionViewOffset = yourKitchensStoredOffset
                     return cell
                 }
