@@ -14,10 +14,16 @@ class Cart: NSObject {
     public var kitchenId: String = ""
     public var cart:[Choice] = []
     static let sharedInstance = Cart()
+    private var rootViewController: UIViewController?
     
     override init()
     {
         super.init()
+    }
+    
+    public func setRootViewController(rootViewController: UIViewController) -> Void
+    {
+        self.rootViewController = rootViewController
     }
     
     public func isCartEmpty() -> Bool
@@ -25,23 +31,24 @@ class Cart: NSObject {
         return self.cart.count==0
     }
     
-    public func updateCartBadge(vc: UIViewController)
+    public func updateCartBadge()//vc: UIViewController)
     {
         if(self.cart.count == 0)
         {
-            vc.navigationController?.tabBarController?.tabBar.items?[1].badgeValue = nil
+            (self.rootViewController as? UITabBarController)?.tabBar.items?[1].badgeValue = nil
         }
         else
         {
-            vc.navigationController?.tabBarController?.tabBar.items?[1].badgeValue = String(self.cart.count)
+            (self.rootViewController as? UITabBarController)?.tabBar.items?[1].badgeValue = String(self.cart.count)
         }
     }
     
-    public func updateCart(choice: Choice, vc: UIViewController, isAddingNew: Bool, completion: @escaping () -> ())    // TODO: TEST THIS
+    public func updateCart(choice: Choice, vc: UIViewController, isAddingNew: Bool, completion: @escaping () -> ())
     {
         if(choice.quantity == nil || choice.quantity! == 0) //we are removing an item from the cart.
         {
             removeItemFromCart(choiceToRemove: choice)
+            self.updateCartBadge()
             completion()
         }
         else    //We are updating cart
@@ -49,6 +56,7 @@ class Cart: NSObject {
             if(self.cart.count == 0) {                  //if cart is empty, simply add to it.
                 self.kitchenId = choice.kitchenId
                 self.cart.append(choice)
+                self.updateCartBadge()
                 completion()
             }
             else    // cart contains something.
@@ -58,12 +66,13 @@ class Cart: NSObject {
                 {
                     if(isAddingNew) //if adding a new item.
                     {
-                    choiceInCart!.quantity = choiceInCart!.quantity! + choice.quantity!
+                        choiceInCart!.quantity = choiceInCart!.quantity! + choice.quantity!
                     }
                     else    // if updating an item already in the cart (Update button visible)
                     {
                         choiceInCart!.quantity = choice.quantity!
                     }
+                    self.updateCartBadge()
                     completion()
                 }
                 else    //cart doesnt contain the choice
@@ -71,6 +80,7 @@ class Cart: NSObject {
                     if(choice.kitchenId == self.kitchenId)  // if the kitchen id is the same as the choice's kitchen, then we can add it to the cart
                     {
                         self.cart.append(choice)
+                        self.updateCartBadge()
                         completion()
                     }
                     else    // the kitchen id is different, so ask to replace the cart with the new choice
@@ -121,6 +131,7 @@ class Cart: NSObject {
             self.clearCart()
             self.cart.append(choice)
             self.kitchenId = choice.kitchenId
+            self.updateCartBadge()
             completion()
         })
         alertController.addAction(alertAction)

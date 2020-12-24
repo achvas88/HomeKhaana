@@ -29,6 +29,7 @@ class KitchenViewController: UIViewController, RefreshTableViewWhenImgLoadsDeleg
         super.viewDidLoad()
         self.tblMenuItems.dataSource = self
         self.tblMenuItems.delegate = self
+        self.navigationController?.navigationBar.isHidden = true
         self.loadKitchenDetails()
         
         var menuItems:[ChoiceGroup]? = KitchenDataManager.getChoiceGroups(kitchenId: self.kitchen!.id)
@@ -77,7 +78,7 @@ class KitchenViewController: UIViewController, RefreshTableViewWhenImgLoadsDeleg
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        Cart.sharedInstance.updateCartBadge(vc: self)
+        Cart.sharedInstance.updateCartBadge()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

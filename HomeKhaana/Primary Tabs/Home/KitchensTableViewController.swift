@@ -66,8 +66,7 @@ class KitchensTableViewController: UITableViewController,RefreshTableViewWhenImg
 //        {
 //            self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: UITableView.ScrollPosition.top, animated: true)
 //        }
-        
-        Cart.sharedInstance.updateCartBadge(vc: self)
+        Cart.sharedInstance.updateCartBadge()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

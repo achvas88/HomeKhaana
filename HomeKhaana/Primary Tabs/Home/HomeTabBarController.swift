@@ -15,6 +15,7 @@ class HomeTabBarController: UITabBarController,UITabBarControllerDelegate {
         
         self.delegate = self
         self.definesPresentationContext = true
+        Cart.sharedInstance.setRootViewController(rootViewController: self)
         // Do any additional setup after loading the view.
     }
 

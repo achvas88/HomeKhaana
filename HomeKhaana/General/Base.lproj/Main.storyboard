@@ -337,7 +337,7 @@
                                 <rect key="frame" x="172.5" y="617" width="30" height="30"/>
                                 <state key="normal" title="OK"/>
                                 <connections>
-                                    <segue destination="BCx-ix-CQG" kind="show" id="rDr-KS-uJ9"/>
+                                    <segue destination="BCx-ix-CQG" kind="presentation" id="rDr-KS-uJ9"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="3: PICK-UP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydW-1z-CBv">
@@ -897,6 +897,7 @@
                             <constraint firstItem="ITl-B8-3Gi" firstAttribute="top" secondItem="pEN-LO-yBH" secondAttribute="top" constant="5" id="tG4-ad-Fmr"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="iUy-Ys-rlc"/>
                     <size key="freeformSize" width="375" height="967"/>
                     <connections>
                         <outlet property="cstKitchenImgHeight" destination="IZ7-Q0-vUX" id="hCI-7o-zh3"/>
@@ -953,9 +954,30 @@
                                     <stackView opaque="NO" contentMode="center" distribution="equalCentering" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="3DW-DR-gim">
                                         <rect key="frame" x="0.0" y="26" width="101.5" height="32"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RUa-S2-WBo">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RUa-S2-WBo">
                                                 <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
-                                                <state key="normal" image="minus"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="32" id="e1M-4y-TQo"/>
+                                                    <constraint firstAttribute="width" constant="32" id="pM5-sQ-maV"/>
+                                                </constraints>
+                                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="4"/>
+                                                <state key="normal">
+                                                    <attributedString key="attributedTitle">
+                                                        <fragment content="-">
+                                                            <attributes>
+                                                                <color key="NSColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <font key="NSFont" metaFont="system" size="24"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="16"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="btnMinusClicked:" destination="z1H-hW-b2Y" eventType="touchUpInside" id="AdE-lS-yVb"/>
                                                 </connections>
@@ -966,9 +988,30 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T26-m7-LGZ">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T26-m7-LGZ">
                                                 <rect key="frame" x="69.5" y="0.0" width="32" height="32"/>
-                                                <state key="normal" image="plus"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="32" id="cLC-do-QDR"/>
+                                                    <constraint firstAttribute="width" constant="32" id="pRn-6K-qyk"/>
+                                                </constraints>
+                                                <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="3"/>
+                                                <state key="normal">
+                                                    <attributedString key="attributedTitle">
+                                                        <fragment content="+">
+                                                            <attributes>
+                                                                <color key="NSColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <font key="NSFont" size="24" name=".SFNS-Regular"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="16"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="btnPlusClicked:" destination="z1H-hW-b2Y" eventType="touchUpInside" id="y79-gE-ivl"/>
                                                 </connections>
@@ -1096,6 +1139,7 @@
                             <constraint firstItem="bNd-GH-rJP" firstAttribute="top" secondItem="sPl-yg-dzP" secondAttribute="bottom" constant="15" id="yHH-0Z-dOU"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="SQA-5U-e2P"/>
                     <connections>
                         <outlet property="btnAddToCart" destination="ndV-xf-iaN" id="COC-PW-D8I"/>
                         <outlet property="imgRepresentation" destination="mLJ-lf-G5e" id="6ah-Dm-WqV"/>
@@ -1251,7 +1295,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <inset key="imageEdgeInsets" minX="-20" minY="0.0" maxX="10" maxY="0.0"/>
-                                <state key="normal" title="Paying by cash" image="invoice">
+                                <state key="normal" title="Paying by cash">
                                     <color key="titleColor" systemColor="secondaryLabelColor"/>
                                 </state>
                                 <connections>
@@ -1263,7 +1307,9 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="9SK-BJ-hjK"/>
                                 </constraints>
-                                <state key="normal" title="CHECKOUT"/>
+                                <state key="normal" title="CHECKOUT">
+                                    <color key="titleColor" systemColor="linkColor"/>
+                                </state>
                                 <connections>
                                     <action selector="btnCheckoutClicked:" destination="kkb-Bm-kjR" eventType="touchUpInside" id="2w9-09-CU9"/>
                                     <segue destination="DpK-Jl-d5B" kind="presentation" identifier="checkout" modalTransitionStyle="crossDissolve" id="bip-6r-AcP"/>
@@ -1391,7 +1437,7 @@
                                                     <outlet property="lblCost" destination="1j7-DC-fOd" id="1fj-Uf-50l"/>
                                                     <outlet property="lblDisplayTitle" destination="Lxj-xx-XNb" id="ZF5-YS-qme"/>
                                                     <outlet property="lblQuantity" destination="OZB-ln-Cdx" id="BDv-QI-ujd"/>
-                                                    <segue destination="z1H-hW-b2Y" kind="showDetail" identifier="cartChoiceDetail" id="Gmd-Ol-96N"/>
+                                                    <segue destination="z1H-hW-b2Y" kind="presentation" identifier="cartChoiceDetail" modalPresentationStyle="fullScreen" id="Gmd-Ol-96N"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -1495,7 +1541,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <size key="titleShadowOffset" width="2" height="2"/>
-                                        <state key="normal" title="Clear Cart"/>
+                                        <state key="normal" title="Clear Cart">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
                                         <connections>
                                             <action selector="btnClearCartClicked:" destination="kkb-Bm-kjR" eventType="touchUpInside" id="Jbo-9q-3wH"/>
                                         </connections>
@@ -1653,6 +1701,7 @@
                             <constraint firstItem="AQI-Bw-rpp" firstAttribute="top" secondItem="ShP-6N-G3u" secondAttribute="bottom" constant="50" id="twg-dh-6fd"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Fop-1d-flt"/>
                     <connections>
                         <outlet property="tglVegetarian" destination="kG0-pl-h2D" id="5ZY-S9-Xdk"/>
                     </connections>
@@ -3632,8 +3681,8 @@
         <segue reference="sdt-pM-Hwp"/>
         <segue reference="jSY-jj-Mgi"/>
         <segue reference="GiJ-Mj-tb5"/>
-        <segue reference="Gmd-Ol-96N"/>
-        <segue reference="Qei-un-YWD"/>
+        <segue reference="84F-P5-k7u"/>
+        <segue reference="3xB-j3-daY"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Icon-App-76x76" width="114" height="114"/>
@@ -3646,10 +3695,8 @@
         <image name="icon-google" width="246" height="54"/>
         <image name="invoice" width="21.333333969116211" height="21.333333969116211"/>
         <image name="leaf" width="8" height="8"/>
-        <image name="minus" width="32" height="32"/>
         <image name="placeholder" width="21.333333969116211" height="21.333333969116211"/>
         <image name="placeholder 2" width="512" height="512"/>
-        <image name="plus" width="32" height="32"/>
         <image name="sad" width="64" height="64"/>
         <image name="shopping-cart (1)" width="32" height="32"/>
         <image name="star" width="16" height="16"/>

@@ -112,16 +112,14 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == UIColor.lightGray {
+        if textView.text == "Optionally enter custom instructions here" {
             textView.text = nil
-            textView.textColor = UIColor.black
         }
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
             textView.text = "Optionally enter custom instructions here"
-            textView.textColor = UIColor.lightGray
         }
     }
     
@@ -201,7 +199,7 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
         //update badge
         if(self.currentOrder!.status == "New")
         {
-            Cart.sharedInstance.updateCartBadge(vc: self)
+            Cart.sharedInstance.updateCartBadge()
         
             //ensure payment source is still valid. This will be uncommented once credit card payment is open.
             //ensurePaymentSourceValidity()
@@ -320,14 +318,8 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
     {
         self.btnClearCart.layer.cornerRadius = 3
         self.btnRate.layer.cornerRadius = 3
-        if #available(iOS 13.0, *) {
-            self.btnCheckout.backgroundColor = UIColor.systemGray6
-            self.btnCheckout.setTitleColor(UIColor.label, for: .normal)
-        } else {
-            self.btnCheckout.backgroundColor = UIColor.systemGray
-            self.btnCheckout.setTitleColor(UIColor.white, for: .normal)
-        }
-        
+        self.btnCheckout.backgroundColor = UIColor.systemGreen
+        self.btnCheckout.setTitleColor(UIColor.black, for: .normal)
         
         self.tblItems.layer.borderWidth = 0.5
         let borderColor : UIColor
