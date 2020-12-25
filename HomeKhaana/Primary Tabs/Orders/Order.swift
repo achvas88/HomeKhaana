@@ -15,6 +15,7 @@ class Order
     //other meta-data
     var id:String
     var orderDate:String
+    var dueDate: String
     var orderRating:Int?
     var status:String
     var orderingUserID:String
@@ -22,6 +23,7 @@ class Order
     var kitchenId: String
     var timestamp: Int64
     var customInstructions: String?
+    var noticeDays: Int
     
     //order items
     var cart:[Choice]
@@ -39,6 +41,7 @@ class Order
         return [
             "id": id,
             "orderDate": self.orderDate,
+            "dueDate": self.dueDate,
             "orderRating": orderRating ?? -1,
             "subTotal": subTotal,
             "tax": tax,
@@ -52,7 +55,8 @@ class Order
             "kitchenId": self.kitchenId,
             "timestamp": self.timestamp,
             "cart": getCartDetails(),
-            "instructions": customInstructions ?? ""
+            "instructions": customInstructions ?? "",
+            "noticeDays": self.noticeDays
         ]
     }
     
@@ -61,6 +65,7 @@ class Order
         self.id=""
         self.status = "New"
         self.orderDate = ""
+        self.dueDate = ""
         self.cart = []
         self.orderRating = -1
         self.subTotal = 0
@@ -71,12 +76,14 @@ class Order
         self.orderingUserID = User.sharedInstance!.id
         self.kitchenId = ""
         self.timestamp = -1
+        self.noticeDays = 0
     }
     
-    public init(id: String, orderDate: String, orderRating: Int?, status: String, cart: [Choice], subTotal: Float, tax: Float, discount: Float, orderTotal: Float, source: PaymentSource?, kitchenId: String, orderingUserId: String?, orderingUserName: String?, timestamp: Int64, instructions: String?)
+    public init(id: String, orderDate: String, dueDate: String, orderRating: Int?, status: String, cart: [Choice], subTotal: Float, tax: Float, discount: Float, orderTotal: Float, source: PaymentSource?, kitchenId: String, orderingUserId: String?, orderingUserName: String?, timestamp: Int64, instructions: String?, noticeDays: Int?)
     {
         self.id = id
         self.orderDate = orderDate
+        self.dueDate = dueDate
         self.orderRating = orderRating
         self.status = status
         self.cart = cart
@@ -90,6 +97,7 @@ class Order
         self.kitchenId = kitchenId
         self.timestamp = timestamp
         self.customInstructions = instructions
+        self.noticeDays = noticeDays ?? 0
     }
     
     public convenience init?(snapshot: DataSnapshot)
@@ -100,6 +108,7 @@ class Order
         //other meta-data
         let id = snapshot["id"] as? String
         let orderDate = snapshot["orderDate"] as? String
+        let dueDate = snapshot["dueDate"] as? String
         let orderRating = snapshot["orderRating"] as? Int
         let status = snapshot["status"] as? String
         let kitchenId = snapshot["kitchenId"] as? String
@@ -107,6 +116,7 @@ class Order
         let orderingUserName = snapshot["orderingUserName"] as? String
         let timestamp = snapshot["timestamp"] as? Int64
         let customInstructions = snapshot["instructions"] as? String
+        let noticeDays = snapshot["noticeDays"] as? Int
         
         //order items
         var cart:[Choice] = []
@@ -136,7 +146,7 @@ class Order
         //payment source and address
         let selectedPayment:PaymentSource? = nil //User.getPaymentSourceForID(id: selectedPaymentID ?? "")
         
-        self.init(id: id!, orderDate: orderDate ?? "", orderRating: orderRating ?? -1, status: status ?? "New", cart: cart, subTotal: subTotal!, tax: tax!, discount: discount!, orderTotal: orderTotal!, source: selectedPayment, kitchenId: kitchenId!, orderingUserId: orderingUserId, orderingUserName: orderingUserName, timestamp: timestamp!, instructions: customInstructions)
+        self.init(id: id!, orderDate: orderDate ?? "", dueDate: dueDate ?? (orderDate ?? ""), orderRating: orderRating ?? -1, status: status ?? "New", cart: cart, subTotal: subTotal!, tax: tax!, discount: discount!, orderTotal: orderTotal!, source: selectedPayment, kitchenId: kitchenId!, orderingUserId: orderingUserId, orderingUserName: orderingUserName, timestamp: timestamp!, instructions: customInstructions, noticeDays: noticeDays ?? 0)
     }
  
     public func setRating(rating: Int)
@@ -151,8 +161,10 @@ class Order
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .medium
         dateFormatter.locale = Locale(identifier: "en_US")
-        self.orderDate = dateFormatter.string(from: Date.init())
-        
+        let today = Date.init()
+        self.orderDate = dateFormatter.string(from: today)
+        let dueDate = Calendar.current.date(byAdding: .day, value: self.noticeDays, to: today)!
+        self.dueDate = dateFormatter.string(from: dueDate)
         dateFormatter.timeStyle = .none
         //self.deliveryDate = dateFormatter.string(from: Date.init(timeInterval: TimeInterval.init(exactly: (24*60*60))!, since: Date.init()))
         

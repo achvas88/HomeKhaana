@@ -29,6 +29,8 @@ class Choice: Equatable
     var quantity: Int?
     var order: Int
     var isFeatured: Bool
+    var needsAdvanceNotice: Bool
+    var noticeDays: Int?
     
     var image: UIImage? {
         didSet {
@@ -36,7 +38,7 @@ class Choice: Equatable
         }
     }
     
-    init(id:String, title:String,description:String,cost:Float,isVegetarian:Bool,hasImage:Bool, items: String, kitchenId: String, order: Int, isFeatured: Bool) {
+    init(id:String, title:String,description:String,cost:Float,isVegetarian:Bool,hasImage:Bool, items: String, kitchenId: String, order: Int, isFeatured: Bool, needsAdvanceNotice: Bool, noticeDays: Int?) {
         self.id = id
         self.displayTitle = title
         self.description = description
@@ -47,6 +49,8 @@ class Choice: Equatable
         self.kitchenId = kitchenId
         self.order = order
         self.isFeatured = isFeatured
+        self.needsAdvanceNotice = needsAdvanceNotice
+        self.noticeDays = noticeDays ?? 0
         
         if(self.hasImage && self.image == nil)
         {
@@ -56,7 +60,7 @@ class Choice: Equatable
     
     public convenience init?(displayTitle: String, quantity: Int, cost: Float)
     {
-        self.init(id: "", title: displayTitle, description: "", cost: cost, isVegetarian: true, hasImage: false, items: "", kitchenId: "", order: 0, isFeatured: false)
+        self.init(id: "", title: displayTitle, description: "", cost: cost, isVegetarian: true, hasImage: false, items: "", kitchenId: "", order: 0, isFeatured: false, needsAdvanceNotice: false, noticeDays: 0)
         self.quantity = quantity
     }
     
@@ -73,10 +77,13 @@ class Choice: Equatable
         let items = snapshot["items"] as! String
         let order = snapshot["order"] as! Int
         var isFeatured = snapshot["isFeatured"] as? Bool
-        
         isFeatured = isFeatured ?? false
+        var needsAdvanceNotice = snapshot["needsAdvanceNotice"] as? Bool
+        needsAdvanceNotice = needsAdvanceNotice ?? false
+        var noticeDays = snapshot["noticeDays"] as? Int
+        noticeDays = noticeDays ?? 0
         
-        self.init(id: id, title: displayTitle , description: description, cost: cost, isVegetarian: isVegetarian, hasImage: hasImage, items: items, kitchenId: kitchenId, order: order, isFeatured: isFeatured!)
+        self.init(id: id, title: displayTitle , description: description, cost: cost, isVegetarian: isVegetarian, hasImage: hasImage, items: items, kitchenId: kitchenId, order: order, isFeatured: isFeatured!, needsAdvanceNotice: needsAdvanceNotice!, noticeDays: noticeDays)
     }
     
     public func getDictionary() -> Dictionary<String,Any>
@@ -89,7 +96,9 @@ class Choice: Equatable
             "hasImage": self.hasImage,
             "id": self.id,
             "items": self.items,
-            "isFeatured": self.isFeatured
+            "isFeatured": self.isFeatured,
+            "needsAdvanceNotice": self.needsAdvanceNotice,
+            "noticeDays": self.noticeDays ?? 0
             // Note that the value of the 'order' property is calculated only in the ChoiceGroup code. So, the dictionary doesnt return it.
         ]
     }
@@ -100,6 +109,10 @@ class Choice: Equatable
         // Assuming a < 10MB file, though you can change that
         let storageRef = Storage.storage().reference()
         storageRef.child(filePath).getData(maxSize: 10*1024*1024, completion: { (data, error) in
+            if(error != nil)
+            {
+                return
+            }
             self.image = UIImage(data: data!)
             // TODO: reloading table view for every image load seems a bit much. we need to come up with a better way of displaying the image.
             self.containingTableViewDelegate?.reloadTableView()

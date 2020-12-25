@@ -191,6 +191,7 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
                 self.tblItems.reloadData()
             }
             self.calculatePrice()
+            self.setOrderNoticeDays()
         }
         
         //set the height of the table view
@@ -204,6 +205,29 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
             //ensure payment source is still valid. This will be uncommented once credit card payment is open.
             //ensurePaymentSourceValidity()
         }
+    }
+    
+    private func setOrderNoticeDays()
+    {
+        var noticeDays: Int = 0
+        for choice in self.inCart
+        {
+            if(noticeDays < (choice.noticeDays ?? 0))
+            {
+                noticeDays = choice.noticeDays! // we can force unwrap here because noticeDays can never by 0, hence it HAS to exist.
+            }
+        }
+        if(noticeDays > 0)
+        {
+            self.lblTime.text! = "In \(noticeDays) days"
+            self.lblTime.textColor = UIColor.systemRed
+        }
+        else
+        {
+            self.lblTime.text! = "Today"
+            self.lblTime.textColor = UIColor.systemGreen
+        }
+        self.currentOrder!.noticeDays = noticeDays
     }
     
     private func updateDisplayWhenCartHasItems(_ kitchen: Kitchen?)

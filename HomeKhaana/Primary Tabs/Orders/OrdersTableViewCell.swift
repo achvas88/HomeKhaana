@@ -49,14 +49,14 @@ class OrdersTableViewCell: UITableViewCell {
             }
             else
             {
-                imgHeightConstraint.constant = 120
+                imgHeightConstraint.constant = 0 // 120 -- always hide the image for now.
             }
             
             //order image
             let choice:Choice = order.cart[0]
             
-            let kitchen:Kitchen? = DataManager.kitchens[order.kitchenId]
-            self.imgOrder.image = kitchen?.image
+            //let kitchen:Kitchen? = DataManager.kitchens[order.kitchenId]
+            //self.imgOrder.image = kitchen?.image
 
             //cart link title
             var cartLinkTitle:String = choice.displayTitle
@@ -104,13 +104,13 @@ class OrdersTableViewCell: UITableViewCell {
 
         self.selectionStyle = .none
         
-        let path = UIBezierPath(roundedRect:self.imgOrder.bounds,
-                                byRoundingCorners:[.topRight, .topLeft],
-                                cornerRadii: CGSize(width: 6, height:  6))
+        //let path = UIBezierPath(roundedRect:self.imgOrder.bounds,
+        //                        byRoundingCorners:[.topRight, .topLeft],
+        //                        cornerRadii: CGSize(width: 6, height:  6))
         
-        let maskLayer = CAShapeLayer()
-        maskLayer.path = path.cgPath
-        self.imgOrder.layer.mask = maskLayer
+        //let maskLayer = CAShapeLayer()
+        //maskLayer.path = path.cgPath
+        //self.imgOrder.layer.mask = maskLayer
         
         orderOuterView.layer.cornerRadius = 6
         orderOuterView.layer.masksToBounds = false

@@ -91,7 +91,7 @@ class OrdersTableViewController: UITableViewController {
             }
             else
             {
-                return 343;
+                return 343 - 120; // we are hiding images for now. So, always reduce by 120.
             }
         }
         else

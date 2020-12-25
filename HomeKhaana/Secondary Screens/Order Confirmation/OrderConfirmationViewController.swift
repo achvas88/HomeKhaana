@@ -51,15 +51,15 @@ class OrderConfirmationViewController: UIViewController {
                 {
                     LoaderController.sharedInstance.updateTitle(title: "Error placing order. Please try again later.")
                     let timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.waitBeforeDismissing(timer:)), userInfo: ["passFail": 0], repeats: false)
-                    timer.tolerance = 0.2
+                    timer.tolerance = 0.5
                 }
                 else
                 {
-                    LoaderController.sharedInstance.updateTitle(title: "Success!")
+                    LoaderController.sharedInstance.updateTitle(title: "Order Successfully Placed!")
                     Cart.sharedInstance.cart.removeAll()
                     self.navigationController?.tabBarController?.tabBar.items?[1].badgeValue = nil
                     let timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.waitBeforeDismissing(timer:)), userInfo: ["passFail": 1], repeats: false)
-                    timer.tolerance = 0.2
+                    timer.tolerance = 0.5
                 }
             }
             

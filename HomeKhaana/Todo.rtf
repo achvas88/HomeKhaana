@@ -5,45 +5,59 @@
 \margl1440\margr1440\vieww9000\viewh8400\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
-\f0\b\fs24 \cf0 \
+\f0\b\fs24 \cf0 Bugs:\
+1. Edit mode in kitchen doesnt immediately update its view\
+2. Fix adding categories. It creates duplicate category items right now :(\
+3. fix profile screen overlay\
+\
 General:\
 
-\f1\b0 - have a time-out if necessary everytime the server is contacted. - MODERATE \
-- Delete image when deleting item in Inventory - TOUGH\
-
+\f1\b0 - Delete image when deleting item in Inventory - TOUGH\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 - ensure that database security is correctly setup
 \f0\b \
-Testing: \
-
-\f1\b0 - Test without network connection - MODERATE\
-- Make sure app shuts down properly - TOUGH\
-
-\f0\b \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
 End user:
 \f1\b0 \
 - Dont allow adding items with different availability times. - MODERATE\
 - Credits screen, Help, FAQ, Legal pages - MODERATE\
-- Advertisements - MODERATE\
-- fix images not loading up.\
-- chat with kitchen\
+- indicate order due date in orders screen\
+- throw warning  pop up when the order due date changes (when adding items and also when it gets modified from the cart)\
+- add ability to send message associated with order\
 \
 
 \f0\b Kitchen\
+
+\f1\b0 - Set pickup times/show when I will get food - MODERATE\
+- Reorder sections Inventory - MODERATE\
+- indicate order due date in current orders screen\
+- add ability to send message based on order\
+\
+\
+
+\f0\b Low priority\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 
-\f1\b0 \cf0 -update for dark mode support - EASY\
+\f1\b0 \cf0 - filter to orders for today - Kitchen\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 - Set pickup times/show when I will get food - MODERATE\
+\cf0 - have a time-out if necessary everytime the server is contacted. - MODERATE \
+- Test without network connection - MODERATE\
+- Make sure app shuts down properly - TOUGH\
+- display favorited items on inventory screen for Kitchens - EASY\
+- Advertisements - MODERATE\
+- chat with kitchen\
+- Send reminder to user for pickup\
+- ability to change the item group\
 \
-DEV: Reorder sections Inventory (low priority) - MODERATE\
-\
-\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \outl\strokewidth60 \strokec0 -update for dark mode support - EASY\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \outl\strokewidth60 \strokec0 - Notification - TOUGH\
+\cf0 - fix images not loading up. - HID THE IMAGES FROM THE ORDERS SCREEN\outl0\strokewidth0 \
+\outl\strokewidth60 - Notification - TOUGH\
 - Database security - TOUGH\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \outl0\strokewidth0 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \outl\strokewidth60 If credit card is developed, then these are mandatory before release, \
+\outl0\strokewidth0 \
+\outl\strokewidth60 If credit card is developed, then these are mandatory before release, \
 Credit card:\
 TEST: Check duplicate credit cards\
 TEST: Test indicator hiding when credit card addition fail. \
@@ -51,10 +65,8 @@ TEST: Test without any card. \
 TEST: test card addition failing - make sure that a line doesnt show up for a failed paymentsource. \
 TEST: make sure that after all cards are deleted, the cart updates appropriately. \
 DEV: Where does the money go??\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \outl0\strokewidth0 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \outl\strokewidth60 DONE\
+\outl0\strokewidth0 \
+\outl\strokewidth60 DONE\
 End User:\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 \cf0 - Don't calculate distance in tableview cell - MODERATE\outl0\strokewidth0 \
