@@ -519,7 +519,6 @@
                             <constraint firstItem="ojN-AF-WP7" firstAttribute="trailing" secondItem="wa9-lf-UBp" secondAttribute="trailing" constant="5" id="DwJ-5j-4gj"/>
                             <constraint firstItem="deU-dR-nr3" firstAttribute="top" secondItem="ojN-AF-WP7" secondAttribute="top" constant="30" id="MCe-Hi-SN7"/>
                             <constraint firstItem="6Qa-BY-L4a" firstAttribute="width" secondItem="oa3-tY-gO5" secondAttribute="width" id="QXu-JP-MV2"/>
-                            <constraint firstItem="wa9-lf-UBp" firstAttribute="width" secondItem="oa3-tY-gO5" secondAttribute="width" id="WAM-iT-P2M"/>
                             <constraint firstItem="wa9-lf-UBp" firstAttribute="top" secondItem="deU-dR-nr3" secondAttribute="bottom" constant="30" id="kL8-bb-P5c"/>
                             <constraint firstItem="6Qa-BY-L4a" firstAttribute="centerX" secondItem="ojN-AF-WP7" secondAttribute="centerX" id="mRD-ae-9Tp"/>
                             <constraint firstItem="ojN-AF-WP7" firstAttribute="bottom" secondItem="aZg-cf-ik9" secondAttribute="bottom" constant="5" id="nBp-ut-gog"/>
@@ -1001,7 +1000,7 @@
                                                         <fragment content="+">
                                                             <attributes>
                                                                 <color key="NSColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <font key="NSFont" size="24" name=".SFNS-Regular"/>
+                                                                <font key="NSFont" metaFont="system" size="24"/>
                                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                             </attributes>
                                                         </fragment>
@@ -1250,6 +1249,7 @@
                             <constraint firstItem="rH6-Vb-g68" firstAttribute="top" secondItem="xpD-0N-3OP" secondAttribute="top" constant="-100" id="wnO-rI-Bb6"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="62i-nc-SMg"/>
                     <connections>
                         <segue destination="77h-F1-Cug" kind="unwind" identifier="returnAfterConfirmation" unwindAction="backFromModal:" id="eva-2s-7fc"/>
                     </connections>
@@ -1312,7 +1312,7 @@
                                 </state>
                                 <connections>
                                     <action selector="btnCheckoutClicked:" destination="kkb-Bm-kjR" eventType="touchUpInside" id="2w9-09-CU9"/>
-                                    <segue destination="DpK-Jl-d5B" kind="presentation" identifier="checkout" modalTransitionStyle="crossDissolve" id="bip-6r-AcP"/>
+                                    <segue destination="DpK-Jl-d5B" kind="show" identifier="checkout" id="bip-6r-AcP"/>
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m8g-eV-W8i">
@@ -3010,13 +3010,13 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="LPc-vu-ygX">
                                                 <rect key="frame" x="0.0" y="40.5" width="335" height="58.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Item Title:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dle-Ph-ToT">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Title:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dle-Ph-ToT">
                                                         <rect key="frame" x="0.0" y="0.0" width="335" height="17"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Egg Biriyani, Chapathi etc. " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tfe-dK-Ia5">
+                                                    <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Egg Biriyani, Chapathi etc. " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tfe-dK-Ia5">
                                                         <rect key="frame" x="0.0" y="25" width="335" height="33.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -3029,13 +3029,13 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="NjW-sk-4H5">
                                                 <rect key="frame" x="0.0" y="119" width="335" height="58.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Item Group:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Bp-Ri-IV1">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Group:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Bp-Ri-IV1">
                                                         <rect key="frame" x="0.0" y="0.0" width="335" height="17"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Lunch, Thali, Desserts etc" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6pn-Eg-rya">
+                                                    <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Lunch, Thali, Desserts etc" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6pn-Eg-rya">
                                                         <rect key="frame" x="0.0" y="25" width="335" height="33.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -3048,13 +3048,13 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="c8K-ed-45x">
                                                 <rect key="frame" x="0.0" y="197.5" width="335" height="58.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Cost (in $):" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HQt-Wi-Pxa">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cost (in $):" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HQt-Wi-Pxa">
                                                         <rect key="frame" x="0.0" y="0.0" width="335" height="17"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="7.50" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="13T-jl-igq">
+                                                    <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="7.50" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="13T-jl-igq">
                                                         <rect key="frame" x="0.0" y="25" width="335" height="33.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
@@ -3101,13 +3101,13 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="VeT-pG-RAp">
                                                 <rect key="frame" x="0.0" y="446" width="335" height="58.5"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Item Contents (Optional) :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="usG-An-7Jw">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Item Contents (Optional) :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="usG-An-7Jw">
                                                         <rect key="frame" x="0.0" y="0.0" width="335" height="17"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8nt-Q7-2N4">
+                                                    <textField opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8nt-Q7-2N4">
                                                         <rect key="frame" x="0.0" y="25" width="335" height="33.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -3678,7 +3678,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="DvV-qM-doP"/>
-        <segue reference="sdt-pM-Hwp"/>
+        <segue reference="auW-X4-2bE"/>
         <segue reference="jSY-jj-Mgi"/>
         <segue reference="GiJ-Mj-tb5"/>
         <segue reference="84F-P5-k7u"/>
