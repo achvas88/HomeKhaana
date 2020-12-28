@@ -10,11 +10,9 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp();
-//const googleCloudStorage = require('@google-cloud/storage');
-//const googleCloudStorage = require('@firebase/storage')()
-//const storage = require('firebase-storage');
-//import '@firebase/storage'
+const {Storage} = require('@google-cloud/storage');
 
+const storage = new Storage({projectId: "homekhaanamain"});
 
 //when an order's status is updated by the kitchen.
 exports.updateOrderStatus2 = functions.database.ref('/CurrentOrders/{kitchenId}/{orderingUserID}/{orderID}/status')
@@ -116,25 +114,25 @@ exports.charge2 = functions.database.ref('/Orders/{userId}/{id}')
         
 });
 
-
 //when an inventory item is deleted, delete the corresponding image in the google cloud storage
-//exports.sanitizePhoto = functions.database.ref('MenuItems/{kitchenID}/{sectionID}/items/{itemID}')
-//.onDelete((snap, context) => {
-//    const filePath = `${context.params.kitchenID}/MenuItems/{itemID}/itemPhoto.jpg`
-//
-//    //const bucket = googleCloudStorage.bucket('myBucket-12345.appspot.com')
-//    //gs://homekhaanamain.appspot.com/
-//    const bucket = googleCloudStorage.bucket('homekhaanamain.appspot.com')
-//
-//    const file = bucket.file(filePath)
-//
-//    file.delete().then(() => {
-//        console.log(`Successfully deleted photo with UID: ${photoUID}, userUID : ${userUID}`)
-//      })
-//      .catch(err => {
-//        console.log(`Failed to remove photo, error: ${err}`)
-//      });
-//});
+exports.sanitizePhoto = functions.database.ref('MenuItems/{kitchenID}/{sectionID}/items/{itemID}')
+.onDelete((snap, context) => {
+    
+    console.log(`Creating the file path...`)
+    const filePath = `${context.params.kitchenID}/MenuItems/${context.params.itemID}/itemPhoto`
+
+    console.log(`Getting the storage bucket...`)
+    const bucket = storage.bucket('gs://homekhaanamain.appspot.com')
+    const file = bucket.file(filePath)
+    
+    console.log(`Okay now. trying to delete...`)
+    file.delete().then(() => {
+        console.log(`Successfully deleted photo`)
+      })
+      .catch(err => {
+        console.log(`Failed to remove photo, error: ${err}`)
+      });
+});
 
 
 
