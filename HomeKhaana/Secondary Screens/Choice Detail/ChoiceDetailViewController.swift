@@ -23,6 +23,7 @@ class ChoiceDetailViewController: UIViewController {
     @IBOutlet weak var stkVegetarian: UIStackView!
     @IBOutlet weak var lblItems: UILabel!
     @IBOutlet weak var lblKitchen: UILabel!
+    @IBOutlet weak var lblAdvanceNoticeWarning: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +46,23 @@ class ChoiceDetailViewController: UIViewController {
         if(!theChoice!.isVegetarian) { stkVegetarian.isHidden = true }
         imgRepresentation.image = theChoice!.image
         setAddToCartTitle()
+        
+        if(theChoice!.needsAdvanceNotice)
+        {
+            lblAdvanceNoticeWarning.isHidden = false
+            if(theChoice!.noticeDays == 1)
+            {
+            lblAdvanceNoticeWarning.text! = " Item requires advance notice of \(theChoice!.noticeDays!) day "
+            }
+            else
+            {
+                lblAdvanceNoticeWarning.text! = " Item requires advance notice of \(theChoice!.noticeDays!) days "
+            }
+        }
+        else
+        {
+            lblAdvanceNoticeWarning.isHidden = true
+        }
         // Do any additional setup after loading the view.
     }
 
@@ -68,8 +86,7 @@ class ChoiceDetailViewController: UIViewController {
     
     @IBAction func btnAddToCartClicked(_ sender: Any) {
         let quantity:Int = Int(self.lblQuantity.text!)!
-        theChoice!.quantity = quantity
-        Cart.sharedInstance.updateCart(choice: theChoice!, vc: self, isAddingNew: comingFromHome, completion:
+        Cart.sharedInstance.updateCart(quantity: quantity, choice: theChoice!, vc: self, isAddingNew: comingFromHome, completion:
             {
                 self.dismiss(animated: true, completion: nil)
             }

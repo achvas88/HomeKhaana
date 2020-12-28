@@ -17,6 +17,8 @@ class ChoiceTableViewCell: UITableViewCell {
     @IBOutlet weak var lblCost: UILabel!
     @IBOutlet weak var imgIsVegetarian: UIImageView!
     @IBOutlet weak var lblItems: UILabel!
+    @IBOutlet weak var lblAdvanceNotice: UILabel!
+    @IBOutlet weak var imgStar: UIImageView!
     
     @IBOutlet weak var choiceOuterView: UIView!
     
@@ -37,6 +39,28 @@ class ChoiceTableViewCell: UITableViewCell {
             imgRepresentation.image = choice.image
             lblItems.text = choice.items
             lblDisplayTitle.text = choice.displayTitle
+            
+            if(choice.needsAdvanceNotice)
+            {
+                lblAdvanceNotice.isHidden = false
+                if(choice.noticeDays == 1)
+                {
+                    lblAdvanceNotice.text! = " Needs \(choice.noticeDays!) day notice "
+                }
+                else
+                {
+                    lblAdvanceNotice.text! = " Needs \(choice.noticeDays!) days notice "
+                }
+            }
+            else
+            {
+                lblAdvanceNotice.isHidden = true
+            }
+            
+            if(imgStar != nil)
+            {
+                imgStar.isHidden = !choice.isFeatured
+            }
         }
     }
     

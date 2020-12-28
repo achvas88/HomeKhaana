@@ -286,7 +286,12 @@ class InventoryAddItemViewController: UIViewController, UIImagePickerControllerD
     
     func addChoiceToGroup(newChoice: Choice)
     {
-        let choiceGroupTitle:String = self.txtGroup.text ?? "Other"
+        var choiceGroupTitle:String = self.txtGroup.text ?? "Other"
+        choiceGroupTitle = choiceGroupTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+        if(choiceGroupTitle == "")
+        {
+            choiceGroupTitle = "Other"
+        }
         let choiceGroup:ChoiceGroup? = ChoiceGroup.getChoiceGroup(kitchenId: User.sharedInstance!.id, groupTitle: choiceGroupTitle)
         
         if(choiceGroup == nil)

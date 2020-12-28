@@ -14,8 +14,8 @@ class Order
 {
     //other meta-data
     var id:String
-    var orderDate:String
-    var dueDate: String
+    var orderDate: Double
+    var dueDate: Double
     var orderRating:Int?
     var status:String
     var orderingUserID:String
@@ -64,8 +64,8 @@ class Order
     {
         self.id=""
         self.status = "New"
-        self.orderDate = ""
-        self.dueDate = ""
+        self.orderDate = Date().timeIntervalSince1970
+        self.dueDate = self.orderDate
         self.cart = []
         self.orderRating = -1
         self.subTotal = 0
@@ -79,7 +79,7 @@ class Order
         self.noticeDays = 0
     }
     
-    public init(id: String, orderDate: String, dueDate: String, orderRating: Int?, status: String, cart: [Choice], subTotal: Float, tax: Float, discount: Float, orderTotal: Float, source: PaymentSource?, kitchenId: String, orderingUserId: String?, orderingUserName: String?, timestamp: Int64, instructions: String?, noticeDays: Int?)
+    public init(id: String, orderDate: Double, dueDate: Double, orderRating: Int?, status: String, cart: [Choice], subTotal: Float, tax: Float, discount: Float, orderTotal: Float, source: PaymentSource?, kitchenId: String, orderingUserId: String?, orderingUserName: String?, timestamp: Int64, instructions: String?, noticeDays: Int?)
     {
         self.id = id
         self.orderDate = orderDate
@@ -107,8 +107,8 @@ class Order
         
         //other meta-data
         let id = snapshot["id"] as? String
-        let orderDate = snapshot["orderDate"] as? String
-        let dueDate = snapshot["dueDate"] as? String
+        let orderDate = snapshot["orderDate"] as? Double
+        let dueDate = snapshot["dueDate"] as? Double
         let orderRating = snapshot["orderRating"] as? Int
         let status = snapshot["status"] as? String
         let kitchenId = snapshot["kitchenId"] as? String
@@ -146,7 +146,7 @@ class Order
         //payment source and address
         let selectedPayment:PaymentSource? = nil //User.getPaymentSourceForID(id: selectedPaymentID ?? "")
         
-        self.init(id: id!, orderDate: orderDate ?? "", dueDate: dueDate ?? (orderDate ?? ""), orderRating: orderRating ?? -1, status: status ?? "New", cart: cart, subTotal: subTotal!, tax: tax!, discount: discount!, orderTotal: orderTotal!, source: selectedPayment, kitchenId: kitchenId!, orderingUserId: orderingUserId, orderingUserName: orderingUserName, timestamp: timestamp!, instructions: customInstructions, noticeDays: noticeDays ?? 0)
+        self.init(id: id!, orderDate: orderDate ?? Date().timeIntervalSince1970, dueDate: dueDate ?? (orderDate ?? Date().timeIntervalSince1970),orderRating: orderRating ?? -1, status: status ?? "New", cart: cart, subTotal: subTotal!, tax: tax!, discount: discount!, orderTotal: orderTotal!, source: selectedPayment, kitchenId: kitchenId!, orderingUserId: orderingUserId, orderingUserName: orderingUserName, timestamp: timestamp!, instructions: customInstructions, noticeDays: noticeDays ?? 0)
     }
  
     public func setRating(rating: Int)
@@ -157,17 +157,10 @@ class Order
     
     public func populateDates() -> Void
     {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .medium
-        dateFormatter.locale = Locale(identifier: "en_US")
-        let today = Date.init()
-        self.orderDate = dateFormatter.string(from: today)
+        let today = Date()
+        self.orderDate = today.timeIntervalSince1970
         let dueDate = Calendar.current.date(byAdding: .day, value: self.noticeDays, to: today)!
-        self.dueDate = dateFormatter.string(from: dueDate)
-        dateFormatter.timeStyle = .none
-        //self.deliveryDate = dateFormatter.string(from: Date.init(timeInterval: TimeInterval.init(exactly: (24*60*60))!, since: Date.init()))
-        
+        self.dueDate = dueDate.timeIntervalSince1970
         self.timestamp = Date().getCurrentTimeStamp()
     }
     
@@ -181,6 +174,28 @@ class Order
         return retMap
     }
     
+    public func getOrderDateString() -> String
+    {
+        return Order.getDateString(timestamp: self.orderDate)
+    }
+    
+    public func getDueDateString() -> String
+    {
+        return Order.getDateString(timestamp: self.dueDate)
+    }
+    
+    public static func getDateString(timestamp: Double) -> String
+    {
+        // gives date with time portion in UTC 0
+        let date = Date(timeIntervalSince1970: timestamp)
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.locale = Locale(identifier: "en_US")
+        return dateFormatter.string(from: date)
+    }
     /*func processResponse(snapshot: DataSnapshot) -> String
      {
      guard

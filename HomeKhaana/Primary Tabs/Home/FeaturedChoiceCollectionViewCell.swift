@@ -13,6 +13,7 @@ class FeaturedChoiceCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imgRepresentation: UIImageView!
     @IBOutlet weak var lblDisplayTitle: UILabel!
     @IBOutlet weak var lblCost: UILabel!
+    @IBOutlet weak var lblAdvanceNotice: UILabel!
     
     var choice: Choice? {
         didSet {
@@ -21,6 +22,22 @@ class FeaturedChoiceCollectionViewCell: UICollectionViewCell {
             lblDisplayTitle.text = choice.displayTitle
             lblCost.text = "$\(convertToCurrency(input:choice.cost))"
             imgRepresentation.image = choice.image
+            if(choice.needsAdvanceNotice)
+            {
+                lblAdvanceNotice.isHidden = false
+                if(choice.noticeDays == 1)
+                {
+                    lblAdvanceNotice.text! = " Needs \(choice.noticeDays!) day notice "
+                }
+                else
+                {
+                    lblAdvanceNotice.text! = " Needs \(choice.noticeDays!) days notice "
+                }
+            }
+            else
+            {
+                lblAdvanceNotice.isHidden = true
+            }
         }
     }
     
@@ -48,40 +65,3 @@ class FeaturedChoiceCollectionViewCell: UICollectionViewCell {
         }
     }
 }
-
-/*
-1       2       3          4
-H       HH
-T       TT
-N       NN
-        HT
-        HN
-        NT
-        NH
-        TN
-        TH
-
- A
- s1 E1 D1
- s2 E2
-    e3
- 
- 9*9          4
- 
- 
- As1e1
- As1e2
- As2e1
- As2e2
- 
- Bs1e1
- Bs1e2
- Bs2e1
- bs2e2
- 
- Cs1e1
- Cs1e2
- cs2e1
- cs2e2
- 
- */

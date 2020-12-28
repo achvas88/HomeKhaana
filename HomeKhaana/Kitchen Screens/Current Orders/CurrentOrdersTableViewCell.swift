@@ -28,6 +28,7 @@ class CurrentOrdersTableViewCell: UITableViewCell {
     @IBOutlet weak var btnMarkAsCompleted: UIButton!
     @IBOutlet weak var lblCost: UILabel!
     @IBOutlet weak var lblInstructions: UIButton!
+    @IBOutlet weak var lblPickupDate: UILabel!
     
     var indexPath: IndexPath?
     var delegate:CurrentOrderActionsDelegate?
@@ -48,7 +49,7 @@ class CurrentOrdersTableViewCell: UITableViewCell {
             
             //others
             lblOrderID.text = String(self.order!.id)
-            lblOrderTime.text = self.order!.orderDate
+            lblOrderTime.text = self.order!.getOrderDateString()
             lblStatus.text = self.order!.status
            
             if(self.order!.customInstructions == nil || self.order!.customInstructions! == "")
@@ -78,6 +79,8 @@ class CurrentOrdersTableViewCell: UITableViewCell {
                 self.btnMarkAsReady.isHidden = false
             }
             self.lblCustomer.text = self.order!.orderingUserName
+            
+            self.lblPickupDate.text! = self.order!.getDueDateString()
         }
     }
     

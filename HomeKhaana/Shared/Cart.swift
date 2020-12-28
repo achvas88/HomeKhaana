@@ -16,6 +16,12 @@ class Cart: NSObject {
     static let sharedInstance = Cart()
     private var rootViewController: UIViewController?
     
+    struct cartNoticePeriod
+    {
+        var differentNoticePeriodsInCart: Bool
+        var maxNoticePeriod: Int
+    }
+    
     override init()
     {
         super.init()
@@ -43,9 +49,9 @@ class Cart: NSObject {
         }
     }
     
-    public func updateCart(choice: Choice, vc: UIViewController, isAddingNew: Bool, completion: @escaping () -> ())
+    public func updateCart(quantity: Int, choice: Choice, vc: UIViewController, isAddingNew: Bool, completion: @escaping () -> ())
     {
-        if(choice.quantity == nil || choice.quantity! == 0) //we are removing an item from the cart.
+        if(quantity == 0) //we are removing an item from the cart.
         {
             removeItemFromCart(choiceToRemove: choice)
             self.updateCartBadge()
@@ -55,6 +61,7 @@ class Cart: NSObject {
         {
             if(self.cart.count == 0) {                  //if cart is empty, simply add to it.
                 self.kitchenId = choice.kitchenId
+                choice.quantity = quantity
                 self.cart.append(choice)
                 self.updateCartBadge()
                 completion()
@@ -66,22 +73,31 @@ class Cart: NSObject {
                 {
                     if(isAddingNew) //if adding a new item.
                     {
-                        choiceInCart!.quantity = choiceInCart!.quantity! + choice.quantity!
+                        choiceInCart!.quantity = choiceInCart!.quantity! + quantity
                     }
                     else    // if updating an item already in the cart (Update button visible)
                     {
-                        choiceInCart!.quantity = choice.quantity!
+                        choiceInCart!.quantity = quantity
                     }
                     self.updateCartBadge()
                     completion()
                 }
                 else    //cart doesnt contain the choice
                 {
+                    choice.quantity = quantity
                     if(choice.kitchenId == self.kitchenId)  // if the kitchen id is the same as the choice's kitchen, then we can add it to the cart
                     {
-                        self.cart.append(choice)
-                        self.updateCartBadge()
-                        completion()
+                        let cartNoticePeriodInfo:cartNoticePeriod = cartItemsNoticePeriodsInfo(choice: choice)
+                        if(cartNoticePeriodInfo.differentNoticePeriodsInCart)
+                        {
+                            showWarningAboutDifferingNoticeDays(highestNoticeDay: cartNoticePeriodInfo.maxNoticePeriod, choice: choice, vc: vc, completion: completion)
+                        }
+                        else
+                        {
+                            self.cart.append(choice)
+                            self.updateCartBadge()
+                            completion()
+                        }
                     }
                     else    // the kitchen id is different, so ask to replace the cart with the new choice
                     {
@@ -90,6 +106,31 @@ class Cart: NSObject {
                 }
             }
         }
+    }
+    
+    private func cartItemsNoticePeriodsInfo(choice: Choice) -> cartNoticePeriod
+    {
+        var ret:cartNoticePeriod = cartNoticePeriod(differentNoticePeriodsInCart: false, maxNoticePeriod: -1);
+        var currentNoticeDays = -1
+        self.cart.append(choice)
+        for choice in self.cart
+        {
+            let choiceNoticeDays: Int = choice.noticeDays ?? 0
+            if(ret.maxNoticePeriod < choiceNoticeDays) { ret.maxNoticePeriod = choiceNoticeDays }
+            
+            if(currentNoticeDays == -1)
+            {
+                currentNoticeDays = choiceNoticeDays
+                continue
+            }
+            
+            if(choiceNoticeDays != currentNoticeDays)
+            {
+                ret.differentNoticePeriodsInCart = true
+            }
+        }
+        self.cart.remove(object: choice)
+        return ret
     }
     
     public func clearCart() -> Void
@@ -131,6 +172,24 @@ class Cart: NSObject {
             self.clearCart()
             self.cart.append(choice)
             self.kitchenId = choice.kitchenId
+            self.updateCartBadge()
+            completion()
+        })
+        alertController.addAction(alertAction)
+        alertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
+            completion()
+        })
+        alertController.addAction(alertAction)
+        vc.present(alertController, animated: true)
+    }
+    
+    private func showWarningAboutDifferingNoticeDays(highestNoticeDay: Int, choice: Choice, vc: UIViewController, completion: @escaping () -> ())
+    {
+        let alertController = UIAlertController(title: "Cart contains items with different pickup dates",
+                                                message: "Do you wish to pick up the entire order \(highestNoticeDay) day(s) from now?",
+                                                preferredStyle: .alert)
+        var alertAction = UIAlertAction(title: "Yes", style: .default, handler: { (action) -> Void in
+            self.cart.append(choice)
             self.updateCartBadge()
             completion()
         })

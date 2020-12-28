@@ -13,6 +13,7 @@ class OrdersTableViewCell: UITableViewCell {
 
     @IBOutlet weak var imgOrder: UIImageView!
     @IBOutlet weak var lblOrderDate: UILabel!
+    @IBOutlet weak var lblDueDate: UILabel!
     @IBOutlet weak var lblStatus: UILabel!
     @IBOutlet weak var lblWhere: UILabel!
     @IBOutlet weak var lblTotal: UILabel!
@@ -68,7 +69,8 @@ class OrdersTableViewCell: UITableViewCell {
             self.btnCartLink.setTitle(cartLinkTitle, for: .normal)
             
             //others
-            lblOrderDate.text = self.order!.orderDate
+            lblOrderDate.text = self.order!.getOrderDateString()
+            lblDueDate.text = self.order!.getDueDateString()
             lblStatus.text = self.order!.status
             lblWhere.text = DataManager.kitchens[self.order!.kitchenId]?.name
             

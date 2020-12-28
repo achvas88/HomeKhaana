@@ -209,25 +209,47 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
     
     private func setOrderNoticeDays()
     {
-        var noticeDays: Int = 0
-        for choice in self.inCart
+        if(self.currentOrder!.status == "New")
         {
-            if(noticeDays < (choice.noticeDays ?? 0))
+            var noticeDays: Int = 0
+            for choice in self.inCart
             {
-                noticeDays = choice.noticeDays! // we can force unwrap here because noticeDays can never by 0, hence it HAS to exist.
+                if(noticeDays < (choice.noticeDays ?? 0))
+                {
+                    noticeDays = choice.noticeDays! // we can force unwrap here because noticeDays can never by 0, hence it HAS to exist.
+                }
             }
-        }
-        if(noticeDays > 0)
-        {
-            self.lblTime.text! = "In \(noticeDays) days"
-            self.lblTime.textColor = UIColor.systemRed
+            let today = Date()
+            let dueDate = Calendar.current.date(byAdding: .day, value: noticeDays, to: today)!
+            let dueDateString = Order.getDateString(timestamp: dueDate.timeIntervalSince1970)
+            let oldWhen: String = self.lblTime.text!
+            if(noticeDays > 0)
+            {
+                if(noticeDays == 1)
+                {
+                    self.lblTime.text! = "\(dueDateString) (Tomorrow)"
+                }
+                else
+                {
+                    self.lblTime.text! = "\(dueDateString) (In \(noticeDays) days)"
+                }
+                self.lblTime.textColor = UIColor.systemRed
+            }
+            else
+            {
+                self.lblTime.text! = "\(dueDateString) (Today)"
+                self.lblTime.textColor = UIColor.systemGreen
+            }
+            if(oldWhen != self.lblTime.text!)
+            {
+                showError(vc: self, message: "This order can be picked up on \(dueDateString)", title: "Order Due Date")
+            }
+            self.currentOrder!.noticeDays = noticeDays
         }
         else
         {
-            self.lblTime.text! = "Today"
-            self.lblTime.textColor = UIColor.systemGreen
+            self.lblTime.text! = self.currentOrder!.getDueDateString()
         }
-        self.currentOrder!.noticeDays = noticeDays
     }
     
     private func updateDisplayWhenCartHasItems(_ kitchen: Kitchen?)
