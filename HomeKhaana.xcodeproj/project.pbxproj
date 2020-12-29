@@ -68,6 +68,7 @@
 		B69F54AC20CDD67900E1B0EB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69F54AB20CDD67900E1B0EB /* SignUpViewController.swift */; };
 		B69F54AE20CDDBCF00E1B0EB /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69F54AD20CDDBCF00E1B0EB /* UserProfileViewController.swift */; };
 		B69F54B020CDE9B000E1B0EB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69F54AF20CDE9B000E1B0EB /* Extensions.swift */; };
+		B6C94DAD259B9B8E00077B80 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C94DAC259B9B8E00077B80 /* ChatViewController.swift */; };
 		B6E5B08522D0D5EF009D3BE0 /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E5B08422D0D5EF009D3BE0 /* RatingViewController.swift */; };
 		B6FC081922C23E4800A232AD /* EmptyOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FC081822C23E4800A232AD /* EmptyOrderTableViewCell.swift */; };
 		C5CFD74962D1ED8F536D12D7 /* Pods_HomeKhaanaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C730D69BC6FF463EFE57DE6 /* Pods_HomeKhaanaTests.framework */; };
@@ -163,6 +164,8 @@
 		B69F54AB20CDD67900E1B0EB /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		B69F54AD20CDDBCF00E1B0EB /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		B69F54AF20CDE9B000E1B0EB /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		B6C94DAC259B9B8E00077B80 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		B6C94DB1259B9E1D00077B80 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		B6E5B08422D0D5EF009D3BE0 /* RatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
 		B6FC081822C23E4800A232AD /* EmptyOrderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyOrderTableViewCell.swift; sourceTree = "<group>"; };
 		EB5E66F4207D926BF78EC654 /* Pods_HomeKhaana.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HomeKhaana.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -262,6 +265,7 @@
 		B64AB0AF20BCC706003B966C = {
 			isa = PBXGroup;
 			children = (
+				B6C94DB1259B9E1D00077B80 /* Bridging-Header.h */,
 				B64AB0BA20BCC706003B966C /* HomeKhaana */,
 				B64AB0CF20BCC70A003B966C /* HomeKhaanaTests */,
 				B64AB0DA20BCC70A003B966C /* HomeKhaanaUITests */,
@@ -354,6 +358,7 @@
 				B655FFC4219D1046008691D2 /* ChoiceGroup.swift */,
 				B64393A120DFC7D800058C82 /* ChoiceTableViewCell.swift */,
 				B6241BFE2249A8C500199845 /* RatingControl.swift */,
+				B6C94DAC259B9B8E00077B80 /* ChatViewController.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -723,6 +728,7 @@
 				B61558DB20DF0B6700471718 /* Choice.swift in Sources */,
 				B609AC3F2120C8C000C45C49 /* Order.swift in Sources */,
 				B6287B4420E873C1009FF79D /* ChoiceDetailViewController.swift in Sources */,
+				B6C94DAD259B9B8E00077B80 /* ChatViewController.swift in Sources */,
 				B6241BFF2249A8C500199845 /* RatingControl.swift in Sources */,
 				B62F26F6213CA83000FA88D3 /* LoaderController.swift in Sources */,
 				B69CE0822129F93200B7CFDB /* OrdersTableViewCell.swift in Sources */,
@@ -1087,6 +1093,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = HomeKhaana.Main.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1238,6 +1245,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = HomeKhaana.Main.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;

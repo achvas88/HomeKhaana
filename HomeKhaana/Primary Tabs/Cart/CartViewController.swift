@@ -34,6 +34,7 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
     @IBOutlet weak var btnClearCart: UIButton!
     @IBOutlet weak var btnRate: UIButton!
     @IBOutlet weak var stkRating: RatingControl!
+    @IBOutlet weak var btnChat: UIButton!
     
     var inCart:[Choice] = []
     var currentOrder:Order?
@@ -48,6 +49,11 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
         {
             self.currentOrder = Order()
             //self.currentOrder!.selectedPayment = self.currentOrder!.selectedPayment ?? User.sharedInstance!.defaultPaymentSource
+            btnChat.isHidden = true
+        }
+        else
+        {
+            btnChat.isHidden = (self.currentOrder!.status == "Completed")
         }
         
         self.navigationController?.isNavigationBarHidden = true
@@ -313,6 +319,7 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
         self.tblItems.isUserInteractionEnabled = false
         self.btnRate.isHidden = true
         self.stkRating.isHidden = true
+        self.btnChat.isHidden = true
     }
     
     func setAddPaymentTitle(kitchen: Kitchen)
@@ -511,6 +518,16 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
             if(ratingVC != nil && self.currentOrder != nil)
             {
                 ratingVC!.currentOrder = self.currentOrder!
+            }
+        }
+        else if (segue.identifier == "chat")
+        {
+            let destinationNavigationController = segue.destination as! UINavigationController
+            let chatVC: ChatViewController? = destinationNavigationController.topViewController as? ChatViewController
+            
+            if(chatVC != nil && self.currentOrder != nil)
+            {
+                chatVC!.currentOrder = self.currentOrder!
             }
         }
         //THIS WILL BE UNCOMMENTED ONCE CREDIT CARD PAYMENT IS AVAILABLE.

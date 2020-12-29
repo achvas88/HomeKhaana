@@ -8,6 +8,9 @@
 \f0\b\fs24 \cf0 Bugs:\
 1. Edit mode in kitchen doesnt immediately update its view\
 4. when no orders previously placed, "Your Favorites" shows up as empty\
+5. fix rating control's display\
+6. cart showing the wrong notice date\
+7. show notification when message is sent about an order (to both kitchen and user)\
 \
 General:
 \f1\b0 \
@@ -49,30 +52,33 @@ ________\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 \outl0\strokewidth0 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \outl\strokewidth60 \strokec0 - Delete image when deleting item in Inventory - TOUGH\outl0\strokewidth0 \
+\cf0 \outl\strokewidth60 - Delete image when deleting item in Inventory - TOUGH\outl0\strokewidth0 \
 \
 \outl\strokewidth60 3. fix profile screen overlay\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 \outl0\strokewidth0 \
 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \outl\strokewidth60 \strokec0 - Set pickup times/show when I will get food - MODERATE\
+\cf0 \outl\strokewidth60 - Set pickup times/show when I will get food - MODERATE\
 - indicate order due date in orders screen\
 - show items that require advance notice \
 - throw warning  pop up when the order due date changes (when adding items and also when it gets modified from the cart)\
 \pard\tx167\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 \strokec0 - Dont allow adding items with different availability times. - MODERATE\outl0\strokewidth0 \
+\cf0 - Dont allow adding items with different availability times. - MODERATE\outl0\strokewidth0 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 \outl\strokewidth60 - indicate order due date in current orders screen\
-\outl0\strokewidth0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \outl0\strokewidth0 \
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 \cf0 \outl\strokewidth60 -update for dark mode support - EASY\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 - fix images not loading up. - HID THE IMAGES FROM THE ORDERS SCREEN\outl0\strokewidth0 \
 \outl\strokewidth60 - Notification - TOUGH\
 - Database security - TOUGH\
-\outl0\strokewidth0 \
-\outl\strokewidth60 If credit card is developed, then these are mandatory before release, \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \outl0\strokewidth0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \outl\strokewidth60 If credit card is developed, then these are mandatory before release, \
 Credit card:\
 TEST: Check duplicate credit cards\
 TEST: Test indicator hiding when credit card addition fail. \
@@ -80,8 +86,10 @@ TEST: Test without any card. \
 TEST: test card addition failing - make sure that a line doesnt show up for a failed paymentsource. \
 TEST: make sure that after all cards are deleted, the cart updates appropriately. \
 DEV: Where does the money go??\
-\outl0\strokewidth0 \
-\outl\strokewidth60 DONE\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \outl0\strokewidth0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \outl\strokewidth60 DONE\
 End User:\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 \cf0 - Don't calculate distance in tableview cell - MODERATE\outl0\strokewidth0 \

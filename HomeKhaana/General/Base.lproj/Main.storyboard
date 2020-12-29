@@ -1185,11 +1185,11 @@
             <objects>
                 <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="8yz-M1-7Fp" customClass="RatingViewController" customModule="HomeKhaana" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gEy-t3-yhi">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="99h-gI-JqJ">
-                                <rect key="frame" x="62.5" y="191" width="250" height="145"/>
+                                <rect key="frame" x="62.5" y="181" width="250" height="145"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cJ0-Ks-T94">
                                         <rect key="frame" x="0.0" y="15" width="250" height="130"/>
@@ -1251,7 +1251,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ma6-gE-7NU" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="rQ2-zd-bm8" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4602.3999999999996" y="-665.21739130434787"/>
+            <point key="canvasLocation" x="4862" y="-640"/>
         </scene>
         <!--Order Confirmation View Controller-->
         <scene sceneID="nen-Do-fek">
@@ -1262,7 +1262,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vegetables" translatesAutoresizingMaskIntoConstraints="NO" id="rH6-Vb-g68">
-                                <rect key="frame" x="0.0" y="-100" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="-44" width="375" height="542"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xpD-0N-3OP"/>
@@ -1285,6 +1285,28 @@
             </objects>
             <point key="canvasLocation" x="3878" y="203"/>
         </scene>
+        <!--Chat with Kitchen-->
+        <scene sceneID="vrA-xq-K4z">
+            <objects>
+                <viewController id="h1L-la-b9Z" customClass="ChatViewController" customModule="HomeKhaana" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="syc-6h-P9y">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="gwV-fM-tkm"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Chat with Kitchen" id="9mp-wa-X7C">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="Cn4-RV-h2G">
+                            <connections>
+                                <action selector="closeBtnClicked:" destination="h1L-la-b9Z" id="OC3-Pk-Z5q"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o4V-6n-h89" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5800.8000000000002" y="175.86206896551727"/>
+        </scene>
         <!--Cart-->
         <scene sceneID="VyE-GD-7rM">
             <objects>
@@ -1294,7 +1316,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="aaQ-6m-8P5">
-                                <rect key="frame" x="123.5" y="246" width="128" height="155"/>
+                                <rect key="frame" x="123.5" y="249.5" width="128" height="155"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty shopping cart" translatesAutoresizingMaskIntoConstraints="NO" id="Kef-w4-aBm">
                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -1315,7 +1337,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ajA-9w-URi">
-                                <rect key="frame" x="0.0" y="537" width="375" height="45"/>
+                                <rect key="frame" x="0.0" y="488" width="375" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="1Fz-U9-ybP"/>
                                 </constraints>
@@ -1329,7 +1351,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qc2-Nr-sO6">
-                                <rect key="frame" x="0.0" y="582" width="375" height="65"/>
+                                <rect key="frame" x="0.0" y="533" width="375" height="65"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="9SK-BJ-hjK"/>
                                 </constraints>
@@ -1342,7 +1364,7 @@
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m8g-eV-W8i">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="537"/>
+                                <rect key="frame" x="0.0" y="56" width="375" height="432"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="h5Z-c8-ruX">
                                         <rect key="frame" x="0.0" y="-50" width="375" height="230"/>
@@ -1359,7 +1381,7 @@
                                         <color key="textColor" systemColor="systemOrangeColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="uqg-lC-jbf">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="uqg-lC-jbf">
                                         <rect key="frame" x="12.5" y="240.5" width="350" height="82"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="m7v-k4-IeV">
@@ -1368,7 +1390,7 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Where" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uGJ-nB-mi9">
                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="16"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="50" id="4aA-fq-0Zg"/>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="4aA-fq-0Zg"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                         <color key="textColor" systemColor="secondaryLabelColor"/>
@@ -1560,65 +1582,82 @@
                                         </constraints>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1fp-vM-DRr">
-                                        <rect key="frame" x="10" y="10" width="80" height="29"/>
+                                        <rect key="frame" x="10" y="11" width="81" height="29"/>
                                         <color key="backgroundColor" systemColor="systemRedColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="80" id="MLM-SV-xFx"/>
-                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <size key="titleShadowOffset" width="2" height="2"/>
-                                        <state key="normal" title="Clear Cart">
+                                        <state key="normal" title="  Clear Cart  ">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="btnClearCartClicked:" destination="kkb-Bm-kjR" eventType="touchUpInside" id="Jbo-9q-3wH"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tW-lv-8xh">
-                                        <rect key="frame" x="245" y="136" width="120" height="29"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="SOK-Nw-Z2O">
+                                        <rect key="frame" x="0.0" y="150" width="375" height="30"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z4Q-pL-Ylw" customClass="RatingControl" customModule="HomeKhaana" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="153" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="ZxA-2n-n8A"/>
+                                                    <constraint firstAttribute="width" constant="153" id="nRw-8c-x52"/>
+                                                </constraints>
+                                            </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OME-OR-BPd">
+                                                <rect key="frame" x="158" y="0.0" width="142" height="30"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <state key="normal" title="Chat with Kitchen">
+                                                    <color key="titleColor" systemColor="linkColor"/>
+                                                </state>
+                                                <connections>
+                                                    <segue destination="PcG-gX-gEq" kind="show" identifier="chat" id="02m-MS-bdc"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tW-lv-8xh">
+                                                <rect key="frame" x="305" y="0.0" width="70" height="30"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="70" id="R2q-mu-3WL"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <state key="normal" title="  Rate" image="star">
+                                                    <color key="titleColor" systemColor="linkColor"/>
+                                                </state>
+                                                <connections>
+                                                    <segue destination="8yz-M1-7Fp" kind="presentation" identifier="rate" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="GiJ-Mj-tb5"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="120" id="R2q-mu-3WL"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <state key="normal" title="  Rate" image="star">
-                                            <color key="titleColor" systemColor="linkColor"/>
-                                        </state>
-                                        <connections>
-                                            <segue destination="8yz-M1-7Fp" kind="presentation" identifier="rate" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="GiJ-Mj-tb5"/>
-                                        </connections>
-                                    </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z4Q-pL-Ylw" customClass="RatingControl" customModule="HomeKhaana" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="135" width="153" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="ZxA-2n-n8A"/>
-                                            <constraint firstAttribute="width" constant="153" id="nRw-8c-x52"/>
+                                            <constraint firstItem="OME-OR-BPd" firstAttribute="height" secondItem="5tW-lv-8xh" secondAttribute="height" id="2Sa-xE-Vu3"/>
+                                            <constraint firstAttribute="height" constant="30" id="EF7-xe-Mkt"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="h5Z-c8-ruX" firstAttribute="top" secondItem="m8g-eV-W8i" secondAttribute="top" constant="-50" id="1Sf-YA-flI"/>
-                                    <constraint firstItem="5tW-lv-8xh" firstAttribute="height" secondItem="1fp-vM-DRr" secondAttribute="height" id="2GO-hc-cbd"/>
                                     <constraint firstAttribute="trailing" secondItem="vRw-2v-j3H" secondAttribute="trailing" id="4NG-2n-LqM"/>
+                                    <constraint firstItem="SOK-Nw-Z2O" firstAttribute="bottom" secondItem="h5Z-c8-ruX" secondAttribute="bottom" id="4uP-9s-cCQ"/>
                                     <constraint firstItem="woN-hy-EPE" firstAttribute="width" secondItem="xZL-st-lcO" secondAttribute="width" id="9hg-3q-20s"/>
                                     <constraint firstItem="1fp-vM-DRr" firstAttribute="leading" secondItem="m8g-eV-W8i" secondAttribute="leading" constant="10" id="B7n-Z4-ker"/>
                                     <constraint firstAttribute="trailing" secondItem="xZL-st-lcO" secondAttribute="trailing" constant="10" id="CS7-g3-4qz"/>
                                     <constraint firstItem="vRw-2v-j3H" firstAttribute="top" secondItem="uqg-lC-jbf" secondAttribute="bottom" constant="15" id="CWm-yC-asr"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1fp-vM-DRr" secondAttribute="trailing" symbolic="YES" id="DvP-DM-uwF"/>
+                                    <constraint firstAttribute="trailing" secondItem="SOK-Nw-Z2O" secondAttribute="trailing" id="EEC-Fb-1Xl"/>
                                     <constraint firstItem="xZL-st-lcO" firstAttribute="leading" secondItem="m8g-eV-W8i" secondAttribute="leading" constant="20" id="Fj5-wm-lI6"/>
                                     <constraint firstItem="woN-hy-EPE" firstAttribute="trailing" secondItem="xZL-st-lcO" secondAttribute="trailing" id="Mxa-Wc-csc"/>
                                     <constraint firstItem="xZL-st-lcO" firstAttribute="top" secondItem="vRw-2v-j3H" secondAttribute="bottom" constant="15" id="O77-tM-v1k"/>
                                     <constraint firstItem="woN-hy-EPE" firstAttribute="leading" secondItem="xZL-st-lcO" secondAttribute="leading" id="Ont-o3-tNH"/>
                                     <constraint firstItem="mWx-Ri-Xhy" firstAttribute="top" secondItem="h5Z-c8-ruX" secondAttribute="bottom" constant="20" id="YTv-RB-FSv"/>
                                     <constraint firstAttribute="bottom" secondItem="woN-hy-EPE" secondAttribute="bottom" constant="20" id="ZUP-eO-n9f"/>
+                                    <constraint firstItem="SOK-Nw-Z2O" firstAttribute="leading" secondItem="m8g-eV-W8i" secondAttribute="leading" id="dlU-0J-AUc"/>
                                     <constraint firstItem="mWx-Ri-Xhy" firstAttribute="centerX" secondItem="m8g-eV-W8i" secondAttribute="centerX" id="kqv-Ji-JIL"/>
                                     <constraint firstItem="vRw-2v-j3H" firstAttribute="leading" secondItem="m8g-eV-W8i" secondAttribute="leading" constant="10" id="lcg-2f-3uz"/>
                                     <constraint firstAttribute="trailing" secondItem="h5Z-c8-ruX" secondAttribute="trailing" id="mBh-2W-QXd"/>
                                     <constraint firstItem="uqg-lC-jbf" firstAttribute="top" secondItem="mWx-Ri-Xhy" secondAttribute="bottom" constant="20" id="n1L-bK-VRC"/>
-                                    <constraint firstItem="mWx-Ri-Xhy" firstAttribute="top" secondItem="z4Q-pL-Ylw" secondAttribute="bottom" constant="35" id="nlF-Pz-wpX"/>
-                                    <constraint firstAttribute="trailing" secondItem="5tW-lv-8xh" secondAttribute="trailing" constant="10" id="nmC-ha-44X"/>
                                     <constraint firstItem="h5Z-c8-ruX" firstAttribute="width" secondItem="m8g-eV-W8i" secondAttribute="width" id="otm-I6-6ey"/>
-                                    <constraint firstItem="z4Q-pL-Ylw" firstAttribute="leading" secondItem="m8g-eV-W8i" secondAttribute="leading" constant="8" id="sC4-uW-xoO"/>
                                     <constraint firstItem="uqg-lC-jbf" firstAttribute="centerX" secondItem="m8g-eV-W8i" secondAttribute="centerX" id="sXT-uw-efd"/>
-                                    <constraint firstItem="5tW-lv-8xh" firstAttribute="bottom" secondItem="h5Z-c8-ruX" secondAttribute="bottom" constant="-15" id="sv6-Mb-11G"/>
                                     <constraint firstItem="h5Z-c8-ruX" firstAttribute="leading" secondItem="m8g-eV-W8i" secondAttribute="leading" id="w7N-rW-KaW"/>
                                     <constraint firstItem="xZL-st-lcO" firstAttribute="bottom" secondItem="woN-hy-EPE" secondAttribute="top" constant="-15" id="z9j-6q-nZx"/>
                                 </constraints>
@@ -1646,6 +1685,7 @@
                     <navigationItem key="navigationItem" title="Cart" id="Sqe-Ot-8RQ"/>
                     <connections>
                         <outlet property="btnAddPayment" destination="ajA-9w-URi" id="wzR-z6-Ck4"/>
+                        <outlet property="btnChat" destination="OME-OR-BPd" id="Nny-Ke-BEm"/>
                         <outlet property="btnCheckout" destination="Qc2-Nr-sO6" id="Wae-rq-bHP"/>
                         <outlet property="btnClearCart" destination="1fp-vM-DRr" id="P8e-7s-tH7"/>
                         <outlet property="btnRate" destination="5tW-lv-8xh" id="hFQ-pc-fqE"/>
@@ -1734,7 +1774,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mg6-tm-4le" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3877.5999999999999" y="1680.8095952023989"/>
+            <point key="canvasLocation" x="3814" y="1672"/>
         </scene>
         <!--Home Khaana-->
         <scene sceneID="pZd-l5-Dfc">
@@ -2141,7 +2181,7 @@
                                     <outlet property="lblWhere" destination="4Dr-cF-hMx" id="e9L-Re-fG1"/>
                                     <outlet property="orderOuterView" destination="PAH-oj-VzM" id="q3s-Ac-ysR"/>
                                     <outlet property="stkRating" destination="XJY-Ic-mT4" id="9rm-cn-kjY"/>
-                                    <segue destination="kkb-Bm-kjR" kind="presentation" identifier="showCart" modalTransitionStyle="crossDissolve" id="jSY-jj-Mgi"/>
+                                    <segue destination="kkb-Bm-kjR" kind="presentation" identifier="showCart" id="jSY-jj-Mgi"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="emptyOrder" rowHeight="443" id="WOa-2A-U6U" customClass="EmptyOrderTableViewCell" customModule="HomeKhaana" customModuleProvider="target">
@@ -3782,12 +3822,31 @@
             </objects>
             <point key="canvasLocation" x="770.39999999999998" y="4149.1754122938537"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="cX9-JF-fGK">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PcG-gX-gEq" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="yg8-gb-zP3"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0Qx-ND-X7V">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="h1L-la-b9Z" kind="relationship" relationship="rootViewController" id="JEX-KP-bBa"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HDZ-kj-wNl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4861.6000000000004" y="175.86206896551727"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="9H9-Pg-pHV"/>
         <segue reference="sdt-pM-Hwp"/>
-        <segue reference="jSY-jj-Mgi"/>
-        <segue reference="gZN-iS-vUy"/>
+        <segue reference="GDw-5U-nRx"/>
+        <segue reference="GiJ-Mj-tb5"/>
         <segue reference="Gmd-Ol-96N"/>
         <segue reference="3xB-j3-daY"/>
     </inferredMetricsTieBreakers>
