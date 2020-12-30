@@ -14,12 +14,14 @@ class ChoiceGroup
     var id: String
     private var choices:[Choice]
     private var vegChoices:[Choice]
+    var order: Int
     
-    init(id: String, displayTitle: String, choices: [Choice]) {
+    init(id: String, displayTitle: String, choices: [Choice], order: Int) {
         self.id = id
         self.displayTitle = displayTitle
         self.choices = choices
         self.vegChoices = []
+        self.order = order
         if(self.choices.count>0) { self.populateVegChoices() }
     }
     
@@ -64,6 +66,7 @@ class ChoiceGroup
     {
         return [
             "name": self.displayTitle,
+            "order": self.order,
             "items": getChoicesDictionary()
         ]
     }
@@ -96,17 +99,16 @@ class ChoiceGroup
     }
     
     //creates a choice group and appends it to the menuItems dictionary in the DataManager class
-    public static func createChoiceGroup(kitchenId: String, displayTitle: String, choices: [Choice])
+    public static func createChoiceGroup(kitchenId: String, displayTitle: String, choices: [Choice], order: Int?)
     {
-        let choiceGroupID: String = UUID().uuidString
-        let newGroup:ChoiceGroup = ChoiceGroup(id: choiceGroupID, displayTitle: displayTitle, choices: choices)
-        
-        let allChoiceGroups:[ChoiceGroup]? = DataManager.menuItems[kitchenId]
-        if(allChoiceGroups == nil)
+        if(DataManager.menuItems[kitchenId] == nil)
         {
             DataManager.menuItems[kitchenId] = []
         }
-        DataManager.menuItems[kitchenId]?.append(newGroup)
+        
+        let choiceGroupID: String = UUID().uuidString
+        let newGroup:ChoiceGroup = ChoiceGroup(id: choiceGroupID, displayTitle: displayTitle, choices: choices, order: order ?? DataManager.menuItems[kitchenId]!.count)
+        DataManager.menuItems[kitchenId]!.append(newGroup)
     }
     
     private func populateVegChoices() -> Void

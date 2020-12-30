@@ -59,7 +59,7 @@ class KitchenDataManager {
     
     //loads the menu items for the given kitchen and runs the completion code after its done loading.
     public static func loadMenuItems(kitchenId: String, completion: @escaping () -> ()) -> Void {
-        let menuItemsRef = db.child("MenuItems/\(kitchenId)")
+        let menuItemsRef = db.child("MenuItems/\(kitchenId)").queryOrdered(byChild: "order")
         menuItemsRef.observe(.value, with: { (snapshot) in
             DataManager.menuItems[kitchenId]=[]
             for sectionChild in snapshot.children {
@@ -67,8 +67,9 @@ class KitchenDataManager {
                     let sectionId:String = sectionSnapshot.key
                     let sectionObject = sectionSnapshot.value as AnyObject
                     let sectionName:String = sectionObject["name"] as! String
+                    let sectionOrder: Int = sectionObject["order"] as! Int
                     let menuItemCount = DataManager.menuItems[kitchenId]!.count
-                    DataManager.menuItems[kitchenId]!.append(ChoiceGroup(id: sectionId, displayTitle: sectionName, choices: []))
+                    DataManager.menuItems[kitchenId]!.append(ChoiceGroup(id: sectionId, displayTitle: sectionName, choices: [], order: sectionOrder))
                     
                     if(sectionSnapshot.hasChild("items")) {
                         let sectionItemsSnapshot = sectionSnapshot.childSnapshot(forPath: "items")
@@ -145,11 +146,26 @@ class KitchenDataManager {
         
         
         let choiceGroups:[ChoiceGroup] = DataManager.menuItems[User.sharedInstance!.id]!
+        var counter:Int = 0
         for choiceGroup in choiceGroups
         {
+            choiceGroup.order = counter
+            counter = counter+1
             retMap[choiceGroup.id] = choiceGroup.getDictionary()
         }
         
         return retMap
     }
+    
+    public static func rearrangeChoiceGroup(kitchenID: String, fromIndex: Int, toIndex: Int)
+    {
+        let choiceGroupRemoved: ChoiceGroup = DataManager.menuItems[kitchenID]!.remove(at: fromIndex)
+        DataManager.menuItems[kitchenID]!.insert(choiceGroupRemoved, at: toIndex)
+    }
+    
+    public static func removeChoiceGroup(kitchenID: String, atIndex: Int)
+    {
+        DataManager.menuItems[kitchenID]!.remove(at: atIndex)
+    }
+    
 }

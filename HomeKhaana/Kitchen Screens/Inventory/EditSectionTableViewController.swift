@@ -16,13 +16,7 @@ class EditSectionTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let menuItems:[ChoiceGroup]? = DataManager.menuItems[self.kitchen!.id]
-        
-        if(menuItems != nil)
-        {
-            self.menuItems = menuItems!
-        }
-        
+        self.loadMenuItems()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -30,6 +24,16 @@ class EditSectionTableViewController: UITableViewController {
          self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
+    private func loadMenuItems()
+    {
+        let menuItems:[ChoiceGroup]? = DataManager.menuItems[self.kitchen!.id]
+        
+        if(menuItems != nil)
+        {
+            self.menuItems = menuItems!
+        }
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -64,27 +68,27 @@ class EditSectionTableViewController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+            KitchenDataManager.removeChoiceGroup(kitchenID: User.sharedInstance!.id, atIndex: indexPath.row)
+            self.loadMenuItems()
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
     
 
-    /*
+    
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+        KitchenDataManager.rearrangeChoiceGroup(kitchenID: User.sharedInstance!.id, fromIndex: fromIndexPath.row, toIndex: to.row)
     }
-    */
+    
 
-    /*
+    
     // Override to support conditional rearranging of the table view.
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the item to be re-orderable.
         return true
     }
-    */
-
+    
     /*
     // MARK: - Navigation
 

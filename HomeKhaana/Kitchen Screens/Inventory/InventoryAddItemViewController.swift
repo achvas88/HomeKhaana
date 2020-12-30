@@ -296,7 +296,7 @@ class InventoryAddItemViewController: UIViewController, UIImagePickerControllerD
         
         if(choiceGroup == nil)
         {
-            ChoiceGroup.createChoiceGroup(kitchenId: User.sharedInstance!.id, displayTitle: choiceGroupTitle, choices: [newChoice])
+            ChoiceGroup.createChoiceGroup(kitchenId: User.sharedInstance!.id, displayTitle: choiceGroupTitle, choices: [newChoice], order: nil)
         }
         else
         {

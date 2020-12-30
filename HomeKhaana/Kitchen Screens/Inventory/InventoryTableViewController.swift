@@ -159,8 +159,8 @@ class InventoryTableViewController: UITableViewController, RefreshTableViewWhenI
                 DataManager.menuItems[self.kitchen!.id]?.remove(at: indexPath.section)
             }
             
-            //self.loadMenuItems()
-            self.tableView.deleteRows(at: [indexPath], with: .fade)
+            self.loadMenuItems()
+            //self.tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
     
