@@ -108,12 +108,28 @@ class InventoryAddItemViewController: UIViewController, UIImagePickerControllerD
     {
         if(row == 0)
         {
-            self.txtGroup.isEnabled = true
+            enableTxtGroup()
         }
         else
         {
-            self.txtGroup.isEnabled = false
+            disableTxtGroup()
             self.txtGroup.text = self.pickerGroupData[row]
+        }
+    }
+    
+    private func enableTxtGroup()
+    {
+        self.txtGroup.isEnabled = true
+        self.txtGroup.backgroundColor = UIColor.clear
+    }
+    
+    private func disableTxtGroup()
+    {
+        self.txtGroup.isEnabled = false
+        if #available(iOS 13.0, *) {
+            self.txtGroup.backgroundColor = UIColor.secondarySystemFill
+        } else {
+            self.txtGroup.backgroundColor = UIColor.systemGray
         }
     }
     
@@ -121,7 +137,7 @@ class InventoryAddItemViewController: UIViewController, UIImagePickerControllerD
     {
         self.txtTitle.text! = choice!.displayTitle
         self.txtGroup.text! = choiceGroupTitle!
-        self.txtGroup.isEnabled = false
+        disableTxtGroup()
         self.pckGroup.isHidden = true
         self.txtDescription.text! = choice!.description
         self.txtCost.text! = String(choice!.cost)
