@@ -14,6 +14,7 @@ protocol CurrentOrderActionsDelegate{
     func markAsCompletedClicked(at index:IndexPath)
     func btnCartLinkClicked(at index:IndexPath)
     func lblInstructionsClicked(at index:IndexPath)
+    func btnChatClicked(at index:IndexPath)
 }
 
 class CurrentOrdersTableViewCell: UITableViewCell {
@@ -109,6 +110,10 @@ class CurrentOrdersTableViewCell: UITableViewCell {
     
     @IBAction func lblInstructionsClicked(_ sender: Any) {
         self.delegate?.lblInstructionsClicked(at: self.indexPath!)
+    }
+    
+    @IBAction func btnChatClicked(_ sender: Any) {
+        self.delegate?.btnChatClicked(at: self.indexPath!)
     }
     
     override func layoutSubviews() {

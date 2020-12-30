@@ -1190,11 +1190,11 @@
             <objects>
                 <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overCurrentContext" id="8yz-M1-7Fp" customClass="RatingViewController" customModule="HomeKhaana" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gEy-t3-yhi">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="99h-gI-JqJ">
-                                <rect key="frame" x="62.5" y="181" width="250" height="145"/>
+                                <rect key="frame" x="62.5" y="191" width="250" height="145"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="cJ0-Ks-T94">
                                         <rect key="frame" x="0.0" y="15" width="250" height="130"/>
@@ -1295,7 +1295,7 @@
             <objects>
                 <viewController id="h1L-la-b9Z" customClass="ChatViewController" customModule="HomeKhaana" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="syc-6h-P9y">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="gwV-fM-tkm"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -2447,7 +2447,7 @@
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <state key="normal" title="Chat with Customer"/>
                                                             <connections>
-                                                                <segue destination="PcG-gX-gEq" kind="show" identifier="chatKitchen" id="TyF-Op-Na6"/>
+                                                                <action selector="btnChatClicked:" destination="auG-yf-z0l" eventType="touchUpInside" id="POz-xm-uUH"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -2545,6 +2545,7 @@
                     <navigationItem key="navigationItem" title="Current Orders" id="P59-V6-t4D"/>
                     <connections>
                         <segue destination="8yz-M1-7Fp" kind="presentation" identifier="rateUser" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="gZN-iS-vUy"/>
+                        <segue destination="PcG-gX-gEq" kind="show" identifier="chatKitchen" id="xbF-UG-SPB"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LuM-rR-XG8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3940,7 +3941,7 @@ The above copyright notice and this permission notice shall be included in all c
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="yg8-gb-zP3"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="0Qx-ND-X7V">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -3983,12 +3984,12 @@ The above copyright notice and this permission notice shall be included in all c
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="02m-MS-bdc"/>
+        <segue reference="xbF-UG-SPB"/>
         <segue reference="9H9-Pg-pHV"/>
         <segue reference="2w2-Nj-VRe"/>
         <segue reference="auW-X4-2bE"/>
         <segue reference="GDw-5U-nRx"/>
-        <segue reference="GiJ-Mj-tb5"/>
+        <segue reference="gZN-iS-vUy"/>
         <segue reference="Gmd-Ol-96N"/>
         <segue reference="3xB-j3-daY"/>
     </inferredMetricsTieBreakers>

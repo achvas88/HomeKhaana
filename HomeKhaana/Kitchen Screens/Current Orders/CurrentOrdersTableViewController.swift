@@ -14,6 +14,7 @@ class CurrentOrdersTableViewController: UITableViewController, CurrentOrderActio
     
     var currentOrders:[Order]?
     var userBeingRated: User?
+    var orderForChat:Order?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -196,6 +197,12 @@ class CurrentOrdersTableViewController: UITableViewController, CurrentOrderActio
         })
     }
     
+    func btnChatClicked(at index: IndexPath) {
+        let order:Order = self.currentOrders![index.row]
+        self.orderForChat = order
+        self.performSegue(withIdentifier: "chatKitchen", sender: self)
+    }
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
@@ -214,9 +221,9 @@ class CurrentOrdersTableViewController: UITableViewController, CurrentOrderActio
             let destinationNavigationController = segue.destination as! UINavigationController
             let chatVC: ChatViewController? = destinationNavigationController.topViewController as? ChatViewController
             
-            if(chatVC != nil && self.currentOrders != nil)
+            if(chatVC != nil && self.orderForChat != nil)
             {
-                chatVC!.currentOrder = self.currentOrders![0]
+                chatVC!.currentOrder = self.orderForChat
             }
         }
     }
