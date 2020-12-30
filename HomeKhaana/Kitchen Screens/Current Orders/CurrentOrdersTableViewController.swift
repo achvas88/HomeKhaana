@@ -209,5 +209,15 @@ class CurrentOrdersTableViewController: UITableViewController, CurrentOrderActio
                 ratingVC!.currentUser = self.userBeingRated
             }
         }
+        else if (segue.identifier == "chatKitchen")
+        {
+            let destinationNavigationController = segue.destination as! UINavigationController
+            let chatVC: ChatViewController? = destinationNavigationController.topViewController as? ChatViewController
+            
+            if(chatVC != nil && self.currentOrders != nil)
+            {
+                chatVC!.currentOrder = self.currentOrders![0]
+            }
+        }
     }
 }

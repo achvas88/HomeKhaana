@@ -14,6 +14,44 @@ const {Storage} = require('@google-cloud/storage');
 
 const storage = new Storage({projectId: "homekhaanamain"});
 
+exports.sendChat = functions.database.ref('/CurrentOrders/{kitchenId}/{orderingUserID}/{orderID}/Chat/{chatID}')
+.onCreate((snap, context) => {
+    const chatMessage = snap.val();
+    const senderName = chatMessage.name;
+    var whoToSendNotificationTo
+    
+    if(chatMessage.sender_id == context.params.orderingUserID)
+    {
+        whoToSendNotificationTo = context.params.kitchenId
+    }
+    else
+    {
+        whoToSendNotificationTo = context.params.orderingUserID
+    }
+    return admin.database().ref(`/Users/${whoToSendNotificationTo}/fcmToken`).once('value')
+    .then((snapshot) => {
+          return snapshot.val();
+          }).then((registrationToken) => {
+              
+              const message = {
+                  notification: {
+                      title: chatMessage.name,
+                      body: chatMessage.text
+                  },
+                  token: registrationToken
+              };
+              
+              return admin.messaging().send(message)
+              .then((response) => {
+                    // Response is a message ID string.
+                    console.log('Successfully sent message:', response);
+                    })
+              .catch((error) => {
+                     throw new Error('Error sending message:', error);
+                     });
+          })
+});
+         
 //when an order's status is updated by the kitchen.
 exports.updateOrderStatus2 = functions.database.ref('/CurrentOrders/{kitchenId}/{orderingUserID}/{orderID}/status')
 .onWrite((change, context) => {

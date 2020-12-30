@@ -20,7 +20,7 @@ class ChatViewController: JSQMessagesViewController {
     }()
 
     lazy var incomingBubble: JSQMessagesBubbleImage = {
-        return JSQMessagesBubbleImageFactory()!.incomingMessagesBubbleImage(with: UIColor.jsq_messageBubbleLightGray())
+        return JSQMessagesBubbleImageFactory()!.incomingMessagesBubbleImage(with: UIColor.jsq_messageBubbleGreen())
     }()
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,13 +49,18 @@ class ChatViewController: JSQMessagesViewController {
         senderId = User.sharedInstance!.id
         senderDisplayName = User.sharedInstance!.name
         
+        let kitchen:Kitchen? = DataManager.kitchens[currentOrder!.kitchenId]
+        
         if(User.sharedInstance!.isKitchen)
         {
             self.title = "Chat with \(currentOrder!.orderingUserName)"
+            if(kitchen != nil)
+            {
+                senderDisplayName = kitchen!.name
+            }
         }
         else
         {
-            let kitchen:Kitchen? = DataManager.kitchens[currentOrder!.kitchenId]
             if(kitchen != nil)
             {
                 self.title = "Chat with \(kitchen!.name)"
