@@ -73,28 +73,30 @@ class ChoiceTableViewCell: UITableViewCell {
     }
     
     override func layoutSubviews() {
-        
-       let path = UIBezierPath(roundedRect:self.imgRepresentation.bounds,
-                                byRoundingCorners:[.bottomLeft],
-                                cornerRadii: CGSize(width: 6, height:  6))
-        
-        let maskLayer = CAShapeLayer()
-        maskLayer.path = path.cgPath
-        self.imgRepresentation.layer.mask = maskLayer
-        
-        
-        self.choiceOuterView.layer.cornerRadius = 6
-        self.choiceOuterView.layer.masksToBounds = true
-        self.choiceOuterView.layer.shadowColor = UIColor.systemGray.cgColor
-        self.choiceOuterView.layer.shadowOffset = CGSize(width: 3, height: 3)
-        self.choiceOuterView.layer.shadowOpacity = 0.2
-        self.choiceOuterView.layer.borderWidth = 1.0
-         
-        if #available(iOS 13.0, *) {
-            self.choiceOuterView.layer.borderColor = UIColor.systemGray4.cgColor
-        } else {
-            self.choiceOuterView.layer.borderColor = UIColor.systemGray.cgColor
+        if(self.choiceOuterView != nil) //this doesnt exist for kitchen inventory screen because it causes problems with editing the tableview. Hence we remove all fancy tweaking of the UI 
+        {
+            let path = UIBezierPath(roundedRect:self.imgRepresentation.bounds,
+                                     byRoundingCorners:[.bottomLeft],
+                                     cornerRadii: CGSize(width: 6, height:  6))
+             
+            let maskLayer = CAShapeLayer()
+            maskLayer.path = path.cgPath
+            self.imgRepresentation.layer.mask = maskLayer
+             
+            
+            
+            self.choiceOuterView.layer.cornerRadius = 6
+            self.choiceOuterView.layer.masksToBounds = true
+            self.choiceOuterView.layer.shadowColor = UIColor.systemGray.cgColor
+            self.choiceOuterView.layer.shadowOffset = CGSize(width: 3, height: 3)
+            self.choiceOuterView.layer.shadowOpacity = 0.2
+            self.choiceOuterView.layer.borderWidth = 1.0
+            
+            if #available(iOS 13.0, *) {
+                self.choiceOuterView.layer.borderColor = UIColor.systemGray4.cgColor
+            } else {
+                self.choiceOuterView.layer.borderColor = UIColor.systemGray.cgColor
+            }
         }
-        
     }
 }

@@ -26,9 +26,9 @@ class InventoryTableViewController: UITableViewController, RefreshTableViewWhenI
         //self.loadMenuItems()
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        self.navigationItem.rightBarButtonItem = self.editButtonItem
+        navigationItem.rightBarButtonItem = editButtonItem
     }
- 
+    
     func reloadTableView() {
         self.tableView.reloadData()
     }
@@ -62,6 +62,10 @@ class InventoryTableViewController: UITableViewController, RefreshTableViewWhenI
     }
     // MARK: - Table view data source
 
+    override func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         if(menuItems.count == 0)
@@ -96,6 +100,8 @@ class InventoryTableViewController: UITableViewController, RefreshTableViewWhenI
         let choice = menuItems[indexPath.section].getChoices(ignorePreferences: true)[indexPath.row]
         choice.containingTableViewDelegate = self
         cell.choice = choice
+        cell.showsReorderControl = true
+        cell.shouldIndentWhileEditing = true
         return cell
     }
     
@@ -107,6 +113,15 @@ class InventoryTableViewController: UITableViewController, RefreshTableViewWhenI
             return menuItems[section].displayTitle
         }
     }
+    
+//    uncomment below if you want to update header UI
+//    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
+//        if #available(iOS 13.0, *) {
+//            view.tintColor = UIColor.tertiarySystemFill
+//        }
+//        //let header = view as! UITableViewHeaderFooterView
+//        //header.textLabel?.textColor = UIColor.systemGray
+//    }
     
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -130,10 +145,10 @@ class InventoryTableViewController: UITableViewController, RefreshTableViewWhenI
                 DataManager.menuItems[self.kitchen!.id]?.remove(at: indexPath.section)
             }
             
-            self.loadMenuItems()
+            //self.loadMenuItems()
+            self.tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
-    
     
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
@@ -163,10 +178,10 @@ class InventoryTableViewController: UITableViewController, RefreshTableViewWhenI
     }
     
     
-    /*override func setEditing(_ editing: Bool, animated: Bool) {
-        super.setEditing(editing, animated: animated)
-        tableView.setEditing(editing, animated: animated)
-    }*/
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: true)
+        tableView.setEditing(editing, animated: true)
+    }
     
     // MARK: - Navigation
 
