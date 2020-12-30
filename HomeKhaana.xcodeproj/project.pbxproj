@@ -12,6 +12,7 @@
 		B609916022CE59A700A3543A /* KitchenHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609915F22CE59A700A3543A /* KitchenHeaderTableViewCell.swift */; };
 		B609AC3F2120C8C000C45C49 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609AC3E2120C8C000C45C49 /* Order.swift */; };
 		B609AC412128A4F500C45C49 /* OrderConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B609AC402128A4F500C45C49 /* OrderConfirmationViewController.swift */; };
+		B60D729D259CFB7600FD5B9B /* EditSectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60D729C259CFB7600FD5B9B /* EditSectionTableViewController.swift */; };
 		B610D6AE223DA23300E94E27 /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B610D6AD223DA23300E94E27 /* LocationSearchTable.swift */; };
 		B610D6B0223DB0B700E94E27 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B610D6AF223DB0B700E94E27 /* LocationViewController.swift */; };
 		B61558C920D6D7B400471718 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61558C820D6D7B400471718 /* NotificationsViewController.swift */; };
@@ -101,6 +102,7 @@
 		B609915F22CE59A700A3543A /* KitchenHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitchenHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		B609AC3E2120C8C000C45C49 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		B609AC402128A4F500C45C49 /* OrderConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmationViewController.swift; sourceTree = "<group>"; };
+		B60D729C259CFB7600FD5B9B /* EditSectionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSectionTableViewController.swift; sourceTree = "<group>"; };
 		B610D6AD223DA23300E94E27 /* LocationSearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 		B610D6AF223DB0B700E94E27 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		B61558C820D6D7B400471718 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 			children = (
 				B61F20C621B3467000A85EDF /* InventoryTableViewController.swift */,
 				B621EC9321BE1E2F00869BD8 /* InventoryAddItemViewController.swift */,
+				B60D729C259CFB7600FD5B9B /* EditSectionTableViewController.swift */,
 			);
 			path = Inventory;
 			sourceTree = "<group>";
@@ -764,6 +767,7 @@
 				B646F95E24CF71B000338198 /* SpecialKitchenTableViewCell.swift in Sources */,
 				B655FFBF219BA975008691D2 /* KitchensTableViewController.swift in Sources */,
 				B61558D320D8611F00471718 /* UserPreferencesViewController.swift in Sources */,
+				B60D729D259CFB7600FD5B9B /* EditSectionTableViewController.swift in Sources */,
 				B61F20CA21B357D900A85EDF /* KitchenDetailsViewController.swift in Sources */,
 				B691C78A20E9B09C0060CF98 /* HomeTabBarController.swift in Sources */,
 				B655FFC1219BA98F008691D2 /* Kitchen.swift in Sources */,

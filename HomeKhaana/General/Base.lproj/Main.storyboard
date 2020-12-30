@@ -3048,88 +3048,96 @@ The above copyright notice and this permission notice shall be included in all c
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="6KT-uZ-CgQ">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ku-uo-eZz">
                                             <rect key="frame" x="10" y="10" width="355" height="200"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="684-b9-ZwS">
-                                                    <rect key="frame" x="0.0" y="0.0" width="355" height="19.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="North Indian Veggie Thali" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TbZ-ur-dzL">
+                                                    <rect key="frame" x="17" y="20" width="202" height="21.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="735-uT-N1u">
+                                                    <rect key="frame" x="0.0" y="61.5" width="142" height="138.5"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="7$" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jjv-PJ-7mz">
+                                                    <rect key="frame" x="316" y="22" width="19" height="19.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="LdW-rQ-8cf">
+                                                    <rect key="frame" x="162" y="61.5" width="168" height="125"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="North Indian Veggie Thali" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TbZ-ur-dzL">
-                                                            <rect key="frame" x="0.0" y="0.0" width="202" height="19.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                            <nil key="textColor"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Needs 2 days notice" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tin-JG-iGJ">
+                                                            <rect key="frame" x="0.0" y="0.0" width="168" height="17"/>
+                                                            <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="7$" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jjv-PJ-7mz">
-                                                            <rect key="frame" x="210" y="0.0" width="145" height="19.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" lineBreakMode="tailTruncation" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ol8-fy-7gp">
+                                                            <rect key="frame" x="0.0" y="27" width="168" height="21"/>
+                                                            <string key="text">This non-vegetarian thali is a perfect mid-day meal. The ingredients are carefully chosen in each of these items and is cooked home-style! </string>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" text="4 Chapathis, Rice, Aloo Mutter, Chicken Tikka Masala, Dal Tadka, 4 more chappathis" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oLN-wi-DWk">
+                                                            <rect key="frame" x="0.0" y="58" width="168" height="67"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="125" id="Jk2-G5-DVh"/>
+                                                    </constraints>
                                                 </stackView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="Ye9-Dc-yDJ">
-                                                    <rect key="frame" x="0.0" y="29.5" width="355" height="170.5"/>
-                                                    <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="735-uT-N1u">
-                                                            <rect key="frame" x="0.0" y="0.0" width="172" height="170.5"/>
-                                                        </imageView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="LdW-rQ-8cf">
-                                                            <rect key="frame" x="183" y="0.0" width="172" height="170.5"/>
-                                                            <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Needs 2 days notice" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tin-JG-iGJ">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="131.5" height="17"/>
-                                                                    <color key="backgroundColor" systemColor="systemOrangeColor"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" lineBreakMode="tailTruncation" numberOfLines="9" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ol8-fy-7gp">
-                                                                    <rect key="frame" x="0.0" y="22" width="172" height="55.5"/>
-                                                                    <string key="text">This non-vegetarian thali is a perfect mid-day meal. The ingredients are carefully chosen in each of these items and is cooked home-style! </string>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" text="4 Chapathis, Rice, Aloo Mutter, Chicken Tikka Masala, Dal Tadka, 4 more chappathis" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oLN-wi-DWk">
-                                                                    <rect key="frame" x="0.0" y="82.5" width="172" height="67"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="0rx-58-2aC">
-                                                                    <rect key="frame" x="0.0" y="154.5" width="37" height="16"/>
-                                                                    <subviews>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="leaf" translatesAutoresizingMaskIntoConstraints="NO" id="7tO-fT-Dus">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="width" constant="16" id="Mgl-p0-jik"/>
-                                                                                <constraint firstAttribute="height" constant="16" id="qtl-HF-78O"/>
-                                                                            </constraints>
-                                                                        </imageView>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="eLZ-Kj-LvG">
-                                                                            <rect key="frame" x="21" y="0.0" width="16" height="16"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="width" constant="16" id="dve-Ch-Jb9"/>
-                                                                                <constraint firstAttribute="height" constant="16" id="iXx-90-XgM"/>
-                                                                            </constraints>
-                                                                        </imageView>
-                                                                    </subviews>
-                                                                </stackView>
-                                                            </subviews>
-                                                        </stackView>
-                                                    </subviews>
-                                                </stackView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7tO-fT-Dus">
+                                                    <rect key="frame" x="334" y="179" width="16" height="16"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="16" id="CYB-F6-oqB"/>
+                                                        <constraint firstAttribute="width" constant="16" id="RiG-0v-rxG"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="eLZ-Kj-LvG">
+                                                    <rect key="frame" x="334" y="158" width="16" height="16"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="16" id="pnP-JW-yJb"/>
+                                                        <constraint firstAttribute="width" constant="16" id="rLT-jU-5z2"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
-                                        </stackView>
+                                            <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="7tO-fT-Dus" secondAttribute="bottom" constant="5" id="8zS-2L-3v8"/>
+                                                <constraint firstAttribute="bottom" secondItem="735-uT-N1u" secondAttribute="bottom" id="997-JS-Qv7"/>
+                                                <constraint firstItem="TbZ-ur-dzL" firstAttribute="bottom" secondItem="jjv-PJ-7mz" secondAttribute="bottom" id="Eze-Az-EXA"/>
+                                                <constraint firstAttribute="trailing" secondItem="jjv-PJ-7mz" secondAttribute="trailing" constant="20" id="Lhj-2a-Aoq"/>
+                                                <constraint firstItem="735-uT-N1u" firstAttribute="top" secondItem="TbZ-ur-dzL" secondAttribute="bottom" constant="20" id="OZJ-9L-3tk"/>
+                                                <constraint firstItem="LdW-rQ-8cf" firstAttribute="leading" secondItem="735-uT-N1u" secondAttribute="trailing" constant="20" id="QOV-nl-p6A"/>
+                                                <constraint firstItem="TbZ-ur-dzL" firstAttribute="top" secondItem="5ku-uo-eZz" secondAttribute="top" constant="20" id="VyR-iC-FUU"/>
+                                                <constraint firstItem="LdW-rQ-8cf" firstAttribute="top" secondItem="735-uT-N1u" secondAttribute="top" id="aCR-9N-RPK"/>
+                                                <constraint firstAttribute="trailing" secondItem="eLZ-Kj-LvG" secondAttribute="trailing" constant="5" id="adi-BF-qxX"/>
+                                                <constraint firstItem="TbZ-ur-dzL" firstAttribute="leading" secondItem="5ku-uo-eZz" secondAttribute="leading" constant="17" id="aov-Rf-LSb"/>
+                                                <constraint firstItem="735-uT-N1u" firstAttribute="leading" secondItem="5ku-uo-eZz" secondAttribute="leading" id="eBj-ZJ-DsZ"/>
+                                                <constraint firstAttribute="trailing" secondItem="LdW-rQ-8cf" secondAttribute="trailing" constant="25" id="f7F-70-f1k"/>
+                                                <constraint firstItem="7tO-fT-Dus" firstAttribute="top" secondItem="eLZ-Kj-LvG" secondAttribute="bottom" constant="5" id="neN-DU-2Sl"/>
+                                                <constraint firstItem="735-uT-N1u" firstAttribute="width" secondItem="5ku-uo-eZz" secondAttribute="width" multiplier="0.4" id="pGh-Kb-WBH"/>
+                                                <constraint firstItem="jjv-PJ-7mz" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="TbZ-ur-dzL" secondAttribute="trailing" constant="10" id="wv3-Al-6EI"/>
+                                                <constraint firstAttribute="trailing" secondItem="7tO-fT-Dus" secondAttribute="trailing" constant="5" id="zEP-PX-WOy"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="6KT-uZ-CgQ" secondAttribute="trailing" constant="10" id="PYW-J5-THu"/>
-                                        <constraint firstItem="6KT-uZ-CgQ" firstAttribute="top" secondItem="iC8-vh-u2h" secondAttribute="top" constant="10" id="bzi-LJ-XAd"/>
-                                        <constraint firstItem="6KT-uZ-CgQ" firstAttribute="leading" secondItem="iC8-vh-u2h" secondAttribute="leading" constant="10" id="pfY-rr-Utd"/>
-                                        <constraint firstAttribute="bottom" secondItem="6KT-uZ-CgQ" secondAttribute="bottom" constant="10" id="wMc-uP-tWW"/>
+                                        <constraint firstAttribute="bottom" secondItem="5ku-uo-eZz" secondAttribute="bottom" constant="10" id="Dfc-Wc-j5J"/>
+                                        <constraint firstItem="5ku-uo-eZz" firstAttribute="top" secondItem="iC8-vh-u2h" secondAttribute="top" constant="10" id="S4j-rP-gR3"/>
+                                        <constraint firstAttribute="trailing" secondItem="5ku-uo-eZz" secondAttribute="trailing" constant="10" id="WnO-T2-Pje"/>
+                                        <constraint firstItem="5ku-uo-eZz" firstAttribute="leading" secondItem="iC8-vh-u2h" secondAttribute="leading" constant="10" id="YHZ-q8-pW4"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="choiceOuterView" destination="5ku-uo-eZz" id="QCy-tt-f5e"/>
                                     <outlet property="imgIsVegetarian" destination="7tO-fT-Dus" id="35h-Ob-WY2"/>
                                     <outlet property="imgRepresentation" destination="735-uT-N1u" id="1pK-Gc-U9W"/>
                                     <outlet property="imgStar" destination="eLZ-Kj-LvG" id="BWG-JO-Xg1"/>
@@ -3170,20 +3178,29 @@ The above copyright notice and this permission notice shall be included in all c
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Inventory" id="WyV-bW-OTi">
-                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="ZKN-Rp-bYT">
-                            <connections>
-                                <segue destination="zGL-gk-haB" kind="presentation" identifier="addItem" modalPresentationStyle="fullScreen" id="9H9-Pg-pHV"/>
-                            </connections>
-                        </barButtonItem>
+                        <leftBarButtonItems>
+                            <barButtonItem systemItem="add" id="ZKN-Rp-bYT">
+                                <connections>
+                                    <segue destination="zGL-gk-haB" kind="presentation" identifier="addItem" modalPresentationStyle="fullScreen" id="9H9-Pg-pHV"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="descending-arrangement" id="bEX-x9-q9N">
+                                <color key="tintColor" systemColor="linkColor"/>
+                                <connections>
+                                    <segue destination="aLX-tq-qmk" kind="show" id="y7o-lc-9oC"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                     </navigationItem>
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
                         <outlet property="btnAdd" destination="ZKN-Rp-bYT" id="gLQ-Bd-E6B"/>
+                        <outlet property="btnEditSections" destination="bEX-x9-q9N" id="scW-rZ-mNn"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qcv-b0-eZK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2704.8000000000002" y="2606.4467766116945"/>
+            <point key="canvasLocation" x="2774" y="2585"/>
         </scene>
         <!--Inventory Add Item View Controller-->
         <scene sceneID="R2T-pY-nxy">
@@ -3935,6 +3952,35 @@ The above copyright notice and this permission notice shall be included in all c
             </objects>
             <point key="canvasLocation" x="4861.6000000000004" y="175.86206896551727"/>
         </scene>
+        <!--Reorder Sections-->
+        <scene sceneID="1CD-81-5a0">
+            <objects>
+                <tableViewController id="aLX-tq-qmk" customClass="EditSectionTableViewController" customModule="HomeKhaana" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ENH-4a-u7u">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="sectionCell" rowHeight="46" id="TYI-yD-feY">
+                                <rect key="frame" x="0.0" y="28" width="375" height="46"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TYI-yD-feY" id="I2e-On-wfN">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="46"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="aLX-tq-qmk" id="38o-85-DsD"/>
+                            <outlet property="delegate" destination="aLX-tq-qmk" id="hnv-Li-6Wb"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Reorder Sections" id="T7u-wQ-RUI"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LeD-T5-t4u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4861.6000000000004" y="3101.1994002998504"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="02m-MS-bdc"/>
@@ -3950,6 +3996,7 @@ The above copyright notice and this permission notice shall be included in all c
         <image name="Icon-App-76x76" width="114" height="114"/>
         <image name="dancing" width="64" height="64"/>
         <image name="delivery-truck (1)" width="64" height="64"/>
+        <image name="descending-arrangement" width="16" height="16"/>
         <image name="empty shopping cart" width="128" height="128"/>
         <image name="facebook-login-button-png-14" width="246" height="54"/>
         <image name="healthy" width="64" height="64"/>

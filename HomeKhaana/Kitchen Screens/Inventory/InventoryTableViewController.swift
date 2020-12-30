@@ -11,6 +11,7 @@ import UIKit
 class InventoryTableViewController: UITableViewController, RefreshTableViewWhenImgLoadsDelegate {
     
     @IBOutlet weak var btnAdd: UIBarButtonItem!
+    @IBOutlet weak var btnEditSections: UIBarButtonItem!
     
     var menuItems: [ChoiceGroup] = []
     
@@ -36,11 +37,14 @@ class InventoryTableViewController: UITableViewController, RefreshTableViewWhenI
     func loadMenuItems()
     {
         self.btnAdd.isEnabled = false
+        self.btnEditSections.isEnabled = false
+        navigationItem.rightBarButtonItem?.isEnabled = false
+        
         let menuItems:[ChoiceGroup]? = DataManager.menuItems[self.kitchen!.id]
         if(menuItems != nil)
         {
             self.menuItems = menuItems!
-            self.btnAdd.isEnabled = true
+            self.enableBarButtonItems()
             self.tableView.reloadData()
         }
         else
@@ -50,10 +54,20 @@ class InventoryTableViewController: UITableViewController, RefreshTableViewWhenI
                 {
                     LoaderController.sharedInstance.removeLoader();
                     self.menuItems = DataManager.menuItems[self.kitchen!.id]!
-                    self.btnAdd.isEnabled = true
+                    self.enableBarButtonItems()
                     self.tableView.reloadData()
             }
             )
+        }
+    }
+    
+    private func enableBarButtonItems()
+    {
+        self.btnAdd.isEnabled = true
+        if(self.menuItems.count > 0)
+        {
+            self.btnEditSections.isEnabled = true
+            self.navigationItem.rightBarButtonItem?.isEnabled = true
         }
     }
     
