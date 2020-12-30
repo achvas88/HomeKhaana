@@ -1312,11 +1312,11 @@
             <objects>
                 <viewController id="kkb-Bm-kjR" customClass="CartViewController" customModule="HomeKhaana" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E14-vD-oFq">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="847"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="aaQ-6m-8P5">
-                                <rect key="frame" x="123.5" y="249.5" width="128" height="155"/>
+                                <rect key="frame" x="123.5" y="349.5" width="128" height="155"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty shopping cart" translatesAutoresizingMaskIntoConstraints="NO" id="Kef-w4-aBm">
                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -1337,7 +1337,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ajA-9w-URi">
-                                <rect key="frame" x="0.0" y="488" width="375" height="45"/>
+                                <rect key="frame" x="0.0" y="688" width="375" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="1Fz-U9-ybP"/>
                                 </constraints>
@@ -1351,7 +1351,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qc2-Nr-sO6">
-                                <rect key="frame" x="0.0" y="533" width="375" height="65"/>
+                                <rect key="frame" x="0.0" y="733" width="375" height="65"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="9SK-BJ-hjK"/>
                                 </constraints>
@@ -1364,7 +1364,7 @@
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m8g-eV-W8i">
-                                <rect key="frame" x="0.0" y="56" width="375" height="432"/>
+                                <rect key="frame" x="0.0" y="56" width="375" height="632"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="h5Z-c8-ruX">
                                         <rect key="frame" x="0.0" y="-50" width="375" height="230"/>
@@ -1420,7 +1420,7 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="When" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ngY-aC-UCs">
                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="16"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="50" id="eTV-Jp-Qt5"/>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="eTV-Jp-Qt5"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                         <color key="textColor" systemColor="secondaryLabelColor"/>
@@ -1593,37 +1593,53 @@
                                             <action selector="btnClearCartClicked:" destination="kkb-Bm-kjR" eventType="touchUpInside" id="Jbo-9q-3wH"/>
                                         </connections>
                                     </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="SOK-Nw-Z2O">
-                                        <rect key="frame" x="0.0" y="150" width="375" height="30"/>
+                                    <stackView opaque="NO" contentMode="left" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="SOK-Nw-Z2O">
+                                        <rect key="frame" x="5" y="145" width="365" height="30"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z4Q-pL-Ylw" customClass="RatingControl" customModule="HomeKhaana" customModuleProvider="target">
+                                            <stackView opaque="NO" contentMode="left" translatesAutoresizingMaskIntoConstraints="NO" id="z4Q-pL-Ylw" customClass="RatingControl" customModule="HomeKhaana" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="153" height="30"/>
+                                                <color key="backgroundColor" systemColor="systemFillColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="ZxA-2n-n8A"/>
                                                     <constraint firstAttribute="width" constant="153" id="nRw-8c-x52"/>
                                                 </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OME-OR-BPd">
-                                                <rect key="frame" x="158" y="0.0" width="142" height="30"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <rect key="frame" x="158" y="0.0" width="127" height="30"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <state key="normal" title="Chat with Kitchen">
+                                                <state key="normal" title=" Chat with Kitchen ">
                                                     <color key="titleColor" systemColor="linkColor"/>
                                                 </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <segue destination="PcG-gX-gEq" kind="show" identifier="chat" id="02m-MS-bdc"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tW-lv-8xh">
-                                                <rect key="frame" x="305" y="0.0" width="70" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tW-lv-8xh">
+                                                <rect key="frame" x="290" y="0.0" width="75" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="70" id="R2q-mu-3WL"/>
+                                                    <constraint firstAttribute="width" constant="75" id="AxI-mp-Doz"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <state key="normal" title="  Rate" image="star">
                                                     <color key="titleColor" systemColor="linkColor"/>
                                                 </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="5"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <segue destination="8yz-M1-7Fp" kind="presentation" identifier="rate" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="GiJ-Mj-tb5"/>
                                                 </connections>
@@ -1638,20 +1654,20 @@
                                 <constraints>
                                     <constraint firstItem="h5Z-c8-ruX" firstAttribute="top" secondItem="m8g-eV-W8i" secondAttribute="top" constant="-50" id="1Sf-YA-flI"/>
                                     <constraint firstAttribute="trailing" secondItem="vRw-2v-j3H" secondAttribute="trailing" id="4NG-2n-LqM"/>
-                                    <constraint firstItem="SOK-Nw-Z2O" firstAttribute="bottom" secondItem="h5Z-c8-ruX" secondAttribute="bottom" id="4uP-9s-cCQ"/>
+                                    <constraint firstItem="SOK-Nw-Z2O" firstAttribute="bottom" secondItem="h5Z-c8-ruX" secondAttribute="bottom" constant="-5" id="4uP-9s-cCQ"/>
                                     <constraint firstItem="woN-hy-EPE" firstAttribute="width" secondItem="xZL-st-lcO" secondAttribute="width" id="9hg-3q-20s"/>
                                     <constraint firstItem="1fp-vM-DRr" firstAttribute="leading" secondItem="m8g-eV-W8i" secondAttribute="leading" constant="10" id="B7n-Z4-ker"/>
                                     <constraint firstAttribute="trailing" secondItem="xZL-st-lcO" secondAttribute="trailing" constant="10" id="CS7-g3-4qz"/>
                                     <constraint firstItem="vRw-2v-j3H" firstAttribute="top" secondItem="uqg-lC-jbf" secondAttribute="bottom" constant="15" id="CWm-yC-asr"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1fp-vM-DRr" secondAttribute="trailing" symbolic="YES" id="DvP-DM-uwF"/>
-                                    <constraint firstAttribute="trailing" secondItem="SOK-Nw-Z2O" secondAttribute="trailing" id="EEC-Fb-1Xl"/>
+                                    <constraint firstAttribute="trailing" secondItem="SOK-Nw-Z2O" secondAttribute="trailing" constant="5" id="EEC-Fb-1Xl"/>
                                     <constraint firstItem="xZL-st-lcO" firstAttribute="leading" secondItem="m8g-eV-W8i" secondAttribute="leading" constant="20" id="Fj5-wm-lI6"/>
                                     <constraint firstItem="woN-hy-EPE" firstAttribute="trailing" secondItem="xZL-st-lcO" secondAttribute="trailing" id="Mxa-Wc-csc"/>
                                     <constraint firstItem="xZL-st-lcO" firstAttribute="top" secondItem="vRw-2v-j3H" secondAttribute="bottom" constant="15" id="O77-tM-v1k"/>
                                     <constraint firstItem="woN-hy-EPE" firstAttribute="leading" secondItem="xZL-st-lcO" secondAttribute="leading" id="Ont-o3-tNH"/>
                                     <constraint firstItem="mWx-Ri-Xhy" firstAttribute="top" secondItem="h5Z-c8-ruX" secondAttribute="bottom" constant="20" id="YTv-RB-FSv"/>
                                     <constraint firstAttribute="bottom" secondItem="woN-hy-EPE" secondAttribute="bottom" constant="20" id="ZUP-eO-n9f"/>
-                                    <constraint firstItem="SOK-Nw-Z2O" firstAttribute="leading" secondItem="m8g-eV-W8i" secondAttribute="leading" id="dlU-0J-AUc"/>
+                                    <constraint firstItem="SOK-Nw-Z2O" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="m8g-eV-W8i" secondAttribute="leading" constant="5" id="dlU-0J-AUc"/>
                                     <constraint firstItem="mWx-Ri-Xhy" firstAttribute="centerX" secondItem="m8g-eV-W8i" secondAttribute="centerX" id="kqv-Ji-JIL"/>
                                     <constraint firstItem="vRw-2v-j3H" firstAttribute="leading" secondItem="m8g-eV-W8i" secondAttribute="leading" constant="10" id="lcg-2f-3uz"/>
                                     <constraint firstAttribute="trailing" secondItem="h5Z-c8-ruX" secondAttribute="trailing" id="mBh-2W-QXd"/>
@@ -1683,6 +1699,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Cart" id="Sqe-Ot-8RQ"/>
+                    <size key="freeformSize" width="375" height="867"/>
                     <connections>
                         <outlet property="btnAddPayment" destination="ajA-9w-URi" id="wzR-z6-Ck4"/>
                         <outlet property="btnChat" destination="OME-OR-BPd" id="Nny-Ke-BEm"/>
@@ -3900,6 +3917,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemFillColor">
+            <color red="0.47058823529411764" green="0.47058823529411764" blue="0.50196078431372548" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
