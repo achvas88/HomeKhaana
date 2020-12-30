@@ -413,6 +413,11 @@
                                         <rect key="frame" x="250" y="0.0" width="125" height="28"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <state key="normal" title="Credits"/>
+                                        <connections>
+                                            <segue destination="cc5-y2-enz" kind="popoverPresentation" popoverAnchorView="gaX-jv-pZ7" id="Std-JV-Mkb">
+                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                            </segue>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -2647,6 +2652,73 @@
             </objects>
             <point key="canvasLocation" x="3878" y="928"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="yJw-cH-JO5">
+            <objects>
+                <viewController id="cc5-y2-enz" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SrC-Wg-E5C">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="lsY-3p-7SP">
+                                <rect key="frame" x="15" y="20" width="345" height="612"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CREDITS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wG1-Fd-asT">
+                                        <rect key="frame" x="0.0" y="0.0" width="345" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <color key="textColor" systemColor="systemOrangeColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B0P-Fp-sBm">
+                                        <rect key="frame" x="0.0" y="39.5" width="345" height="572.5"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <mutableString key="text">Icons:
+
+&lt;div&gt;Icons made by &lt;a href="https://www.flaticon.com/authors/photo3idea-studio" title="photo3idea_studio"&gt;photo3idea_studio&lt;/a&gt; from &lt;a href="https://www.flaticon.com/" title="Flaticon"&gt;www.flaticon.com&lt;/a&gt; is licensed by &lt;a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank"&gt;CC 3.0 BY&lt;/a&gt;&lt;/div&gt;
+
+&lt;div&gt;Icons made by &lt;a href="https://www.flaticon.com/authors/smashicons" title="Smashicons"&gt;Smashicons&lt;/a&gt; from &lt;a href="https://www.flaticon.com/" title="Flaticon"&gt;www.flaticon.com&lt;/a&gt; is licensed by &lt;a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank"&gt;CC 3.0 BY&lt;/a&gt;&lt;/div&gt;
+
+&lt;div&gt;Icons made by &lt;a href="https://www.flaticon.com/authors/those-icons" title="Those Icons"&gt;Those Icons&lt;/a&gt; from &lt;a href="https://www.flaticon.com/" title="Flaticon"&gt;www.flaticon.com&lt;/a&gt; is licensed by &lt;a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank"&gt;CC 3.0 BY&lt;/a&gt;&lt;/div&gt;
+
+&lt;div&gt;Icons made by &lt;a href="https://www.flaticon.com/authors/lucy-g" title="Lucy G"&gt;Lucy G&lt;/a&gt; from &lt;a href="https://www.flaticon.com/" title="Flaticon"&gt;www.flaticon.com&lt;/a&gt; is licensed by &lt;a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank"&gt;CC 3.0 BY&lt;/a&gt;&lt;/div&gt;
+
+&lt;div&gt;Icons made by &lt;a href="http://www.freepik.com" title="Freepik"&gt;Freepik&lt;/a&gt; from &lt;a href="https://www.flaticon.com/" title="Flaticon"&gt;www.flaticon.com&lt;/a&gt; is licensed by &lt;a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank"&gt;CC 3.0 BY&lt;/a&gt;&lt;/div&gt;
+
+&lt;div&gt;Icons made by &lt;a href="https://www.flaticon.com/authors/smartline" title="Smartline"&gt;Smartline&lt;/a&gt; from &lt;a href="https://www.flaticon.com/" title="Flaticon"&gt;www.flaticon.com&lt;/a&gt; is licensed by &lt;a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank"&gt;CC 3.0 BY&lt;/a&gt;&lt;/div&gt;
+
+&lt;div&gt;Icons made by &lt;a href="https://www.flaticon.com/authors/roundicons" title="Roundicons"&gt;Roundicons&lt;/a&gt; from &lt;a href="https://www.flaticon.com/" title="Flaticon"&gt;www.flaticon.com&lt;/a&gt; is licensed by &lt;a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank"&gt;CC 3.0 BY&lt;/a&gt;&lt;/div&gt;
+
+&lt;div&gt;Icons made by &lt;a href="https://www.flaticon.com/authors/maxim-basinski" title="Maxim Basinski"&gt;Maxim Basinski&lt;/a&gt; from &lt;a href="https://www.flaticon.com/" title="Flaticon"&gt;www.flaticon.com&lt;/a&gt; is licensed by &lt;a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank"&gt;CC 3.0 BY&lt;/a&gt;&lt;/div&gt;
+
+Chat User Interface:
+
+MIT License
+Copyright (c) 2013-present Jesse Squires
+http://www.jessesquires.com
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+</mutableString>
+                                        <color key="textColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="aOx-N5-I6y"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="lsY-3p-7SP" firstAttribute="leading" secondItem="aOx-N5-I6y" secondAttribute="leading" constant="15" id="0un-UV-Agd"/>
+                            <constraint firstItem="lsY-3p-7SP" firstAttribute="top" secondItem="aOx-N5-I6y" secondAttribute="top" constant="20" id="FVE-OW-Nr7"/>
+                            <constraint firstItem="aOx-N5-I6y" firstAttribute="bottom" secondItem="lsY-3p-7SP" secondAttribute="bottom" constant="15" id="IE0-Mu-M32"/>
+                            <constraint firstItem="aOx-N5-I6y" firstAttribute="trailing" secondItem="lsY-3p-7SP" secondAttribute="trailing" constant="15" id="kr9-RI-e2f"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BG2-ze-FDZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4872.8000000000002" y="1130.2848575712144"/>
+        </scene>
         <!--Kitchen Details View Controller-->
         <scene sceneID="4Xm-iw-LMM">
             <objects>
@@ -3443,7 +3515,7 @@
             </objects>
             <point key="canvasLocation" x="3842" y="2572"/>
         </scene>
-        <!--Kitchen Profile View Controller-->
+        <!--Profile-->
         <scene sceneID="Fkk-iT-aAo">
             <objects>
                 <viewController id="jO4-AM-1lA" customClass="KitchenProfileViewController" customModule="HomeKhaana" customModuleProvider="target" sceneMemberID="viewController">
@@ -3468,6 +3540,11 @@
                                         <rect key="frame" x="250" y="0.0" width="125" height="28"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <state key="normal" title="Credits"/>
+                                        <connections>
+                                            <segue destination="cc5-y2-enz" kind="popoverPresentation" popoverAnchorView="dAC-qJ-vKo" id="2w2-Nj-VRe">
+                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                            </segue>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -3576,7 +3653,7 @@
                             <constraint firstItem="CeF-T2-L5G" firstAttribute="width" secondItem="ToJ-c6-1wr" secondAttribute="width" id="nF1-9z-n36"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="YLi-z7-Lah"/>
+                    <navigationItem key="navigationItem" title="Profile" id="YLi-z7-Lah"/>
                     <connections>
                         <outlet property="imgKitchen" destination="bKG-FX-Jrc" id="Tgm-bf-qJZ"/>
                         <outlet property="lblKitchenRating" destination="8zF-tw-QMr" id="Cwu-f6-VzO"/>
@@ -3870,7 +3947,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="02m-MS-bdc"/>
         <segue reference="9H9-Pg-pHV"/>
-        <segue reference="sdt-pM-Hwp"/>
+        <segue reference="2w2-Nj-VRe"/>
+        <segue reference="auW-X4-2bE"/>
         <segue reference="GDw-5U-nRx"/>
         <segue reference="GiJ-Mj-tb5"/>
         <segue reference="Gmd-Ol-96N"/>
