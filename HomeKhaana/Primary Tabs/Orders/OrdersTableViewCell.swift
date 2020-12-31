@@ -21,6 +21,7 @@ class OrdersTableViewCell: UITableViewCell {
     @IBOutlet weak var orderOuterView: UIView!
     @IBOutlet weak var imgHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var stkRating: RatingControl!
+    @IBOutlet weak var lblPickupTime: UILabel!
     
     
     var order:Order? {
@@ -71,10 +72,19 @@ class OrdersTableViewCell: UITableViewCell {
             //others
             lblOrderDate.text = self.order!.getOrderDateString()
             lblDueDate.text = self.order!.getDueDateString()
+            if(self.order!.pickupTime != nil && self.order!.pickupTime!.count > 0)
+            {
+                lblPickupTime.text! = self.order!.pickupTime!
+            }
+            else
+            {
+                lblPickupTime.text! = "Not yet confirmed"
+            }
             lblStatus.text = self.order!.status
             lblWhere.text = DataManager.kitchens[self.order!.kitchenId]?.name
             
             lblTotal.text = "$\(convertToCurrency(input: self.order!.orderTotal))"
+            
         }
     }
     

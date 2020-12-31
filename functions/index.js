@@ -51,7 +51,14 @@ exports.sendChat = functions.database.ref('/CurrentOrders/{kitchenId}/{orderingU
                      });
           })
 });
-         
+
+//update the pickup time
+exports.updatePickupTime = functions.database.ref('/CurrentOrders/{kitchenId}/{orderingUserID}/{orderID}/pickupTime')
+.onWrite((change, context) => {
+        const newPickupTime = change.after.val();
+        admin.database().ref(`/Orders/${context.params.orderingUserID}/${context.params.orderID}/pickupTime`).set(newPickupTime);
+});
+
 //when an order's status is updated by the kitchen.
 exports.updateOrderStatus2 = functions.database.ref('/CurrentOrders/{kitchenId}/{orderingUserID}/{orderID}/status')
 .onWrite((change, context) => {
@@ -95,16 +102,28 @@ exports.updateOrderStatus2 = functions.database.ref('/CurrentOrders/{kitchenId}/
 						   const newStatus = change.after.val();
 						   console.log('Updating order status in the Orders location', context.params.orderID, newStatus);
 						   admin.database().ref(`/Orders/${context.params.orderingUserID}/${context.params.orderID}/status`).set(newStatus);
-					   
-						   //now send a notification to the user about the order status update.
-						   const message = {
-							   notification: {
-								   title: 'Order Status Update!',
-                                   body: 'Your order is now in the status of: ' + change.after.val()
-							   },
-							   token: registrationToken
-						   };
-					   
+                           
+                           var message;
+                           if(newStatus != "Confirmed")
+                           {
+                               message = {
+                                   notification: {
+                                       title: 'Order Status Update!',
+                                       body: 'Your order is now in the status of: ' + change.after.val()
+                                   },
+                                   token: registrationToken
+                               };
+                           }
+                           else
+                           {
+                               message = {
+                                   notification: {
+                                       title: 'Order Confirmed!',
+                                       body: 'Check your pickup time in the Orders Screen'
+                                   },
+                                   token: registrationToken
+                               };
+                           }
 						   return admin.messaging().send(message)
 						   .then((response) => {
 								 // Response is a message ID string.
@@ -171,6 +190,7 @@ exports.sanitizePhoto = functions.database.ref('MenuItems/{kitchenID}/{sectionID
         console.log(`Failed to remove photo, error: ${err}`)
       });
 });
+
 
 
 

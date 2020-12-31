@@ -35,6 +35,7 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
     @IBOutlet weak var btnRate: UIButton!
     @IBOutlet weak var stkRating: RatingControl!
     @IBOutlet weak var btnChat: UIButton!
+    @IBOutlet weak var lblConfirmationWarning: UILabel!
     
     var inCart:[Choice] = []
     var currentOrder:Order?
@@ -211,6 +212,15 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
             //ensure payment source is still valid. This will be uncommented once credit card payment is open.
             //ensurePaymentSourceValidity()
         }
+        
+        if((self.currentOrder!.pickupTime != nil) && self.currentOrder!.pickupTime!.count > 0)
+        {
+            self.lblConfirmationWarning.text! = self.currentOrder!.pickupTime!
+        }
+        else
+        {
+            self.lblConfirmationWarning.text! = "To be confirmed by kitchen once order is placed. We will make sure to notify you :)"
+        }
     }
     
     private func setOrderNoticeDays()
@@ -340,7 +350,7 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
             credit = "/Credit"
         }
         
-        self.btnAddPayment.setTitle("Pay by Cash" + debit + credit , for: .normal)
+        self.btnAddPayment.setTitle("Pay at kitchen by Cash" + debit + credit , for: .normal)
     }
     
     func calculatePrice()
@@ -361,7 +371,7 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
         
         //update labels
         self.lblSubtotal.text = "$\(convertToCurrency(input: self.currentOrder!.subTotal))"
-        self.lblTotal.text = "$\(convertToCurrency(input: self.currentOrder!.orderTotal)) + taxes"
+        self.lblTotal.text = "$\(convertToCurrency(input: self.currentOrder!.orderTotal))"
         
         if(self.currentOrder!.status == "New")
         {

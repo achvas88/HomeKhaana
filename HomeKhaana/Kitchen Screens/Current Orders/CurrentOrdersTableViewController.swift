@@ -54,7 +54,9 @@ class CurrentOrdersTableViewController: UITableViewController, CurrentOrderActio
                 if let snapshot = user as? DataSnapshot
                 {
                     for orderChild in snapshot.children {
-                        if let snapshot = orderChild as? DataSnapshot,
+                        if let snapshot:DataSnapshot = orderChild as? DataSnapshot,
+                           let id = (snapshot.value as AnyObject)["id"] as? String?,
+                           id != nil,
                            let order:Order? = Order(snapshot: snapshot)
                         {
                             if(order != nil)
@@ -201,6 +203,51 @@ class CurrentOrdersTableViewController: UITableViewController, CurrentOrderActio
         let order:Order = self.currentOrders![index.row]
         self.orderForChat = order
         self.performSegue(withIdentifier: "chatKitchen", sender: self)
+    }
+    
+    func btnConfirmOrderClicked(at index: IndexPath) {
+        let order:Order = self.currentOrders![index.row]
+        
+        let alert = UIAlertController(title: "Order Confirmation", message: "When can the order be picked up? (Do not give relative times like \"One hour from now\". Give actual times)", preferredStyle: .alert)
+        
+        //Cancel button
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        //Save button
+        let saveAction = UIAlertAction(title:"Confirm", style: .destructive, handler: { (action: UIAlertAction!) -> Void in
+            
+            order.status = "Confirmed"
+            order.pickupTime = (alert.textFields![0] as UITextField).text!
+            LoaderController.sharedInstance.showLoader(indicatorText: "Confirming order", holdingView: self.view)
+            let kitchenId=User.sharedInstance!.id
+            
+            let orderConfirmation = ["status": "Confirmed",
+                                     "pickupTime": order.pickupTime!]
+            db.child("/CurrentOrders/\(kitchenId)/\(order.orderingUserID)/\(order.id)").updateChildValues(orderConfirmation) {
+                (error:Error?, ref:DatabaseReference) in
+                if error == nil {
+                    LoaderController.sharedInstance.removeLoader()
+                    self.tableView.reloadData()
+                } else {
+                    LoaderController.sharedInstance.updateTitle(title: "Failed. Try again")
+                    LoaderController.sharedInstance.removeLoader()
+                }
+            }
+        })
+        alert.addAction(saveAction)
+        
+        //text box for getting time
+        alert.addTextField(configurationHandler: { (textField) in
+            textField.text = "9 - 10 AM (or) ASAP"
+            saveAction.isEnabled = false
+            NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) { (notification) in
+                saveAction.isEnabled = textField.text!.count > 0
+            }
+        })
+        
+        //present the alert
+        self.present(alert, animated: true)
+
     }
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation

@@ -15,6 +15,7 @@ protocol CurrentOrderActionsDelegate{
     func btnCartLinkClicked(at index:IndexPath)
     func lblInstructionsClicked(at index:IndexPath)
     func btnChatClicked(at index:IndexPath)
+    func btnConfirmOrderClicked(at index:IndexPath)
 }
 
 class CurrentOrdersTableViewCell: UITableViewCell {
@@ -30,6 +31,8 @@ class CurrentOrdersTableViewCell: UITableViewCell {
     @IBOutlet weak var lblCost: UILabel!
     @IBOutlet weak var lblInstructions: UIButton!
     @IBOutlet weak var lblPickupDate: UILabel!
+    @IBOutlet weak var btnConfirmOrder: UIButton!
+    @IBOutlet weak var lblPickupTime: UILabel!
     
     var indexPath: IndexPath?
     var delegate:CurrentOrderActionsDelegate?
@@ -67,21 +70,40 @@ class CurrentOrdersTableViewCell: UITableViewCell {
             let formatter = NumberFormatter()
             formatter.maximumFractionDigits = 2
             formatter.numberStyle = .currency
-            lblCost.text = formatter.string(from: NSNumber(value: self.order!.orderTotal))! + " (excludes taxes)"
+            lblCost.text = formatter.string(from: NSNumber(value: self.order!.orderTotal))! + " (includes taxes)"
             
-            if(self.order!.status == "Ready for Pick-Up")
+            if(self.order!.status == "Ordered" || self.order!.status == "New")
             {
-                self.btnMarkAsCompleted.isHidden = false
+                self.btnConfirmOrder.isHidden = false
                 self.btnMarkAsReady.isHidden = true
+                self.btnMarkAsCompleted.isHidden = true
             }
             else
             {
-                self.btnMarkAsCompleted.isHidden = true
-                self.btnMarkAsReady.isHidden = false
+                self.btnConfirmOrder.isHidden = true
+                if(self.order!.status == "Ready for Pick-Up")
+                {
+                    self.btnMarkAsCompleted.isHidden = false
+                    self.btnMarkAsReady.isHidden = true
+                    
+                }
+                else
+                {
+                    self.btnMarkAsCompleted.isHidden = true
+                    self.btnMarkAsReady.isHidden = false
+                }
             }
             self.lblCustomer.text = self.order!.orderingUserName
             
             self.lblPickupDate.text! = self.order!.getDueDateString()
+            if(self.order!.pickupTime != nil && self.order!.pickupTime!.count > 0)
+            {
+                self.lblPickupTime.text! = self.order!.pickupTime!
+            }
+            else
+            {
+                self.lblPickupTime.text! = "Not set"
+            }
         }
     }
     
@@ -114,6 +136,10 @@ class CurrentOrdersTableViewCell: UITableViewCell {
     
     @IBAction func btnChatClicked(_ sender: Any) {
         self.delegate?.btnChatClicked(at: self.indexPath!)
+    }
+    
+    @IBAction func btnConfirmOrderClicked(_ sender: Any) {
+        self.delegate?.btnConfirmOrderClicked(at: self.indexPath!)
     }
     
     override func layoutSubviews() {

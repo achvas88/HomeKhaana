@@ -87,11 +87,11 @@ class OrdersTableViewController: UITableViewController {
             let order:Order = self.mostRecentOrders![indexPath.row]
             if(order.status != "Ordered" && order.status != "Ready for Pick-Up")
             {
-                return 343 - 120; // here 120 is the height of the image.
+                return 370 - 120; // here 120 is the height of the image.
             }
             else
             {
-                return 343 - 120; // we are hiding images for now. So, always reduce by 120.
+                return 370 - 120; // we are hiding images for now. So, always reduce by 120.
             }
         }
         else

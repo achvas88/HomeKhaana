@@ -24,6 +24,7 @@ class Order
     var timestamp: Int64
     var customInstructions: String?
     var noticeDays: Int
+    var pickupTime: String?
     
     //order items
     var cart:[Choice]
@@ -56,7 +57,8 @@ class Order
             "timestamp": self.timestamp,
             "cart": getCartDetails(),
             "instructions": customInstructions ?? "",
-            "noticeDays": self.noticeDays
+            "noticeDays": self.noticeDays,
+            "pickupTime": self.pickupTime ?? ""
         ]
     }
     
@@ -79,7 +81,7 @@ class Order
         self.noticeDays = 0
     }
     
-    public init(id: String, orderDate: Double, dueDate: Double, orderRating: Int?, status: String, cart: [Choice], subTotal: Float, tax: Float, discount: Float, orderTotal: Float, source: PaymentSource?, kitchenId: String, orderingUserId: String?, orderingUserName: String?, timestamp: Int64, instructions: String?, noticeDays: Int?)
+    public init(id: String, orderDate: Double, dueDate: Double, orderRating: Int?, status: String, cart: [Choice], subTotal: Float, tax: Float, discount: Float, orderTotal: Float, source: PaymentSource?, kitchenId: String, orderingUserId: String?, orderingUserName: String?, timestamp: Int64, instructions: String?, noticeDays: Int?, pickupTime: String?)
     {
         self.id = id
         self.orderDate = orderDate
@@ -98,6 +100,7 @@ class Order
         self.timestamp = timestamp
         self.customInstructions = instructions
         self.noticeDays = noticeDays ?? 0
+        self.pickupTime = pickupTime ?? ""
     }
     
     public convenience init?(snapshot: DataSnapshot)
@@ -117,6 +120,7 @@ class Order
         let timestamp = snapshot["timestamp"] as? Int64
         let customInstructions = snapshot["instructions"] as? String
         let noticeDays = snapshot["noticeDays"] as? Int
+        let pickupTime = snapshot["pickupTime"] as? String
         
         //order items
         var cart:[Choice] = []
@@ -146,7 +150,7 @@ class Order
         //payment source and address
         let selectedPayment:PaymentSource? = nil //User.getPaymentSourceForID(id: selectedPaymentID ?? "")
         
-        self.init(id: id!, orderDate: orderDate ?? Date().timeIntervalSince1970, dueDate: dueDate ?? (orderDate ?? Date().timeIntervalSince1970),orderRating: orderRating ?? -1, status: status ?? "New", cart: cart, subTotal: subTotal!, tax: tax!, discount: discount!, orderTotal: orderTotal!, source: selectedPayment, kitchenId: kitchenId!, orderingUserId: orderingUserId, orderingUserName: orderingUserName, timestamp: timestamp!, instructions: customInstructions, noticeDays: noticeDays ?? 0)
+        self.init(id: id!, orderDate: orderDate ?? Date().timeIntervalSince1970, dueDate: dueDate ?? (orderDate ?? Date().timeIntervalSince1970),orderRating: orderRating ?? -1, status: status ?? "New", cart: cart, subTotal: subTotal!, tax: tax!, discount: discount!, orderTotal: orderTotal!, source: selectedPayment, kitchenId: kitchenId!, orderingUserId: orderingUserId, orderingUserName: orderingUserName, timestamp: timestamp!, instructions: customInstructions, noticeDays: noticeDays ?? 0, pickupTime: pickupTime ?? "")
     }
  
     public func setRating(rating: Int)
