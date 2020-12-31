@@ -81,11 +81,11 @@ class UserProfileViewController: UIViewController {
     
     func setupButtons()
     {
-        self.btnPreferences.setImage(UIImage(named: "settings")?.withRenderingMode(.alwaysOriginal), for: .normal)
-        self.btnPayment.setImage(UIImage(named: "credit-card")?.withRenderingMode(.alwaysOriginal), for: .normal)
-        self.btnHelp.setImage(UIImage(named: "Help")?.withRenderingMode(.alwaysOriginal), for: .normal)
-        self.btnFAQ.setImage(UIImage(named: "FAQ")?.withRenderingMode(.alwaysOriginal), for: .normal)
-        self.btnKitchenLogin.setImage(UIImage(named: "chef")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        self.btnPreferences.setImage(UIImage(named: "settings")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        self.btnPayment.setImage(UIImage(named: "credit-card")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        self.btnHelp.setImage(UIImage(named: "Help")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        self.btnFAQ.setImage(UIImage(named: "FAQ")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        self.btnKitchenLogin.setImage(UIImage(named: "chef")?.withRenderingMode(.alwaysTemplate), for: .normal)
         if(User.sharedInstance!.isKitchen)
         {
             self.btnKitchenLogin.isHidden = true
