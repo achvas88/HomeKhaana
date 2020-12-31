@@ -92,8 +92,8 @@ class KitchensTableViewController: UITableViewController,RefreshTableViewWhenImg
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let yourKitchensExists:Bool = (self.kitchens.count > 0)
-        let popularKitchensExists:Bool = (self.yourKitchens.count > 0)
+        let yourKitchensExists:Bool = (self.yourKitchens.count > 0)
+        let popularKitchensExists:Bool = (self.kitchens.count > 0)
         if(self.kitchens.count > 0)
         {
             if(yourKitchensExists && popularKitchensExists)
@@ -177,8 +177,8 @@ class KitchensTableViewController: UITableViewController,RefreshTableViewWhenImg
     
     
     override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let yourKitchensExists:Bool = (self.kitchens.count > 0)
-        let popularKitchensExists:Bool = (self.yourKitchens.count > 0)
+        let yourKitchensExists:Bool = (self.yourKitchens.count > 0)
+        let popularKitchensExists:Bool = (self.kitchens.count > 0)
         
         if(self.kitchens.count > 0)
         {
@@ -224,8 +224,8 @@ class KitchensTableViewController: UITableViewController,RefreshTableViewWhenImg
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let yourKitchensExists:Bool = (self.kitchens.count > 0)
-        let popularKitchensExists:Bool = (self.yourKitchens.count > 0)
+        let yourKitchensExists:Bool = (self.yourKitchens.count > 0)
+        let popularKitchensExists:Bool = (self.kitchens.count > 0)
         
         if(self.kitchens.count == 0)
         {
@@ -286,8 +286,8 @@ extension KitchensTableViewController: UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         
-        let yourKitchensExists:Bool = (self.kitchens.count > 0)
-        let popularKitchensExists:Bool = (self.yourKitchens.count > 0)
+        let yourKitchensExists:Bool = (self.yourKitchens.count > 0)
+        let popularKitchensExists:Bool = (self.kitchens.count > 0)
         
         if(yourKitchensExists && popularKitchensExists)
         {
@@ -322,8 +322,8 @@ extension KitchensTableViewController: UICollectionViewDelegate, UICollectionVie
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "specialKitchenCollectionViewCell",
                                                       for: indexPath) as! SpecialKitchenCollectionViewCell
-        let yourKitchensExists:Bool = (self.kitchens.count > 0)
-        let popularKitchensExists:Bool = (self.yourKitchens.count > 0)
+        let yourKitchensExists:Bool = (self.yourKitchens.count > 0)
+        let popularKitchensExists:Bool = (self.kitchens.count > 0)
         
         if(yourKitchensExists && popularKitchensExists)
         {

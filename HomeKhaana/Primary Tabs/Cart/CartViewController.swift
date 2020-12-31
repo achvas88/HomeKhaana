@@ -220,9 +220,12 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
             var noticeDays: Int = 0
             for choice in self.inCart
             {
-                if(noticeDays < (choice.noticeDays ?? 0))
+                if(choice.needsAdvanceNotice)
                 {
-                    noticeDays = choice.noticeDays! // we can force unwrap here because noticeDays can never by 0, hence it HAS to exist.
+                    if(noticeDays < (choice.noticeDays ?? 0))
+                    {
+                        noticeDays = choice.noticeDays! // we can force unwrap here because noticeDays can never by 0, hence it HAS to exist.
+                    }
                 }
             }
             let today = Date()
@@ -246,7 +249,7 @@ class CartViewController: UIViewController, UITableViewDataSource,PaymentSourceD
                 self.lblTime.text! = "\(dueDateString) (Today)"
                 self.lblTime.textColor = UIColor.systemGreen
             }
-            if(oldWhen != self.lblTime.text!)
+            if(oldWhen != self.lblTime.text! && oldWhen != "ASAP")
             {
                 showError(vc: self, message: "This order can be picked up on \(dueDateString)", title: "Order Due Date")
             }
