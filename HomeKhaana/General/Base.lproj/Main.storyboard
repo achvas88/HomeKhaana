@@ -1178,7 +1178,7 @@
                         <outlet property="lblItems" destination="XUZ-Qf-ao2" id="UHm-NI-4x5"/>
                         <outlet property="lblKitchen" destination="g1R-vY-O0q" id="XjL-oH-aEG"/>
                         <outlet property="lblQuantity" destination="SA2-z7-BaH" id="n5B-A5-FuH"/>
-                        <outlet property="stkVegetarian" destination="sPl-yg-dzP" id="Zrj-Ww-oHe"/>
+                        <outlet property="stkVegetarian" destination="8Gr-lG-dK0" id="M4H-o5-cbN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Clf-nB-4YA" userLabel="First Responder" sceneMemberID="firstResponder"/>

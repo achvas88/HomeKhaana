@@ -78,7 +78,15 @@ class OrdersTableViewCell: UITableViewCell {
             }
             else
             {
-                lblPickupTime.text! = "Not yet confirmed"
+                if(self.order!.status == "Completed")
+                {
+                    lblPickupTime.text! = "Order picked up"
+                    lblPickupTime.textColor = UIColor.systemGray
+                }
+                else
+                {
+                    lblPickupTime.text! = "Not yet confirmed"
+                }
             }
             lblStatus.text = self.order!.status
             lblWhere.text = DataManager.kitchens[self.order!.kitchenId]?.name
