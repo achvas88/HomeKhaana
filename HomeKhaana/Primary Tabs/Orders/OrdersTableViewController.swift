@@ -74,8 +74,8 @@ class OrdersTableViewController: UITableViewController {
         else
         {
             let cell = tableView.dequeueReusableCell(withIdentifier: "emptyOrder", for: indexPath) as! EmptyOrderTableViewCell
-            cell.mainText!.text = "Nothing here yet"
-            cell.subText!.text = "Order something for it to show up here"
+            cell.mainText!.text = "No orders yet"
+            cell.subText!.text = "¯\\_(ツ)_/¯"
             return cell
         }
     }
