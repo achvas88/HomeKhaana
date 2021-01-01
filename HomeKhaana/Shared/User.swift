@@ -56,9 +56,7 @@ final class User: NSObject{
             "defaultAddress": User.sharedInstance!.defaultAddress,
             "isKitchen": User.sharedInstance!.isKitchen,
             "latitude": User.sharedInstance!.latitude,
-            "longitude": User.sharedInstance!.longitude,
-            "rating": User.sharedInstance!.ratingHandler.rating,
-            "ratingCount": User.sharedInstance!.ratingHandler.ratingCount
+            "longitude": User.sharedInstance!.longitude
         ]
     }
     
@@ -209,16 +207,16 @@ final class User: NSObject{
     }
     
     //load user from server. Currently used by the rating control
-    public static func loadUserFromServer(userID: String,completion: @escaping (User?) -> Void)
+    public static func loadUserFromServer(userID: String,completion: @escaping (NSDictionary?) -> Void)
     {
-        db.child("Users").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
+        db.child("UserRatings").child(userID).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             let value = snapshot.value as? NSDictionary
             if(value == nil){
                 completion(nil)
             }
             else {
-                let userLoaded = User(dictionary: value!, id: userID)
+                let userLoaded = value!
                 completion(userLoaded)
             }
         });

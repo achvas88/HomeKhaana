@@ -46,11 +46,11 @@ class RatingHandler {
         var userRef: DatabaseReference
         if(self.isForKitchen)
         {
-            userRef = db.child("Kitchens/\(self.id)")
+            userRef = db.child("KitchenRatings/\(self.id)")
         }
         else
         {
-            userRef = db.child("Users/\(self.id)")
+            userRef = db.child("UserRatings/\(self.id)")
         }
         userRef.child("rating").setValue(self.rating)
         userRef.child("ratingCount").setValue(self.ratingCount)

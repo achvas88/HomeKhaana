@@ -13,7 +13,7 @@ import FirebaseDatabase
 class CurrentOrdersTableViewController: UITableViewController, CurrentOrderActionsDelegate {
     
     var currentOrders:[Order]?
-    var userBeingRated: User?
+    var ratingHandlerForUser: RatingHandler?
     var orderForChat:Order?
     
     override func viewDidLoad() {
@@ -190,12 +190,11 @@ class CurrentOrdersTableViewController: UITableViewController, CurrentOrderActio
 
     private func rateUser(order: Order)
     {
-        User.loadUserFromServer(userID: order.orderingUserID, completion: { (user) in
-            if(user != nil)
-            {
-                self.userBeingRated = user
-                self.performSegue(withIdentifier: "rateUser", sender: self)
-            }
+        User.loadUserFromServer(userID: order.orderingUserID, completion: { (userRatingDic) in
+            let userRating = userRatingDic?["rating"] as? Double
+            let userRatingCount = userRatingDic?["ratingCount"] as? Int
+            self.ratingHandlerForUser = RatingHandler(rating: userRating ?? -1, ratingCount: userRatingCount ?? 0, isForKitchen: false, id: order.orderingUserID)
+            self.performSegue(withIdentifier: "rateUser", sender: self)
         })
     }
     
@@ -258,9 +257,9 @@ class CurrentOrdersTableViewController: UITableViewController, CurrentOrderActio
         {
             let ratingVC: RatingViewController? = segue.destination as? RatingViewController
             
-            if(ratingVC != nil && self.userBeingRated != nil)
+            if(ratingVC != nil && self.ratingHandlerForUser != nil)
             {
-                ratingVC!.currentUser = self.userBeingRated
+                ratingVC!.currentUserRatingHandler = self.ratingHandlerForUser
             }
         }
         else if (segue.identifier == "chatKitchen")

@@ -14,6 +14,30 @@ const {Storage} = require('@google-cloud/storage');
 
 const storage = new Storage({projectId: "homekhaanamain"});
 
+exports.updateKitchenRating = functions.database.ref('/KitchenRatings/{kitchenId}/rating')
+.onWrite((change, context) => {
+    const newRating = change.after.val();
+    admin.database().ref(`/Kitchens/${context.params.kitchenId}/rating`).set(newRating);
+});
+         
+exports.updateKitchenRatingCount = functions.database.ref('/KitchenRatings/{kitchenId}/ratingCount')
+.onWrite((change, context) => {
+    const newRatingCount = change.after.val();
+    admin.database().ref(`/Kitchens/${context.params.kitchenId}/ratingCount`).set(newRatingCount);
+});
+         
+exports.updateUserRating2 = functions.database.ref('/UserRatings/{userId}/rating')
+.onWrite((change, context) => {
+    const newRating = change.after.val();
+    admin.database().ref(`/Users/${context.params.userId}/rating`).set(newRating);
+});
+      
+exports.updateUserRatingCount = functions.database.ref('/UserRatings/{userId}/ratingCount')
+.onWrite((change, context) => {
+    const newRatingCount = change.after.val();
+    admin.database().ref(`/Users/${context.params.userId}/ratingCount`).set(newRatingCount);
+});
+
 exports.sendChat = functions.database.ref('/CurrentOrders/{kitchenId}/{orderingUserID}/{orderID}/Chat/{chatID}')
 .onCreate((snap, context) => {
     const chatMessage = snap.val();

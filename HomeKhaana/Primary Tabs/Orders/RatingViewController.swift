@@ -14,7 +14,7 @@ class RatingViewController: UIViewController {
     @IBOutlet weak var stkRating: RatingControl!
     
     var currentOrder:Order?
-    var currentUser:User?
+    var currentUserRatingHandler:RatingHandler?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,13 +30,13 @@ class RatingViewController: UIViewController {
                 self.stkRating.rating = self.currentOrder!.orderRating!
             }
         }
-        else
-        {
-            if(self.currentUser!.ratingHandler.ratingThisSession != nil)
-            {
-                self.stkRating.rating = self.currentUser!.ratingHandler.ratingThisSession!
-            }
-        }
+//        else
+//        {
+//            if(self.currentUser!.ratingHandler.ratingThisSession != nil)
+//            {
+//                self.stkRating.rating = self.currentUser!.ratingHandler.ratingThisSession!
+//            }
+//        }
     }
     
     @IBAction func btnAcceptClicked(_ sender: Any) {
@@ -49,31 +49,32 @@ class RatingViewController: UIViewController {
         if(self.currentOrder != nil)
         {
             let kitchenId = self.currentOrder!.kitchenId
-            let kitchen:Kitchen? = DataManager.kitchens[kitchenId]
-            if(kitchen != nil)
+            if(kitchenId != "")
             {
-                if(self.currentOrder!.orderRating != nil && self.currentOrder!.orderRating != -1)
-                {
-                    kitchen!.ratingHandler.updateRating(oldRating: Double(self.currentOrder!.orderRating!), newRating: Double(stkRating!.rating))
-                }
-                else
-                {
-                    kitchen!.ratingHandler.addRating(rating: Double(stkRating!.rating))
-                }
+                //ensure that the newest ratings are obtained from the server
+                db.child("KitchenRatings").child(kitchenId).observeSingleEvent(of: .value, with: { (snapshot) in
+                    // Get user value
+                    let kitchenRatings = snapshot.value as? NSDictionary
+                    let rating = kitchenRatings?["rating"] as? Double
+                    let ratingCount = kitchenRatings?["ratingCount"] as? Int
+                    let ratingHandlerForKitchen = RatingHandler(rating: rating ?? -1, ratingCount: ratingCount ?? 0, isForKitchen: true, id: kitchenId)
+                    
+                    if(self.currentOrder!.orderRating != nil && self.currentOrder!.orderRating != -1)
+                    {
+                        ratingHandlerForKitchen.updateRating(oldRating: Double(self.currentOrder!.orderRating!), newRating: Double(self.stkRating!.rating)) //there may be a chance that the rating has not been updated yet from the previous save. This is going to be rare enough that I am ignoring this for now.
+                    }
+                    else
+                    {
+                        ratingHandlerForKitchen.addRating(rating: Double(self.stkRating!.rating))
+                    }
+                    self.currentOrder!.setRating(rating: self.stkRating!.rating)
+                    self.performSegue(withIdentifier: "returnAfterRating", sender: self)
+                });
             }
-            self.currentOrder!.setRating(rating: stkRating!.rating)
-            self.performSegue(withIdentifier: "returnAfterRating", sender: self)
         }
-        else if(self.currentUser != nil)  //if a kitchen is logged in, set the rating for the user.
+        else if(self.currentUserRatingHandler != nil)  //if a kitchen is logged in, set the rating for the user.
         {
-            if(self.currentUser!.ratingHandler.ratingThisSession != nil)
-            {
-                self.currentUser!.ratingHandler.updateRating(oldRating: Double(self.currentUser!.ratingHandler.ratingThisSession!), newRating: Double(self.stkRating!.rating))
-            }
-            else
-            {
-                self.currentUser!.ratingHandler.addRating(rating: Double(stkRating!.rating))
-            }
+            self.currentUserRatingHandler!.addRating(rating: Double(stkRating!.rating))
             self.dismiss(animated: true, completion: nil)
         }
     }
