@@ -15,7 +15,6 @@ class UserProfileViewController: UIViewController {
 
     @IBOutlet weak var btnPreferences: CustomUIButton!
     @IBOutlet weak var btnPayment: CustomUIButton!
-    @IBOutlet weak var btnHelp: CustomUIButton!
     @IBOutlet weak var btnFAQ: CustomUIButton!
     @IBOutlet weak var btnLogout: CustomUIButton!
     @IBOutlet weak var btnKitchenLogin: UIButton!
@@ -83,7 +82,6 @@ class UserProfileViewController: UIViewController {
     {
         self.btnPreferences.setImage(UIImage(named: "settings")?.withRenderingMode(.alwaysTemplate), for: .normal)
         self.btnPayment.setImage(UIImage(named: "credit-card")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        self.btnHelp.setImage(UIImage(named: "Help")?.withRenderingMode(.alwaysTemplate), for: .normal)
         self.btnFAQ.setImage(UIImage(named: "FAQ")?.withRenderingMode(.alwaysTemplate), for: .normal)
         self.btnKitchenLogin.setImage(UIImage(named: "chef")?.withRenderingMode(.alwaysTemplate), for: .normal)
         if(User.sharedInstance!.isKitchen)

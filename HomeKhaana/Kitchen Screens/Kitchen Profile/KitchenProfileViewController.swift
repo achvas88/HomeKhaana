@@ -16,7 +16,6 @@ class KitchenProfileViewController: UIViewController {
     @IBOutlet weak var stkKitchenRating: UIStackView!
     @IBOutlet weak var lblKitchenRating: UILabel!
     @IBOutlet weak var btnKitchenDetails: CustomUIButton!
-    @IBOutlet weak var btnHelp: CustomUIButton!
     @IBOutlet weak var btnFAQ: CustomUIButton!
     @IBOutlet weak var btnLogout: UIButton!
     
@@ -35,7 +34,6 @@ class KitchenProfileViewController: UIViewController {
     func setupButtons()
     {
         self.btnKitchenDetails.setImage(UIImage(named: "settings")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        self.btnHelp.setImage(UIImage(named: "Help")?.withRenderingMode(.alwaysTemplate), for: .normal)
         self.btnFAQ.setImage(UIImage(named: "FAQ")?.withRenderingMode(.alwaysTemplate), for: .normal)
         if #available(iOS 13.0, *) {
             self.btnLogout.backgroundColor = UIColor.secondarySystemBackground
