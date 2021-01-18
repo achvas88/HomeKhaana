@@ -103,9 +103,10 @@ class PaymentSourceTableViewController: UITableViewController {
     }
     
     @IBAction func btnAddPaymentClicked(_ sender: Any) {
-        let addCardViewController = STPAddCardViewController()
-        addCardViewController.delegate = self
-        navigationController?.pushViewController(addCardViewController, animated: true)
+        // uncomment after stripe integration
+//        let addCardViewController = STPAddCardViewController()
+//        addCardViewController.delegate = self
+//        navigationController?.pushViewController(addCardViewController, animated: true)
     }
     
     
@@ -191,101 +192,102 @@ class PaymentSourceTableViewController: UITableViewController {
     }*/
 }
 
+// uncomment after stripe integration
 //Credit Card Processing
-extension PaymentSourceTableViewController: STPAddCardViewControllerDelegate {
-    
-    func addCardViewControllerDidCancel(_ addCardViewController: STPAddCardViewController) {
-        navigationController?.popViewController(animated: true)
-    }
-    
-    func addCardViewController(_ addCardViewController: STPAddCardViewController,
-                               didCreateToken token: STPToken,
-                               completion: @escaping STPErrorBlock) {
-        
-        if (User.isUserInitialized)
-        {
-            
-            let id = User.sharedInstance!.id
-            
-            Database.database().reference().child("PaymentSources/\(id)").child(token.tokenId).setValue(token.card!.last4){
-                (error:Error?, ref:DatabaseReference) in
-                if let error = error {
-                    print("Error uploading user data: \(error).")
-                    completion(error)
-                } else {
-                    print("Added Payment!")
-                    completion(nil)
-                    self.setupLoadingIndicator()
-                    if(!self.alreadyListening!) { self.listenToPaymentSourceChanges() }
-                    self.navigationController?.popViewController(animated: true)
-                }
-            }
-        }
-    }
-    
-    func setupLoadingIndicator()
-    {
-        if(self.indicator == nil)
-        {
-            self.indicator  = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
-            self.indicator!.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-            self.indicator!.center = self.view.center
-            self.indicator!.hidesWhenStopped = true
-            self.view.addSubview(self.indicator!)
-            self.view.bringSubviewToFront(self.indicator!)
-            UIApplication.shared.isNetworkActivityIndicatorVisible = true
-            self.indicator!.startAnimating()
-        }
-        else
-        {
-            self.indicator!.startAnimating()
-        }
-        print("start Animating")
-    }
-    
-    func listenToPaymentSourceChanges()
-    {
-        let paymentSourcesRef = db.child("PaymentSources/\(Auth.auth().currentUser!.uid)")
-        paymentSourcesRef.observe(.value, with: { (snapshot) in
-            
-            User.sharedInstance!.paymentSources = []
-            
-            /*for card in snapshot.children {
-                if let snapshot = card as? DataSnapshot,
-                    let paymentSource = PaymentSource(snapshot: snapshot)
-                {
-                    if(!User.paymentIsMarkedForDeletion(paymentSource: paymentSource))
-                    {
-                        User.sharedInstance!.paymentSources!.append(paymentSource)
-                    }
-                }
-            }*/
-            
-            if(User.sharedInstance!.defaultPaymentSource == nil)
-            {
-                if(User.sharedInstance!.paymentSources!.count>0)
-                {
-                    User.sharedInstance!.defaultPaymentSource = User.sharedInstance!.paymentSources![0]
-                    self.selectedPayment = User.sharedInstance!.defaultPaymentSource
-                    self.paymentSourceDelegate?.updatePaymentSource(self.selectedPayment)
-                }
-            }
-            
-            if(self.selectedPayment == nil)
-            {
-                self.selectedPayment = User.sharedInstance!.defaultPaymentSource
-                self.paymentSourceDelegate?.updatePaymentSource(self.selectedPayment)
-            }
-            
-            // so the very first time the indicator doesnt stop animating because we know that a payment source has been added but it
-            // is not yet reflected in the table view controller because the paymentSources has not yet updated.
-            if(self.alreadyListening! == true) {
-                self.indicator!.stopAnimating()
-                UIApplication.shared.isNetworkActivityIndicatorVisible = false
-            }
-            print("stop Animating")
-            self.tableView.reloadData()
-            self.alreadyListening = true
-        })
-    }
-}
+//extension PaymentSourceTableViewController: STPAddCardViewControllerDelegate {
+//
+//    func addCardViewControllerDidCancel(_ addCardViewController: STPAddCardViewController) {
+//        navigationController?.popViewController(animated: true)
+//    }
+//
+//    func addCardViewController(_ addCardViewController: STPAddCardViewController,
+//                               didCreateToken token: STPToken,
+//                               completion: @escaping STPErrorBlock) {
+//
+//        if (User.isUserInitialized)
+//        {
+//
+//            let id = User.sharedInstance!.id
+//
+//            Database.database().reference().child("PaymentSources/\(id)").child(token.tokenId).setValue(token.card!.last4){
+//                (error:Error?, ref:DatabaseReference) in
+//                if let error = error {
+//                    print("Error uploading user data: \(error).")
+//                    completion(error)
+//                } else {
+//                    print("Added Payment!")
+//                    completion(nil)
+//                    self.setupLoadingIndicator()
+//                    if(!self.alreadyListening!) { self.listenToPaymentSourceChanges() }
+//                    self.navigationController?.popViewController(animated: true)
+//                }
+//            }
+//        }
+//    }
+//
+//    func setupLoadingIndicator()
+//    {
+//        if(self.indicator == nil)
+//        {
+//            self.indicator  = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
+//            self.indicator!.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+//            self.indicator!.center = self.view.center
+//            self.indicator!.hidesWhenStopped = true
+//            self.view.addSubview(self.indicator!)
+//            self.view.bringSubviewToFront(self.indicator!)
+//            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+//            self.indicator!.startAnimating()
+//        }
+//        else
+//        {
+//            self.indicator!.startAnimating()
+//        }
+//        print("start Animating")
+//    }
+//
+//    func listenToPaymentSourceChanges()
+//    {
+//        let paymentSourcesRef = db.child("PaymentSources/\(Auth.auth().currentUser!.uid)")
+//        paymentSourcesRef.observe(.value, with: { (snapshot) in
+//
+//            User.sharedInstance!.paymentSources = []
+//
+//            /*for card in snapshot.children {
+//                if let snapshot = card as? DataSnapshot,
+//                    let paymentSource = PaymentSource(snapshot: snapshot)
+//                {
+//                    if(!User.paymentIsMarkedForDeletion(paymentSource: paymentSource))
+//                    {
+//                        User.sharedInstance!.paymentSources!.append(paymentSource)
+//                    }
+//                }
+//            }*/
+//
+//            if(User.sharedInstance!.defaultPaymentSource == nil)
+//            {
+//                if(User.sharedInstance!.paymentSources!.count>0)
+//                {
+//                    User.sharedInstance!.defaultPaymentSource = User.sharedInstance!.paymentSources![0]
+//                    self.selectedPayment = User.sharedInstance!.defaultPaymentSource
+//                    self.paymentSourceDelegate?.updatePaymentSource(self.selectedPayment)
+//                }
+//            }
+//
+//            if(self.selectedPayment == nil)
+//            {
+//                self.selectedPayment = User.sharedInstance!.defaultPaymentSource
+//                self.paymentSourceDelegate?.updatePaymentSource(self.selectedPayment)
+//            }
+//
+//            // so the very first time the indicator doesnt stop animating because we know that a payment source has been added but it
+//            // is not yet reflected in the table view controller because the paymentSources has not yet updated.
+//            if(self.alreadyListening! == true) {
+//                self.indicator!.stopAnimating()
+//                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+//            }
+//            print("stop Animating")
+//            self.tableView.reloadData()
+//            self.alreadyListening = true
+//        })
+//    }
+//}

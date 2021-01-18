@@ -11,7 +11,7 @@ import Firebase
 import FirebaseAuth
 import GoogleSignIn
 
-class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDelegate{ //}, FBSDKLoginButtonDelegate  {
+class SignUpViewController: UIViewController, GIDSignInDelegate{ //}, FBSDKLoginButtonDelegate  {
     
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var txtEmail: UITextField!
@@ -85,7 +85,8 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
     // Google Sign In ----------------------------------------------
     @IBAction func btnGoogleClicked(_ sender: Any) {
         GIDSignIn.sharedInstance().delegate=self
-        GIDSignIn.sharedInstance().uiDelegate=self
+        GIDSignIn.sharedInstance()?.presentingViewController = self
+        
         GIDSignIn.sharedInstance().signIn()
     }
     
@@ -98,7 +99,7 @@ class SignUpViewController: UIViewController, GIDSignInUIDelegate, GIDSignInDele
         
         guard let authentication = user.authentication else { return }
         let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken, accessToken: authentication.accessToken)
-        Auth.auth().signInAndRetrieveData(with: credential)
+        Auth.auth().signIn(with: credential)
         {
             (user, error) in
             if (error == nil)

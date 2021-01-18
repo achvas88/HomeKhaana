@@ -61,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     }
     
     func jumpToHomeScreenIfApplicable() {
-        if ((GIDSignIn.sharedInstance().hasAuthInKeychain() == true) || Auth.auth().currentUser != nil) {
+        if ((GIDSignIn.sharedInstance()?.hasPreviousSignIn() == true) || Auth.auth().currentUser != nil) {
             // User is logged in, use 'accessToken' here.
             
             // get your storyboard
@@ -78,12 +78,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        let googleAuthentication =  GIDSignIn.sharedInstance().handle(url, sourceApplication:options[UIApplication.OpenURLOptionsKey.sourceApplication] as? String, annotation: [:])
+        let googleAuthentication =  GIDSignIn.sharedInstance().handle(url)
         return googleAuthentication
     }
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        let googleAuthentication =  GIDSignIn.sharedInstance().handle(url,sourceApplication: sourceApplication, annotation: annotation)
+        let googleAuthentication =  GIDSignIn.sharedInstance().handle(url)
         return googleAuthentication
     }
 
@@ -208,10 +208,14 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 
 extension AppDelegate : MessagingDelegate {
     // [START refresh_token]
-    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-        print("Firebase registration token: \(fcmToken)")
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        if(fcmToken == nil)
+        {
+            return
+        }
+        print("Firebase registration token: \(fcmToken!)")
         
-        let dataDict:[String: String] = ["token": fcmToken]
+        let dataDict:[String: String] = ["token": fcmToken!]
         NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
         // TODO: If necessary send token to application server.
         // Note: This callback is fired at each app startup and whenever a new token is generated.
