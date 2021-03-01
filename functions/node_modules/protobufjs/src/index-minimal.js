@@ -27,10 +27,10 @@ protobuf.configure    = configure;
  * @returns {undefined}
  */
 function configure() {
-    protobuf.Reader._configure(protobuf.BufferReader);
     protobuf.util._configure();
+    protobuf.Writer._configure(protobuf.BufferWriter);
+    protobuf.Reader._configure(protobuf.BufferReader);
 }
 
-// Configure serialization
-protobuf.Writer._configure(protobuf.BufferWriter);
+// Set up buffer utility according to the environment
 configure();

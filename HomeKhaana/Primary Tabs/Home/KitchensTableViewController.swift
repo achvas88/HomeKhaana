@@ -15,12 +15,62 @@ class KitchensTableViewController: UITableViewController,RefreshTableViewWhenImg
     var yourKitchensStoredOffset: CGFloat = 0.0
     var popularKitchensStoredOffset: CGFloat = 0.0
     var popularKitchens: [Kitchen] = []
+    var userSetupComplete: Bool = false;
+    let locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
+        
+        if(User.sharedInstance!.latitude == -1 || User.sharedInstance!.longitude == -1 || DataManager.kitchens.count == 0)
+        {
+            //user setup likely not complete. Try reinitializing again...
+            userSetupComplete = false
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestWhenInUseAuthorization()
+        }
+        else
+        {
+            userSetupComplete = true
+        }
     }
 
+    func getLocation()
+    {
+        LoaderController.sharedInstance.showLoader(indicatorText: "Getting Location", holdingView: self.view)
+        locationManager.requestLocation()
+    }
+    
+    func moveOn()
+    {
+        LoaderController.sharedInstance.removeLoader();
+        userSetupComplete = true;
+        UserDataManager.loadKitchens(completion: loadInitial);
+    }
+    
+    func showLocationDisabledPopUp() {
+        
+        LoaderController.sharedInstance.removeLoader()
+        
+        let alertController = UIAlertController(title: "Unable to get location",
+                                                message: "Please check your settings and try again. We need your location to show kitchens near you",
+                                                preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        let openAction = UIAlertAction(title: "Open Settings", style: .default) { (action) in
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(url, options: [:], completionHandler:
+                    nil)
+            }
+        }
+        alertController.addAction(openAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     func setupNavigationBar()
     {
         // Create a navView to add to the navigation bar
@@ -54,11 +104,22 @@ class KitchensTableViewController: UITableViewController,RefreshTableViewWhenImg
         navView.sizeToFit()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    func loadInitial() {
         self.kitchens = DataManager.getKitchens()
         self.yourKitchens = DataManager.getUserFavoriteKitchens()
         self.popularKitchens = DataManager.getKitchens(onlyPopular: true)
         self.tableView.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if(userSetupComplete)
+        {
+            loadInitial()
+        }
+        else
+        {
+            getLocation()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -351,5 +412,31 @@ extension KitchensTableViewController: UICollectionViewDelegate, UICollectionVie
             }
         }
         return cell
+    }
+}
+
+
+extension KitchensTableViewController : CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            locationManager.requestLocation()
+            LoaderController.sharedInstance.showLoader(indicatorText: "", holdingView: self.view)
+        }
+        else if status == .denied || status == .restricted  {
+            showLocationDisabledPopUp()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            User.sharedInstance!.latitude = location.coordinate.latitude
+            User.sharedInstance!.longitude = location.coordinate.longitude
+            moveOn()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        showLocationDisabledPopUp()
     }
 }

@@ -14,7 +14,17 @@ class UserDataManager {
     // load all kitchens
     public static func initData(completion: @escaping () -> ()) -> Void {
         LoaderController.sharedInstance.updateTitle(title: "Loading Service Providers")
-        let kitchensRef = db.child("Kitchens")
+        if(User.sharedInstance!.latitude == -1 || User.sharedInstance!.longitude == -1)
+        {
+            completion();   //you cannot yet load the kitchens for the user as the location is not yet known!
+        }
+        loadKitchens(completion: completion);
+    }
+    
+    public static func loadKitchens(completion: @escaping () -> ())
+    {
+        let userLocation = String(Int(round(User.sharedInstance!.latitude))) + ":" + String(Int(round(User.sharedInstance!.longitude)))
+        let kitchensRef = db.child("Kitchens/ByLocation/\(userLocation)")
         kitchensRef.observe(.value, with: { (snapshot) in
             DataManager.kitchens = [:]
             for kitchenChild in snapshot.children {
@@ -28,6 +38,65 @@ class UserDataManager {
             }
             loadDistanceOfKitchensFromUser(completion: completion)
         })
+    }
+    
+    public static func loadDistanceOfKitchensFromUser(completion: @escaping () -> ())
+    {
+        LoaderController.sharedInstance.updateTitle(title: "Triangulating")
+        
+        DataManager.kitchenDistancesToBeCalculated = DataManager.kitchens.count
+        if(DataManager.kitchens.count > 0)
+        {
+            for (_, kitchen) in DataManager.kitchens {
+                calculateDistanceOfKitchenFromCurrentUser(kitchen: kitchen, completion: completion)
+            }
+        }
+        else
+        {
+            completion();
+        }
+    }
+    
+    
+    public static func calculateDistanceOfKitchenFromCurrentUser(kitchen: Kitchen, completion: @escaping () -> ()) -> Void
+    {
+        let location1 =  User.sharedInstance!.userLocation.coordinate
+        let location2 =  kitchen.kitchenLocation.coordinate
+        let mapItemLoc1 = MKMapItem(placemark: MKPlacemark(coordinate: location1))
+        let mapItemLoc2 = MKMapItem(placemark: MKPlacemark(coordinate: location2))
+        
+        let req = MKDirections.Request()
+        req.source = mapItemLoc1
+        req.destination = mapItemLoc2
+        let dir = MKDirections(request:req)
+        dir.calculate { response, error in
+            
+            DataManager.kitchenDistancesToBeCalculated = DataManager.kitchenDistancesToBeCalculated-1
+            guard let response = response else {
+                // if error in route calculation, just print out direct distance.
+                let distance:CLLocationDistance = User.sharedInstance!.userLocation.distance(from: kitchen.kitchenLocation)
+                let distanceInMiles:Double = distance * 0.62137 / 1000
+                kitchen.distanceInMiles = distanceInMiles
+                let distanceStr = NSString(format: "~ %.2f mi", distanceInMiles)
+                kitchen.distanceFromLoggedInUser = (distanceStr as String)
+                
+                if(DataManager.kitchenDistancesToBeCalculated == 0)
+                {
+                    completion()
+                }
+                return
+            }
+            let route:MKRoute = response.routes[0]
+            let distance = route.distance
+            let distanceInMiles:Double = distance * 0.62137 / 1000
+            kitchen.distanceInMiles = distanceInMiles
+            let distanceStr = NSString(format: "%.2f mi", distanceInMiles)
+            kitchen.distanceFromLoggedInUser = (distanceStr as String)
+            if(DataManager.kitchenDistancesToBeCalculated == 0)
+            {
+                completion()
+            }
+        }
     }
     
     //saves user data to the database

@@ -17,15 +17,109 @@ const storage = new Storage({projectId: "homekhaanamain"});
 exports.updateKitchenRating = functions.database.ref('/KitchenRatings/{kitchenId}/rating')
 .onWrite((change, context) => {
     const newRating = change.after.val();
-    admin.database().ref(`/Kitchens/${context.params.kitchenId}/rating`).set(newRating);
+    admin.database().ref(`/Kitchens/ByID/${context.params.kitchenId}/rating`).set(newRating);
 });
          
 exports.updateKitchenRatingCount = functions.database.ref('/KitchenRatings/{kitchenId}/ratingCount')
 .onWrite((change, context) => {
     const newRatingCount = change.after.val();
-    admin.database().ref(`/Kitchens/${context.params.kitchenId}/ratingCount`).set(newRatingCount);
+    admin.database().ref(`/Kitchens/ByID/${context.params.kitchenId}/ratingCount`).set(newRatingCount);
 });
-         
+
+exports.deleteKitchen = functions.database.ref('/Kitchens/ByID/{kitchenId}')
+.onDelete((snap, context) => {
+    const kitchen = snap.val();
+    updateCoordinatesNodesForKitchen(context.params.kitchenId, kitchen, true);
+});
+
+function updateCoordinatesNodesForKitchen(kitchenId, kitchen, forKilling) {
+    const kLat = kitchen.latitude;
+    const kLong = kitchen.longitude;
+    
+    const kLatFloor = Math.floor(kLat);
+    const kLatCeil = Math.ceil(kLat);
+    const kLongFloor = Math.floor(kLong);
+    const kLongCeil = Math.ceil(kLong);
+ 
+    const kCorr1 = kLatFloor + ":" + kLongFloor;
+    const kCorr2 = kLatFloor + ":" + kLongCeil;
+    const kCorr3 = kLatCeil + ":" + kLongFloor;
+    const kCorr4 = kLatCeil + ":" + kLongCeil;
+    
+    if(forKilling)
+    {
+        killCoordinateNodesForKitchen(kCorr1, kCorr2, kCorr3, kCorr4, kitchenId)
+    }
+    else
+    {
+        setCoordinateNodesForKitchen(kCorr1, kCorr2, kCorr3, kCorr4, kitchenId, kitchen)
+    }
+}
+
+function killCoordinateNodesForKitchen(kCorr1,kCorr2,kCorr3,kCorr4,kitchenId)
+{
+    admin.database().ref(`/Kitchens/ByLocation/${kCorr1}/${kitchenId}`).remove();
+    admin.database().ref(`/Kitchens/ByLocation/${kCorr2}/${kitchenId}`).remove();
+    admin.database().ref(`/Kitchens/ByLocation/${kCorr3}/${kitchenId}`).remove();
+    admin.database().ref(`/Kitchens/ByLocation/${kCorr4}/${kitchenId}`).remove();
+}
+
+function setCoordinateNodesForKitchen(kCorr1,kCorr2,kCorr3,kCorr4,kitchenId, kitchen)
+{
+    admin.database().ref(`/Kitchens/ByLocation/${kCorr1}/${kitchenId}`).set(kitchen);
+    admin.database().ref(`/Kitchens/ByLocation/${kCorr2}/${kitchenId}`).set(kitchen);
+    admin.database().ref(`/Kitchens/ByLocation/${kCorr3}/${kitchenId}`).set(kitchen);
+    admin.database().ref(`/Kitchens/ByLocation/${kCorr4}/${kitchenId}`).set(kitchen);
+}
+
+exports.updateKitchensAtCoordinates = functions.database.ref('/Kitchens/ByID/{kitchenId}')
+.onWrite((change, context) => {
+    const kitchenBef = change.before.val();
+    const kitchen = change.after.val();
+    
+    updateCoordinatesNodesForKitchen(context.params.kitchenId, kitchenBef, true); //kill previous kichen coordinate nodes
+    updateCoordinatesNodesForKitchen(context.params.kitchenId, kitchen, false); //set new ones
+    
+//    //get the latitudes/longitudes
+//    const kLatBef = kitchenBef.latitude;
+//    const kLongBef = kitchenBef.longitude;
+//    const kLat = kitchen.latitude;
+//    const kLong = kitchen.longitude;
+//
+//    //get ceil and floor values. This will give a radius of 120 sq km. Okay for now.
+//    const kLatFloorBef = Math.floor(kLatBef);
+//    const kLatCeilBef = Math.ceil(kLatBef);
+//    const kLongFloorBef = Math.floor(kLongBef);
+//    const kLongCeilBef = Math.ceil(kLongBef);
+//    const kLatFloor = Math.floor(kLat);
+//    const kLatCeil = Math.ceil(kLat);
+//    const kLongFloor = Math.floor(kLong);
+//    const kLongCeil = Math.ceil(kLong);
+//
+//    //location string to store the kitchen into
+//    const kCorr1Bef = kLatFloorBef + ":" + kLongFloorBef;
+//    const kCorr2Bef = kLatFloorBef + ":" + kLongCeilBef;
+//    const kCorr3Bef = kLatCeilBef + ":" + kLongFloorBef;
+//    const kCorr4Bef = kLatCeilBef + ":" + kLongCeilBef;
+//    const kCorr1 = kLatFloor + ":" + kLongFloor;
+//    const kCorr2 = kLatFloor + ":" + kLongCeil;
+//    const kCorr3 = kLatCeil + ":" + kLongFloor;
+//    const kCorr4 = kLatCeil + ":" + kLongCeil;
+//
+//    //kill the kitchen nodes in the previous locations
+//    admin.database().ref(`/Kitchens/ByLocation/${kCorr1Bef}/${context.params.kitchenId}`).remove();
+//    admin.database().ref(`/Kitchens/ByLocation/${kCorr2Bef}/${context.params.kitchenId}`).remove();
+//    admin.database().ref(`/Kitchens/ByLocation/${kCorr3Bef}/${context.params.kitchenId}`).remove();
+//    admin.database().ref(`/Kitchens/ByLocation/${kCorr4Bef}/${context.params.kitchenId}`).remove();
+//
+//
+//    //set the kitchen nodes in the new locations
+//    admin.database().ref(`/Kitchens/ByLocation/${kCorr1}/${context.params.kitchenId}`).set(kitchen);
+//    admin.database().ref(`/Kitchens/ByLocation/${kCorr2}/${context.params.kitchenId}`).set(kitchen);
+//    admin.database().ref(`/Kitchens/ByLocation/${kCorr3}/${context.params.kitchenId}`).set(kitchen);
+//    admin.database().ref(`/Kitchens/ByLocation/${kCorr4}/${context.params.kitchenId}`).set(kitchen);
+});
+
 exports.updateUserRating2 = functions.database.ref('/UserRatings/{userId}/rating')
 .onWrite((change, context) => {
     const newRating = change.after.val();

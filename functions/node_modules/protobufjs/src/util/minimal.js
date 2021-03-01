@@ -26,6 +26,27 @@ util.pool = require("@protobufjs/pool");
 util.LongBits = require("./longbits");
 
 /**
+ * Whether running within node or not.
+ * @memberof util
+ * @type {boolean}
+ */
+util.isNode = Boolean(typeof global !== "undefined"
+                   && global
+                   && global.process
+                   && global.process.versions
+                   && global.process.versions.node);
+
+/**
+ * Global object reference.
+ * @memberof util
+ * @type {Object}
+ */
+util.global = util.isNode && global
+           || typeof window !== "undefined" && window
+           || typeof self   !== "undefined" && self
+           || this; // eslint-disable-line no-invalid-this
+
+/**
  * An immuable empty array.
  * @memberof util
  * @type {Array.<*>}
@@ -39,14 +60,6 @@ util.emptyArray = Object.freeze ? Object.freeze([]) : /* istanbul ignore next */
  * @const
  */
 util.emptyObject = Object.freeze ? Object.freeze({}) : /* istanbul ignore next */ {}; // used on prototypes
-
-/**
- * Whether running within node or not.
- * @memberof util
- * @type {boolean}
- * @const
- */
-util.isNode = Boolean(global.process && global.process.versions && global.process.versions.node);
 
 /**
  * Tests if the specified value is an integer.
@@ -164,7 +177,9 @@ util.Array = typeof Uint8Array !== "undefined" ? Uint8Array /* istanbul ignore n
  * Long.js's Long class if available.
  * @type {Constructor<Long>}
  */
-util.Long = /* istanbul ignore next */ global.dcodeIO && /* istanbul ignore next */ global.dcodeIO.Long || util.inquire("long");
+util.Long = /* istanbul ignore next */ util.global.dcodeIO && /* istanbul ignore next */ util.global.dcodeIO.Long
+         || /* istanbul ignore next */ util.global.Long
+         || util.inquire("long");
 
 /**
  * Regular expression used to verify 2 bit (`bool`) map keys.
@@ -259,7 +274,7 @@ function newError(name) {
         if (Error.captureStackTrace) // node
             Error.captureStackTrace(this, CustomError);
         else
-            Object.defineProperty(this, "stack", { value: (new Error()).stack || "" });
+            Object.defineProperty(this, "stack", { value: new Error().stack || "" });
 
         if (properties)
             merge(this, properties);
@@ -383,6 +398,7 @@ util.toJSONOptions = {
     json: true
 };
 
+// Sets up buffer utility according to the environment (called in index-minimal)
 util._configure = function() {
     var Buffer = util.Buffer;
     /* istanbul ignore if */

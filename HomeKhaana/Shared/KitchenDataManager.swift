@@ -19,7 +19,7 @@ class KitchenDataManager {
         LoaderController.sharedInstance.updateTitle(title: "Loading...")
         
         let kitchenId:String = User.sharedInstance!.id
-        db.child("Kitchens").child(kitchenId).observeSingleEvent(of: .value, with: { (snapshot) in
+        db.child("Kitchens/ByID/").child(kitchenId).observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             if(value != nil)
             {
@@ -38,7 +38,7 @@ class KitchenDataManager {
         
         if(currentKitchen != nil)
         {
-            let kitchenRef = db.child("Kitchens/\(id)")
+            let kitchenRef = db.child("Kitchens/ByID/\(id)")
             kitchenRef.updateChildValues(currentKitchen!.dictionary, withCompletionBlock: {
                 (error:Error?, ref:DatabaseReference) in
                 

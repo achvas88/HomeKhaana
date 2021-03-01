@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="g9I-37-HDr">
-                                <rect key="frame" x="5" y="227" width="365" height="213"/>
+                                <rect key="frame" x="5" y="244.5" width="365" height="178"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jqP-RX-yl5">
                                         <rect key="frame" x="82.5" y="0.0" width="200" height="44"/>
@@ -75,13 +75,6 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hcM-u0-rh3">
-                                        <rect key="frame" x="138" y="183" width="89" height="30"/>
-                                        <state key="normal" title="Kitchen User"/>
-                                        <connections>
-                                            <action selector="kitchenUser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NPG-UY-xip"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="7wC-8I-aCX" firstAttribute="width" secondItem="g9I-37-HDr" secondAttribute="width" constant="-50" id="Tcr-2G-ODi"/>
@@ -98,7 +91,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vegetables" translatesAutoresizingMaskIntoConstraints="NO" id="XVo-uA-1sg">
-                                <rect key="frame" x="171.5" y="155" width="32" height="32"/>
+                                <rect key="frame" x="171.5" y="172.5" width="32" height="32"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -190,7 +183,7 @@
                                 <state key="normal" title="Next"/>
                                 <connections>
                                     <action selector="btnSureClicked:" destination="2pD-jY-eIC" eventType="touchUpInside" id="mI9-wv-EOB"/>
-                                    <segue destination="O6n-Uq-Cpw" kind="show" id="liz-Ym-Opp"/>
+                                    <segue destination="O6n-Uq-Cpw" kind="presentation" modalPresentationStyle="fullScreen" id="liz-Ym-Opp"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -221,7 +214,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="oPF-s4-a6e">
-                                <rect key="frame" x="45.5" y="217" width="284" height="93"/>
+                                <rect key="frame" x="45.5" y="227" width="284" height="93"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder 2" translatesAutoresizingMaskIntoConstraints="NO" id="a5q-j4-8tS">
                                         <rect key="frame" x="112" y="0.0" width="60" height="60"/>
@@ -239,13 +232,13 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We only use location to find services nearest to you" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nFM-2k-o4y">
-                                <rect key="frame" x="0.0" y="360" width="375" height="18"/>
+                                <rect key="frame" x="0.0" y="370" width="375" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" systemColor="secondaryLabelColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ctm-K1-jEY">
-                                <rect key="frame" x="0.0" y="587" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="607" width="375" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="p8B-FN-Qr4"/>
                                 </constraints>
@@ -257,7 +250,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Jo9-Yy-D9V"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="nFM-2k-o4y" firstAttribute="centerX" secondItem="Jo9-Yy-D9V" secondAttribute="centerX" id="2QZ-dJ-Int"/>
                             <constraint firstItem="oPF-s4-a6e" firstAttribute="centerY" secondItem="Jo9-Yy-D9V" secondAttribute="centerY" constant="-60" id="AKC-dx-liO"/>
@@ -269,6 +262,7 @@
                             <constraint firstItem="ctm-K1-jEY" firstAttribute="width" secondItem="Hu8-uL-pk5" secondAttribute="width" id="v4r-IQ-byJ"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="mtP-EA-A4k"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DYA-JF-GOI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -337,7 +331,7 @@
                                 <rect key="frame" x="172.5" y="617" width="30" height="30"/>
                                 <state key="normal" title="OK"/>
                                 <connections>
-                                    <segue destination="BCx-ix-CQG" kind="presentation" id="rDr-KS-uJ9"/>
+                                    <segue destination="ls0-u9-fAh" kind="presentation" modalPresentationStyle="fullScreen" id="IyY-kg-9uR"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="3: PICK-UP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydW-1z-CBv">
@@ -354,7 +348,7 @@
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="q0w-by-u8w"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="o7U-62-AEZ" firstAttribute="top" secondItem="VJ4-Lg-vDm" secondAttribute="bottom" constant="50" id="4Ll-nm-U1Y"/>
                             <constraint firstItem="VJ4-Lg-vDm" firstAttribute="leading" secondItem="q0w-by-u8w" secondAttribute="leading" constant="28" id="7Xk-SD-Q7n"/>
@@ -397,7 +391,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="aZg-cf-ik9">
-                                <rect key="frame" x="0.0" y="565" width="375" height="28"/>
+                                <rect key="frame" x="0.0" y="585" width="375" height="28"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JvU-b9-Gv1">
                                         <rect key="frame" x="0.0" y="0.0" width="187.5" height="28"/>
@@ -422,7 +416,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="deU-dR-nr3">
-                                <rect key="frame" x="104.5" y="86" width="166.5" height="167.5"/>
+                                <rect key="frame" x="104.5" y="74" width="166.5" height="167.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="Lhw-fc-qRG">
                                         <rect key="frame" x="33" y="0.0" width="100" height="100"/>
@@ -454,7 +448,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="wa9-lf-UBp">
-                                <rect key="frame" x="5" y="283.5" width="365" height="100"/>
+                                <rect key="frame" x="5" y="271.5" width="365" height="100"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZF1-Mg-5Bn" customClass="CustomUIButton" customModule="HomeKhaana" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="365" height="30"/>
@@ -501,7 +495,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Qa-BY-L4a">
-                                <rect key="frame" x="0.0" y="515" width="375" height="45"/>
+                                <rect key="frame" x="0.0" y="535" width="375" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="3No-A9-VCO"/>
                                 </constraints>
@@ -551,6 +545,7 @@
         <scene sceneID="0iF-du-dhb">
             <objects>
                 <tabBarController storyboardIdentifier="UserHome" id="BCx-ix-CQG" customClass="HomeTabBarController" customModule="HomeKhaana" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="LeX-bq-F1V"/>
                     <tabBar key="tabBar" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" id="tCR-hK-6rc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -572,24 +567,24 @@
             <objects>
                 <viewController id="6i5-dl-kRg" customClass="KitchenViewController" customModule="HomeKhaana" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dUD-6Z-3bT">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="967"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="k9r-cH-cO3">
-                                <rect key="frame" x="0.0" y="56" width="375" height="250"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="250"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="IZ7-Q0-vUX"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nO4-5G-4rl" userLabel="kitchenNameBG">
-                                <rect key="frame" x="0.0" y="226" width="375" height="80"/>
+                                <rect key="frame" x="0.0" y="214" width="375" height="80"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="Eiv-aF-j2I"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="7tT-XJ-yTq" userLabel="kitchenNameStack">
-                                <rect key="frame" x="45" y="236.5" width="315" height="64.5"/>
+                                <rect key="frame" x="45" y="224.5" width="315" height="64.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amma's Kitchen" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Qt-qJ-ZsK">
                                         <rect key="frame" x="0.0" y="0.0" width="315" height="20.5"/>
@@ -638,7 +633,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="fill" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ITl-B8-3Gi">
-                                <rect key="frame" x="5" y="61" width="32" height="32"/>
+                                <rect key="frame" x="5" y="49" width="32" height="32"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="6sf-Dw-AVa"/>
@@ -669,10 +664,10 @@
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aCe-mR-wE9">
-                                <rect key="frame" x="0.0" y="306" width="375" height="592"/>
+                                <rect key="frame" x="0.0" y="294" width="375" height="624"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Voy-5I-NkX" userLabel="tblMnuItems">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="592"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="624"/>
                                         <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                         <color key="sectionIndexBackgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                         <prototypes>
@@ -1197,13 +1192,13 @@
                                         <rect key="frame" x="0.0" y="15" width="250" height="130"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RATING" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qzS-CE-fL3">
-                                                <rect key="frame" x="94" y="0.0" width="62" height="19"/>
+                                                <rect key="frame" x="94" y="0.0" width="62" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                 <color key="textColor" systemColor="systemOrangeColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bQG-0c-rDg" customClass="RatingControl" customModule="HomeKhaana" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="27" width="250" height="50"/>
+                                                <rect key="frame" x="0.0" y="28.5" width="250" height="48.5"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="size" keyPath="starSize">
                                                         <size key="value" width="50" height="50"/>
@@ -1618,7 +1613,7 @@
                                         <rect key="frame" x="5" y="145" width="365" height="30"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="left" translatesAutoresizingMaskIntoConstraints="NO" id="z4Q-pL-Ylw" customClass="RatingControl" customModule="HomeKhaana" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="153" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
                                                 <color key="backgroundColor" systemColor="systemFillColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="ZxA-2n-n8A"/>
@@ -1631,7 +1626,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OME-OR-BPd">
-                                                <rect key="frame" x="158" y="0.0" width="127" height="30"/>
+                                                <rect key="frame" x="155" y="0.0" width="130" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <state key="normal" title=" Chat with Kitchen ">
@@ -1755,17 +1750,17 @@
             <objects>
                 <viewController title="User Preferences" id="VGf-9h-Wt0" customClass="UserPreferencesViewController" customModule="HomeKhaana" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fCO-qk-vxo">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="USER PREFERENCES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ShP-6N-G3u">
-                                <rect key="frame" x="95" y="156" width="185" height="23"/>
+                                <rect key="frame" x="95" y="144" width="185" height="23"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                 <color key="textColor" systemColor="systemOrangeColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="AQI-Bw-rpp">
-                                <rect key="frame" x="20" y="229" width="335" height="31"/>
+                                <rect key="frame" x="20" y="217" width="335" height="31"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="7r4-QW-5CW">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="31"/>
@@ -1786,7 +1781,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JMc-jW-DeV">
-                                <rect key="frame" x="170.5" y="548" width="34" height="30"/>
+                                <rect key="frame" x="170.5" y="568" width="34" height="30"/>
                                 <state key="normal" title="Save"/>
                                 <connections>
                                     <action selector="btnClose:" destination="VGf-9h-Wt0" eventType="touchUpInside" id="ngJ-iO-5R0"/>
@@ -1820,7 +1815,7 @@
             <objects>
                 <tableViewController id="KmN-EH-RGJ" customClass="KitchensTableViewController" customModule="HomeKhaana" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="skS-t3-Fdm">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
@@ -2052,7 +2047,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="Orders" id="PUF-4e-HT5" customClass="OrdersTableViewController" customModule="HomeKhaana" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="370" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="nrH-jM-a8E">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
@@ -2083,13 +2078,13 @@
                                                     <rect key="frame" x="15" y="135" width="325" height="30"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XJY-Ic-mT4" customClass="RatingControl" customModule="HomeKhaana" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="0.0" width="160" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="PkC-AZ-bgx"/>
                                                             </constraints>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready for Pick-Up" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p76-rV-3nN">
-                                                            <rect key="frame" x="165" y="0.0" width="160" height="30"/>
+                                                            <rect key="frame" x="155" y="0.0" width="170" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" id="6dh-l7-ZeR"/>
                                                             </constraints>
@@ -2632,7 +2627,7 @@
                     <tabBarItem key="tabBarItem" title="" image="user tab" id="YIQ-L9-kJh"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="KPe-Fs-RZT">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -2649,7 +2644,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="PaymentSources" id="9fq-Ab-qtc" customClass="PaymentSourceTableViewController" customModule="HomeKhaana" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="4f8-Aa-YXX">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
@@ -2746,7 +2741,7 @@
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B0P-Fp-sBm">
                                         <rect key="frame" x="0.0" y="39.5" width="345" height="572.5"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <mutableString key="text">Icons
+                                        <string key="text">Icons
 
 &lt;div&gt;Icons made by &lt;a href="https://www.flaticon.com/authors/photo3idea-studio" title="photo3idea_studio"&gt;photo3idea_studio&lt;/a&gt; from &lt;a href="https://www.flaticon.com/" title="Flaticon"&gt;www.flaticon.com&lt;/a&gt; is licensed by &lt;a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank"&gt;CC 3.0 BY&lt;/a&gt;&lt;/div&gt;
 
@@ -2771,7 +2766,7 @@ Copyright (c) 2013-present Jesse Squires
 http://www.jessesquires.com
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-</mutableString>
+</string>
                                         <color key="textColor" systemColor="labelColor"/>
                                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -3359,21 +3354,14 @@ The above copyright notice and this permission notice shall be included in all c
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Kv-ZY-Bq3">
-                                                        <rect key="frame" x="0.0" y="25" width="335" height="30"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <connections>
-                                                            <action selector="autoPopulate:" destination="zGL-gk-haB" eventType="touchUpInside" id="3zV-R1-ZCn"/>
-                                                        </connections>
-                                                    </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Minimum Required Characters: 100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZPI-FF-Kz2">
-                                                        <rect key="frame" x="0.0" y="63" width="335" height="14.5"/>
+                                                        <rect key="frame" x="0.0" y="25" width="335" height="14.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <color key="textColor" systemColor="secondaryLabelColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Please enter the item description here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qx0-C2-9OT">
-                                                        <rect key="frame" x="0.0" y="85.5" width="335" height="64.5"/>
+                                                        <rect key="frame" x="0.0" y="47.5" width="335" height="102.5"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="textColor" systemColor="labelColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -3801,7 +3789,7 @@ The above copyright notice and this permission notice shall be included in all c
                     <tabBarItem key="tabBarItem" title="" image="shopping-cart (1)" id="Z3t-Qs-Hck"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mVx-UR-JpA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -3820,6 +3808,7 @@ The above copyright notice and this permission notice shall be included in all c
                     <tabBarItem key="tabBarItem" title="" image="invoice" id="Wcu-1W-9xq"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3rR-s9-PIW">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -3857,7 +3846,7 @@ The above copyright notice and this permission notice shall be included in all c
                     <tabBarItem key="tabBarItem" title="" image="home" id="jDx-Fr-fQN"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="oAw-7v-EqX">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -3996,6 +3985,7 @@ The above copyright notice and this permission notice shall be included in all c
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UtP-jL-JGr" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="tk6-hd-VZd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -5228,13 +5218,13 @@ Cg
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kwx-2g-Nkn">
                                         <rect key="frame" x="0.0" y="39.5" width="345" height="567.5"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <string key="text">WELCOME TO HOME KHAANA. 
+                                        <mutableString key="text">WELCOME TO HOME KHAANA. 
 
 PLEASE READ THE TERMS AND CONDITIONS CAREFULLY. THE TERMS AND CONDITIONS (“AGREEMENT”) CONSTITUTE A LEGAL AGREEMENT BETWEEN YOU AND HOME KHAANA, AND THE DEVELOPER OF THIS APPLICATION - ACHYUTHAN VASANTH (COLLECTIVELY, “HOME KHAANA,” “WE,” “US,” OR “OUR”).
 
 
 
-By accessing or otherwise interacting with our servers, services, websites, mobile app ("App"), or any associated content/postings (together, "HK"), you agree to these Terms of Use ("TOU") (last updated December 31, 2020). Home Khaana is a privately owned mobile application that provides an online marketplace connection, using web-based technology that connects you and other consumers, to independent cooks, individuals who wish to cook and sell their products, home kitchens, restaurants and/or other businesses (hereby referred to as vendors).  Home Khaana’s software permits consumers to place orders for food and/or other goods from vendors for pickup. Once a pickup order is made, the Software notifies the vendor that an order has been placed and the Software facilitates completion of the order. Once a pickup order is made, the Software communicates with the customer regarding the availability of the order for pickup. Home Khaana is not a restaurant, delivery service, or food preparation business. You acknowledge and agree to this. If you are accessing or using HK on behalf of a business, you represent and warrant to HK that you have authority to accept the TOU on behalf of that business and that that business agrees to the TOU. If you do not agree to the TOU, you are not authorized to use HK or download the App. We may modify the TOU at any time in our sole discretion. You are responsible for periodically checking for changes and are bound by them if you continue to use HK. Our privacy policy (see below), and all other policies, site rules, and agreements referenced below or on HK, are fully incorporated into this TOU, and you agree to them as well.
+By accessing or otherwise interacting with our servers, services, websites, mobile app ("App"), or any associated content/postings (together, "HK"), you agree to these Terms of Use ("TOU") (last updated December 31, 2020). Home Khaana is a privately owned mobile application that provides an online marketplace connection, using web-based technology that connects you and other consumers, to independent cooks, individuals who wish to cook and sell their products, home kitchens, restaurants and/or other businesses (hereby referred to as vendors).  Home Khaana’s software permits consumers to place orders for food and/or other goods from vendors for pickup. Once a pickup order is made, the Software notifies the vendor that an order has been placed and the Software facilitates completion of the order. Once a pickup order is made, the Software communicates with the customer regarding the availability of the order for pickup. Home Khaana is not a restaurant, delivery service, or food preparation business. We are not to be held accountable for any posting and we do not guarantee the quality of service rendered. We are also not to be held accountable for any mishaps that may occur while using HK. We are also not responsible for actions of users of HK. The App is released on an as-is basis and we will not be held responsible for any bugs in the App that may affect the user's experience. You as the user (vendor and consumer) take ANY and ALL responsibility for ALL risks involved while using HK. We are not responsible for correspondences inside and outside of HK. We DO NOT GUARANTEE the safety and accuracy of HK. You shall not claim any damages caused by usage of HK. You acknowledge and agree to this. If you are accessing or using HK on behalf of a business, you represent and warrant to HK that you have authority to accept the TOU on behalf of that business and that that business agrees to the TOU. If you do not agree to the TOU, you are not authorized to use HK or download the App. We may modify the TOU at any time in our sole discretion. You are responsible for periodically checking for changes and are bound by them if you continue to use HK. Our privacy policy (see below), and all other policies, site rules, and agreements referenced below or on HK, are fully incorporated into this TOU, and you agree to them as well.
 
 LICENSE. If you agree to the TOU and (1) are of sufficient age and capacity to use HK and be bound by the TOU, or (2) use HK on behalf of a business, thereby binding that business to the TOU, we grant you a limited, revocable, non-exclusive, non-assignable license to use HK in compliance with the TOU; unlicensed use is unauthorized. You agree not to display, "frame," make derivative works, distribute, license, or sell, content from HK, excluding items you posted as a vendor. You grant us a perpetual, irrevocable, unlimited, worldwide, fully paid/sublicensable license to use, copy, display, distribute, and make derivative works from content you post.
 
@@ -5320,7 +5310,7 @@ If you are a registered HK user under the age of 18, you may request (via good.h
 By accessing HK or providing us data, you agree we may use and disclose data we collect as described here or as communicated to you, transmit it outside your resident jurisdiction, and store it on servers in the United States. For more information please contact our privacy officer at good.home.khaana@gmail.com.
 6. Contact
 If you have any questions or concerns about HK's privacy policy and practices please email good.home.khaana@gmail.com.
-</string>
+</mutableString>
                                         <color key="textColor" systemColor="labelColor"/>
                                         <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -5343,13 +5333,156 @@ If you have any questions or concerns about HK's privacy policy and practices pl
             </objects>
             <point key="canvasLocation" x="6673" y="3448"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="sS5-yI-9SL">
+            <objects>
+                <viewController id="ls0-u9-fAh" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KHt-lE-xad">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="naa-tq-H6F">
+                                <rect key="frame" x="15" y="25" width="345" height="627"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TERMS AND CONDITIONS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9YP-hA-62k">
+                                        <rect key="frame" x="0.0" y="0.0" width="345" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <color key="textColor" systemColor="systemOrangeColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HBZ-fb-b9f">
+                                        <rect key="frame" x="0.0" y="39.5" width="345" height="518.5"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <mutableString key="text">WELCOME TO HOME KHAANA. 
+
+PLEASE READ THE TERMS AND CONDITIONS CAREFULLY. THE TERMS AND CONDITIONS (“AGREEMENT”) CONSTITUTE A LEGAL AGREEMENT BETWEEN YOU AND HOME KHAANA, AND THE DEVELOPER OF THIS APPLICATION - ACHYUTHAN VASANTH (COLLECTIVELY, “HOME KHAANA,” “WE,” “US,” OR “OUR”).
+
+
+
+By accessing or otherwise interacting with our servers, services, websites, mobile app ("App"), or any associated content/postings (together, "HK"), you agree to these Terms of Use ("TOU") (last updated December 31, 2020). Home Khaana is a privately owned mobile application that provides an online marketplace connection, using web-based technology that connects you and other consumers, to independent cooks, individuals who wish to cook and sell their products, home kitchens, restaurants and/or other businesses (hereby referred to as vendors).  Home Khaana’s software permits consumers to place orders for food and/or other goods from vendors for pickup. Once a pickup order is made, the Software notifies the vendor that an order has been placed and the Software facilitates completion of the order. Once a pickup order is made, the Software communicates with the customer regarding the availability of the order for pickup. Home Khaana is not a restaurant, delivery service, or food preparation business. We are not to be held accountable for any posting and we do not guarantee the quality of service rendered. We are also not to be held accountable for any mishaps that may occur while using HK. We are also not responsible for actions of users of HK. The App is released on an as-is basis and we will not be held responsible for any bugs in the App that may affect the user's experience. You as the user (vendor and consumer) take ANY and ALL responsibility for ALL risks involved while using HK. We are not responsible for correspondences inside and outside of HK. We DO NOT GUARANTEE the safety and accuracy of HK. You shall not claim any damages caused by usage of HK. You acknowledge and agree to this. If you are accessing or using HK on behalf of a business, you represent and warrant to HK that you have authority to accept the TOU on behalf of that business and that that business agrees to the TOU. If you do not agree to the TOU, you are not authorized to use HK or download the App. We may modify the TOU at any time in our sole discretion. You are responsible for periodically checking for changes and are bound by them if you continue to use HK. Our privacy policy (see below), and all other policies, site rules, and agreements referenced below or on HK, are fully incorporated into this TOU, and you agree to them as well.
+
+LICENSE. If you agree to the TOU and (1) are of sufficient age and capacity to use HK and be bound by the TOU, or (2) use HK on behalf of a business, thereby binding that business to the TOU, we grant you a limited, revocable, non-exclusive, non-assignable license to use HK in compliance with the TOU; unlicensed use is unauthorized. You agree not to display, "frame," make derivative works, distribute, license, or sell, content from HK, excluding items you posted as a vendor. You grant us a perpetual, irrevocable, unlimited, worldwide, fully paid/sublicensable license to use, copy, display, distribute, and make derivative works from content you post.
+
+USE. Unless licensed by us in a separate written or electronic agreement, you agree not to use or provide software (except our App and general purpose web browsers and email clients) or services that interact or interoperate with HK, e.g. for downloading, uploading, creating/accessing/using an account, posting, flagging, emailing, searching, or mobile use. You agree not to copy/collect HK content via robots, spiders, scripts, scrapers, crawlers, or any automated or manual equivalent (e.g., by hand). Misleading, unsolicited, and/or unlawful postings/communications/accounts are prohibited, as is buying or selling accounts. A vendor cannot add items to their inventory of supplied goods, things that are not something that the vendor can create by themselves. Vendor shouldn’t post any obscene or otherwise inappropriate and/or personal content. You agree not to collect HK user information or interfere with HK. You agree we may moderate HK access/use in our sole discretion, e.g., by blocking, filtering, re-categorizing, re-ranking, deleting, delaying, holding, omitting, verifying, or terminating your access/license/account. You agree (1) not to bypass said moderation, (2) we are not liable for moderating or not moderating, and (3) nothing we say or do waives our right to moderate, or not. Unless licensed by us in a separate written or electronic agreement, you agree not to (i) rent, lease, sell, publish, distribute, license, sublicense, assign, transfer, or otherwise make available HK or our application programming interface ("API"), (ii) copy, adapt, create derivative works of, decompile, reverse engineer, translate, localize, port or modify the App, the API, any website code, or any software used to provide HK, (iii) combine or integrate HK or the API with any software, technology, services, or materials not authorized by us, (iv) circumvent any functionality that controls access to or otherwise protects HK or the API, or (v) remove or alter any copyright, trademark or other proprietary rights notices. You agree not to use HK or the API in any manner or for any purpose that infringes, misappropriates, or otherwise violates any intellectual property right or other right of any person, or that violates any applicable law.
+
+LIQUIDATED DAMAGES. You further agree that if you violate the TOU, or you encourage, support, benefit from, or induce others to do so, you will be jointly and severally liable to us for liquidated damages as follows for: (A) collecting/harvesting HK users' information, including personal or identifying information - $1 per violation; (B) publishing/misusing personal or identifying information of a third party in connection with your use of HK without that party's express written consent - $1,000 per violation; (C) misrepresenting your identity or affiliation to anyone in connection with your use of HK - $1,000 per violation; (D) posting or attempting to post inappropriate content - $4 per violation; (F) sending an unauthorized/unsolicited email to an email address obtained from HK - $25 per violation; (G) using HK user information to make/send an unauthorized/unsolicited text message, call, or communication to a HK user - $500 per text/call/communication; (H) creating a misleading or unlawful HK account or buying/selling a HK account - $4 per violation; (J) distributing any software to facilitate violations of the USE Section - $1,000 per violation; (K) aggregating, displaying, framing, copying, duplicating, reproducing, making derivative works from, distributing, licensing, selling, or exploiting HK content for any purpose without our express written consent - $3,000 for each day you engage in such violations; (M) bypassing or attempting to bypass our moderation efforts - $4 per violation. You agree that these amounts are (1) a reasonable estimate of our damages (as actual damages are often difficult to calculate), (2) not a penalty, and (3) not otherwise limiting on our ability to recover under any legal theory or claim, including statutory damages and other equitable relief (e.g., for spam, we can elect between the above liquidated damages or statutory damages under the anti-spam statute). You further agree that repeated violations of the USE section will irreparably harm and entitle us to injunctive or equitable relief, in addition to monetary damages.
+
+DISCLAIMER &amp; LIABILITY. To the full extent permitted by law, Home Khaana, and its developers, officers, directors, employees, agents, licensors, affiliates, and successors in interest ("HK Entities") (1) make no promises, warranties, or representations as to HK, including its completeness, accuracy, availability, timeliness, propriety, security, safety or reliability; (2) provide HK on an "AS IS" and "AS AVAILABLE" basis and any risk of using HK is assumed by you; (3) disclaim all warranties, express or implied, including as to accuracy, merchantability, fitness for a particular purpose, and non-infringement, and all warranties arising from course of dealing, usage, or trade practice; and (4) disclaim any liability or responsibility for acts, omissions, or conduct of you or any party in connection with HK. HK Entities are NOT liable for any direct, indirect, consequential, incidental, special, punitive, or other losses, including lost profits, revenues, data, goodwill, etc., arising from or related to HK, and in no event shall such liability exceed $1. Some jurisdictions restrict or alter these disclaimers and limits, so some may not apply to you.
+
+CLAIMS &amp; INDEMNITY. Any claim, cause of action, demand, or dispute arising from or related to HK ("Claims") will be governed by the internal laws of California, without regard to conflict of law provisions, except to the extent governed by US federal law. Any Claims will be exclusively resolved by courts in San Francisco, CA (except we may seek preliminary or injunctive relief anywhere). You agree to (1) submit to the personal jurisdiction of courts in San Francisco, CA; (2) indemnify and hold HK Entities harmless from any Claims, losses, liability, or expenses (including attorneys' fees) that arise from a third party and relate to your use of HK; and (3) be liable and responsible for any Claims we may have against your officers, directors, employees, agents, affiliates, or any other party, directly or indirectly, paid, directed or controlled by you, or acting for your benefit.
+
+MISC. Unless you have entered into a separate written or electronic agreement with us that expressly references the TOU, this is the exclusive and entire agreement between us and you, and supersedes all prior and contemporaneous understandings, agreements, representations, and warranties, both written and oral. Users complying with prior written licenses may access HK thereby until authorization is terminated. Our actions or silence toward you or anyone else does not waive, modify, or limit the TOU or our ability to enforce it. The USE, LIQUIDATED DAMAGES, and CLAIMS &amp; INDEMNITY sections survive termination of the TOU, and you will remain bound by those sections. If a TOU term is unenforceable, it shall be limited to the least extent possible and supplemented with a valid provision that best embodies the intent of the parties. The English version of the TOU controls over any translations. 
+
+
+Privacy Policy 
+This policy details how data about you is used when you access our websites and services, including via our mobile applications (together, "HK") or interact with us. If we update it, we will revise the date, place notices on HK if changes are material, and/or obtain your consent as required by law.
+
+1. Protecting your privacy
+	•	We take precautions to prevent unauthorized access to or misuse of data about you.
+	•	We do not run ads, other than the classifieds posted by our users.
+	•	We do not share your data with third parties for marketing purposes.
+	•	We do not engage in cross-marketing or link-referral programs.
+	•	We do not employ tracking devices for marketing purposes.
+	•	We do not send you unsolicited communications for marketing purposes.
+	•	We do not engage in affiliate marketing (and prohibit it on HK).
+	•	We do provide a chat service to avoid exposure of your phone number.
+	•	Please review privacy policies of any third party sites linked to from HK.
+	•	We do not respond to "Do Not Track" signals (see allaboutdnt.com).
+
+2. Data we collect, use and disclose:
+Below is a list of all the types of data we have collected in the last 12 months, where we got it, why we collected it and the categories of third parties to whom we disclosed it. We do not sell your data to third parties. 
+
+Data type
+Where we got it
+Why collected
+DisHKosed to
+First and last name
+User entry
+Facilitating transactions and personalizing your use of HK
+No one
+Email address
+User entry
+Account creation, user-to-user and HK-to-user communications and combatting fraud/abuse
+No one
+Mailing or street address
+User entry
+Account and post creation, facilitating transactions and personalizing your use of HK
+No one
+Geographic location (latitude and longitude)
+User entry, IP/geolocation providers
+Personalizing your use of HK and combatting fraud/abuse
+No one
+Photos and other data you voluntarily provide, post on HK
+User entry
+Facilitating and personalizing your use of HK
+No one
+Account preferences, featured items in inventory
+User entry
+Facilitating and personalizing your use of HK
+No one
+
+We may share some or all of the above listed data in the following circumstances:
+	•	to respond to subpoenas, search warrants, court orders, or other legal process.
+	•	to protect the rights, property, or safety of HK users, HK, or the general public.
+	•	at your direction (e.g. if you authorize us to share data with other users).
+	•	in connection with a merger, bankruptcy, or sale/transfer of assets.
+
+3. Data we store
+	•	We retain data as needed to facilitate and personalize your use of HK, combat fraud/abuse and/or as required by law.
+	•	We make good faith efforts to store data securely, but can make no guarantees.
+	•	You may access and update certain data about you via your account login.
+
+4. California Users:
+To learn more about the California Consumer Privacy Act and how it applies to you, please visit the California Attorney-General's website.
+Right to know: You have the right to request that we disclose the data we collect, use and disclose, and other information relating to data we collect about you.
+Right to delete: You have the right to request the deletion of data that we have collected from you, subject to certain exceptions.
+Right to non-discrimination: You have the right not to receive discriminatory treatment for exercising the rights listed above.
+You may submit a request to know or delete via good.home.khaana@gmail.com.
+Only you, or someone you authorize to act on your behalf, may make a request to know or delete your data. An authorized agent may make a request on your behalf by providing written permission signed by you.
+We will need to confirm your identity before processing your request by asking you to log into your existing account (if you are a registered user) or by asking you for additional information, such as a government issued ID, to confirm your identity against information we have already collected.
+If you are a registered HK user under the age of 18, you may request (via good.home.khaana@gmail.com) and obtain removal of content or information publicly posted on HK. Please note that removal does not ensure complete or comprehensive removal of said content or information from the Internet.
+5. International Users
+By accessing HK or providing us data, you agree we may use and disclose data we collect as described here or as communicated to you, transmit it outside your resident jurisdiction, and store it on servers in the United States. For more information please contact our privacy officer at good.home.khaana@gmail.com.
+6. Contact
+If you have any questions or concerns about HK's privacy policy and practices please email good.home.khaana@gmail.com.
+</mutableString>
+                                        <color key="textColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OzM-rn-c42">
+                                        <rect key="frame" x="0.0" y="577" width="345" height="50"/>
+                                        <state key="normal" title="Agree"/>
+                                        <connections>
+                                            <segue destination="BCx-ix-CQG" kind="presentation" modalPresentationStyle="fullScreen" id="WKp-nd-PD6"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="51f-xJ-1Ix"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="naa-tq-H6F" firstAttribute="top" secondItem="51f-xJ-1Ix" secondAttribute="top" constant="25" id="Qm6-wq-4pP"/>
+                            <constraint firstItem="51f-xJ-1Ix" firstAttribute="trailing" secondItem="naa-tq-H6F" secondAttribute="trailing" constant="15" id="Rbf-b5-yfA"/>
+                            <constraint firstItem="51f-xJ-1Ix" firstAttribute="bottom" secondItem="naa-tq-H6F" secondAttribute="bottom" constant="15" id="bf1-DL-oU9"/>
+                            <constraint firstItem="naa-tq-H6F" firstAttribute="leading" secondItem="51f-xJ-1Ix" secondAttribute="leading" constant="15" id="vyN-a6-1i2"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="HUC-H6-JNw"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5D7-gE-ULP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="881" y="1210"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="DTc-TH-0Qa"/>
+        <segue reference="xwS-DX-0iq"/>
         <segue reference="xbF-UG-SPB"/>
         <segue reference="9H9-Pg-pHV"/>
-        <segue reference="2w2-Nj-VRe"/>
-        <segue reference="sdt-pM-Hwp"/>
+        <segue reference="Std-JV-Mkb"/>
+        <segue reference="auW-X4-2bE"/>
         <segue reference="jSY-jj-Mgi"/>
         <segue reference="gZN-iS-vUy"/>
         <segue reference="Gmd-Ol-96N"/>

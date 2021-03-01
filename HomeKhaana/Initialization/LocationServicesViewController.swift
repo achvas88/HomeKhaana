@@ -33,6 +33,7 @@ class LocationServicesViewController: UIViewController {
         LoaderController.sharedInstance.removeLoader()
         
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "howItWorks")
+        vc!.modalPresentationStyle = .fullScreen
         self.present(vc!, animated: false, completion: nil)
     }
 
@@ -45,7 +46,7 @@ class LocationServicesViewController: UIViewController {
         LoaderController.sharedInstance.removeLoader()
         
         let alertController = UIAlertController(title: "Location Access Disabled",
-                                                message: "We need your location to proceed further",
+                                                message: "We need your location to show kitchens near you",
                                                 preferredStyle: .alert)
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)

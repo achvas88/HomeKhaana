@@ -84,8 +84,7 @@ final class User: NSObject{
     {
         guard let name = dictionary["name"] as? String,
             let isVegetarian = dictionary["isVegetarian"] as? Bool,
-            let email = dictionary["email"] as? String,
-            let customerID = dictionary["customerID"] as? String
+            let email = dictionary["email"] as? String
             else { return nil }
         
         let defaultAddress = dictionary["defaultAddress"] as? String
@@ -95,7 +94,7 @@ final class User: NSObject{
         let rating = dictionary["rating"] as? Double
         let ratingCount = dictionary["ratingCount"] as? Int
         
-        self.init(name: name, isVegetarian: isVegetarian, id: id, email: email, customerID:customerID, defaultAddress: (defaultAddress ?? ""), isKitchen: isKitchen ?? false, latitude: latitude ?? -1, longitude: longitude ?? -1, rating: rating ?? -1, ratingCount: ratingCount ?? 0)
+        self.init(name: name, isVegetarian: isVegetarian, id: id, email: email, customerID:"", defaultAddress: (defaultAddress ?? ""), isKitchen: isKitchen ?? false, latitude: latitude ?? -1, longitude: longitude ?? -1, rating: rating ?? -1, ratingCount: ratingCount ?? 0)
     }
     
     //intializes User data from the database
@@ -196,6 +195,7 @@ final class User: NSObject{
                 GIDSignIn.sharedInstance().signOut()
                 
                 let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignUp")
+                vc.modalPresentationStyle = .fullScreen
                 vcHost.present(vc, animated: true, completion: nil)
                 
             }
@@ -458,6 +458,8 @@ extension User : CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             User.sharedInstance!.userLocation =  location
+            User.sharedInstance!.latitude = location.coordinate.latitude
+            User.sharedInstance!.longitude = location.coordinate.longitude
             
             if(User.loadingLocation)
             {

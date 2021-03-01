@@ -61,56 +61,6 @@ func parseAddress(selectedItem:MKPlacemark) -> String {
     return addressLine
 }
 
-func loadDistanceOfKitchensFromUser(completion: @escaping () -> ())
-{
-    LoaderController.sharedInstance.updateTitle(title: "Triangulating")
-    
-    DataManager.kitchenDistancesToBeCalculated = DataManager.kitchens.count
-    for (_, kitchen) in DataManager.kitchens {
-        calculateDistanceOfKitchenFromCurrentUser(kitchen: kitchen, completion: completion)
-    }
-}
-
-func calculateDistanceOfKitchenFromCurrentUser(kitchen: Kitchen, completion: @escaping () -> ()) -> Void
-{
-    let location1 =  User.sharedInstance!.userLocation.coordinate
-    let location2 =  kitchen.kitchenLocation.coordinate
-    let mapItemLoc1 = MKMapItem(placemark: MKPlacemark(coordinate: location1))
-    let mapItemLoc2 = MKMapItem(placemark: MKPlacemark(coordinate: location2))
-    
-    let req = MKDirections.Request()
-    req.source = mapItemLoc1
-    req.destination = mapItemLoc2
-    let dir = MKDirections(request:req)
-    dir.calculate { response, error in
-        
-        DataManager.kitchenDistancesToBeCalculated = DataManager.kitchenDistancesToBeCalculated-1
-        guard let response = response else {
-            // if error in route calculation, just print out direct distance.
-            let distance:CLLocationDistance = User.sharedInstance!.userLocation.distance(from: kitchen.kitchenLocation)
-            let distanceInMiles:Double = distance * 0.62137 / 1000
-            kitchen.distanceInMiles = distanceInMiles
-            let distanceStr = NSString(format: "~ %.2f mi", distanceInMiles)
-            kitchen.distanceFromLoggedInUser = (distanceStr as String)
-            
-            if(DataManager.kitchenDistancesToBeCalculated == 0)
-            {
-                completion()
-            }
-            return
-        }
-        let route:MKRoute = response.routes[0]
-        let distance = route.distance
-        let distanceInMiles:Double = distance * 0.62137 / 1000
-        kitchen.distanceInMiles = distanceInMiles
-        let distanceStr = NSString(format: "%.2f mi", distanceInMiles)
-        kitchen.distanceFromLoggedInUser = (distanceStr as String)
-        if(DataManager.kitchenDistancesToBeCalculated == 0)
-        {
-            completion()
-        }
-    }
-}
 
 func showError(vc: UIViewController, message: String, title: String = "Error")
 {

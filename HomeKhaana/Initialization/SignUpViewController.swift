@@ -164,6 +164,7 @@ class SignUpViewController: UIViewController, GIDSignInDelegate{ //}, FBSDKLogin
     func navigateToLoadUserScreen()
     {
         let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoadUser")
+        vc!.modalPresentationStyle = .fullScreen
         self.present(vc!, animated: true, completion: nil)
     }
 }

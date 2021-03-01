@@ -96,6 +96,9 @@ Root.fromDescriptor = function fromDescriptor(descriptor) {
             if (fileDescriptor.extension)
                 for (i = 0; i < fileDescriptor.extension.length; ++i)
                     filePackage.add(Field.fromDescriptor(fileDescriptor.extension[i]));
+            if (fileDescriptor.service)
+                for (i = 0; i < fileDescriptor.service.length; ++i)
+                    filePackage.add(Service.fromDescriptor(fileDescriptor.service[i]));
             var opts = fromDescriptorOptions(fileDescriptor.options, exports.FileOptions);
             if (opts) {
                 var ks = Object.keys(opts);
@@ -657,12 +660,12 @@ Service.prototype.toDescriptor = function toDescriptor() {
 
     // Methods
     var methods = [];
-    for (var i = 0; i < this.methodsArray; ++i)
+    for (var i = 0; i < this.methodsArray.length; ++i)
         methods.push(this._methodsArray[i].toDescriptor());
 
     return exports.ServiceDescriptorProto.create({
         name: this.name,
-        methods: methods,
+        method: methods,
         options: toDescriptorOptions(this.options, exports.ServiceOptions)
     });
 };
